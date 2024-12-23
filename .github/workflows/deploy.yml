@@ -1,0 +1,52 @@
+name: Deploy Hugo Site
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    # Run every 2 weeks at midnight UTC
+    - cron: "0 0 */14 * *"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "latest"
+
+      - name: Update Content Submodule
+        run: |
+          git submodule update --remote --merge
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -am "Update content submodule"
+          else
+            echo "No changes to commit for content submodule"
+          fi
+
+      - name: Clean Public Directory
+        run: rm -rf public/*
+
+      - name: Build Hugo Site
+        run: hugo --minify
+
+      - name: Deploy to GitHub Pages
+        run: |
+          cd public
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git commit -m "Deploy site: $(date +'%Y-%m-%d %H:%M:%S')"
+            git push origin main
+          else
+            echo "No changes to deploy to GitHub Pages"
+          fi

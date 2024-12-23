@@ -1,0 +1,19 @@
+# Hugo build output
+public/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
+*.bak
+*.swp
+*.tmp
+
+# Hugo cache
+resources/
+
+# Backup files
+*.~* # Emacs
+*.~ # Vim
