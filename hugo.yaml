@@ -1,7 +1,8 @@
-baseURL: https://example.org/
+baseURL: https://matt2ology.github.io/
 languageCode: en-us
 title: My New Hugo Site
-theme: ["PaperMod"]
+theme:
+- PaperMod
 
 ignoreFiles:
   - "^content/Templates/"
