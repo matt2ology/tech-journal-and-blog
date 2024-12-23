@@ -18,6 +18,9 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Allow Public Directory in CI
+        run: echo '!public' >> .git/info/exclude
+
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
