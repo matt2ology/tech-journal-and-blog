@@ -26,7 +26,7 @@ jobs:
         with:
           hugo-version: "latest"
 
-      - name: Update Content Submodule
+      - name: Update Content-Submodule
         run: |
           git submodule update --remote --merge
           if [ -n "$(git status --porcelain)" ]; then
