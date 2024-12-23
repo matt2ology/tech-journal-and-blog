@@ -1,6 +1,3 @@
-# Hugo build output
-public/
-
 # System files
 .DS_Store
 Thumbs.db
