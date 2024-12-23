@@ -18,15 +18,12 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Allow Public Directory in CI
-        run: echo '!public' >> .git/info/exclude
-
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: "latest"
+          hugo-version: 'latest'
 
-      - name: Update Content-Submodule
+      - name: Update Content Submodule
         run: |
           git submodule update --remote --merge
           if [ -n "$(git status --porcelain)" ]; then
@@ -47,9 +44,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           if [ -n "$(git status --porcelain)" ]; then
-            git add -f .
+            git add .
             git commit -m "Deploy site: $(date +'%Y-%m-%d %H:%M:%S')"
-            git push https://${{ secrets.GH_TOKEN }}@github.com/matt2ology/tech-journal-and-blog.git main
+            git push origin main
           else
             echo "No changes to deploy to GitHub Pages"
           fi
