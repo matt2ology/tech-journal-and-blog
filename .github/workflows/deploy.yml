@@ -93,8 +93,8 @@ jobs:
       - name: Push to Submodule
         run: |
           cd public
-          git config user.name "${{ secrets.GIT_USERNAME }}"  # Set your Git username as a secret
-          git config user.email "${{ secrets.GIT_EMAIL }}"    # Set your Git email as a secret
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "Update site [CI]"
           git push
