@@ -46,6 +46,9 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+        with:
+            token: ${{ secrets.GH_PAT }}
+            enablement: true
 
       # Install Node.js dependencies (if applicable)
       - name: Install Node.js dependencies
