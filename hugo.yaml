@@ -2,3 +2,8 @@ baseURL: https://matt2ology.github.io/
 languageCode: en-us
 title: My Tech Journal and Blog
 
+module:
+  mounts:
+    - excludeFiles: Templates/*
+      source: content
+      target: content
