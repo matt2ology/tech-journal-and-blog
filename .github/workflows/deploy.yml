@@ -49,11 +49,22 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
+      - name: Update Submodules
+        run: |
+          git submodule update --init --recursive
+
       # Install Node.js dependencies (if applicable)
       - name: Install Node.js dependencies
         run: |
           # If package-lock.json or npm-shrinkwrap.json exists, install dependencies
           [[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true
+
+      - name: Check and Create Public Directory
+        run: |
+          if [ ! -d "public" ]; then
+            echo "Public directory not found. Creating it..."
+            mkdir public
+          fi
 
       - name: Build with Hugo
         env:
@@ -63,13 +74,8 @@ jobs:
         run: |
           hugo \
             --gc \
-            --minify
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: hugo-site
-          path: ./public
+            --minify \
+            --destination public
 
   update:
     name: Update public submodule
