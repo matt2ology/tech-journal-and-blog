@@ -98,3 +98,5 @@ jobs:
           git add .
           git commit -m "Update site [CI]"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.TECH_JOURNAL_AND_BLOG_TOKEN }}
