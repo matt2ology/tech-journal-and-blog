@@ -1,0 +1,9 @@
+[submodule "content"]
+	path = content
+	url = git@github.com:matt2ology/tech-journal-and-blog-content.git
+[submodule "public"]
+	path = public
+	url = git@github.com:matt2ology/matt2ology.github.io.git
+[submodule "themes/hugo-theme-stack"]
+	path = themes/hugo-theme-stack
+	url = https://github.com/CaiJimmy/hugo-theme-stack/
