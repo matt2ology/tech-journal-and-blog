@@ -49,13 +49,6 @@ jobs:
           submodules: recursive
           fetch-depth: 0
 
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-          token: ${{ secrets.TECH_JOURNAL_AND_BLOG_TOKEN }}
-
       # Install Node.js dependencies (if applicable)
       - name: Install Node.js dependencies
         run: |
@@ -78,25 +71,17 @@ jobs:
           name: hugo-site
           path: ./public
 
-  deploy:
-    name: Deploy to GitHub Pages
+  update:
+    name: Update public submodule
     runs-on: ubuntu-latest
     needs: build
 
     steps:
-      - name: Download built site
-        uses: actions/download-artifact@v3
-        with:
-          name: hugo-site
-
-      # Commit and push changes to the submodule
-      - name: Push to Submodule
+      - name: Commit and Push Submodule Updates
         run: |
           cd public
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Update site [CI]"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.TECH_JOURNAL_AND_BLOG_TOKEN }}
+          git commit -m "Update generated site from GitHub Actions"
+          git push origin main
