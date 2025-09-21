@@ -1,0 +1,38 @@
+name: Format Notes and Trigger Hugo
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  format-and-trigger:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Notes Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Prettier
+        run: npm install -g prettier
+
+      - name: Format Markdown (exclude templates/)
+        run: |
+          prettier --write "**/*.md" "!templates/**/*.md"
+
+      - name: Commit Formatting Changes (if any)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "chore: format markdown files" || echo "No formatting changes"
+
+      - name: Push Formatting Changes
+        run: |
+          git push origin main || echo "No changes to push"
