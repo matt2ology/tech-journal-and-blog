@@ -13,7 +13,6 @@ title: Blog - {{title}}
 
 <!-- A blog is about communicating outward (you → readers) -->
 
-
 ## Related blogs
 
 <!-- [Related blog post]({{< \ref "/post/blog/path_to_file.md" >}}) -->

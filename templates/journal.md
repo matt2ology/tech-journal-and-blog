@@ -21,7 +21,6 @@ What did I learn or realize?
 Write freely here — anecdotes, thoughts, questions, anything I want to explore.
 -->
 
-
 ---
 
 ### Ideas / Action / Next Steps
@@ -44,4 +43,5 @@ Add links, books, videos, or tools that I found useful or want to remember.
 -->
 
 <!-- [Book, article, tool, or link #1]({{< ref "/post/reference/reference-note-01.md" >}}) -->
+
 - [Book, article, tool, or link #2]

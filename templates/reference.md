@@ -23,7 +23,7 @@ Highlights of direct quotes, key points, or insights from the source content
 Format:
 
 > Initial thought or note on:
->> Quote 
+>> Quote
 >> \- cited
 >
 -->
