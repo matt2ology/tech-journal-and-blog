@@ -1,18 +1,21 @@
-name: Format Notes and Trigger Hugo
+name: Format Markdown with Prettier
 
 on:
+  workflow_dispatch: # manual trigger
   push:
-    branches: [ "main" ]
+    branches:
+      - main # run on pushes to main (adjust branch if needed)
 
 jobs:
-  format-and-trigger:
+  format:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Notes Repo
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }} # uses repo’s built-in token
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -20,19 +23,19 @@ jobs:
           node-version: 20
 
       - name: Install Prettier
-        run: npm install -g prettier
+        run: npm install --global prettier
 
-      - name: Format Markdown (exclude templates/)
-        run: |
-          prettier --write "**/*.md" "!templates/**/*.md"
+      - name: Run Prettier on Markdown
+        run: prettier --write "**/*.md"
 
-      - name: Commit Formatting Changes (if any)
+      - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "chore: format markdown files" || echo "No formatting changes"
-
-      - name: Push Formatting Changes
-        run: |
-          git push origin main || echo "No changes to push"
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: format markdown with prettier"
+            git push
+          fi
