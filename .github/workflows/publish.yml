@@ -1,10 +1,13 @@
 name: Format Markdown with Prettier
 
 on:
-  workflow_dispatch: # manual trigger
+  workflow_dispatch:   # manual trigger
   push:
     branches:
-      - main # run on pushes to main (adjust branch if needed)
+      - main           # adjust branch if needed
+
+permissions:
+  contents: write      # allow commits/push
 
 jobs:
   format:
@@ -15,7 +18,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }} # uses repo’s built-in token
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
