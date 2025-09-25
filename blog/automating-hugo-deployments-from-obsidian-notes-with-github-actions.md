@@ -15,32 +15,20 @@ title: Blog - Automating Hugo Deployments from Obsidian Notes with GitHub Action
 You have two repositories:
 
 1. **`obsidian-note-vault-repo`** → Your Obsidian vault with Markdown notes
-    
 2. **`username.github.io`** → Hugo site repo deployed with GitHub Pages
-    
-    - Has a **git submodule**: `content/` → points to `obsidian-note-vault-repo`
-        
+   - Has a **git submodule**: `content/` → points to `obsidian-note-vault-repo`
 
 Goal:
 
 - On push to `obsidian-note-vault-repo`:
-    
-    1. Format Markdown with Prettier
-        
-    2. Commit any changes
-        
-    3. Trigger a workflow in `username.github.io`
-        
+  1. Format Markdown with Prettier
+  2. Commit any changes
+  3. Trigger a workflow in `username.github.io`
 - On trigger, `username.github.io` should:
-    
-    1. Pull updated submodule content
-        
-    2. Build Hugo site
-        
-    3. Deploy to GitHub Pages
-        
+  1. Pull updated submodule content
+  2. Build Hugo site
+  3. Deploy to GitHub Pages
 - You should also be able to **manually rebuild Hugo** from `username.github.io`
-    
 
 ---
 
@@ -68,35 +56,23 @@ git push origin main
 ### Step 1. Create a Fine-grained PAT
 
 1. Go to **GitHub → Settings → Developer settings → Fine-grained tokens**
-    
 2. Click **Generate new token**
-    
-    - **Name:** `OBSIDIAN_NOTE_TO_HUGO_PAT`
-        
-    - **Owner:** your GitHub account
-        
-    - **Expiration:** set to a safe rotation policy
-        
+   - **Name:** `OBSIDIAN_NOTE_TO_HUGO_PAT`
+   - **Owner:** your GitHub account
+   - **Expiration:** set to a safe rotation policy
+
 3. **Repository access** → Select:
-    
-    - `obsidian-note-vault-repo`
-        
-    - `username.github.io`
-        
+   - `obsidian-note-vault-repo`
+   - `username.github.io`
+
 4. **Permissions:**
-    
-    - `Contents`: **Read and Write**
-        
-    - `Metadata`: **Read-only**
-        
+   - `Contents`: **Read and Write**
+   - `Metadata`: **Read-only**
+
 5. Save token.
-    
 6. Add as a **secret** in both repos:
-    
-    - `Settings → Secrets and variables → Actions → New repository secret`
-        
-    - Name: `OBSIDIAN_NOTE_TO_HUGO_PAT`
-        
+   - `Settings → Secrets and variables → Actions → New repository secret`
+   - Name: `OBSIDIAN_NOTE_TO_HUGO_PAT`
 
 ---
 
@@ -108,15 +84,15 @@ File: `.github/workflows/format-and-trigger.yml`
 name: Format Markdown with Prettier
 
 on:
-  workflow_dispatch:   # manual trigger
+  workflow_dispatch: # manual trigger
   push:
     branches:
-      - main           # adjust branch if needed
+      - main # adjust branch if needed
 
 permissions:
-  contents: write      # allow commits/push with GITHUB_TOKEN
+  contents: write # allow commits/push with GITHUB_TOKEN
 
-jobs: 
+jobs:
   format-and-trigger:
     runs-on: ubuntu-latest
     env:
@@ -182,8 +158,8 @@ File: `.github/workflows/deploy-hugo.yml`
 name: Build and Deploy Hugo Site
 
 on:
-  workflow_dispatch:  # Manual trigger
-  repository_dispatch:  # Triggered from another repo (e.g., notes)
+  workflow_dispatch: # Manual trigger
+  repository_dispatch: # Triggered from another repo (e.g., notes)
     types: [sync-from-notes]
 
 permissions:
@@ -192,7 +168,7 @@ permissions:
   id-token: write
 
 env:
-  HUGO_CACHEDIR: /tmp/hugo_cache  # Predictable path for Hugo module caching
+  HUGO_CACHEDIR: /tmp/hugo_cache # Predictable path for Hugo module caching
 
 jobs:
   build-hugo-site:
@@ -227,7 +203,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 'latest'
+          hugo-version: "latest"
           extended: true
 
       # Show installed Hugo version (debugging aid)
@@ -281,36 +257,24 @@ jobs:
 ## Workflow Recap
 
 1. You write notes in **Obsidian** → push to `obsidian-note-vault-repo`
-    
 2. Workflow formats with **Prettier**, commits if needed, and triggers Hugo site build
-    
 3. `username.github.io` workflow runs:
-    
-    - Updates `content` submodule
-        
-    - Builds Hugo site
-        
-    - Deploys to GitHub Pages
-        
+   - Updates `content` submodule
+   - Builds Hugo site
+   - Deploys to GitHub Pages
+
 4. You can also manually run `deploy-hugo.yml` in `username.github.io` to force a rebuild
-    
 
 ---
 
 ## Why Two Tokens?
 
 - **`GITHUB_TOKEN`** (auto-provided)
-    
-    - Used for **commits inside `obsidian-note-vault-repo`**
-        
-    - Only works in same repo
-        
+  - Used for **commits inside `obsidian-note-vault-repo`**
+  - Only works in same repo
 - **`OBSIDIAN_NOTE_TO_HUGO_PAT`** (your fine-grained PAT)
-    
-    - Used for **cross-repo triggers** and **submodule updates**
-        
-    - Scoped to just the two repos with least privilege
-        
+  - Used for **cross-repo triggers** and **submodule updates**
+  - Scoped to just the two repos with least privilege
 
 ---
 
