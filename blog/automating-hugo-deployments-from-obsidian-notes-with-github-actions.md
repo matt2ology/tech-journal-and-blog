@@ -19,9 +19,11 @@ The flow looks like this:
 1. Write notes in Obsidian.
 2. Push them to `obsidian-note-vault-repo` (your notes repo).
 3. GitHub Actions:
-  - Format Markdown files with Prettier.
-  - Sync changes into the content submodule of your Hugo repo (`username.github.io`) using SSH.
-  - Trigger a workflow in `username.github.io` via fine-grained PAT.
+
+- Format Markdown files with Prettier.
+- Sync changes into the content submodule of your Hugo repo (`username.github.io`) using SSH.
+- Trigger a workflow in `username.github.io` via fine-grained PAT.
+
 4. Hugo builds and deploys to GitHub Pages.
 
 ### Step 0: Repository Setup
@@ -72,10 +74,10 @@ This creates two files:
 cat ~/.ssh/obsidian-hugo.pub
 ```
 
-- Go to your repository `username.github.io` → **Settings** → **Deploy keys** → **Add deploy key**  
-- **Title**: `obsidian-to-hugo`  
-- **Key**: Paste the entire contents of your public key file (`~/.ssh/obsidian-hugo.pub`)  
-- Check **Allow write access**  
+- Go to your repository `username.github.io` → **Settings** → **Deploy keys** → **Add deploy key**
+- **Title**: `obsidian-to-hugo`
+- **Key**: Paste the entire contents of your public key file (`~/.ssh/obsidian-hugo.pub`)
+- Check **Allow write access**
 - Click **Add key**
 
 **Add a secret to your Obsidian notes repository**:
@@ -84,9 +86,9 @@ cat ~/.ssh/obsidian-hugo.pub
 cat ~/.ssh/obsidian-hugo
 ```
 
-- Go to your repository `obsidian-note-vault-repo` → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**  
-- **Name:** `ACTIONS_DEPLOY_KEY`  
-- **Value:** Paste the contents of your private key file (`~/.ssh/obsidian-hugo`)  
+- Go to your repository `obsidian-note-vault-repo` → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**
+- **Name:** `ACTIONS_DEPLOY_KEY`
+- **Value:** Paste the contents of your private key file (`~/.ssh/obsidian-hugo`)
 - Click **Add secret**
 
 ### Step 3: Adding Submodules
@@ -136,20 +138,19 @@ git commit -m "Add content submodule via SSH"
 git push
 ```
 
-
-
-
 ### Step 4. Create a Fine-grained PAT
 
 Go to **GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens**:
 
-1. **Name**: `OBSIDIAN_NOTE_TO_HUGO_PAT` 
+1. **Name**: `OBSIDIAN_NOTE_TO_HUGO_PAT`
 2. **Owner**: your GitHub account
 3. **Expiration:** set to a safe rotation policy
 4. **Repos**: `obsidian-note-vault-repo`, `username.github.io`
 5. **Permissions**:
-  - `Contents`: Read/Write
-  - `Metadata`: Read-only
+
+- `Contents`: Read/Write
+- `Metadata`: Read-only
+
 6. Save token.
 7. Add as a **secret** in both repos:
    - `Settings → Secrets and variables → Actions → New repository secret`
@@ -356,25 +357,25 @@ With this, we now have a **clean CI/CD pipeline**: Obsidian → Notes repo → H
 
 Managing this pipeline requires three different credentials, each with its own purpose:
 
-- **`GITHUB_TOKEN`** (auto-provided by GitHub)  
-  - Used for **commits inside `tech-journal-and-blog`** (your notes repo)  
-  - Only works within the same repository — **cannot** trigger workflows or access private repos across boundaries  
+- **`GITHUB_TOKEN`** (auto-provided by GitHub)
+  - Used for **commits inside `tech-journal-and-blog`** (your notes repo)
+  - Only works within the same repository — **cannot** trigger workflows or access private repos across boundaries
 
-- **`ACTIONS_DEPLOY_KEY`** (SSH private key, stored as a secret)  
-  - Used for **cloning and pushing the `content` submodule** (`matt2ology.github.io`) during CI  
-  - Public half of the key is added as a **Deploy Key** in `matt2ology.github.io`  
-  - Ensures reliable SSH-based submodule access without relying on HTTPS + PAT  
+- **`ACTIONS_DEPLOY_KEY`** (SSH private key, stored as a secret)
+  - Used for **cloning and pushing the `content` submodule** (`matt2ology.github.io`) during CI
+  - Public half of the key is added as a **Deploy Key** in `matt2ology.github.io`
+  - Ensures reliable SSH-based submodule access without relying on HTTPS + PAT
 
-- **`TECH_BLOG_TO_HUGO_PAT`** (fine-grained Personal Access Token)  
-  - Used for **cross-repo workflow triggers** (e.g. telling `matt2ology.github.io` to run its Hugo build after notes are synced)  
-  - Scoped to just the two repos with least privilege (`contents: read/write`, `metadata: read-only`)  
+- **`TECH_BLOG_TO_HUGO_PAT`** (fine-grained Personal Access Token)
+  - Used for **cross-repo workflow triggers** (e.g. telling `matt2ology.github.io` to run its Hugo build after notes are synced)
+  - Scoped to just the two repos with least privilege (`contents: read/write`, `metadata: read-only`)
 
 ---
 
 ### Credential Comparison
 
-| Credential               | Scope of Use                                   | Can Push Commits? | Can Trigger Workflows in Another Repo? | Best For                           |
-|---------------------------|-----------------------------------------------|-------------------|----------------------------------------|-------------------------------------|
-| `GITHUB_TOKEN`           | Auto-provided per workflow, repo-local only    | ✅ Yes            | ❌ No                                   | Internal CI/CD tasks in same repo   |
-| `ACTIONS_DEPLOY_KEY`     | SSH-based access to a single repository        | ✅ Yes            | ❌ No                                   | Submodules, Git read/write          |
-| `TECH_BLOG_TO_HUGO_PAT`  | Fine-grained access across multiple repos      | ✅ Yes            | ✅ Yes                                  | Cross-repo triggers & automation    |
+| Credential              | Scope of Use                                | Can Push Commits? | Can Trigger Workflows in Another Repo? | Best For                          |
+| ----------------------- | ------------------------------------------- | ----------------- | -------------------------------------- | --------------------------------- |
+| `GITHUB_TOKEN`          | Auto-provided per workflow, repo-local only | ✅ Yes            | ❌ No                                  | Internal CI/CD tasks in same repo |
+| `ACTIONS_DEPLOY_KEY`    | SSH-based access to a single repository     | ✅ Yes            | ❌ No                                  | Submodules, Git read/write        |
+| `TECH_BLOG_TO_HUGO_PAT` | Fine-grained access across multiple repos   | ✅ Yes            | ✅ Yes                                 | Cross-repo triggers & automation  |
