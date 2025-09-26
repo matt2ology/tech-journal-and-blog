@@ -59,7 +59,7 @@ jobs:
         run: |
           echo "Triggering Hugo site workflow in matt2ology.github.io..."
           curl -X POST \
-            -H "Authorization: token ${{ secrets.TECH_BLOG_TO_HUGO_PAT }}" \
+            -H "Authorization: token ${{ secrets.MATT2OLOGY_GITHUB_IO_PAT }}" \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/matt2ology/matt2ology.github.io/dispatches \
             -d '{"event_type": "sync-from-notes", "client_payload": {"source_sha": "${{ github.sha }}"}}'
