@@ -46,11 +46,17 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
+
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
             echo "Committing the formatted markdown files..."
             git commit -m "chore: format markdown with prettier"
+
+            echo "Pulling latest main to avoid non-fast-forward error..."
+            git pull --rebase origin main
+
+            echo "Pushing changes..."
             git push origin HEAD:main
             echo "Changes have been committed and pushed!"
           fi
