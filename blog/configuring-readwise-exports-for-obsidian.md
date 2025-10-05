@@ -73,9 +73,13 @@ To organize highlights clearly, I dynamically include:
 
 ```markdown
 {% if is_new_page %}
+
 ## Highlights
+
 {% elif has_new_highlights -%}
+
 ## New highlights added {{date|date('F j, Y')}} at {{time}}
+
 {% endif -%}
 ```
 
@@ -90,10 +94,12 @@ Each highlight is formatted with location info or ID:
 
 > {{ highlight_text }}{% if highlight_location and highlight_location_url %}
 > \- [({{ highlight_location }})]({{ highlight_location_url }})
-{% elif highlight_location %}
-({{ highlight_location }})
-{% else %}
+> {% elif highlight_location %}
+> ({{ highlight_location }})
+> {% else %}
+
 <!-- Adding a blank line -->
+
 {% endif %}{% if highlight_note %}
 **Initial thought or note on:** {% if highlight_location and highlight_location_url %}[({{highlight_location}})]({{highlight_location_url}}){% elif highlight_location %}({{highlight_location}}){% endif %}
 {{ highlight_note }}
@@ -114,13 +120,13 @@ This structured formatting makes it easy to visually parse each highlight and re
 Finally, each file begins with comprehensive YAML front matter metadata:
 
 ```yaml
-authors: {{author}}
+authors: { { author } }
 categories:
   - reference
-date: {{date|date("Y-m-d")}}
+date: { { date|date("Y-m-d") } }
 draft: true
-media: {{category}}
-source: {{source}}
+media: { { category } }
+source: { { source } }
 tags: readwise, reference/{{category}}{% for tag in document_tags %}, {{tag}}{% endfor %}
 title: Reference - {{author}} - {{title}}
 ```
