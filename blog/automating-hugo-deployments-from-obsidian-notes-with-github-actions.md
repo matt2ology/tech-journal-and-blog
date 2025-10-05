@@ -314,7 +314,7 @@ jobs:
           shopt -s globstar nullglob
           for file in content/**/*.md; do
             # skip templates folder
-            if [[ "$file" == content/templates/* ]]; then
+            if [[ "\$file" == content/templates/* ]]; then
               continue
             fi
 
