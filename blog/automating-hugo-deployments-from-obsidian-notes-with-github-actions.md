@@ -60,18 +60,6 @@ Replace `"hugo-theme-name"` with the actual name of your theme.
 
 This is done by the following options and here's how to do that:
 
-##### Option 1: Add a theme using Git submodules
-
-The most common approach is to add a Hugo theme using Git as a submodule. Run the following command from your Hugo site’s root directory:
-
-`git submodule add https://github.com/<theme-author>/hugo-theme-name.git themes/hugo-theme-name git submodule update --init --recursive`
-
-This will add the theme as a submodule under the `themes/` folder. Don't forget to replace `<theme-author>` and `hugo-theme-name` with the actual repository details for the Hugo theme you want to use.
-
-##### Option 2: Download a theme manually
-
-If you'd prefer to avoid using submodules, you can manually download and extract the theme into the `themes/` folder. Simply visit the [Hugo Themes website](https://themes.gohugo.io/), download your theme, and unzip it into the `themes/` directory.
-
 ### Step 1: Add your Obsidian repo as a submodule
 
 Run this locally in your **site repo** (`username.github.io`):
