@@ -4,7 +4,7 @@ authors:
 categories:
   - blog
 date: 2025-09-24T00:01:22-07:00
-draft: true
+draft: false
 tags:
   - guide
   - obsidian
