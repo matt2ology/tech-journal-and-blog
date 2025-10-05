@@ -150,10 +150,6 @@ File: `.github/workflows/format-and-dispatch.yml`
 - Commits any formatting changes
 - Dispatches an event to trigger the Hugo build in your site repo (`username.github.io`)
 
-> Due to a Hugo rendering issue that mistakenly interprets parts of the following line as a [shortcode](https://gohugo.io/content-management/shortcodes/), make sure to remove the quoted backticks from the dollar sign (e.g. `$`) from the following:
->
-> > `if git diff --quiet && git diff --cached --quiet && [[ -z "`$`(git ls-files --others --exclude-standard)" ]]; then`
-
 ```yaml
 name: Format Markdown & Trigger Site Build
 
@@ -198,51 +194,27 @@ jobs:
           echo "Node.js: $(node --version)"
           echo "Prettier: $(prettier --version)"
 
-      - name: Commit formatted files (if any)
+      - name: Commit changes (if any)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          set -e
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
 
-          # Exit early if no changes (tracked modifications/deletions or new untracked files)
-          if git diff --quiet && git diff --cached --quiet && [[ -z "`$`(git ls-files --others --exclude-standard)" ]]; then
-            echo "No changes to commit (tracked or new files). Exiting."
-            exit 0
-          fi
-
-          # --- Commit modified/deleted markdown files individually ---
-          echo "Checking for modified/deleted markdown files..."
-          MODIFIED_FILES=$(git ls-files -m -d | grep '\.md$' || true)
-
-          if [ -z "$MODIFIED_FILES" ]; then
-            echo "No modified/deleted markdown files to commit."
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
           else
-            echo "$MODIFIED_FILES" | while read -r file; do
-              git add "$file"
-              git commit -m "chore: update existing markdown file: $file"
-            done
+            echo "Committing the formatted markdown files..."
+            git commit -m "chore: format markdown with prettier"
+
+            echo "Pulling latest main to avoid non-fast-forward error..."
+            git pull --rebase origin main
+
+            echo "Pushing changes..."
+            git push origin HEAD:main
+            echo "Changes have been committed and pushed!"
           fi
-
-          # --- Commit new (untracked) markdown files individually ---
-          echo "Checking for new markdown files..."
-          NEW_FILES=$(git ls-files --others --exclude-standard | grep '\.md$' || true)
-
-          if [ -z "$NEW_FILES" ]; then
-            echo "No new markdown files to commit."
-          else
-            echo "$NEW_FILES" | while read -r file; do
-              git add "$file"
-              git commit -m "chore: add new markdown file: $file"
-            done
-          fi
-
-          # For a clean, linear history and fewer merge conflicts
-          echo "Rebasing latest changes from main..."
-          git pull --rebase origin main
-
-          echo "Pushing changes..."
-          git push origin HEAD:main
-          echo "Changes committed and pushed."
 
       - name: Trigger site repo (repository_dispatch)
         run: |
