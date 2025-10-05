@@ -143,87 +143,14 @@ Personally I like to keep the PAT and the repository secret the same, but made U
 
 ### Step 3: Workflow for `obsidian-note-vault-repo`
 
-File: `.github/workflows/format-and-dispatch.yml`
+Hugo gets a bit weird with dollar signs (`$`) in code blocks and tries to treat them like shortcodes; so, instead of dropping the GitHub Actions workflow directly in this post, I’ve put it in a GitHub Gist to keep things clean and readable.
+
+GitHub Gist: [`.github/workflows/format-and-dispatch.yml`](https://gist.github.com/matt2ology/4b8800889e149f5087ba9b8071be05d9)
 
 - Runs on push to `main`
 - Formats Markdown files (using Prettier)
 - Commits any formatting changes
 - Dispatches an event to trigger the Hugo build in your site repo (`username.github.io`)
-
-```yaml
-name: Format Markdown & Trigger Site Build
-
-on:
-  workflow_dispatch: # Manual trigger
-  push:
-    branches:
-      - main # Adjust if needed
-
-permissions:
-  contents: write # Needed for commit/push with GITHUB_TOKEN
-
-jobs:
-  format-and-dispatch:
-    runs-on: ubuntu-latest
-    env:
-      NODE_VERSION: 20
-      TZ: America/Los_Angeles
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      SITE_REPO_PAT: ${{ secrets.SITE_REPO_PAT }}
-
-    steps:
-      - name: Checkout notes repo
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-          token: ${{ env.GITHUB_TOKEN }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v5
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Install Prettier
-        run: npm install --global prettier
-
-      - name: Format Markdown files
-        run: prettier --write "**/*.md"
-
-      - name: Verify Node & Prettier versions
-        run: |
-          echo "Node.js: $(node --version)"
-          echo "Prettier: $(prettier --version)"
-
-      - name: Commit changes (if any)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-
-          if git diff --cached --quiet; then
-            echo "No changes to commit"
-          else
-            echo "Committing the formatted markdown files..."
-            git commit -m "chore: format markdown with prettier"
-
-            echo "Pulling latest main to avoid non-fast-forward error..."
-            git pull --rebase origin main
-
-            echo "Pushing changes..."
-            git push origin HEAD:main
-            echo "Changes have been committed and pushed!"
-          fi
-
-      - name: Trigger site repo (repository_dispatch)
-        run: |
-          curl -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: token ${SITE_REPO_PAT}" \
-            https://api.github.com/repos/<your-username>/<your-username>.github.io/dispatches \
-            -d '{"event_type":"obsidian_content_updated","client_payload":{"ref":"'"${GITHUB_SHA}"'"}}'
-```
 
 > Don't forget to change `https://api.github.com/repos/<your-username>/<your-username>` with your own username/organization
 
@@ -231,141 +158,13 @@ An optional enhancement would be to format file names by slugifying them; for ex
 
 ### Step 4: Workflow for `username.github.io`
 
-```yml
-# Sample workflow for building and deploying a Hugo site to GitHub Pages
-name: Update Submodule & Deploy Hugo Site to Pages
+GitHub Gist: [`.github/workflows/update-format-links-build-deploy.yml`](https://gist.github.com/matt2ology/048b2d9d10b802697d9427e7885cd989)
 
-on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-  repository_dispatch:
-    types: [obsidian_content_updated]
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
-# Default to bash
-defaults:
-  run:
-    shell: bash
-
-jobs:
-  # Build job
-  build:
-    runs-on: ubuntu-latest
-    env:
-      HUGO_VERSION: 0.128.0
-    steps:
-      - name: Install Hugo CLI
-        run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
-
-      - name: Install Dart Sass
-        run: sudo snap install dart-sass
-
-      - name: Checkout with submodules
-        uses: actions/checkout@v5
-        with:
-          submodules: recursive
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Update submodules to latest commit on main branch
-        run: |
-          # Sync submodules with remote configuration
-          git submodule sync --recursive
-
-          # Initialize submodules and update them
-          git submodule update --init --recursive
-
-          # Fetch the latest commit for the content submodule
-          git submodule update --remote content
-
-          # Set GitHub Actions bot as the author
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          # Check if submodule changes exist and commit them
-          if git diff --cached --quiet; then
-            echo "No submodule changes to commit"
-          else
-            echo "Submodule changes detected. Committing..."
-            git add content
-            git commit -m "chore: sync content from notes repo"
-            git push origin HEAD:main
-            echo "Changes pushed to main branch"
-          fi
-
-      - name: Convert links in markdown files
-        run: |
-          shopt -s globstar nullglob
-          for file in content/**/*.md; do
-            # skip templates folder
-            if [[ "\$file" == content/templates/* ]]; then
-              continue
-            fi
-
-            echo "Processing $file"
-
-            # [[Page Name|Alias]] → [Alias]({{< relref "Page Name.md" >}})
-            sed -i -E 's/\[\[([^]|#]+)\|([^]]+)\]\]/[\2]({{< relref "\1.md" >}})/g' "$file"
-
-            # [[Page Name#Anchor]] → [Anchor]({{< relref "Page Name.md#Anchor" >}})
-            sed -i -E 's/\[\[([^]|#]+)#([^\]]+)\]\]/[\2]({{< relref "\1.md#\2" >}})/g' "$file"
-
-            # [[Page Name]] → [Page Name]({{< relref "Page Name.md" >}})
-            sed -i -E 's/\[\[([^]|#]+)\]\]/[\1]({{< relref "\1.md" >}})/g' "$file"
-
-            # [Page Name](page name.md) → [Page Name]({{< relref "page name.md" >}})
-            sed -E 's/\[([^]]+)\]\(([^\)]+\.md)(#[^\)]*)?\)/[\1]({{< relref "\2\3" >}})/g' "$file"
-          done
-
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v5
-
-      - name: Install Node.js dependencies
-        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
-
-      - name: Build with Hugo
-        env:
-          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
-          HUGO_ENVIRONMENT: production
-        run: |
-          hugo \
-            --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./public
-
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-```
+- **Triggers** on push to `main`, manual dispatch, or external `repository_dispatch` event.
+- **Updates Hugo submodule** (`content`) to latest commit from its repo and commits changes if needed.
+- **Converts Obsidian-style links** in Markdown files to Hugo `relref` shortcodes.
+- **Builds Hugo site** with `hugo`, using Dart Sass and Node.js if needed.
+- **Deploys the site** to GitHub Pages via artifact upload and deployment step.
 
 ### Step 5: Enable GitHub Pages in the site repo
 
