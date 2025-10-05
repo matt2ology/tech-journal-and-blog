@@ -40,17 +40,17 @@ The relationship:
 ### Prerequisites
 
 1. A GitHub account and two repos:
-    - `obsidian-note-vault-repo` — your Obsidian vault (content).
-    - `username/username.github.io` — your Hugo site repo (user site).
+   - `obsidian-note-vault-repo` — your Obsidian vault (content).
+   - `username/username.github.io` — your Hugo site repo (user site).
 2. Local git + Hugo to test locally.
 3. A secret you’ll create later:
-    - In `obsidian-note-vault-repo`:  a fine-grained PAT (details below) used to trigger the site repo.
+   - In `obsidian-note-vault-repo`: a fine-grained PAT (details below) used to trigger the site repo.
 
 **Important about tokens**: to trigger a workflow in _another_ repo via `repository_dispatch` you’ll need a PAT (the built-in `GITHUB_TOKEN` cannot dispatch to a different repository). For fine-grained PATs, read the docs and grant only the minimal repo permissions you need.
 
 #### Adding A theme
 
-Once your Hugo repo site is set up you can now add a theme to your site. 
+Once your Hugo repo site is set up you can now add a theme to your site.
 
 You'll need to configure Hugo to use a them. Edit your `config.toml` (or `config.yaml`/`config.json` if using a different format) and specify your theme:
 
@@ -85,7 +85,7 @@ git push origin main
 
 > Don't forget to change `https://api.github.com/repos/<your-username>/<your-username>` with your own username/organization
 
-This records the branch in `.gitmodules` so we can use 
+This records the branch in `.gitmodules` so we can use
 
 ```bash
 git submodule update --remote
@@ -111,18 +111,18 @@ You only need **one fine-grained Personal Access Token (PAT)**.
 1. Go to **GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens**
 2. Click **"Generate new token"**
 3. Choose a name: a descriptive name like one of the following
-    - `obsidian-site-dispatch`
-    - `site-update-trigger`
-    - `obsidian-content-sync`
-    - `gh-pages-push-token`
-    - `personal-site-deploy`
-    - `obsidian-ci-token`
-    - `gh-token-site-refresh`
-    - `update-token-obsidian-site`
+   - `obsidian-site-dispatch`
+   - `site-update-trigger`
+   - `obsidian-content-sync`
+   - `gh-pages-push-token`
+   - `personal-site-deploy`
+   - `obsidian-ci-token`
+   - `gh-token-site-refresh`
+   - `update-token-obsidian-site`
 4. Repository access: **only select** your site repo (`username.github.io`)
 5. Permissions:
-    - ✅ **Repository contents** → Read and write
-    - ✅ **Metadata** → Read
+   - ✅ **Repository contents** → Read and write
+   - ✅ **Metadata** → Read
 6. Expiration: choose 90 days or similar (renew as needed)
 7. Copy the token (you won’t see it again 😈)
 
@@ -154,13 +154,13 @@ File: `.github/workflows/format-and-dispatch.yml`
 name: Format Markdown & Trigger Site Build
 
 on:
-  workflow_dispatch:  # Manual trigger
+  workflow_dispatch: # Manual trigger
   push:
     branches:
-      - main  # Adjust if needed
+      - main # Adjust if needed
 
 permissions:
-  contents: write  # Needed for commit/push with GITHUB_TOKEN
+  contents: write # Needed for commit/push with GITHUB_TOKEN
 
 jobs:
   format-and-dispatch:
@@ -199,17 +199,17 @@ jobs:
           set -e
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      
+
           # Exit early if no changes (tracked modifications/deletions or new untracked files)
           if git diff --quiet && git diff --cached --quiet && [[ -z "$(git ls-files --others --exclude-standard)" ]]; then
             echo "No changes to commit (tracked or new files). Exiting."
             exit 0
           fi
-      
+
           # --- Commit modified/deleted markdown files individually ---
           echo "Checking for modified/deleted markdown files..."
           MODIFIED_FILES=$(git ls-files -m -d | grep '\.md$' || true)
-      
+
           if [ -z "$MODIFIED_FILES" ]; then
             echo "No modified/deleted markdown files to commit."
           else
@@ -218,11 +218,11 @@ jobs:
               git commit -m "chore: update existing markdown file: $file"
             done
           fi
-      
+
           # --- Commit new (untracked) markdown files individually ---
           echo "Checking for new markdown files..."
           NEW_FILES=$(git ls-files --others --exclude-standard | grep '\.md$' || true)
-      
+
           if [ -z "$NEW_FILES" ]; then
             echo "No new markdown files to commit."
           else
@@ -231,11 +231,11 @@ jobs:
               git commit -m "chore: add new markdown file: $file"
             done
           fi
-      
+
           # For a clean, linear history and fewer merge conflicts
           echo "Rebasing latest changes from main..."
           git pull --rebase origin main
-      
+
           echo "Pushing changes..."
           git push origin HEAD:main
           echo "Changes committed and pushed."
@@ -267,7 +267,7 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   repository_dispatch:
-    types: [ obsidian_content_updated ]
+    types: [obsidian_content_updated]
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -311,17 +311,17 @@ jobs:
         run: |
           # Sync submodules with remote configuration
           git submodule sync --recursive
-          
+
           # Initialize submodules and update them
           git submodule update --init --recursive
-          
+
           # Fetch the latest commit for the content submodule
           git submodule update --remote content
-          
+
           # Set GitHub Actions bot as the author
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-      
+
           # Check if submodule changes exist and commit them
           if git diff --cached --quiet; then
             echo "No submodule changes to commit"
@@ -341,18 +341,18 @@ jobs:
             if [[ "$file" == content/templates/* ]]; then
               continue
             fi
-        
+
             echo "Processing $file"
-        
+
             # [[Page Name|Alias]] → [Alias]({{< relref "Page Name.md" >}})
             sed -i -E 's/\[\[([^]|#]+)\|([^]]+)\]\]/[\2]({{< relref "\1.md" >}})/g' "$file"
-        
+
             # [[Page Name#Anchor]] → [Anchor]({{< relref "Page Name.md#Anchor" >}})
             sed -i -E 's/\[\[([^]|#]+)#([^\]]+)\]\]/[\2]({{< relref "\1.md#\2" >}})/g' "$file"
-        
+
             # [[Page Name]] → [Page Name]({{< relref "Page Name.md" >}})
             sed -i -E 's/\[\[([^]|#]+)\]\]/[\1]({{< relref "\1.md" >}})/g' "$file"
-        
+
             # [Page Name](page name.md) → [Page Name]({{< relref "page name.md" >}})
             sed -E 's/\[([^]]+)\]\(([^\)]+\.md)(#[^\)]*)?\)/[\1]({{< relref "\2\3" >}})/g' "$file"
           done
@@ -402,12 +402,12 @@ jobs:
 1. Commit a Markdown change in your `obsidian-note-vault-repo/main` branch.
 2. Push it to GitHub.
 3. In **obsidian-note-vault-repo → Actions**, confirm:
-    - Markdown formatted
-    - “Trigger site repo” step runs successfully
+   - Markdown formatted
+   - “Trigger site repo” step runs successfully
 4. In **username.github.io → Actions**, confirm:
-    - Repository dispatch received
-    - Submodule updated
-    - Hugo build + deployment succeeded
+   - Repository dispatch received
+   - Submodule updated
+   - Hugo build + deployment succeeded
 5. Visit `https://username.github.io` to verify content updated.
 
 ## Recap
