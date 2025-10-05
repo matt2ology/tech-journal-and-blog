@@ -22,6 +22,8 @@ title: Blog - Automating Hugo Deployments from Obsidian Notes with GitHub Action
 
 ## End-to-End Guide: Obsidian → Hugo → GitHub Pages with 2 Repos
 
+I came across Hugo through Jeff Delaney’s [Fireship](https://www.youtube.com/@Fireship) video, "[Hugo in 100 Seconds](https://www.youtube.com/watch?v=0RKpf3rK57I)".
+
 This project serves as my personal starting point for gaining hands-on experience with GitHub Actions.
 
 The guide I’ve put together is primarily a reference for myself - a way to document the steps and automation involved in this workflow. I find it’s best to keep things flexible and general, without locking into a specific theme. That way, both you and I can apply the workflow to any theme or configuration.
