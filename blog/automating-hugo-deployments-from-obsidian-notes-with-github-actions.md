@@ -150,6 +150,10 @@ File: `.github/workflows/format-and-dispatch.yml`
 - Commits any formatting changes
 - Dispatches an event to trigger the Hugo build in your site repo (`username.github.io`)
 
+> Due to a Hugo rendering issue that mistakenly interprets parts of the following line as a [shortcode](https://gohugo.io/content-management/shortcodes/), make sure to remove the backslash (\\) escape character before the dollar sign (\$)
+>
+> > `if git diff --quiet && git diff --cached --quiet && [[ -z "\$(git ls-files --others --exclude-standard)" ]]; then`
+
 ```yaml
 name: Format Markdown & Trigger Site Build
 
@@ -201,7 +205,7 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
           # Exit early if no changes (tracked modifications/deletions or new untracked files)
-          if git diff --quiet && git diff --cached --quiet && [[ -z "$(git ls-files --others --exclude-standard)" ]]; then
+          if git diff --quiet && git diff --cached --quiet && [[ -z "\$(git ls-files --others --exclude-standard)" ]]; then
             echo "No changes to commit (tracked or new files). Exiting."
             exit 0
           fi
