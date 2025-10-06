@@ -31,7 +31,6 @@ Best for: General study and reading comprehension. It’s a well-established met
 
 > **Summary:**
 
-
 ## Key Ideas
 
 <!-- Idea 1: Key point or insights written in your own words -->

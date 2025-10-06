@@ -47,4 +47,3 @@ Write down what I plan to do next—tasks, experiments, or intentions.
 -
 
 ### 🔗 External Links, Resources, and Related Notes
-
