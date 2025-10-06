@@ -54,7 +54,7 @@ jobs:
             git commit -m "chore: format markdown with prettier"
 
             echo "Pulling latest main to avoid non-fast-forward error..."
-            git pull --rebase origin main
+            git pull --rebase=merges origin main
 
             echo "Pushing changes..."
             git push origin HEAD:main
