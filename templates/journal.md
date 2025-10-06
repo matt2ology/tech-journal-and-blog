@@ -21,27 +21,30 @@ What did I learn or realize?
 Write freely here — anecdotes, thoughts, questions, anything I want to explore.
 -->
 
----
+### 🎯 Focus
 
-### Ideas / Action / Next Steps
+- Topic:
+- Goal for today:
+
+### 📘 What I learned
+
+-
+
+### 🔍 Questions / Gaps
+
+-
+
+### 💡 Insights
+
+-
+
+## ✅ Ideas / Actions / Next Steps
 
 <!--
-Write down what I plan to do next. Could be tasks, experiments,
-or intentions I want to do week.
+Write down what I plan to do next—tasks, experiments, or intentions.
 -->
 
-- [Actionable point #1]
-- [Actionable point #2]
-- [Actionable point #3]
+-
 
----
+### 🔗 External Links, Resources, and Related Notes
 
-### Resources / References
-
-<!--
-Add links, books, videos, or tools that I found useful or want to remember.
--->
-
-<!-- [Book, article, tool, or link #1]({{< ref "/post/reference/reference-note-01.md" >}}) -->
-
-- [Book, article, tool, or link #2]
