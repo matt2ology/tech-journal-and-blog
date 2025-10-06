@@ -39,6 +39,3 @@ Best for: General study and reading comprehension. It’s a well-established met
 ## Chapters Optional
 
 ## Related Literature Notes or Atomic Notes
-
-<!-- [Related Literature Note]({{< ref "/post/literature/rest_of_the_path_to_file.md" >}}) -->
-<!-- [Related Atomic Note]({{< ref "/post/atomic/rest_of_the_path_to_file.md" >}}) -->
