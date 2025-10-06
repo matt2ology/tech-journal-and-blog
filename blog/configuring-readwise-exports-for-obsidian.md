@@ -127,7 +127,10 @@ date: { { date|date("Y-m-d") } }
 draft: true
 media: { { category } }
 source: { { source } }
-tags: readwise, reference/{{category}}{% for tag in document_tags %}, {{tag}}{% endfor %}
+tags:
+  - readwise
+  - reference/{{category}}{% for tag in document_tags %}
+  - {{tag}}{% endfor %}
 title: Reference - {{author}} - {{title}}
 ```
 
