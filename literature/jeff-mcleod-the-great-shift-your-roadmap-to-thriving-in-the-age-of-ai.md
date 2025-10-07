@@ -40,6 +40,15 @@ Best for: General study and reading comprehension. It’s a well-established met
 
 ### From Farms to Algorithms - The Evolution of Work
 
+Focuses on the American perspective in highlighting Samuel Slater and Slater's contribution to machinery automation, and restructuring and organizing human effort via the factory system. No longer are families working for themselves to sell what they produce, but now work for a wage and leveraging machinery to increase both efficiency and output.
+
+#### Steam Gives Way to Circuits: The Rise of White-Collar Work
+
+As repetitive manual labor is increasingly replaced by machines, we free ourselves to engage our minds. We evolve from muscle-driven workers, often unaware of the reasons behind our tasks (just 'dig the hole, hole-digger'), to knowledge workers focused on applying understanding and insight to create meaningful solutions.
+
+#### Fear and Opportunity: Technology as a Job Destroyer and Creator
+
+
 ### The AI Tidal Wave - What's Coming and Who's at Risk
 
 ### Skills that Survive - What AI Can't Replace
