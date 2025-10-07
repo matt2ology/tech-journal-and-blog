@@ -48,7 +48,6 @@ As repetitive manual labor is increasingly replaced by machines, we free ourselv
 
 #### Fear and Opportunity: Technology as a Job Destroyer and Creator
 
-
 ### The AI Tidal Wave - What's Coming and Who's at Risk
 
 ### Skills that Survive - What AI Can't Replace
