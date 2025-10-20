@@ -59,6 +59,7 @@ source: {{source}}
 <!-- Adding a blank line -->
 {% endif %}{% if highlight_note %}
 **Initial thought or note on:** {% if highlight_location and highlight_location_url %}[({{highlight_location}})]({{highlight_location_url}}){% elif highlight_location %}({{highlight_location}}){% endif %}
+
 {{ highlight_note }}
 {% endif %}
 ```
