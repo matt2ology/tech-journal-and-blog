@@ -10,6 +10,7 @@ tags:
   - reference/articles
 title: Reference - UnityCoin - Clean Code - Uncle Bob / Lesson 6
 ---
+
 ## Clean Code - Uncle Bob / Lesson 6 (Highlights)
 
 ![rw-book-cover](https://i.ytimg.com/vi/l-gF0vDhJVI/maxresdefault.jpg)
@@ -36,6 +37,7 @@ There are many implementations of Agile.
 > \- [(View Highlight)](https://read.readwise.io/read/01k758emmvy70e4mq3tkmh366q)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k758emmvy70e4mq3tkmh366q)
+
 - Badly?
 - Hope and prayer?
 - With Great Difficulty
@@ -48,6 +50,7 @@ There are many implementations of Agile.
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k758gkg8w5q49qqh6wchteew)
 Leads to:
+
 - Producing the wrong product
 - Producing a product of inferior quality
 - Being late
@@ -56,7 +59,7 @@ Leads to:
 #### id946365983
 
 > why is it so hard to manage software projects? What is the fundamental cause of this? The answer to that has been known for a very long time, and it’s actually a very simple problem: good, fast, cheap — pick any three; you're not going to get the fourth.
->   This is called the iron cross of project management.
+> This is called the iron cross of project management.
 > \- [(View Highlight)](https://read.readwise.io/read/01k767fcjwz6dcn240c3gck2t4)
 
 #### id946366308
@@ -76,6 +79,7 @@ Lots of feedback - increase iteration cycles (2 weeks most common). Agile is to 
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k767t4am1pvxtytbtcmjk7z4)
 Finding the optimum solution
+
 - We need to manage the project to the best possible outcome
 - An outcome that maximizes all four qualities: good (quality), fast (schedule), cheap (cost), done/scope (the deliverable).
 - To do this, we need: DATA!
@@ -126,7 +130,7 @@ This may be a point in that an evaluation of an user story was lower than what t
 #### id946585562
 
 > Put these two charts on the wall.
->   Anybody can walk into the room where those two charts are, look at those charts for 10 seconds and say, "Huh, this team's getting about 45 points a week done. I think they're gonna be done in May.
+> Anybody can walk into the room where those two charts are, look at those charts for 10 seconds and say, "Huh, this team's getting about 45 points a week done. I think they're gonna be done in May.
 > \- [(View Highlight)](https://read.readwise.io/read/01k7853xzjxgxe3sr69mtxqady)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7853xzjxgxe3sr69mtxqady)
@@ -219,6 +223,7 @@ Other engineering disciplines are not susceptible to such rapid changes; for thi
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k786h9pqbtyme1pfb2fsmdkq)
 Break the project up into 3 major phases:
+
 1. Analysis
 2. Design
 3. Implementation
@@ -266,7 +271,7 @@ It isn't about doing more of the analysis or design. Requirements changed, so th
 #### id947989348
 
 > doubling the staff does not have the effect of doubling the throughput. What really happens is that when you add new people to the project, the old people slow down enormously. The whole schedule begins to slip because the new people suck the life out of the old people. You kind of hope that after a month or two the new people get smart enough to start getting faster, and even if that's true, it's risky as hell.
->   Besides that, if you add more people to the project, it's going to cost more money.
+> Besides that, if you add more people to the project, it's going to cost more money.
 > \- [(View Highlight)](https://read.readwise.io/read/01k7j4zyjepd20e8jhf1qf24ey)
 
 #### id947989742
@@ -292,7 +297,7 @@ It isn't about doing more of the analysis or design. Requirements changed, so th
 #### id948276804
 
 > Just tell us what you want first so that we never, ever deliver something you don’t need. That’s agile. That’s agile. At the 30,000 foot level, agile is a simple technique. You take a project, you subdivide it into time.
->   In time boxes, you measure how much you get done. In those time boxes, you use that measurement to project the end date, and then you manage and manage and manage, because every software project is always a horror scene.
+> In time boxes, you measure how much you get done. In those time boxes, you use that measurement to project the end date, and then you manage and manage and manage, because every software project is always a horror scene.
 > \- [(View Highlight)](https://read.readwise.io/read/01k7mnprbk7z1442qhevzqjyns)
 
 #### id948277012
@@ -342,7 +347,7 @@ Scrum without engineering practices systematically sets the team for failure.
 #### id948280093
 
 > If you
->   want to do big things, you have to use a lot of little small teams, and all the small teams are doing Agile.
+> want to do big things, you have to use a lot of little small teams, and all the small teams are doing Agile.
 > \- [(View Highlight)](https://read.readwise.io/read/01k7mpz3ed52g3w7b71mf488s5)
 
 #### id948280749
@@ -442,7 +447,7 @@ In Velocity chart we don't want any surprises. No fluxuation in output - predict
 #### id949247916
 
 > A positive trend
->   probably means that someone is putting pressure on the team, and pressure on the team is going to shift all the numbers.
+> probably means that someone is putting pressure on the team, and pressure on the team is going to shift all the numbers.
 > \- [(View Highlight)](https://read.readwise.io/read/01k7xmhh09sk0w56dfq6sqnp75)
 
 #### id949248075
@@ -495,4 +500,3 @@ The ability to be technical and sociable to communicate the jargon and situation
 
 > You have to be able to put yourself in the position of the customer and understand what the customer needs so that you can communicate requirements to the software development team. But then you have to be able to put yourself In the programmer's position, they need to understand what they are fighting against and how they need design.
 > \- [(View Highlight)](https://read.readwise.io/read/01k7xpjg3wzqem9mew0j1xkz5c)
-
