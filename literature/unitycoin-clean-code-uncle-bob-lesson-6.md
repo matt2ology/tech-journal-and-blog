@@ -28,7 +28,7 @@ Reference note: [unitycoin-clean-code-uncle-bob-lesson-6](../references/articles
 
 ## Chapters
 
-### [[../references/articles/unitycoin-clean-code-uncle-bob-lesson-6#How do you manage a software project?|#How do you manage a software project?]]
+### [[../references/articles/unitycoin-clean-code-uncle-bob-lesson-6#How do you manage a software project?|How do you manage a software project?]]
 
 - Software project management is notoriously hard - often done "badly" or through "hope and prayer".
 - Mismanagement leads to wrong products, low quality, missed deadlines, and burnout.
