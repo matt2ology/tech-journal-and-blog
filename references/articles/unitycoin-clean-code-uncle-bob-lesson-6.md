@@ -269,11 +269,7 @@ It isn't about doing more of the analysis or design. Requirements changed, so th
 > \- [(View Highlight)](https://read.readwise.io/read/01k7j4wgj6b6fecrp4tcsfxtaz)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7j4wgj6b6fecrp4tcsfxtaz)
-The Control Knobs of project management:
-    - Schedule
-    - Staff
-    - Quality
-    - Scope
+The Control Knobs of project management: - Schedule - Staff - Quality - Scope
 
 #### id947989348
 
