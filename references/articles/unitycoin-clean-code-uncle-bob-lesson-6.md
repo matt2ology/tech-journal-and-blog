@@ -17,7 +17,8 @@ title: Reference - UnityCoin - Clean Code - Uncle Bob / Lesson 6
 
 Source published date: 2019-08-09
 
-**Link:** [Clean Code - Uncle Bob / Lesson 6](https://www.youtube.com/watch?v=l-gF0vDhJVI&list=PLmmYSbUCWJ4x1GO839azG_BBw8rkh-zOj&index=7)
+
+**Literature note:** [[../../literature/unitycoin-clean-code-uncle-bob-lesson-6]]
 
 ## Highlights
 
