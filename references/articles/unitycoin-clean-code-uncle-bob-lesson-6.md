@@ -268,6 +268,13 @@ It isn't about doing more of the analysis or design. Requirements changed, so th
 > early is a good time to tell everybody you're going to be late.
 > \- [(View Highlight)](https://read.readwise.io/read/01k7j4wgj6b6fecrp4tcsfxtaz)
 
+**Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7j4wgj6b6fecrp4tcsfxtaz)
+The Control Knobs of project management:
+    - Schedule
+    - Staff
+    - Quality
+    - Scope
+
 #### id947989348
 
 > doubling the staff does not have the effect of doubling the throughput. What really happens is that when you add new people to the project, the old people slow down enormously. The whole schedule begins to slip because the new people suck the life out of the old people. You kind of hope that after a month or two the new people get smart enough to start getting faster, and even if that's true, it's risky as hell.
