@@ -3,7 +3,7 @@ authors:
   - matt2ology
 categories:
   - literature
-date: 2025-10-14T12:52:18-07:00
+date: 2025-10-20
 draft: false
 tags:
   - literature/video
