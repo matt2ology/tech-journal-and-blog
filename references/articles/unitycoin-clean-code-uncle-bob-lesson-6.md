@@ -31,6 +31,7 @@ Source published date: 2019-08-09
 > \- [(View Highlight)](https://read.readwise.io/read/01k758xcc7y24sq5hc2vkk4htd)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k758xcc7y24sq5hc2vkk4htd)
+
 There are many implementations of Agile.
 
 #### id946254751
@@ -51,6 +52,7 @@ There are many implementations of Agile.
 > \- [(View Highlight)](https://read.readwise.io/read/01k758gkg8w5q49qqh6wchteew)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k758gkg8w5q49qqh6wchteew)
+
 Leads to:
 
 - Producing the wrong product
@@ -70,6 +72,7 @@ Leads to:
 > \- [(View Highlight)](https://read.readwise.io/read/01k767mvq148ny9kxa1jg3ze6q)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k767mvq148ny9kxa1jg3ze6q)
+
 Lots of feedback - increase iteration cycles (2 weeks most common). Agile is to have multiple short iterations, so to be best informed by having more meaningful communication to help drive the product to what the customer wants without guessing what they want.
 
 ### Finding the optimum solution - Data
@@ -80,6 +83,7 @@ Lots of feedback - increase iteration cycles (2 weeks most common). Agile is to 
 > \- [(View Highlight)](https://read.readwise.io/read/01k767t4am1pvxtytbtcmjk7z4)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k767t4am1pvxtytbtcmjk7z4)
+
 Finding the optimum solution
 
 - We need to manage the project to the best possible outcome
@@ -92,6 +96,7 @@ Finding the optimum solution
 > \- [(View Highlight)](https://read.readwise.io/read/01k7685et03esbb687n1mnw96z)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7685et03esbb687n1mnw96z)
+
 Velocity chart. This enables managers to predict the volume of work that can be done within a week.
 
 #### id946367270
@@ -100,6 +105,7 @@ Velocity chart. This enables managers to predict the volume of work that can be 
 > \- [(View Highlight)](https://read.readwise.io/read/01k768a1jvn3c641edvpxw9gfq)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k768a1jvn3c641edvpxw9gfq)
+
 One would hope that volume of work would decrement by the average of team's velocity.
 
 #### id946475312
@@ -108,6 +114,7 @@ One would hope that volume of work would decrement by the average of team's velo
 > \- [(View Highlight)](https://read.readwise.io/read/01k77ccn7xgqbsnnzq4fjqkffq)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k77ccn7xgqbsnnzq4fjqkffq)
+
 This puts process in-front of getting what the customer/end-user requests.
 
 #### id946475652
@@ -121,6 +128,7 @@ This puts process in-front of getting what the customer/end-user requests.
 > \- [(View Highlight)](https://read.readwise.io/read/01k77cmcywe8adq8waj5wdc2bs)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k77cmcywe8adq8waj5wdc2bs)
+
 On the topic of burndown charts (story points left in sprint/release) we generally want to see the number of story points decrease; however, there may be a case where one would see a spike in story points.
 This may be a point in that an evaluation of an user story was lower than what the work required actually was (i.e. it was more complexed than they originally estimated).
 
@@ -136,7 +144,8 @@ This may be a point in that an evaluation of an user story was lower than what t
 > \- [(View Highlight)](https://read.readwise.io/read/01k7853xzjxgxe3sr69mtxqady)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7853xzjxgxe3sr69mtxqady)
-Velocity chart and burndown chart
+
+Velocity chart and burn-down chart
 
 #### id946585794
 
@@ -149,6 +158,7 @@ Velocity chart and burndown chart
 > \- [(View Highlight)](https://read.readwise.io/read/01k785bsyzn3jbwzff65sp7d9e)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k785bsyzn3jbwzff65sp7d9e)
+
 HA!
 
 #### id946586088
@@ -157,6 +167,7 @@ HA!
 > \- [(View Highlight)](https://read.readwise.io/read/01k785d8273mwwhcg7jqdsxp2v)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k785d8273mwwhcg7jqdsxp2v)
+
 Data driven management.
 
 #### id946586120
@@ -170,6 +181,7 @@ Data driven management.
 > \- [(View Highlight)](https://read.readwise.io/read/01k785k2r99181mex11zr6vg5k)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k785k2r99181mex11zr6vg5k)
+
 All work has been planned to the next major deliverable. It isn't management saying just do the work it's the whole team on same level understanding what is going on.
 This is done every iteration - curate another 3 to 4 months look ahead.
 
@@ -179,6 +191,7 @@ This is done every iteration - curate another 3 to 4 months look ahead.
 > \- [(View Highlight)](https://read.readwise.io/read/01k785qz4hyrfg5pemfrq2zza8)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k785qz4hyrfg5pemfrq2zza8)
+
 Velocity chart and burn-down chart
 
 ### What is the first thing know about project - The Management Paradox.
@@ -189,6 +202,7 @@ Velocity chart and burn-down chart
 > \- [(View Highlight)](https://read.readwise.io/read/01k785w178vdd7dttqr85959k7)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k785w178vdd7dttqr85959k7)
+
 The first thing you know about any project, even before the name of it, is the date. When is the deliverable date?
 
 #### id946589703
@@ -197,6 +211,7 @@ The first thing you know about any project, even before the name of it, is the d
 > \- [(View Highlight)](https://read.readwise.io/read/01k7861k0erpk7myxmfb3kf4ac)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7861k0erpk7myxmfb3kf4ac)
+
 If every feature is important than none of them are. Core features of each major release can be replanned or deprioritized, and can later be incorporated in the next iteration.
 
 #### id946589875
@@ -205,6 +220,7 @@ If every feature is important than none of them are. Core features of each major
 > \- [(View Highlight)](https://read.readwise.io/read/01k7865z8td5xhnh6d1qea7jmk)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7865z8td5xhnh6d1qea7jmk)
+
 Agile is to work in iterations. Ideas get better with iterations. As a result show-and-tell the customers early and often to see if it is in alignment to what they envisioned the end product to be.
 
 ### The Waterfall Model
@@ -215,6 +231,7 @@ Agile is to work in iterations. Ideas get better with iterations. As a result sh
 > \- [(View Highlight)](https://read.readwise.io/read/01k786b62wr82a20yv5z1jaag1)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k786b62wr82a20yv5z1jaag1)
+
 Software is made to be flexible and dynamic. Major changes can be made relatively quickly.
 Other engineering disciplines are not susceptible to such rapid changes; for this reason, waterfall methodologies are better suited.
 
@@ -224,6 +241,7 @@ Other engineering disciplines are not susceptible to such rapid changes; for thi
 > \- [(View Highlight)](https://read.readwise.io/read/01k786h9pqbtyme1pfb2fsmdkq)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k786h9pqbtyme1pfb2fsmdkq)
+
 Break the project up into 3 major phases:
 
 1. Analysis
@@ -236,6 +254,7 @@ Break the project up into 3 major phases:
 > \- [(View Highlight)](https://read.readwise.io/read/01k78bhpxkwj4jraza8w73qcy4)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k78bhpxkwj4jraza8w73qcy4)
+
 Fails in the waterfall model. Analysis and design are constantly evaluated and worked on.
 
 #### id947984544
@@ -251,6 +270,7 @@ Fails in the waterfall model. Analysis and design are constantly evaluated and w
 > \- [(View Highlight)](https://read.readwise.io/read/01k7j3k7epyt6jvq8w3nbrjqzx)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7j3k7epyt6jvq8w3nbrjqzx)
+
 It isn't about doing more of the analysis or design. Requirements changed, so they "hacked" their way into implementation ignoring the original design documentations.
 
 #### id947985278
@@ -271,6 +291,7 @@ It isn't about doing more of the analysis or design. Requirements changed, so th
 > \- [(View Highlight)](https://read.readwise.io/read/01k7j4wgj6b6fecrp4tcsfxtaz)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7j4wgj6b6fecrp4tcsfxtaz)
+
 The Control Knobs of project management: - Schedule - Staff - Quality - Scope
 
 #### id947989348
@@ -311,6 +332,7 @@ The Control Knobs of project management: - Schedule - Staff - Quality - Scope
 > \- [(View Highlight)](https://read.readwise.io/read/01k7mnvtnwc11d832pq8257swp)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7mnvtnwc11d832pq8257swp)
+
 Why we can't estimate software.
 Things we can do intuitively takes significant time to describe all the steps, edge cases, to a computer that will do exactly as you have described.
 
@@ -337,6 +359,7 @@ Things we can do intuitively takes significant time to describe all the steps, e
 > \- [(View Highlight)](https://read.readwise.io/read/01k7mps90wbvw569faast3dv33)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7mps90wbvw569faast3dv33)
+
 Scrum without engineering practices systematically sets the team for failure.
 
 #### id948280033
@@ -361,6 +384,7 @@ Scrum without engineering practices systematically sets the team for failure.
 > \- [(View Highlight)](https://read.readwise.io/read/01k7mq7vm7trz74n8eph64vj31)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7mq7vm7trz74n8eph64vj31)
+
 Consultant BS to play pretend of a process and charge time coaching a solution for a problem that doesn't exists.
 
 #### id948281192
@@ -384,6 +408,7 @@ Consultant BS to play pretend of a process and charge time coaching a solution f
 > \- [(View Highlight)](https://read.readwise.io/read/01k7xk7j59x4mv458n09qnj9bf)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7xk7j59x4mv458n09qnj9bf)
+
 Prioritizing a "process" over impactful, meaningful, work.
 
 #### id949246827
@@ -442,6 +467,7 @@ Prioritizing a "process" over impactful, meaningful, work.
 > \- [(View Highlight)](https://read.readwise.io/read/01k7xmbd26pqy4c7egdn09p2hn)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7xmbd26pqy4c7egdn09p2hn)
+
 In Velocity chart we don't want any surprises. No fluxuation in output - predictable.
 
 #### id949247884
@@ -461,6 +487,7 @@ In Velocity chart we don't want any surprises. No fluxuation in output - predict
 > \- [(View Highlight)](https://read.readwise.io/read/01k7xmjsdjkyfzbd36m2stv728)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7xmjsdjkyfzbd36m2stv728)
+
 Tech debt
 
 ### Questions and Answers
@@ -491,6 +518,7 @@ Tech debt
 > \- [(View Highlight)](https://read.readwise.io/read/01k7xp5cnrzwefnjqv5qgme5nt)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7xp5cnrzwefnjqv5qgme5nt)
+
 A spike is a user story to estimate another user story; for example, estimate how long it will take to get the database working.
 
 #### id949251449
@@ -499,6 +527,7 @@ A spike is a user story to estimate another user story; for example, estimate ho
 > \- [(View Highlight)](https://read.readwise.io/read/01k7xpf892b0rxzgmj27a4mv53)
 
 **Initial thought or note on:** [(View Highlight)](https://read.readwise.io/read/01k7xpf892b0rxzgmj27a4mv53)
+
 The ability to be technical and sociable to communicate the jargon and situation to non-technical business people.
 
 #### id949251938
