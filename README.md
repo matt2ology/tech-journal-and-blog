@@ -27,10 +27,12 @@ Source published date: {{published_date}}
 
 {% endif -%}
 {% if url -%}
-**Link:** [{{full_title}}]({{url}})
+**Source link:** [{{full_title}}]({{url}})
 {% else %}
 source: {{source}}
 {% endif -%}
+<!-- Line brake - br -->
+**Literature note:**
 
 ```
 
