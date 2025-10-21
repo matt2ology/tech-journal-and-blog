@@ -7,6 +7,7 @@ date: 2025-10-20
 draft: false
 tags:
   - literature/video
+  - agile
 title: Literature - unitycoin-clean-code-uncle-bob-lesson-6
 ---
 
