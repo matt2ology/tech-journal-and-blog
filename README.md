@@ -49,19 +49,19 @@ source: {{source}}
 ### Highlight
 
 ```
+
+---
+
 {% if highlight_location == "View Highlight" %}### id{{ highlight_id }}{% elif highlight_location == "View Tweet" %}### id{{ highlight_id }}{% else %}### {{highlight_location}}{% endif %}
+{% if highlight_tags %}
+**Tags:** {{ highlight_tags|join(', ') }} {% endif %}
 
-> {{ highlight_text }}{% if highlight_location and highlight_location_url %}
-> \- [({{ highlight_location }})]({{ highlight_location_url }})
-{% elif highlight_location %}
-({{ highlight_location }})
-{% else %}
-<!-- Adding a blank line -->
-{% endif %}{% if highlight_note %}
-**Initial thought or note on:** {% if highlight_location and highlight_location_url %}[({{highlight_location}})]({{highlight_location_url}}){% elif highlight_location %}({{highlight_location}}){% endif %}
-
-{{ highlight_note }}
+> {{ highlight_text }}{% if highlight_location_url %}
+> \- [{{ highlight_location }}]({{ highlight_location_url }}) {% elif highlight_location %} > \- {{ highlight_location }}
 {% endif %}
+{% if highlight_note %}
+**Reflection:**
+{{ highlight_note }} {% endif %}
 ```
 
 ### YAML front matter
