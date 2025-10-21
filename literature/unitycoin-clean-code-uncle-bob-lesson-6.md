@@ -10,7 +10,7 @@ tags:
 title: Literature - unitycoin-clean-code-uncle-bob-lesson-6
 ---
 
-## Literature note: unitycoin-clean-code-uncle-bob-lesson-6
+## Literature note: UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile Solutions for Balancing Deadlines and Software Quality
 
 Reference note: [unitycoin-clean-code-uncle-bob-lesson-6](../references/articles/unitycoin-clean-code-uncle-bob-lesson-6.md)
 
