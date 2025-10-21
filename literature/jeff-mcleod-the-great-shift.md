@@ -48,6 +48,20 @@ As repetitive manual labor is increasingly replaced by machines, we free ourselv
 
 #### Fear and Opportunity: Technology as a Job Destroyer and Creator
 
+Machines take up manual tasks freeing people to focus on the human-elements (e.g. customer service); as a result, roles will disappear, new categories of work will boom, and existing roles will adapt and incorporate the new technologies.
+
+##### Question on - Fear and Opportunity: Technology as a Job Destroyer and Creator
+
+>   McLeod, Jeff. The Great Shift: Your Roadmap to Thriving in the Age of AI (p. 3). (Function). Kindle Edition.
+> > Banks used the savings to open more branches, and tellers shifted from cash handlers to customer service roles.
+
+**Question**: If machines, hardware, frees one from manual labor to do more people oriented customer service tasks - what does AI, software, enable one to do? If labor is of the body, customer service is of the heart/mind, what type of work is of the spirit do we all become members of a clergy or kick up an industry of enlightenment?
+
+#### Case Study: How Electricity Rewired Work
+
+
+
+
 ### The AI Tidal Wave - What's Coming and Who's at Risk
 
 ### Skills that Survive - What AI Can't Replace
