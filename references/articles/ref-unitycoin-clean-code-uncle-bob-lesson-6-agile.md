@@ -8,7 +8,7 @@ media: articles
 source: reader
 tags:
   - reference/articles
-title: Reference - UnityCoin - Clean Code - Uncle Bob / Lesson 6
+title: Reference - UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile
 ---
 
 ## Clean Code - Uncle Bob / Lesson 6 (Highlights)
