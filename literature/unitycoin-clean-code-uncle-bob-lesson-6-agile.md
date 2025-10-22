@@ -8,7 +8,7 @@ draft: false
 tags:
   - literature/video
   - agile
-title: Literature - unitycoin-clean-code-uncle-bob-lesson-6-agile
+title: Literature - UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile
 ---
 
 ## Literature note: UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile Solutions for Balancing Deadlines and Software Quality
