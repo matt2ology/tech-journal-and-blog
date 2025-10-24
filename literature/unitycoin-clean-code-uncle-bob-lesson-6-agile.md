@@ -55,7 +55,7 @@ Reference note: [ref-unitycoin-clean-code-uncle-bob-lesson-6-agile](../reference
 - The **first thing known** in any project is _the date_, often fixed by business needs; however, **requirements are fluid** - customers refine what they want through iteration.
 - Agile solves this by allowing requirements to evolve while maintaining time-boxed delivery.
 - Teams continuously replan priorities, focusing on _core features first_ and pushing less-critical items to future iterations.
-  - If every feature is “critical,” none of them are — **prioritize what matters**.
+  - If every feature is “critical,” none of them are - **prioritize what matters**.
 - Frequent show-and-tell sessions keep customer expectations aligned with progress.
   - Customers rarely know what they truly want until they see a working product.
   - Agile embraces this uncertainty by iterating quickly and showing progress often.
