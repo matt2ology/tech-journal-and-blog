@@ -25,9 +25,10 @@ Knowing myself - interest and goals
 Worked with and for
 
 Time in leadership positions - IT at Intel
+
 - Was 65 People (mid level manager)
 - General manager - [Kim Stevenson](https://www.linkedin.com/in/kimsstevenson/)
-    - Worked under to become Individual contributor
+  - Worked under to become Individual contributor
 - Culture Change - Stagnant
 
 Have different perspectives - entrepreneur - different backgrounds
