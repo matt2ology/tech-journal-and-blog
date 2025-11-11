@@ -346,7 +346,33 @@ Things we can do intuitively takes significant time to describe all the steps, e
 #### id948277805
 
 > Agile is for: to get the bad news as early as possible. It's not to go fast, just to get The bad news early: the disciplines of Agile are on the screen.
-> \- [(View Highlight)](https://read.readwise.io/read/01k7mp40j0ktzbdvavwkj0nxea)
+> \- [(View Highlight)](https://youtu.be/l-gF0vDhJVI?si=xFsYkn2NJwRFpLAM&t=2938)
+
+**Initial thought or note on:** [(View Highlight)](https://youtu.be/l-gF0vDhJVI?si=xFsYkn2NJwRFpLAM&t=2938)
+
+##### The Disciplines of Agile
+
+A process extracted from "Extreme Programming (XP)"
+
+Green outer ring - Scrum - Business-facing practices (does not deal with the internals):
+- Whole Team
+- Acceptance Tests
+- Small Releases
+- Planning Game
+
+Blue floating in-between the rings - the team practices - how a team behaves:
+- Continuous Integration
+- Metaphor
+- Sustainable Pace
+- Collective Ownership
+
+Red inner ring - The engineering practices - the programmer-specific practices:
+- Test Driven Development
+- Pairing
+- Simple Design
+- Refactoring
+
+Scrum without the inner red ring is known as "Flaccid Scrum": scrum that fails.
 
 #### id948279832
 
