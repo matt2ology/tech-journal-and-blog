@@ -355,18 +355,21 @@ Things we can do intuitively takes significant time to describe all the steps, e
 A process extracted from "Extreme Programming (XP)"
 
 Green outer ring - Scrum - Business-facing practices (does not deal with the internals):
+
 - Whole Team
 - Acceptance Tests
 - Small Releases
 - Planning Game
 
 Blue floating in-between the rings - the team practices - how a team behaves:
+
 - Continuous Integration
 - Metaphor
 - Sustainable Pace
 - Collective Ownership
 
 Red inner ring - The engineering practices - the programmer-specific practices:
+
 - Test Driven Development
 - Pairing
 - Simple Design
