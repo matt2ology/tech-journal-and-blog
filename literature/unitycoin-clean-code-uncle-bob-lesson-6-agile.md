@@ -91,10 +91,33 @@ Reference note: [ref-unitycoin-clean-code-uncle-bob-lesson-6-agile](../reference
 
 ### [[../references/articles/ref-unitycoin-clean-code-uncle-bob-lesson-6-agile#Short Cycles - Agile Software Development Practices - Extreme Programming|Short Cycles / Agile Software Development Practices / Extreme Programming.]]
 
-- You can't fix all four constraints (scope, time, cost, quality); short cycles expose tradeoffs early.
+Agile development, particularly **Extreme Programming (XP)**, emphasizes **short cycles** to uncover problems (“bad news”) as early as possible. The goal of Agile isn’t speed, but **early feedback and adaptability**.
+
+- You can’t fix **scope, date, quality, and cost** all at once (“the Iron Cross”). The best way to manage uncertainty is to work iteratively, learning and adjusting each cycle; that is, short cycles expose tradeoffs early.
 - Agile's purpose: **get the bad news fast**, not to move faster.
-- **Scrum without engineering discipline** (testing, refactoring, clean code) leads to _Flaccid Scrum_ - progress slows and quality decays.
-  - **XP practices** (testing, refactoring, clean design) keep Scrum sustainable.
+- **Scrum without engineering discipline** (testing, refactoring, clean code) leads to _Flaccid Scrum_ - progress slows and quality decays: a process framework without the technical rigor needed for success.
+  - **Extreme Programming (XP)** (testing, refactoring, clean design) keep Scrum sustainable.
+- **XP structure of practices**
+    - **Outer (Green) Ring - Business-facing (Scrum-level)**: focus on **what** is being built and **why**, ensuring that the software actually delivers value to the customer or stakeholder.
+        - Whole Team: Business and technical people work together.
+        - Acceptance Tests: Define done-ness in terms the customer understands.
+        - Small Releases: Deliver value and get customer feedback early.
+        - Planning Game: Balance business priorities with technical estimates.
+    - **Middle (Blue) Ring: Team behavior**
+        - **Continuous Integration**: Team members frequently integrate and test their code together, ensuring shared ownership and rapid feedback.
+        - **Metaphor**: The team uses a shared "story" or metaphor to describe the system’s architecture, helping everyone (technical or not) share a common understanding.
+            - Creates a **common language** across technical and non-technical people.
+            - Helps guide design decisions - new features should “fit the metaphor”.
+            - Makes the system easier to discuss and reason about.
+        - **Sustainable Pace**: The team avoids burnout by maintaining a steady, reasonable work rhythm - no "death marches".
+        - **Collective Ownership**: Any developer can improve or modify any part of the code; responsibility is shared, not siloed.
+    - **Inner (Red) Ring: Engineering (developer-specific)**
+        - Test-Driven Development
+        - Pair Programming
+        - Simple Design
+        - Refactoring
+    - **Business-facing == practices that expose progress, risk, and value to the business side** (product owners, stakeholders, customers).  
+    - **Engineering-facing == practices that ensure technical excellence and delivery capability.**
 - Agile works best for **small, disciplined teams**.
 - Large-scale Agile requires **many small Agile teams** working in parallel - not a single "Agile in the large" process.
 - Avoid process theater - when tools (e.g., Jira) become more important than outcomes.
