@@ -33,10 +33,11 @@ Reference note: [rwd-ronald-t.-kneusel-how-ai-works](../Readwise/books/rwd-ronal
 
 1.
 
-## Preface  
-## Chapter 1: And Away We Go: An AI Overview  
+## Preface
 
-## Chapter 2: Why Now? A History of AI  
+## Chapter 1: And Away We Go: An AI Overview
+
+## Chapter 2: Why Now? A History of AI
 
 ### Pre-1900
 
@@ -60,15 +61,15 @@ Reference note: [rwd-ronald-t.-kneusel-how-ai-works](../Readwise/books/rwd-ronal
 
 ### Data
 
-## Chapter 3: Classical Models: Old-School Machine Learning  
+## Chapter 3: Classical Models: Old-School Machine Learning
 
-## Chapter 4: Neural Networks: Brain-Like AI  
+## Chapter 4: Neural Networks: Brain-Like AI
 
-## Chapter 5: Convolutional Neural Networks: AI Learns to See  
+## Chapter 5: Convolutional Neural Networks: AI Learns to See
 
-## Chapter 6: Generative AI: AI Gets Creative   
+## Chapter 6: Generative AI: AI Gets Creative 
 
-## Chapter 7: Large Language Models: True AI at Last?  
+## Chapter 7: Large Language Models: True AI at Last?
 
 ### GPT-4
 
