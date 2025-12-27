@@ -7,7 +7,7 @@
   "useTab": false,
   "tabSize": 4,
   "vimMode": true,
-  "useMarkdownLinks": false,
+  "useMarkdownLinks": true,
   "userIgnoreFilters": [
     "templates/"
   ]
