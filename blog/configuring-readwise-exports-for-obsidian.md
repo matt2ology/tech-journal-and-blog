@@ -94,9 +94,10 @@ Source published date: {{published_date}}
 {% else %}
 source: {{source}}
 {% endif -%}
-<!-- Line brake - br -->
-**Literature note:**
 
+<!-- Line brake - br -->
+
+**Literature note:**
 ```
 
 If available, the book or article cover image is included, alongside publication date. I also embed the source link when present, or fallback to a source name. This enriches the note and helps later retrieval or citation.
@@ -107,9 +108,13 @@ To organize highlights clearly, I dynamically include:
 
 ```markdown
 {% if is_new_page %}
+
 ## Highlights
+
 {% elif has_new_highlights -%}
+
 ## New highlights added {{date|date('F j, Y')}} at {{time}}
+
 {% endif -%}
 ```
 
@@ -120,7 +125,6 @@ This means on a fresh export, the section is simply titled "Highlights," but on 
 Each highlight is formatted with location info or ID:
 
 ```markdown
-
 ---
 
 {% if highlight_location == "View Highlight" %}### id{{ highlight_id }}{% elif highlight_location == "View Tweet" %}### id{{ highlight_id }}{% else %}### {{highlight_location}}{% endif %}
@@ -128,10 +132,10 @@ Each highlight is formatted with location info or ID:
 
 > {{ highlight_text }}{% if highlight_location_url %}
 > \- [{{ highlight_location }}]({{ highlight_location_url }}) {% elif highlight_location %} > \- {{ highlight_location }}
-{% endif %}
-{% if highlight_note %}
-**Reflection:**
-{{ highlight_note }} {% endif %}
+> {% endif %}
+> {% if highlight_note %}
+> **Reflection:**
+> {{ highlight_note }} {% endif %}
 ```
 
 This includes:
