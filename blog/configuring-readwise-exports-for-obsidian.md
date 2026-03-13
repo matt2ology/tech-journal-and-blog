@@ -24,8 +24,39 @@ I want to share the core parts of my configuration that handle file naming, meta
 
 First things first, the filename. A consistent naming scheme is key for organizing hundreds of highlights. My format looks like this:
 
-```
-rwd-{{author|lower|replace("and","")|replace(" ","-")|replace("...","")|truncate(20)}}-{{title|lower|replace(""","")|replace(""","")|replace("'","")|replace("'","")|replace("/","-")|replace(" ","-")|replace(" ","-")|replace("...","")|truncate(30)}}
+```text
+{% macro slug(s, length) -%}
+{{ s
+| lower
+| replace("and","")
+| replace(' ','-')
+| replace('--','-')
+| replace(' - ','-')
+| replace(' -','-')
+| replace('- ','-')
+| replace('..','')
+| replace('.','-')
+| replace('"','')
+| replace("'","")
+| replace('“','')
+| replace('”','')
+| replace('"','')
+| replace('‘','')
+| replace('’','')
+| replace('…','-')
+| replace('(','')
+| replace(')','')
+| replace(',','')
+| replace('|','')
+| replace('/','')
+| replace('^-','')
+| replace('--','-')
+| truncate(length, True, '')
+| replace('-$','')
+}}
+{%- endmacro %}
+
+{{ slug(author, 50) }}-{{ slug(title, 80) }}
 ```
 
 Breaking it down:
@@ -59,10 +90,13 @@ Source published date: {{published_date}}
 
 {% endif -%}
 {% if url -%}
-**Link:** [{{full_title}}]({{url}})
+**Source link:** [{{full_title}}]({{url}})
 {% else %}
 source: {{source}}
 {% endif -%}
+<!-- Line brake - br -->
+**Literature note:**
+
 ```
 
 If available, the book or article cover image is included, alongside publication date. I also embed the source link when present, or fallback to a source name. This enriches the note and helps later retrieval or citation.
@@ -73,13 +107,9 @@ To organize highlights clearly, I dynamically include:
 
 ```markdown
 {% if is_new_page %}
-
 ## Highlights
-
 {% elif has_new_highlights -%}
-
 ## New highlights added {{date|date('F j, Y')}} at {{time}}
-
 {% endif -%}
 ```
 
@@ -90,20 +120,18 @@ This means on a fresh export, the section is simply titled "Highlights," but on 
 Each highlight is formatted with location info or ID:
 
 ```markdown
+
+---
+
 {% if highlight_location == "View Highlight" %}### id{{ highlight_id }}{% elif highlight_location == "View Tweet" %}### id{{ highlight_id }}{% else %}### {{highlight_location}}{% endif %}
+{% if highlight_tags %}**Tags:** {{ highlight_tags|join(', ') }} {% endif %}
 
-> {{ highlight_text }}{% if highlight_location and highlight_location_url %}
-> \- [({{ highlight_location }})]({{ highlight_location_url }})
-> {% elif highlight_location %}
-> ({{ highlight_location }})
-> {% else %}
-
-<!-- Adding a blank line -->
-
-{% endif %}{% if highlight_note %}
-**Initial thought or note on:** {% if highlight_location and highlight_location_url %}[({{highlight_location}})]({{highlight_location_url}}){% elif highlight_location %}({{highlight_location}}){% endif %}
-{{ highlight_note }}
+> {{ highlight_text }}{% if highlight_location_url %}
+> \- [{{ highlight_location }}]({{ highlight_location_url }}) {% elif highlight_location %} > \- {{ highlight_location }}
 {% endif %}
+{% if highlight_note %}
+**Reflection:**
+{{ highlight_note }} {% endif %}
 ```
 
 This includes:
@@ -120,18 +148,18 @@ This structured formatting makes it easy to visually parse each highlight and re
 Finally, each file begins with comprehensive YAML front matter metadata:
 
 ```yaml
-authors: { { author } }
+authors: {{author}}
 categories:
-  - reference
-date: { { date|date("Y-m-d") } }
+  - highlights
+  - {{category}}
+date: {{date|date("Y-m-d")}}
 draft: true
-media: { { category } }
-source: { { source } }
+media: {{category}}
+source: {{source}}
 tags:
-  - readwise
-  - reference/{{category}}{% for tag in document_tags %}
+  - readwise{% for tag in document_tags %}
   - {{tag}}{% endfor %}
-title: Reference - {{author}} - {{title}}
+title: {{author}} - {{title}} - Highlights
 ```
 
 This front matter enables:
