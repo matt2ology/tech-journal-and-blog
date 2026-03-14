@@ -13,7 +13,7 @@ jobs:
   format-and-trigger:
     runs-on: ubuntu-latest
     env:
-      NODE_VERSION: 20
+      NODE_VERSION: 22
       TZ: America/Los_Angeles
 
     steps:
