@@ -1,10 +1,13 @@
+.DS_Store
 .obsidian/workspace.json
-.obsidian/plugins/quickadd/data.json
-.obsidian/plugins/quickadd/main.js
-.obsidian/plugins/quickadd/manifest.json
-.obsidian/plugins/quickadd/styles.css
-.obsidian/plugins/readwise-official/data.json
-.obsidian/plugins/readwise-official/main.js
-.obsidian/plugins/readwise-official/manifest.json
-.obsidian/plugins/readwise-official/styles.css
+
+# Ignore everything in the QuickAdd plugin folder
+.obsidian/plugins/quickadd/*
+.obsidian/plugins/quickadd/*
+.obsidian/plugins/readwise-official/*
+
+# Except data.json
+!.obsidian/plugins/quickadd/data.json
+!.obsidian/plugins/readwise-official/data.json
+
 Readwise/
