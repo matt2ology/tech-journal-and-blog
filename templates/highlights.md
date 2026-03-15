@@ -1,15 +1,11 @@
 ---
 authors:
 categories:
-  - reference
+  - highlights
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
 tags:
-  - reference/article
-  - reference/book
-  - reference/podcast
-  - reference/video
-title: Reference - {{title}}
+title: Highlights - {{title}}
 ---
 
 ## {{title}}
