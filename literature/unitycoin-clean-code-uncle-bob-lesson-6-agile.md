@@ -5,6 +5,7 @@ categories:
   - literature
 date: 2025-10-20
 draft: false
+tags:
   - agile
   - project-management
   - software-development
