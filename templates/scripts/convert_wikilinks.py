@@ -2,10 +2,10 @@ import re
 import os
 from pathlib import Path
 
-VAULT_DIR = "content"   # change to your vault root if needed
+VAULT_DIR = "content"
 
-# Regex to match [[...]]
 WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
+MD_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+\.md(?:#[^)]+)?)\)")
 
 
 def slugify(text: str) -> str:
@@ -16,7 +16,7 @@ def slugify(text: str) -> str:
     return text
 
 
-def convert_link(match):
+def convert_wikilink(match):
     content = match.group(1)
 
     alias = None
@@ -38,20 +38,42 @@ def convert_link(match):
     if section:
         ref += f"#{slugify(section)}"
 
-    if alias:
-        return f"[{alias}]({{{{< relref \"{ref}\" >}}}})"
+    label = alias if alias else page.split("/")[-1].replace("-", " ")
+
+    return f"[{label}]({{{{< relref \"{ref}\" >}}}})"
+
+
+def convert_mdlink(match):
+    text = match.group(1)
+    target = match.group(2)
+
+    if target.startswith("http"):
+        return match.group(0)
+
+    if "#" in target:
+        path, section = target.split("#", 1)
     else:
-        label = page.split("/")[-1].replace("-", " ")
-        return f"[{label}]({{{{< relref \"{ref}\" >}}}})"
+        path = target
+        section = None
+
+    path = Path(path).stem
+    page = slugify(path)
+
+    ref = page
+    if section:
+        ref += f"#{slugify(section)}"
+
+    return f"[{text}]({{{{< relref \"{ref}\" >}}}})"
 
 
 def process_file(path: Path):
     text = path.read_text(encoding="utf-8")
 
-    if "[[" not in text:
+    if "[[" not in text and ".md)" not in text:
         return
 
-    new_text = WIKILINK_RE.sub(convert_link, text)
+    new_text = WIKILINK_RE.sub(convert_wikilink, text)
+    new_text = MD_LINK_RE.sub(convert_mdlink, new_text)
 
     if new_text != text:
         path.write_text(new_text, encoding="utf-8")
