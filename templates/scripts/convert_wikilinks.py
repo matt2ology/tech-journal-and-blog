@@ -77,7 +77,7 @@ def process_file(path: Path):
 
     if new_text != text:
         path.write_text(new_text, encoding="utf-8")
-        print("Converted:", path)
+        print(f"Converted: {path}")
 
 
 def main():
