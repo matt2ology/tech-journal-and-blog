@@ -56,12 +56,12 @@ First things first, the filename. A consistent naming scheme is key for organizi
 }}
 {%- endmacro %}
 
-{{ slug(author, 50) }}-{{ slug(title, 80) }}
+hl-{{ slug(author, 50) }}-{{ slug(title, 80) }}
 ```
 
 Breaking it down:
 
-- Starts with `rwd-` to denote "Readwise Data"
+- Starts with `hl-` to denote original highlights while working though the material
 - Author name is sanitized: lowercase, removing "and", replacing spaces with dashes, removing ellipses, truncated to 20 characters
 - Book or article title is also cleaned and truncated (30 characters max)
 
