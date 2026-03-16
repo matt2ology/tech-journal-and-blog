@@ -16,7 +16,29 @@ def slugify(text: str) -> str:
     return text
 
 
-def convert_wikilink(match):
+def resolve_content_path(current_file: Path, target: str) -> str:
+    """ Resolve a wikilink target to a path relative to the content/ directory.
+
+    Args:
+        current_file (Path): The path of the current file containing the wikilink.
+        target (str): The target of the wikilink.
+
+    Returns:
+        str: The resolved path relative to the content/ directory.
+    """
+    content_root = Path(VAULT_DIR).resolve()
+
+    # Resolve filesystem path
+    resolved = (current_file.parent / target).resolve()
+
+    # Convert to path relative to content/
+    rel = resolved.relative_to(content_root)
+
+    # Remove .md and normalize separators
+    return str(rel).replace("\\", "/").removesuffix(".md")
+
+
+def convert_wikilink(match, current_file):
     content = match.group(1)
 
     alias = None
@@ -31,14 +53,15 @@ def convert_wikilink(match):
         page, section = target.split("#", 1)
     else:
         page = target
+        section = None
 
-    page = slugify(page)
+    page = resolve_content_path(current_file, page)
 
     ref = page
     if section:
         ref += f"#{slugify(section)}"
 
-    label = alias if alias else page.split("/")[-1].replace("-", " ")
+    label = alias if alias else Path(page).name.replace("-", " ")
 
     return f"[{label}]({{{{< relref \"{ref}\" >}}}})"
 
@@ -72,7 +95,7 @@ def process_file(path: Path):
     if "[[" not in text and ".md)" not in text:
         return
 
-    new_text = WIKILINK_RE.sub(convert_wikilink, text)
+    new_text = WIKILINK_RE.sub(lambda m: convert_wikilink(m, path), text)
     new_text = MD_LINK_RE.sub(convert_mdlink, new_text)
 
     if new_text != text:
