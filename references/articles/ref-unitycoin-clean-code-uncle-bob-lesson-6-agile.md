@@ -1,14 +1,20 @@
 ---
 authors: UnityCoin
 categories:
-  - reference
+  - articles
+  - highlights
 date: 2025-10-19
 draft: false
 media: articles
 source: reader
 tags:
-  - reference/articles
-title: Reference - UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile
+  - agile
+  - project-management
+  - software-development
+  - scrum
+  - extreme-programming
+  - software-engineering
+title: Highlights - UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile
 ---
 
 ## Clean Code - Uncle Bob / Lesson 6 (Highlights)
