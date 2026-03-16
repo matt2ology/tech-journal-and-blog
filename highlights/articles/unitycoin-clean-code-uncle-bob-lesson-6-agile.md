@@ -8,12 +8,6 @@ draft: false
 media: articles
 source: reader
 tags:
-  - agile
-  - project-management
-  - software-development
-  - scrum
-  - extreme-programming
-  - software-engineering
 title: Highlights - UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile
 ---
 
