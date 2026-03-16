@@ -19,7 +19,7 @@ Source published date: 2019-08-09
 
 **Source link:** [Clean Code - Uncle Bob / Lesson 6](https://www.youtube.com/watch?v=l-gF0vDhJVI&list=PLmmYSbUCWJ4x1GO839azG_BBw8rkh-zOj&index=7)
 
-**Literature note:** [unitycoin-clean-code-uncle-bob-lesson-6-agile](../../literature/unitycoin-clean-code-uncle-bob-lesson-6-agile.md)
+**Literature note:** [[../../literature/unitycoin-clean-code-uncle-bob-lesson-6-agile|Literature note: UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile Solutions for Balancing Deadlines and Software Quality]]
 
 ## Highlights
 
