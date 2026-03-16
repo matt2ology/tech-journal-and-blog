@@ -1,10 +1,9 @@
 ---
-authors:
-  - matt2ology
+authors: matt2ology
 categories:
   - journal
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
-draft: false
+draft: true
 tags:
 title: Journal - {{title}}
 ---
