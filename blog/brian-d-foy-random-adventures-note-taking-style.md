@@ -1,7 +1,7 @@
 ---
 authors: matt2ology
 categories:
-  - journal
+  - blog
 date: 2026-03-16T04:30:31-07:00
 draft: false
 tags:
@@ -11,10 +11,10 @@ tags:
   - brian-d-foy
   - uncle-bob
   - robert-c-martin
-title: "Journal - 2026-03-16-Mon: brian d foy's Random Adventures"
+title: I like brian d foy's Random Adventures Note Taking Style
 ---
 
-## Journal entry for Monday, March 16, 2026
+## I like brian d foy's Random Adventures Note Taking Style
 
 In contrast to my own "literature" note: [[../literature/unitycoin-clean-code-uncle-bob-lesson-6-agile]]
 
