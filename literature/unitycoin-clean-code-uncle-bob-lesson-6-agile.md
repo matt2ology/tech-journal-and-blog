@@ -5,9 +5,12 @@ categories:
   - literature
 date: 2025-10-20
 draft: false
-tags:
-  - literature/video
   - agile
+  - project-management
+  - software-development
+  - scrum
+  - extreme-programming
+  - software-engineering
 title: Literature - UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile
 ---
 
