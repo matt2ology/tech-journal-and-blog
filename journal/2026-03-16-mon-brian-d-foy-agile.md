@@ -11,7 +11,7 @@ tags:
   - brian-d-foy
   - uncle-bob
   - robert-c-martin
-title: Journal - 2026-03-16-Mon
+title: "Journal - 2026-03-16-Mon: brian d foy's Random Adventures"
 ---
 
 ## Journal entry for Monday, March 16, 2026
