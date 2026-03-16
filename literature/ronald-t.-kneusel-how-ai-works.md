@@ -67,7 +67,7 @@ Reference note: [rwd-ronald-t.-kneusel-how-ai-works](../Readwise/books/rwd-ronal
 
 ## Chapter 5: Convolutional Neural Networks: AI Learns to See
 
-## Chapter 6: Generative AI: AI Gets Creative 
+## Chapter 6: Generative AI: AI Gets Creative
 
 ## Chapter 7: Large Language Models: True AI at Last?
 
