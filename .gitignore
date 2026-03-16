@@ -5,6 +5,7 @@
 .obsidian/plugins/quickadd/*
 .obsidian/plugins/quickadd/*
 .obsidian/plugins/readwise-official/*
+.obsidian/plugins/readwise-official/data.json
 
 # Except data.json
 !.obsidian/plugins/quickadd/data.json
