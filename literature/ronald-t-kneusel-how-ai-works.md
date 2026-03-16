@@ -1,16 +1,15 @@
 ---
-authors:
-  - matt2ology
+authors: matt2ology
 categories:
   - literature
+  - book
 date: 2025-12-26T18:55:21-08:00
 draft: true
 tags:
-  - literature/book
 title: Literature - ronald-t.-kneusel-how-ai-works
 ---
 
-## Literature note: ronald-t.-kneusel-how-ai-works
+## Literature note: Ronald T. Kneusel How AI Works: From Sorcery to Science
 
 <!--
 SQ3R Method (Survey, Question, Read, Recite, Review).
@@ -23,7 +22,7 @@ Best for: General study and reading comprehension. It’s a well-established met
 5. **Review:** Go back over the material periodically to reinforce the information.
  -->
 
-Reference note: [rwd-ronald-t.-kneusel-how-ai-works](../Readwise/books/rwd-ronald-t.-kneusel-how-ai-works.md)
+Source highlights: [rwd-ronald-t.-kneusel-how-ai-works](../Readwise/books/rwd-ronald-t.-kneusel-how-ai-works.md)
 
 > **Summary:**
 
