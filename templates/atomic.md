@@ -1,6 +1,5 @@
 ---
-authors:
-  - matt2ology
+authors: matt2ology
 categories:
   - atomic
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
