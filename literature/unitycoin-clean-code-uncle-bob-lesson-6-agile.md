@@ -16,7 +16,7 @@ title: Literature - UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile
 
 ## Literature note: UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile Solutions for Balancing Deadlines and Software Quality
 
-Source highlights: [unitycoin-clean-code-uncle-bob-lesson-6-agile](../highlights/articles/unitycoin-clean-code-uncle-bob-lesson-6-agile.md)
+Source highlights: [[../highlights/articles/unitycoin-clean-code-uncle-bob-lesson-6-agile|Clean Code - Uncle Bob / Lesson 6 (Highlights)]]
 
 > **Summary:** Agile isn't about speed... It's about visibility. Agile replaces hope with data so teams can manage reality instead of wishful thinking; to clarify, Agile is a feedback system for managing uncertainty - not a process for going faster.
 
