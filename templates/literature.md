@@ -1,15 +1,10 @@
 ---
-authors:
-  - matt2ology
+authors: matt2ology
 categories:
   - literature
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
 tags:
-  - literature/article
-  - literature/book
-  - literature/podcast
-  - literature/video
 title: Literature - {{title}}
 ---
 
