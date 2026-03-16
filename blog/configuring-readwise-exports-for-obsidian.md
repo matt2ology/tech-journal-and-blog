@@ -162,7 +162,7 @@ media: {{category}}
 source: {{source}}
 tags: {% for tag in document_tags %}
   - {{tag}} {% endfor %}
-title: {{author}} - {{title}} - Highlights
+title: Highlights - {{author}} - {{title}}
 ```
 
 This front matter enables:
