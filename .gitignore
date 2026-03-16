@@ -8,6 +8,5 @@
 
 # Except data.json
 !.obsidian/plugins/quickadd/data.json
-!.obsidian/plugins/readwise-official/data.json
 
 Readwise/
