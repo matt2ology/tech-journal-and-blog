@@ -4,6 +4,7 @@ categories:
   - highlights
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
+media:
 tags:
 title: Highlights - {{title}}
 ---
