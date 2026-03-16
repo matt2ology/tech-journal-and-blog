@@ -160,9 +160,8 @@ date: {{date|date("Y-m-d")}}
 draft: true
 media: {{category}}
 source: {{source}}
-tags:
-  - readwise{% for tag in document_tags %}
-  - {{tag}}{% endfor %}
+tags: {% for tag in document_tags %}
+  - {{tag}} {% endfor %}
 title: {{author}} - {{title}} - Highlights
 ```
 
