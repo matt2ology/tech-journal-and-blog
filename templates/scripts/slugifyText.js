@@ -1,7 +1,7 @@
 module.exports = async (params) => {
   const { quickAddApi: qa, variables, abort } = params;
 
-  const input = await qa.inputPrompt("Enter meeting/training title:");
+  const input = await qa.inputPrompt("Enter title for blog post:");
   if (!input?.trim()) return abort("No input entered");
 
   const originalTitle = input.trim();
