@@ -11,5 +11,5 @@
   "userIgnoreFilters": [
     "templates/"
   ],
-  "showUnsupportedFiles": false
+  "showUnsupportedFiles": true
 }
