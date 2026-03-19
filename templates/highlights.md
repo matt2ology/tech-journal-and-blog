@@ -1,15 +1,18 @@
 ---
 authors:
+  - "{{VALUE:originalAuthors}}"
+  - matt2ology
 categories:
   - highlights
+  - "{{VALUE:media}}"
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
-media:
+media: "{{VALUE:media}}"
 tags:
-title: Highlights - {{title}}
+title: Highlights - {{VALUE:originalTitle}}
 ---
 
-## {{title}}
+## Highlights of {{VALUE:authorSlug}} - {{VALUE:originalTitle}}
 
 **Link to source:**
 
@@ -24,3 +27,5 @@ Format:
 
 **Reflection**:
 -->
+
+<!-- Optional: Chapters of each section -->
