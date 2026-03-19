@@ -1,0 +1,13 @@
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - '!file.inFolder("templates")'
+        - categories.contains("journal")
+    groupBy:
+      property: multi_year
+      direction: ASC
+    sort:
+      - property: multi_year
+        direction: ASC
