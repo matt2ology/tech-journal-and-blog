@@ -7,8 +7,6 @@ yearly_note: "2025"
 week_with_day: W49.6
 multi_year: 12-06
 categories: journal
-related_entries:
-people_present:
 tags:
   - noteable
 ---

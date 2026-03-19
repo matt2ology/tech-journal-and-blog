@@ -7,8 +7,6 @@ yearly_note: "2020"
 week_with_day: "W18.3"
 multi_year: "04-29"
 categories: journal
-related_entries:
-people_present:
 tags:
 ---
 

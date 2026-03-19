@@ -7,8 +7,6 @@ yearly_note: "2023"
 week_with_day: W25.5
 multi_year: 06-23
 categories: journal
-related_entries:
-people_present:
 tags:
 ---
 

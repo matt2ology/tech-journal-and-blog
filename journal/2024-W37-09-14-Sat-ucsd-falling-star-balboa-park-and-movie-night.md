@@ -7,8 +7,6 @@ yearly_note: "2024"
 week_with_day: W37.6
 multi_year: 09-14
 categories: journal
-related_entries:
-people_present:
 tags:
   - noteable
 ---
