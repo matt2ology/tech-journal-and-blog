@@ -1,5 +1,61 @@
 {
-  "choices": [],
+  "choices": [
+    {
+      "id": "47814f29-73ee-4dac-a1b3-121756db903b",
+      "name": "blog",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "macro": {
+        "name": "blog",
+        "id": "4b729423-8f59-4a84-b30f-1d546176703a",
+        "commands": [
+          {
+            "name": "slugifyText",
+            "type": "UserScript",
+            "id": "bdff1445-bcbd-4af5-babe-448d44125b6c",
+            "path": "templates/scripts/slugifyText.js",
+            "settings": {}
+          },
+          {
+            "name": "blog-template",
+            "type": "NestedChoice",
+            "id": "4a1a22a7-025e-46ba-9e97-a0ae83d5e529",
+            "choice": {
+              "id": "3b0bd532-061b-43a1-963c-22894172d0d3",
+              "name": "blog-template",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/blog.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "{{VALUE:slugifiedTitle}}"
+              },
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "blog"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsMode": "Increment the file name",
+              "setFileExistsBehavior": true
+            }
+          }
+        ]
+      }
+    }
+  ],
   "inputPrompt": "single-line",
   "persistInputPromptDrafts": true,
   "useSelectionAsCaptureValue": true,
@@ -10,7 +66,7 @@
   "globalVariables": {},
   "onePageInputEnabled": false,
   "disableOnlineFeatures": true,
-  "enableRibbonIcon": false,
+  "enableRibbonIcon": true,
   "showCaptureNotification": true,
   "showInputCancellationNotification": false,
   "enableTemplatePropertyTypes": false,
