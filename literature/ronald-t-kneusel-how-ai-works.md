@@ -22,7 +22,7 @@ Best for: General study and reading comprehension. It’s a well-established met
 5. **Review:** Go back over the material periodically to reinforce the information.
  -->
 
-Source highlights: [rwd-ronald-t.-kneusel-how-ai-works](../Readwise/books/rwd-ronald-t.-kneusel-how-ai-works.md)
+Source highlights: [[../Readwise/books/hl-ronald-t-kneusel-how-ai-works]]
 
 > **Summary:**
 
