@@ -8,7 +8,7 @@ draft: false
 media: articles
 source: reader
 tags:
-title: Highlights - UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile
+title: Highlights of UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile
 ---
 
 ## Clean Code - Uncle Bob / Lesson 6 (Highlights)
