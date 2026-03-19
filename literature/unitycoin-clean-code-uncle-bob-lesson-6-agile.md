@@ -11,7 +11,7 @@ tags:
   - scrum
   - extreme-programming
   - software-engineering
-title: Literature - UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile
+title: UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile
 ---
 
 ## Literature note: UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile Solutions for Balancing Deadlines and Software Quality
