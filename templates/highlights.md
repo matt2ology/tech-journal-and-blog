@@ -12,9 +12,9 @@ tags:
 title: Highlights - {{VALUE:originalTitle}}
 ---
 
-## Highlights of {{VALUE:authorSlug}} - {{VALUE:originalTitle}}
+## Highlights of {{VALUE:authorList}} - {{VALUE:originalTitle}}
 
-**Link to source:**
+**Link to source:** {{VALUE: sourceMarkdownLink}}
 
 ## Key Highlights
 
