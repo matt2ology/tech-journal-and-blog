@@ -17,7 +17,7 @@ tags:
   - deployment
   - devops
   - git-submodules
-title: Blog - Automating Hugo Deployments from Obsidian Notes with GitHub Actions
+title: Automating Hugo Deployments from Obsidian Notes with GitHub Actions
 ---
 
 ## End-to-End Guide: Obsidian → Hugo → GitHub Pages with 2 Repos
