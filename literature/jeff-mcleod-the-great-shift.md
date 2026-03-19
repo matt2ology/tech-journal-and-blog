@@ -12,7 +12,7 @@ tags:
   - entrepreneurship
   - self-improvement
   - technology-industry
-title: "Literature - The Great Shift: Your Roadmap to Thriving in the Age of AI Kindle Edition by Jeff McLeod"
+title: "The Great Shift: Your Roadmap to Thriving in the Age of AI Kindle Edition by Jeff McLeod"
 ---
 
 ## Literature note: The Great Shift: Your Roadmap to Thriving in the Age of AI Kindle Edition by Jeff McLeod
