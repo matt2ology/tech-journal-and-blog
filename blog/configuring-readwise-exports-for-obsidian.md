@@ -11,7 +11,7 @@ tags:
   - note-taking
   - digital-notes
   - knowledge-management
-title: Blog - Configuring Readwise Exports for Obsidian
+title: Configuring Readwise Exports for Obsidian
 ---
 
 ## Automating Your Readwise Exports into Obsidian: A Deep Dive into My Configuration
@@ -162,7 +162,7 @@ media: {{category}}
 source: {{source}}
 tags: {% for tag in document_tags %}
   - {{tag}} {% endfor %}
-title: Highlights - {{author}} - {{title}}
+title: Highlights of {{author}} - {{title}}
 ```
 
 This front matter enables:
