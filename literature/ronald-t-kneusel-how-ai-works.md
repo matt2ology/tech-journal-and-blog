@@ -6,7 +6,7 @@ categories:
 date: 2025-12-26T18:55:21-08:00
 draft: true
 tags:
-title: Literature - ronald-t.-kneusel-how-ai-works
+title: "Ronald T. Kneusel How AI Works: From Sorcery to Science"
 ---
 
 ## Literature note: Ronald T. Kneusel How AI Works: From Sorcery to Science
