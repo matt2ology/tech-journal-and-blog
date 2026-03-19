@@ -8,16 +8,16 @@ module.exports = async (params) => {
   try {
     values = await qa.requestInputs([
       {
-        id: "authors",
-        label: "Authors (separate with ;)",
-        type: "text",
-        placeholder: "Doe, John; Smith, Jane",
-      },
-      {
         id: "title",
         label: "Title",
         type: "text",
         placeholder: "Human Resources Training Documentation",
+      },
+      {
+        id: "authors",
+        label: "Authors (separate with ;)",
+        type: "text",
+        placeholder: "Doe, John; Smith, Jane",
       },
       {
         id: "media",
