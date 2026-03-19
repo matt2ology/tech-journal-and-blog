@@ -1,6 +1,9 @@
 module.exports = async (params) => {
   const { quickAddApi: qa, variables, abort } = params;
 
+  // =========================
+  // Prompt user for input
+  // =========================
   let values;
   try {
     values = await qa.requestInputs([
@@ -8,13 +11,13 @@ module.exports = async (params) => {
         id: "authors",
         label: "Authors (separate with ;)",
         type: "text",
-        placeholder: "Doe, John; Smith, Jane"
+        placeholder: "Doe, John; Smith, Jane",
       },
       {
         id: "title",
         label: "Title",
         type: "text",
-        placeholder: "Human Resources Training Documentation"
+        placeholder: "Human Resources Training Documentation",
       },
       {
         id: "media",
@@ -22,19 +25,22 @@ module.exports = async (params) => {
         type: "suggester",
         options: ["articles", "books", "podcasts", "youtube"],
         placeholder: "Select or type media type...",
-        suggesterConfig: { caseSensitive: false }
+        suggesterConfig: { caseSensitive: false },
       },
       {
         id: "source",
         label: "Source Link",
         type: "text",
-        placeholder: "https://..."
-      }
+        placeholder: "https://...",
+      },
     ]);
   } catch (e) {
     return abort("Input cancelled by user");
   }
 
+  // =========================
+  // Extract and clean input
+  // =========================
   const authorsRaw = values.authors?.trim();
   const titleRaw = values.title?.trim();
   const mediaRaw = values.media?.trim();
@@ -50,23 +56,21 @@ module.exports = async (params) => {
   // =========================
   // Author Processing
   // =========================
-
   const MAX_AUTHORS_IN_SLUG = 2;
 
   const authorList = authorsRaw
     .split(";")
-    .map(a => a.trim())
+    .map((a) => a.trim())
     .filter(Boolean);
 
   if (authorList.length === 0) return abort("No valid authors found");
 
-  const authorSlugs = authorList.map(author => {
+  const authorSlugs = authorList.map((author) => {
     const normalized = normalizeText(author);
     return slugifyText(normalized);
   });
 
   let combinedAuthorSlug;
-
   if (authorSlugs.length <= MAX_AUTHORS_IN_SLUG) {
     combinedAuthorSlug = authorSlugs.join("-");
   } else {
@@ -77,7 +81,6 @@ module.exports = async (params) => {
   // =========================
   // Title Processing
   // =========================
-
   const normalizedTitleText = normalizeText(originalTitle);
   const slugifiedTitle = slugifyText(normalizedTitleText);
   const abbreviatedTitle = applyAbbreviations(slugifiedTitle);
@@ -85,13 +88,11 @@ module.exports = async (params) => {
   // =========================
   // Media Processing
   // =========================
-
   const mediaSlug = slugifyText(normalizeText(mediaType));
 
   // =========================
-  // Source Processing
+  // Source Processing & Markdown link
   // =========================
-
   let sourceDomain = "";
   let sourceMarkdownLink = "";
 
@@ -100,18 +101,21 @@ module.exports = async (params) => {
       const url = new URL(sourceLink);
       sourceDomain = url.hostname.replace(/^www\./, "");
     } catch {
-      // invalid URL
+      // invalid URL, leave empty
     }
 
+    // Markdown link format: [Authors - Title](URL)
     sourceMarkdownLink = `[${originalAuthors} - ${originalTitle}](${sourceLink})`;
   }
 
   // =========================
   // Final Output
   // =========================
-
+  // Slug combining media, authors, and abbreviated title
+  // Example: "articles-doe-et-al-hr-trn-docs"
   const finalSlug = `${mediaSlug}-${combinedAuthorSlug}-${abbreviatedTitle}`;
 
+  // Store all outputs in variables for QuickAdd/templating
   variables.media = mediaType;
   variables.sourceLink = sourceLink;
   variables.sourceDomain = sourceDomain;
@@ -127,18 +131,18 @@ module.exports = async (params) => {
   variables.slugifiedTitle = finalSlug;
   variables.fileName = finalSlug;
 
-  variables.normalizedTitle =
-    `${authorList.join("; ")} - ${toDisplayName(slugifiedTitle)}`;
+  // Human-readable display
+  variables.normalizedTitle = `${authorList.join("; ")} - ${toDisplayName(slugifiedTitle)}`;
 
+  // Quick notification in Obsidian
   new Notice(`[${mediaType}] "${variables.fullTitle}" → "${finalSlug}"`);
 
   return finalSlug;
 };
 
 /* =========================
-   Constants
+   Constants & Abbreviations
    ========================= */
-
 const RESERVED_NAMES = /^(con|prn|aux|nul|com\d|lpt\d)$/;
 
 const abbreviationMap = {
@@ -147,33 +151,30 @@ const abbreviationMap = {
   "information-technology": "it",
   "quality-assurance": "qa",
   "frequently-asked-questions": "faq",
-  "meeting": "mtg",
-  "training": "trn",
-  "development": "dev",
-  "documentation": "docs"
+  meeting: "mtg",
+  training: "trn",
+  development: "dev",
+  documentation: "docs",
 };
 
 const ABBREVIATIONS = Object.entries(abbreviationMap)
   .sort(([a], [b]) => b.length - a.length)
   .map(([key, value]) => ({
     regex: new RegExp(`\\b${key}\\b`, "g"),
-    value
+    value,
   }));
 
 /* =========================
    Processing Functions
    ========================= */
-
 function normalizeText(text) {
   let normalized = text
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
-
   if (RESERVED_NAMES.test(normalized)) {
     normalized = `-${normalized}-`;
   }
-
   return normalized;
 }
 
@@ -188,11 +189,9 @@ function slugifyText(text) {
 
 function applyAbbreviations(slug) {
   let result = slug;
-
   for (const { regex, value } of ABBREVIATIONS) {
     result = result.replace(regex, value);
   }
-
   return result.replace(/--+/g, "-");
 }
 
@@ -200,6 +199,6 @@ function toDisplayName(slug) {
   return slug
     .split("-")
     .filter(Boolean)
-    .map(word => word[0].toUpperCase() + word.slice(1))
+    .map((word) => word[0].toUpperCase() + word.slice(1))
     .join(" ");
 }
