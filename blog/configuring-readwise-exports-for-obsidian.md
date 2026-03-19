@@ -143,7 +143,7 @@ This includes:
 - Highlight location or an ID if location is generic
 - The highlight text itself in blockquote format for readability
 - Optional links to the highlight’s exact location or tweet
-- Any personal notes attached, labeled as “Initial thought or note on”
+- Any personal notes attached, labeled as "Reflection"
 
 This structured formatting makes it easy to visually parse each highlight and reflect on it within Obsidian.
 
