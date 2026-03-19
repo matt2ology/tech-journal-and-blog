@@ -5,7 +5,7 @@ categories:
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
 tags:
-title: Collection - {{title}}
+title: Collection - {{VALUE:originalTitle}}
 ---
 
-## {{title}}
+## {{VALUE:originalTitle}}
