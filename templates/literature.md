@@ -2,13 +2,14 @@
 authors: matt2ology
 categories:
   - literature
+  - "{{VALUE:media}}"
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
 tags:
-title: Literature - {{title}}
+title: "{{VALUE:originalTitle}}"
 ---
 
-## Literature note: {{title}}
+## {{VALUE:authorSlug}} - {{VALUE:originalTitle}}
 
 <!--
 SQ3R Method (Survey, Question, Read, Recite, Review).
@@ -23,7 +24,7 @@ Best for: General study and reading comprehension. It’s a well-established met
 
 > **Summary:**
 
-<!-- [**Link to reference note**]({{< ref "/post/reference/rest_of_the_path_to_file.md" >}})  -->
+**Source highlights:** [[hl-{{VALUE:slugifiedTitle}}]]
 
 ## Key Ideas
 
@@ -31,6 +32,4 @@ Best for: General study and reading comprehension. It’s a well-established met
 
 1.
 
-## Chapters Optional
-
-## Related Literature Notes or Atomic Notes
+<!-- Optional: Chapters of each section -->
