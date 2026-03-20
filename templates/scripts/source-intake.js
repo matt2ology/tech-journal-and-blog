@@ -65,6 +65,15 @@ module.exports = async (params) => {
 
   if (authorList.length === 0) return abort("No valid authors found");
 
+  // Non-slugified shortened author display
+  let shortAuthorsDisplay;
+  if (authorList.length <= MAX_AUTHORS_IN_SLUG) {
+    shortAuthorsDisplay = authorList.join("; ");
+  } else {
+    const firstAuthorLastName = authorList[0].split(",")[0].trim();
+    shortAuthorsDisplay = `${firstAuthorLastName} et al.`;
+  }
+
   const authorSlugs = authorList.map((author) => {
     const normalized = normalizeText(author);
     return slugifyText(normalized);
@@ -84,6 +93,7 @@ module.exports = async (params) => {
   const normalizedTitleText = normalizeText(originalTitle);
   const slugifiedTitle = slugifyText(normalizedTitleText);
   const abbreviatedTitle = applyAbbreviations(slugifiedTitle);
+  const yamlSafeTitle = toYamlSafeString(originalTitle);
 
   // =========================
   // Media Processing
@@ -111,30 +121,61 @@ module.exports = async (params) => {
   // =========================
   // Final Output
   // =========================
-  // Slug combining media, authors, and abbreviated title
-  // Example: "articles-doe-et-al-hr-trn-docs"
-  const finalSlug = `${mediaSlug}-${combinedAuthorSlug}-${abbreviatedTitle}`;
+  const finalSlug = `${combinedAuthorSlug}-${abbreviatedTitle}`;
 
-  // Store all outputs in variables for QuickAdd/templating
+  // =========================
+  // Variables for QuickAdd
+  // =========================
+
   variables.media = mediaType;
+  // EX: "articles"
+
   variables.sourceLink = sourceLink;
+  // EX: "https://example.com/article"
+
   variables.sourceDomain = sourceDomain;
+  // EX: "example.com"
+
   variables.sourceMarkdownLink = sourceMarkdownLink;
+  // EX: "[Doe, John; Smith, Jane - Human Resources Training Documentation](https://example.com/article)"
 
   variables.originalAuthors = originalAuthors;
+  // EX: "Doe, John; Smith, Jane; Brown, Bob"
+
   variables.originalTitle = originalTitle;
+  // EX: "Human Resources Training Documentation"
+
   variables.fullTitle = `${originalAuthors} - ${originalTitle}`;
+  // EX: "Doe, John; Smith, Jane - Human Resources Training Documentation"
 
   variables.authorList = authorList;
+  // EX: ["Doe, John", "Smith, Jane", "Brown, Bob"]
+
   variables.authorSlug = combinedAuthorSlug;
+  // EX (≤2 authors): "doe-john-smith-jane"
+  // EX (>2 authors): "doe-et-al"
+
+  variables.shortAuthorsDisplay = shortAuthorsDisplay;
+  // EX (≤2): "Doe, John; Smith, Jane"
+  // EX (>2): "Doe et al."
+
+  variables.shortTitle = `${shortAuthorsDisplay} - ${originalTitle}`;
+  // EX: "Doe et al. - Human Resources Training Documentation"
 
   variables.slugifiedTitle = finalSlug;
+  // EX: "doe-et-al-hr-trn-docs"
+
   variables.fileName = finalSlug;
+  // EX: "doe-et-al-hr-trn-docs"
 
-  // Human-readable display
   variables.normalizedTitle = `${authorList.join("; ")} - ${toDisplayName(slugifiedTitle)}`;
+  // EX: "Doe, John; Smith, Jane - Human Resources Training Docs"
 
-  // Quick notification in Obsidian
+  variables.yamlSafeTitle = yamlSafeTitle;
+
+  // =========================
+  // Notification
+  // =========================
   new Notice(`[${mediaType}] "${variables.fullTitle}" → "${finalSlug}"`);
 
   return finalSlug;
@@ -201,4 +242,8 @@ function toDisplayName(slug) {
     .filter(Boolean)
     .map((word) => word[0].toUpperCase() + word.slice(1))
     .join(" ");
+}
+
+function toYamlSafeString(value) {
+  return JSON.stringify(value);
 }
