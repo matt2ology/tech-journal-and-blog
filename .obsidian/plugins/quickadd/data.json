@@ -121,10 +121,10 @@
         "id": "4ee55075-0a4d-4892-81fa-249d3a3f4eea",
         "commands": [
           {
-            "name": "slugify-text-for-highlights",
+            "name": "source-intake",
             "type": "UserScript",
-            "id": "6c0cd4fd-158c-4777-86a3-ba0bbc5b6f89",
-            "path": "templates/scripts/slugify-text-for-highlights.js",
+            "id": "9b376871-4f08-42ae-b036-1b11b634fa21",
+            "path": "templates/scripts/source-intake.js",
             "settings": {}
           },
           {
@@ -176,10 +176,10 @@
         "id": "41c58c0d-c74b-4a16-91cf-5902e2656f9e",
         "commands": [
           {
-            "name": "slugify-text-for-highlights",
+            "name": "source-intake",
             "type": "UserScript",
-            "id": "401b1535-e43c-4ae3-bc39-afd75335fa9d",
-            "path": "templates/scripts/slugify-text-for-highlights.js",
+            "id": "890e7cef-a68c-4fa3-8900-e938488befce",
+            "path": "templates/scripts/source-intake.js",
             "settings": {}
           },
           {
