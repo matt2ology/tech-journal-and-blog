@@ -22,6 +22,14 @@ I don't know...
 
 I have a repository that uses nested submodules. I want to make sure they all work where `content` is a submodule to the main project repo, but `content` has a submodule of its own `journal`. Both `content` and `journal` are private repos to the main project repo.
 
+Where the `content` repo to **manage its own submodule (`journal`) independently** and **not have the `journal` submodule tracked by the main repo**. That is `content` repo to control its own submodules, but the main repo should only track `content` as a submodule, without the nested submodule (`journal`) being tracked directly by the main repo.
+
+All together:
+
+- **Main repo** tracks `content` as a submodule.
+- **`content` repo** contains its own submodule `journal`.
+- Main repo does not track the `journal` submodule directly.
+
 ```
 +---.github
 |   \---workflows
