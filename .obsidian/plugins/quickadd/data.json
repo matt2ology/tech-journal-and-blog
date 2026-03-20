@@ -164,6 +164,61 @@
           }
         ]
       }
+    },
+    {
+      "id": "555c2063-449d-4d93-af82-f35a7b301a4c",
+      "name": "literature",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "macro": {
+        "name": "literature",
+        "id": "41c58c0d-c74b-4a16-91cf-5902e2656f9e",
+        "commands": [
+          {
+            "name": "slugify-text-for-highlights",
+            "type": "UserScript",
+            "id": "401b1535-e43c-4ae3-bc39-afd75335fa9d",
+            "path": "templates/scripts/slugify-text-for-highlights.js",
+            "settings": {}
+          },
+          {
+            "name": "literature-template",
+            "type": "NestedChoice",
+            "id": "e2cd1d31-f766-4ee2-9bff-6a62213cfc87",
+            "choice": {
+              "id": "82c7cd3b-8754-4b6d-a94c-42c52c5253e2",
+              "name": "literature-template",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/literature.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "{{VALUE:slugifiedTitle}}"
+              },
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "literature"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "openFile": false,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsMode": "Increment the file name",
+              "setFileExistsBehavior": false
+            }
+          }
+        ]
+      }
     }
   ],
   "inputPrompt": "single-line",
