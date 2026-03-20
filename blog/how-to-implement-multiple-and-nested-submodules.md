@@ -22,12 +22,11 @@ I don't know...
 
 I have a repository that uses nested submodules. I want to make sure they all work where `content` is a submodule to the main project repo, but `content` has a submodule of its own `journal`. Both `content` and `journal` are private repos to the main project repo.
 
-
 ```
 +---.github
 |   \---workflows
 +---archetypes
-+---content (submodule) 
++---content (submodule)
 |   +---.github
 |   |   \---workflows
 |   +---.obsidian
@@ -36,7 +35,7 @@ I have a repository that uses nested submodules. I want to make sure they all wo
 |   +---blog
 |   +---collections
 |   +---highlights
-|   +---journal (submodule) 
+|   +---journal (submodule)
 |   +---literature
 |   +---search
 |   \---templates
@@ -47,5 +46,5 @@ I have a repository that uses nested submodules. I want to make sure they all wo
 |       +---article
 |       \---obsidian
 \---themes
-    \---hugo-theme-stack (submodule) 
+    \---hugo-theme-stack (submodule)
 ```
