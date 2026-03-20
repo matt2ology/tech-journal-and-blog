@@ -2,78 +2,8 @@
 
 Notes managed by Obsidian and transpiled to HTML via Hugo static site generator.
 
-## Readwise Obsidian Export
+"highlight" notes are all direct quotes and my reflection of direct quotes; and, I have "literature" notes that are written in my own words, summary of collection of highlights, abstractions, and key ideas of source material.
 
-### File name
-
-```
-rwd-{{author|lower|replace("and","")|replace(" ","-")|replace("...","")|truncate(20)}}-{{title|lower|replace(""","")|replace(""","")|replace("'","")|replace("'","")|replace("/","-")|replace(" ","-")|replace(" ","-")|replace("...","")|truncate(30)}}
-```
-
-### Page title
-
-```
-## {{ full_title }} (Highlights)
-```
-
-### Page metadata
-
-```
-{% if image_url -%}
-
-![rw-book-cover]({{image_url}})
-
-Source published date: {{published_date}}
-
-{% endif -%}
-{% if url -%}
-**Source link:** [{{full_title}}]({{url}})
-{% else %}
-source: {{source}}
-{% endif -%}
-<!-- Line brake - br -->
-**Literature note:**
-
-```
-
-### Highlights header
-
-```
-{% if is_new_page %}
-## Highlights
-{% elif has_new_highlights -%}
-## New highlights added {{date|date('F j, Y')}} at {{time}}
-{% endif -%}
-```
-
-### Highlight
-
-```
-
----
-
-{% if highlight_location == "View Highlight" %}### id{{ highlight_id }}{% elif highlight_location == "View Tweet" %}### id{{ highlight_id }}{% else %}### {{highlight_location}}{% endif %}
-{% if highlight_tags %}
-**Tags:** {{ highlight_tags|join(', ') }} {% endif %}
-
-> {{ highlight_text }}{% if highlight_location_url %}
-> \- [{{ highlight_location }}]({{ highlight_location_url }}) {% elif highlight_location %} > \- {{ highlight_location }}
-{% endif %}
-{% if highlight_note %}
-**Reflection:**
-{{ highlight_note }} {% endif %}
-```
-
-### YAML front matter
-
-```
-authors: {{author}}
-categories:
-  - reference
-date: {{date|date("Y-m-d")}}
-draft: true
-media: {{category}}
-source: {{source}}
-tags: readwise, reference/{{category}}{% for tag in document_tags %}, {{tag}}{% endfor %}
-title: Reference - {{author}} - {{title}}
-```
+- **Highlights → Processed notes** (best conceptual distinction)
+    - Zettelkasten / PKM style: **Processed notes** → contrasts nicely with raw highlights
+- **Summary notes** → emphasizes synthesis of highlights
