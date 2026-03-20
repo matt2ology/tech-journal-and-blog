@@ -1,6 +1,6 @@
 ---
 authors:
-  - "{{VALUE:originalAuthors}}"
+  - "{{VALUE:authorList}}"
   - matt2ology
 categories:
   - highlights
@@ -9,10 +9,10 @@ date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
 media: "{{VALUE:media}}"
 tags:
-title: Highlights - {{VALUE:originalTitle}}
+title: Highlights - {{VALUE:yamlSafeTitle }}
 ---
 
-## Highlights of {{VALUE:authorList}} - {{VALUE:originalTitle}}
+## Highlights of {{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}
 
 **Link to source:** {{VALUE: sourceMarkdownLink}}
 
