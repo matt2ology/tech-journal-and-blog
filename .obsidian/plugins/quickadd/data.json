@@ -11,10 +11,10 @@
         "id": "4b729423-8f59-4a84-b30f-1d546176703a",
         "commands": [
           {
-            "name": "slugifyText",
+            "name": "create-post-slug-and-title",
             "type": "UserScript",
-            "id": "bdff1445-bcbd-4af5-babe-448d44125b6c",
-            "path": "templates/scripts/slugifyText.js",
+            "id": "026272d5-f1fd-4c4b-961d-7a4199cd7891",
+            "path": "templates/scripts/create-post-slug-and-title.js",
             "settings": {}
           },
           {
@@ -66,10 +66,10 @@
         "id": "b07655ac-1632-429f-85a9-c1e6b44faf3e",
         "commands": [
           {
-            "name": "slugifyText",
+            "name": "create-post-slug-and-title",
             "type": "UserScript",
-            "id": "d0f4974d-2a2c-4ea2-a8ed-27a2cbc513ba",
-            "path": "templates/scripts/slugifyText.js",
+            "id": "09820ed3-c356-4e95-8e6e-fa3d437c6c66",
+            "path": "templates/scripts/create-post-slug-and-title.js",
             "settings": {}
           },
           {
