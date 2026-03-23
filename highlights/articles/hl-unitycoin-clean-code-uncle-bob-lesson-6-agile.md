@@ -46,7 +46,7 @@ There are many implementations of Agile.
 - Hope and prayer?
 - With Great Difficulty
 - Dictate and Motivate: dictate - if we don't succeed, we let "them" win; and,
-motivate "hang in there".
+  motivate "hang in there".
 
 #### id946254810
 
