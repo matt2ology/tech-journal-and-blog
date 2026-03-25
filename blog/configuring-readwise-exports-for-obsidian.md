@@ -11,16 +11,13 @@ tags:
   - note-taking
   - digital-notes
   - knowledge-management
-title: Configuring Readwise Exports for Obsidian
+title: "Automating Your Readwise Exports into Obsidian: A Deep Dive into My Configuration"
 ---
-
-## Automating Your Readwise Exports into Obsidian: A Deep Dive into My Configuration
-
 If you’re like me, a user of both Readwise and Obsidian, you know how valuable it is to seamlessly integrate your highlights and notes from Readwise into Obsidian for long-term knowledge management. To make this process efficient and automated, I’ve built a custom export template that formats my Readwise data perfectly for Obsidian vaults.
 
 I want to share the core parts of my configuration that handle file naming, metadata formatting, highlight organization, and front matter YAML - all designed to maximize readability and usability within Obsidian.
 
-### File Naming Convention
+## File Naming Convention
 
 First things first, the filename. A consistent naming scheme is key for organizing hundreds of highlights. My format looks like this:
 
@@ -67,7 +64,7 @@ Breaking it down:
 
 This ensures filenames remain readable, unique, and manageable, avoiding problematic characters like quotes or slashes.
 
-### Page Title
+## Page Title
 
 For each exported highlight page, the title is formatted as:
 
@@ -77,7 +74,7 @@ For each exported highlight page, the title is formatted as:
 
 This clear header allows me to immediately identify the source material and that the page contains highlights, improving navigation inside Obsidian.
 
-### Metadata Block
+## Metadata Block
 
 Metadata is essential to provide context without cluttering the note. My export includes:
 
@@ -102,7 +99,7 @@ source: {{source}}
 
 If available, the book or article cover image is included, alongside publication date. I also embed the source link when present, or fallback to a source name. This enriches the note and helps later retrieval or citation.
 
-### Highlight Section Headers
+## Highlight Section Headers
 
 To organize highlights clearly, I dynamically include:
 
@@ -120,7 +117,7 @@ To organize highlights clearly, I dynamically include:
 
 This means on a fresh export, the section is simply titled "Highlights," but on updates, I can track when new highlights were added - great for incremental review and daily workflows.
 
-### Formatting Individual Highlights
+## Formatting Individual Highlights
 
 Each highlight is formatted with location info or ID:
 
@@ -147,7 +144,7 @@ This includes:
 
 This structured formatting makes it easy to visually parse each highlight and reflect on it within Obsidian.
 
-### YAML Front Matter
+## YAML Front Matter
 
 Finally, each file begins with comprehensive YAML front matter metadata:
 
