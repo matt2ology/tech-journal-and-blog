@@ -5,10 +5,8 @@ categories:
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
 tags:
-title: Atomic - {{title}}
+title: {{title}}
 ---
-
-## {{title}}
 
 ## Explain Like I'm 5 (ELI5): the Definition or Key Concept/Idea/Theory
 
