@@ -7,5 +7,3 @@ draft: true
 tags:
 title: Collection - {{VALUE:originalTitle}}
 ---
-
-## {{VALUE:originalTitle}}
