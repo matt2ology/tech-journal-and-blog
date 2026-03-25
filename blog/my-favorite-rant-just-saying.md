@@ -5,11 +5,8 @@ categories:
 date: 2026-03-20T11:09:27-07:00
 draft: false
 tags:
-title: My favorite rant on "just saying"
+title: My favorite rant on "just saying" from Regular Car Reviews
 ---
-
-## My favorite rant on "just saying"
-
 <!-- A blog is about communicating outward (you → readers) -->
 
 Don't say that you're "just saying."
