@@ -7,6 +7,7 @@ draft: false
 tags:
 title: My favorite rant on "just saying" from Regular Car Reviews
 ---
+
 <!-- A blog is about communicating outward (you → readers) -->
 
 Don't say that you're "just saying."

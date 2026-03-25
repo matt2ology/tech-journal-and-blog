@@ -13,6 +13,7 @@ tags:
   - knowledge-management
 title: "Automating Your Readwise Exports into Obsidian: A Deep Dive into My Configuration"
 ---
+
 If you’re like me, a user of both Readwise and Obsidian, you know how valuable it is to seamlessly integrate your highlights and notes from Readwise into Obsidian for long-term knowledge management. To make this process efficient and automated, I’ve built a custom export template that formats my Readwise data perfectly for Obsidian vaults.
 
 I want to share the core parts of my configuration that handle file naming, metadata formatting, highlight organization, and front matter YAML - all designed to maximize readability and usability within Obsidian.
