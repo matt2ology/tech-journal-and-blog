@@ -8,6 +8,4 @@ tags:
 title: "{{VALUE:originalTitle}}"
 ---
 
-## {{VALUE:originalTitle}}
-
 <!-- A blog is about communicating outward (you → readers) -->
