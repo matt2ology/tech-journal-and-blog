@@ -9,6 +9,8 @@ title: Collection - Favorite Talks
 ---
 ## Talks
 
+Related: [[favorite-lectures|Collection - Favorite Lectures]]
+
 | Title                                                                                                                             | Notes                                                                                                                                                                     |
 | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [GDC Vault: Creating Accountability: 4 Simple Steps for Managers - Ben Carcich](https://youtu.be/Fy5f_Gelbp4?si=pdFI5M3xgOmHXIqB) |                                                                                                                                                                           |
