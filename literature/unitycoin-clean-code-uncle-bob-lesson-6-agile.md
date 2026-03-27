@@ -32,7 +32,9 @@ Source highlights: [[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-le
 
 ## Chapters
 
-### [[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#How do you manage a software project?|How do you manage a software project?]]
+### How do you manage a software project?
+
+[[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#How do you manage a software project?|(See highlights and initial reflections)]]
 
 - Software project management is notoriously hard - often done "badly" or through "hope and prayer".
 - Mismanagement leads to wrong products, low quality, missed deadlines, and burnout.
@@ -41,7 +43,9 @@ Source highlights: [[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-le
 - **Agile** exists to improve feedback and communication, reducing guesswork.
   - The goal isn’t to hit a fixed plan - it's to steer toward the best achievable outcome.
 
-### [[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#Finding the optimum solution - Data|Finding the optimum solution / Data]]
+### Finding the optimum solution / Data
+
+[[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#Finding the optimum solution - Data|(See highlights and initial reflections)]]
 
 - **Data drives success**; without it, management is blind.
 - Use metrics to manage toward the best achievable outcome across quality, cost, speed, and scope.
@@ -53,7 +57,9 @@ Source highlights: [[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-le
 - **Estimates ≠ promises**; treat them as evolving signals.
 - The goal of Agile: **produce reliable data early** so the team can _manage reality_.
 
-### [[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#What is the first thing know about project - The Management Paradox.|What is the first thing know about project / The Management Paradox]]
+### What is the first thing know about project / The Management Paradox
+
+[[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#What is the first thing know about project - The Management Paradox.|(See highlights and initial reflections)]]
 
 - The **first thing known** in any project is _the date_, often fixed by business needs; however, **requirements are fluid** - customers refine what they want through iteration.
 - Agile solves this by allowing requirements to evolve while maintaining time-boxed delivery.
@@ -63,7 +69,9 @@ Source highlights: [[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-le
   - Customers rarely know what they truly want until they see a working product.
   - Agile embraces this uncertainty by iterating quickly and showing progress often.
 
-### [[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#The Waterfall Model|The Waterfall Model.]]
+### The Waterfall Model
+
+[[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#The Waterfall Model|(See highlights and initial reflections)]]
 
 - Traditional Waterfall assumes phases (analysis, design, implementation) are sequential and "done".
 - In reality, **analysis and design are continuous**, not binary.
@@ -71,7 +79,9 @@ Source highlights: [[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-le
 - Freezing requirements too early forces teams to "hack in" changes later, creating instability and technical debt.
 - Waterfall often fails because it resists feedback and delays learning until it's too late.
 
-### [[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#Iterative Development - Calculate Day|Iterative Development / Calculate Day.]]
+### Iterative Development / Calculate Day
+
+[[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#Iterative Development - Calculate Day|(See highlights and initial reflections)]]
 
 - **"Runaway process inflation"** happens when teams respond to failure by adding _more process_ instead of _more feedback_.
 - Iterative development starts with **Iteration 0** - capture lightweight requirements and draft user stories, leaving details to emerge over time.
@@ -79,7 +89,9 @@ Source highlights: [[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-le
 - Each iteration provides **real data** about progress, risks, and estimates.
 - The focus shifts from predicting the future to learning as early as possible.
 
-### [[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#The Control Knobs of project mgt|The Control Knobs of project mgt.]]
+### The Control Knobs of project mgt
+
+[[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#The Control Knobs of project mgt|(See highlights and initial reflections)]]
 
 - The four adjustable controls:
   1. **Schedule**
@@ -92,7 +104,9 @@ Source highlights: [[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-le
   - **Scope** is the most flexible lever; negotiate what must ship now vs. later.
 - Developers hold the **data**, stakeholders hold the **authority** - in rational organizations, _data should win_.
 
-### [[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#Short Cycles - Agile Software Development Practices - Extreme Programming|Short Cycles / Agile Software Development Practices / Extreme Programming.]]
+### Short Cycles / Agile Software Development Practices / Extreme Programming
+
+[[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#Short Cycles - Agile Software Development Practices - Extreme Programming|(See highlights and initial reflections)]]
 
 Agile development, particularly **Extreme Programming (XP)**, emphasizes **short cycles** to uncover problems (“bad news”) as early as possible. The goal of Agile isn’t speed, but **early feedback and adaptability**.
 
@@ -130,7 +144,9 @@ Agile development, particularly **Extreme Programming (XP)**, emphasizes **short
 - **Velocity stability** is the goal - steady, predictable output signals health.
   - **Stable velocity** signals health; erratic or declining trends indicate tech debt or pressure.
 
-### [[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#Questions and Answers|Questions and Answers]]
+### Questions and Answers
+
+[[../highlights/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile#Questions and Answers|(See highlights and initial reflections)]]
 
 - Writing extensive documentation often fails - _"nobody reads it"_. Favor visibility and communication instead.
 - **Mentorship** is a senior engineer's responsibility; pairing with juniors accelerates growth for both.
