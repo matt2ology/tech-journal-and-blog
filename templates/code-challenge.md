@@ -17,7 +17,7 @@ title: "{{VALUE:originalTitle}}"
 
 ---
 
-## 💡 Key Insight  
+## 💡 Key Insight
 
 <!-- That “Ohhh” moment = your one sentence that unlocked it -->
 
