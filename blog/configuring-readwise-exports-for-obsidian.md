@@ -75,7 +75,7 @@ This ensures filenames remain readable, unique, and manageable, avoiding problem
 
 For each exported highlight page, the title is formatted as:
 
-```
+```markdown
 ## {{ full_title }} (Highlights)
 ```
 
