@@ -18,6 +18,12 @@ If you’re like me, a user of both Readwise and Obsidian, you know how valuable
 
 I want to share the core parts of my configuration that handle file naming, metadata formatting, highlight organization, and front matter YAML - all designed to maximize readability and usability within Obsidian.
 
+## Why This Setup Works for Me
+
+By automating these formatting rules, I can quickly import and review Readwise highlights in a clean, consistent way inside Obsidian. It supports my knowledge workflow by making highlights searchable, linkable, and context-rich.
+
+If you’re looking to build a similar export template or workflow, feel free to use this as a base. It’s a blend of practical file naming, markdown structuring, and metadata management that turns your reading highlights into a powerful personal knowledge base.
+
 ## File Naming Convention
 
 First things first, the filename. A consistent naming scheme is key for organizing hundreds of highlights. My format looks like this:
@@ -54,7 +60,7 @@ First things first, the filename. A consistent naming scheme is key for organizi
 }}
 {%- endmacro %}
 
-hl-{{ slug(author, 50) }}-{{ slug(title, 80) }}
+hl-{{ slug(author, 50) }}-{{ slug(title, 30) }}
 ```
 
 Breaking it down:
@@ -95,12 +101,19 @@ source: {{source}}
 
 <!-- Line brake - br -->
 
-**Literature note:**
+- [ ] **Literature note:**
 ```
 
 If available, the book or article cover image is included, alongside publication date. I also embed the source link when present, or fallback to a source name. This enriches the note and helps later retrieval or citation.
 
-## Highlight Section Headers
+Literature note is made to a checkbox to signify that the highlighted note has been summarized and media source is "consumed" (i.e. listened to, have been read, was watched).
+
+Example:
+
+- [ ] **Literature note:** Has not been "consumed" and summarized in my own words for quick recall and comprehension
+- [v] **Literature note:** Source has been summarized in my own words and has been, to my best ability, written for future recall and quick comprehension.
+
+### Highlight Section Headers
 
 To organize highlights clearly, I dynamically include:
 
@@ -170,8 +183,3 @@ This front matter enables:
 - Draft status for workflow management
 - Standardized titles for note previews
 
-## Why This Setup Works for Me
-
-By automating these formatting rules, I can quickly import and review Readwise highlights in a clean, consistent way inside Obsidian. It supports my knowledge workflow by making highlights searchable, linkable, and context-rich.
-
-If you’re looking to build a similar export template or workflow, feel free to use this as a base. It’s a blend of practical file naming, markdown structuring, and metadata management that turns your reading highlights into a powerful personal knowledge base.
