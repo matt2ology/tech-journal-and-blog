@@ -16,6 +16,27 @@ def slugify(text: str) -> str:
     return text
 
 
+def resolve_full_path(current_file: Path, target: str) -> Path:
+    """
+    Resolve a wikilink target to a full filesystem path,
+    ensuring it has a `.md` extension.
+
+    Args:
+        current_file (Path): Path of the current file containing the wikilink.
+        target (str): The target of the wikilink.
+
+    Returns:
+        Path: Resolved full path to the target file,
+        ensuring it has a `.md` extension.
+    """
+    target_path = (current_file.parent / target)
+
+    if target_path.suffix != ".md":
+        target_path = target_path.with_suffix(".md")
+
+    return target_path.resolve()
+
+
 def resolve_content_path(current_file: Path, target: str) -> str:
     """ Resolve a wikilink target to a path relative to the content/ directory.
 
@@ -55,6 +76,12 @@ def convert_wikilink(match, current_file):
         page = target
         section = None
 
+    # Check if file exists
+    full_path = resolve_full_path(current_file, page)
+    if not full_path.exists():
+        return match.group(0)  # keep original [[...]]
+
+    # Continue as before
     page = resolve_content_path(current_file, page)
 
     ref = page
