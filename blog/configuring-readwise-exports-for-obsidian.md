@@ -182,4 +182,3 @@ This front matter enables:
 - Categorization and tagging for Obsidian plugins or queries
 - Draft status for workflow management
 - Standardized titles for note previews
-
