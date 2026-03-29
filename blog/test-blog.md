@@ -7,5 +7,5 @@ draft: false
 tags:
 title: test blog
 ---
-This is a test
+This is a test [[test-missing-note-reference]]
 <!-- A blog is about communicating outward (you → readers) -->
