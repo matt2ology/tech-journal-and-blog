@@ -111,7 +111,7 @@ Literature note is made to a checkbox to signify that the highlighted note has b
 Example:
 
 - [ ] **Literature note:** Has not been "consumed" and summarized in my own words for quick recall and comprehension
-- [v] **Literature note:** Source has been summarized in my own words and has been, to my best ability, written for future recall and quick comprehension.
+- [x] **Literature note:** Source has been summarized in my own words and has been, to my best ability, written for future recall and quick comprehension.
 
 ### Highlight Section Headers
 
