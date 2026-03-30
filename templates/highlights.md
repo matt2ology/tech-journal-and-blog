@@ -1,7 +1,7 @@
 ---
 aliases:
   - Highlights
-  - {{VALUE:yamlSafeTitle}}
+  - { { VALUE:yamlSafeTitle } }
 authors:
   - "{{VALUE:authorList}}"
   - matt2ology
