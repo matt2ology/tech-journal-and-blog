@@ -17,51 +17,45 @@ def slugify(text: str) -> str:
 
 
 def resolve_full_path(current_file: Path, target: str) -> Path:
-    """
-    Resolve a wikilink target to a full filesystem path,
-    ensuring it has a `.md` extension.
-
-    Args:
-        current_file (Path): Path of the current file containing the wikilink.
-        target (str): The target of the wikilink.
-
-    Returns:
-        Path: Resolved full path to the target file,
-        ensuring it has a `.md` extension.
-    """
-    target_path = (current_file.parent / target)
-
-    if target_path.suffix != ".md":
-        target_path = target_path.with_suffix(".md")
-
-    return target_path.resolve()
+    """Resolve target to an absolute .md file path."""
+    return (current_file.parent / target).with_suffix(".md").resolve()
 
 
 def resolve_content_path(current_file: Path, target: str) -> str:
-    """ Resolve a wikilink target to a path relative to the content/ directory.
-
-    Args:
-        current_file (Path): The path of the current file containing the wikilink.
-        target (str): The target of the wikilink.
-
-    Returns:
-        str: The resolved path relative to the content/ directory.
-    """
+    """Resolve target to a path relative to content/ (without .md)."""
     content_root = Path(VAULT_DIR).resolve()
+    resolved = resolve_full_path(current_file, target)
 
-    # Resolve filesystem path
-    resolved = (current_file.parent / target).resolve()
-
-    # Convert to path relative to content/
     rel = resolved.relative_to(content_root)
-
-    # Remove .md and normalize separators
     return str(rel).replace("\\", "/").removesuffix(".md")
 
 
-def convert_wikilink(match, current_file):
-    content = match.group(1)
+def parse_target(content: str) -> tuple[str, str | None, str | None]:
+    """
+    Parse a wikilink string into its target, alias, and section components.
 
+    Args:
+        content: The inner content of a wikilink (e.g., "folder/page#section|alias").
+
+    Returns:
+        A tuple of (target, alias, section):
+            - target (str): The page path (e.g., "folder/page").
+            - alias (str | None): The display label, if provided.
+            - section (str | None): The section name, if provided.
+
+    Examples:
+        "[[folder/page]]"
+            -> ("folder/page", None, None)
+
+        "[[folder/page|Custom Label]]"
+            -> ("folder/page", "Custom Label", None)
+
+        "[[folder/page#Section Name]]"
+            -> ("folder/page", None, "Section Name")
+
+        "[[folder/page#Section Name|Custom Label]]"
+            -> ("folder/page", "Custom Label", "Section Name")
+    """
     alias = None
     section = None
 
@@ -71,59 +65,120 @@ def convert_wikilink(match, current_file):
         target = content
 
     if "#" in target:
-        page, section = target.split("#", 1)
-    else:
-        page = target
-        section = None
+        target, section = target.split("#", 1)
 
-    # Check if file exists
-    full_path = resolve_full_path(current_file, page)
-    if not full_path.exists():
-        return match.group(0)  # keep original [[...]]
+    return target, alias, section
 
-    # Continue as before
-    page = resolve_content_path(current_file, page)
 
+def build_ref(page: str, section: str | None) -> str:
+    """Build Hugo relref string.
+        - For page: "folder/page"
+        - For section: "folder/page#section"
+        - Slugify section for URL compatibility
+    """
     ref = page
     if section:
         ref += f"#{slugify(section)}"
+    return ref
 
-    label = alias if alias else Path(page).name.replace("-", " ")
+
+def convert_wikilink(match, current_file: Path) -> str:
+    """
+    Convert a wikilink match into a Hugo relref-style Markdown link.
+
+    The function parses a wikilink of the form:
+        [[target#section|alias]]
+
+    It finds the target file based on the current file, checks if it exists,
+    and converts the link to a Hugo relref. If the file doesn't exist,
+    it leaves the link as is.
+
+    Args:
+        match: A regex match object containing the wikilink content.
+        current_file: The path to the file where the link was found.
+
+    Returns:
+        A Markdown link string using Hugo relref syntax, or the original match
+        string if the target cannot be resolved.
+
+    Notes:
+        - If an alias is provided, it is used as the link label.
+        - Otherwise, the label is derived from the target filename with hyphens
+          replaced by spaces.
+        - Section anchors are preserved in the generated reference.
+    """
+    content = match.group(1)
+    target, alias, section = parse_target(content)
+
+    full_path = resolve_full_path(current_file, target)
+
+    # 🚫 Do not convert if file does not exist
+    if not full_path.exists():
+        return match.group(0)
+
+    page = resolve_content_path(current_file, target)
+    ref = build_ref(page, section)
+
+    label = alias or Path(page).name.replace("-", " ")
 
     return f"[{label}]({{{{< relref \"{ref}\" >}}}})"
 
 
-def convert_mdlink(match):
-    text = match.group(1)
-    target = match.group(2)
+def convert_mdlink(match, current_file: Path) -> str:
+    """
+    Convert a standard Markdown link into a Hugo relref-style link.
 
+    The function processes links of the form:
+        [text](target#section)
+
+    It skips external links (e.g., starting with "http"), resolves the target
+    path relative to the current file, and converts valid internal links into
+    Hugo relref format. If the target file does not exist, the original match
+    is returned unchanged.
+
+    Args:
+        match: A regex match object containing the link text and target.
+        current_file: The path to the file where the link was found.
+
+    Returns:
+        A Markdown link string using Hugo relref syntax, or the original match
+        string if the link is external or cannot be resolved.
+
+    Notes:
+        - External links (starting with "http") are not modified.
+        - Section anchors (after '#') are preserved in the generated reference.
+    """
+    text, target = match.groups()
+
+    # 🚫 Skip external links
     if target.startswith("http"):
         return match.group(0)
 
     if "#" in target:
         path, section = target.split("#", 1)
     else:
-        path = target
-        section = None
+        path, section = target, None
 
-    path = Path(path).stem
-    page = slugify(path)
+    full_path = resolve_full_path(current_file, path)
 
-    ref = page
-    if section:
-        ref += f"#{slugify(section)}"
+    # 🚫 Do not convert if file does not exist
+    if not full_path.exists():
+        return match.group(0)
+
+    page = resolve_content_path(current_file, path)
+    ref = build_ref(page, section)
 
     return f"[{text}]({{{{< relref \"{ref}\" >}}}})"
 
 
-def process_file(path: Path):
+def process_file(path: Path) -> None:
     text = path.read_text(encoding="utf-8")
 
     if "[[" not in text and ".md)" not in text:
         return
 
     new_text = WIKILINK_RE.sub(lambda m: convert_wikilink(m, path), text)
-    new_text = MD_LINK_RE.sub(convert_mdlink, new_text)
+    new_text = MD_LINK_RE.sub(lambda m: convert_mdlink(m, path), new_text)
 
     if new_text != text:
         path.write_text(new_text, encoding="utf-8")
@@ -131,7 +186,7 @@ def process_file(path: Path):
 
 
 def main():
-    for root, dirs, files in os.walk(VAULT_DIR):
+    for root, _, files in os.walk(VAULT_DIR):
         for file in files:
             if file.endswith(".md"):
                 process_file(Path(root) / file)
