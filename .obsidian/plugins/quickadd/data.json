@@ -139,7 +139,7 @@
               "templatePath": "templates/highlights.md",
               "fileNameFormat": {
                 "enabled": true,
-                "format": "hl-{{VALUE:slugifiedTitle}}"
+                "format": "hl-{{VALUE:fileName}}"
               },
               "folder": {
                 "enabled": true,
@@ -194,7 +194,7 @@
               "templatePath": "templates/literature.md",
               "fileNameFormat": {
                 "enabled": true,
-                "format": "{{VALUE:slugifiedTitle}}"
+                "format": "{{VALUE:fileName}}"
               },
               "folder": {
                 "enabled": true,
