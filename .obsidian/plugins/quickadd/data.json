@@ -274,6 +274,112 @@
           }
         ]
       }
+    },
+    {
+      "id": "aec69900-f3b7-45cb-bd20-e1a141e70906",
+      "name": "code-challenges",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "macro": {
+        "name": "code-challenges",
+        "id": "e045160a-3a1f-4c35-933a-8dffabaae76b",
+        "commands": [
+          {
+            "name": "create-post-slug-and-title",
+            "type": "UserScript",
+            "id": "18652c3c-77aa-45a6-b988-d414ec48adaa",
+            "path": "templates/scripts/create-post-slug-and-title.js",
+            "settings": {}
+          },
+          {
+            "name": "code-challenge-template",
+            "type": "NestedChoice",
+            "id": "f3200a5d-287d-4433-a01a-f91aa929e422",
+            "choice": {
+              "id": "3b0bd532-061b-43a1-963c-22894172d0d3",
+              "name": "code-challenge-template",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/code-challenge.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "index"
+              },
+              "folder": {
+                "enabled": true,
+                "folders": [],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsMode": "Increment the file name",
+              "setFileExistsBehavior": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "e58578e7-4ba2-4d3d-a6c4-8411c6ddaa02",
+      "name": "courses",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "macro": {
+        "name": "courses",
+        "id": "8351b06b-06ed-4496-9bc2-fc09b86fcea0",
+        "commands": [
+          {
+            "name": "create-post-slug-and-title",
+            "type": "UserScript",
+            "id": "837b841f-bfef-4cf0-a16d-7d6ca1f871fb",
+            "path": "templates/scripts/create-post-slug-and-title.js",
+            "settings": {}
+          },
+          {
+            "name": "course-lesson-template",
+            "type": "NestedChoice",
+            "id": "f5f3cc4c-3f2d-4079-8c21-418972663a0e",
+            "choice": {
+              "id": "3b0bd532-061b-43a1-963c-22894172d0d3",
+              "name": "course-lesson-template",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/literature.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "index"
+              },
+              "folder": {
+                "enabled": true,
+                "folders": [],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsMode": "Increment the file name",
+              "setFileExistsBehavior": true
+            }
+          }
+        ]
+      }
     }
   ],
   "inputPrompt": "single-line",
