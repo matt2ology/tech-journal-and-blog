@@ -1,13 +1,13 @@
 ---
 aliases:
-  - "Test Blog 03"
+  - Test Blog 03
 authors: matt2ology
 categories:
   - blog
-date: "2026-03-29T23:23:26-07:00"
-draft: true
+date: 2026-03-29T23:23:26-07:00
+draft: false
 tags:
-title: "Test Blog 03"
+title: Test Blog 03
 ---
 
 <!-- A blog is about communicating outward (you → readers) -->
