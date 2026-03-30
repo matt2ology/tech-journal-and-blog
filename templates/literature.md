@@ -27,7 +27,7 @@ Best for: General study and reading comprehension. It’s a well-established met
 
 > **Summary:**
 
-**Source highlights:** [[hl-{{VALUE:slugifiedTitle}}]]
+**Source highlights:** [[hl-{{VALUE:fileName}}]]
 
 ## Key Ideas
 
