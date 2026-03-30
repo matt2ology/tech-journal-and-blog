@@ -10,6 +10,14 @@ title: test blog
 
 This is a test ==[[test-missing-note-reference]]==
 
+`![](20260329200830.png)`
+
+![](20260329200830.png)
+
+`![an image](20260329200830.png)`
+
+![an image](20260329200830.png)
+
 `![[20260329200830.png]]`
 
 ![[20260329200830.png]]
