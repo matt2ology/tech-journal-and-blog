@@ -1,5 +1,4 @@
 from pathlib import Path
-
 import os
 import re
 
@@ -22,7 +21,25 @@ def parse_image_target(content: str):
     return path.strip(), alt.strip() if alt else None
 
 
-def convert_image_wikilink(match, current_file: Path):
+def is_inside_backticks(text: str, start_pos: int):
+    """
+    Check if a position in text is inside inline code (`...`) or code block (```...```).
+    Returns True if inside backticks.
+    """
+    # Count backticks before the match
+    before = text[:start_pos]
+    single_backticks = before.count("`")
+
+    return single_backticks % 2 != 0  # odd number => inside backticks
+
+
+def convert_image_wikilink(match, current_file: Path, text: str):
+    start, end = match.span()
+
+    # Skip if inside backticks
+    if is_inside_backticks(text, start):
+        return match.group(0)  # leave as-is
+
     content = match.group(1)
     path, alt = parse_image_target(content)
 
@@ -54,8 +71,9 @@ def process_file(path: Path):
     if "![[ " not in text and "![[" not in text:
         return
 
+    # Pass full text to converter so it can check for backticks
     new_text = IMAGE_WIKILINK_RE.sub(
-        lambda m: convert_image_wikilink(m, path), text
+        lambda m: convert_image_wikilink(m, path, text), text
     )
 
     if new_text != text:
@@ -65,8 +83,10 @@ def process_file(path: Path):
 
 def main():
     """
-    Convert Obsidian image wikilinks in all index.md files to standard Markdown,
-    only for real image files. Missing images are removed entirely.
+    Convert Obsidian image wikilinks in all index.md files
+    to standard Markdown, only for real image files.
+    Missing images are removed entirely.
+    Skips links inside inline code or code blocks.
     """
     for path in Path(VAULT_DIR).rglob("index.md"):
         process_file(path)
