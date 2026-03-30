@@ -26,14 +26,14 @@ def convert_image_wikilink(match, current_file: Path):
 
     # Only process if file has a valid image extension
     if Path(path).suffix.lower() not in IMAGE_EXTENSIONS:
-        return match.group(0)
+        return ""  # remove non-image links entirely
 
     # Resolve relative path
     full_path = (current_file.parent / path).resolve()
 
-    # Skip if image file does not exist
+    # Skip missing images entirely
     if not full_path.exists():
-        return match.group(0)
+        return ""  # remove missing images
 
     # Convert to relative path from current file
     rel_path = full_path.relative_to(current_file.parent)
@@ -64,7 +64,7 @@ def process_file(path: Path):
 def main():
     """
     Convert Obsidian image wikilinks in all index.md files to standard Markdown,
-    but only for real image files.
+    only for real image files. Missing images are removed entirely.
     """
     for path in Path(VAULT_DIR).rglob("index.md"):
         process_file(path)
