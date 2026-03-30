@@ -10,9 +10,9 @@ title: test blog
 
 This is a test ==[[test-missing-note-reference]]==
 
-![[20260329200830.png]]
+![[test-post/20260329200830.png]]
 
-![markdown image style](20260329200830.png)
+![markdown image style](test-post/20260329200830.png)
 
 ![img](https://yt3.googleusercontent.com/Jzh-VfliIJvWX-jBOFRXfCUpDdhInOokGZQshKlET4H-u1OLl_80GY-2wwe8gvQwFoSzeeYzNg=s900-c-k-c0x00ffffff-no-rj)
 
