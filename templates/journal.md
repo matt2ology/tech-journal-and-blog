@@ -1,4 +1,8 @@
 ---
+aliases:
+  - "{{date:LL}}"
+  - "{{date:MM/DD/YYYY}}"
+  - "{{date:YYYY-MM-DD}}"
 authors: matt2ology
 categories:
   - journal
