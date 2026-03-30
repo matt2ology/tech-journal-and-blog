@@ -1,11 +1,15 @@
 ---
+aliases:
+  - "{{VALUE:displayTitle}}"
 authors: matt2ology
 categories:
   - atomic
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
+slug: "{{VALUE:slug}}"
 tags:
-title: { { title } }
+title: "{{VALUE:displayTitle}}"
+toc: false
 ---
 
 ## Explain Like I'm 5 (ELI5): the Definition or Key Concept/Idea/Theory
@@ -14,4 +18,4 @@ title: { { title } }
 
 ## Related Atomic Notes and Published Works
 
-<!-- [Also See]({{< ref "/post/rest_of_the_path_to_file.md" >}})
+<!-- [Also See]({{< ref "/post/rest_of_the_path_to_file.md" >}}) -->

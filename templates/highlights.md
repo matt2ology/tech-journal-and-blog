@@ -1,4 +1,6 @@
 ---
+aliases:
+  - Highlights of {{VALUE:yamlSafeTitle}}
 authors:
   - "{{VALUE:authorList}}"
   - matt2ology
@@ -8,8 +10,9 @@ categories:
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
 media: "{{VALUE:media}}"
+slug: "{{VALUE:slug}}"
 tags:
-title: Highlights - {{VALUE:yamlSafeTitle }}
+title: Highlights - {{VALUE:yamlSafeTitle}}
 ---
 
 ## Highlights of {{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}

@@ -1,6 +1,4 @@
-module.exports = async (params) => {
-  const { quickAddApi: qa, variables, abort } = params;
-
+module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   // =========================
   // Prompt user for input
   // =========================
@@ -34,150 +32,83 @@ module.exports = async (params) => {
         placeholder: "https://...",
       },
     ]);
-  } catch (e) {
+  } catch {
     return abort("Input cancelled by user");
   }
 
-  // =========================
-  // Extract and clean input
-  // =========================
+  const originalTitle = values.title?.trim();
   const authorsRaw = values.authors?.trim();
-  const titleRaw = values.title?.trim();
-  const mediaRaw = values.media?.trim();
-  const sourceLink = values.source?.trim();
+  const mediaType = values.media?.trim() || "unknown";
+  const sourceLink = values.source?.trim() || "";
 
+  if (!originalTitle) return abort("Missing title");
   if (!authorsRaw) return abort("Missing authors");
-  if (!titleRaw) return abort("Missing title");
-
-  const originalAuthors = authorsRaw;
-  const originalTitle = titleRaw;
-  const mediaType = mediaRaw || "unknown";
 
   // =========================
-  // Author Processing
+  // Author processing
   // =========================
   const MAX_AUTHORS_IN_SLUG = 2;
-
   const authorList = authorsRaw
     .split(";")
     .map((a) => a.trim())
     .filter(Boolean);
-
   if (authorList.length === 0) return abort("No valid authors found");
 
-  // Non-slugified shortened author display
-  let shortAuthorsDisplay;
-  if (authorList.length <= MAX_AUTHORS_IN_SLUG) {
-    shortAuthorsDisplay = authorList.join("; ");
-  } else {
-    const firstAuthorLastName = authorList[0].split(",")[0].trim();
-    shortAuthorsDisplay = `${firstAuthorLastName} et al.`;
-  }
+  const shortAuthorsDisplay =
+    authorList.length <= MAX_AUTHORS_IN_SLUG
+      ? authorList.join("; ")
+      : `${authorList[0].split(",")[0]} et al.`;
 
-  const authorSlugs = authorList.map((author) => {
-    const normalized = normalizeText(author);
-    return slugifyText(normalized);
-  });
-
-  let combinedAuthorSlug;
-  if (authorSlugs.length <= MAX_AUTHORS_IN_SLUG) {
-    combinedAuthorSlug = authorSlugs.join("-");
-  } else {
-    const firstLastName = authorSlugs[0].split("-")[0];
-    combinedAuthorSlug = `${firstLastName}-et-al`;
-  }
+  const authorSlugs = authorList.map((a) => buildSlug(a));
+  const combinedAuthorSlug =
+    authorSlugs.length <= MAX_AUTHORS_IN_SLUG
+      ? authorSlugs.join("-")
+      : `${authorSlugs[0].split("-")[0]}-et-al`;
 
   // =========================
-  // Title Processing
+  // Title processing
   // =========================
-  const normalizedTitleText = normalizeText(originalTitle);
-  const slugifiedTitle = slugifyText(normalizedTitleText);
-  const abbreviatedTitle = applyAbbreviations(slugifiedTitle);
+  const abbreviatedTitle = buildSlug(originalTitle);
   const yamlSafeTitle = toYamlSafeString(originalTitle);
 
   // =========================
-  // Media Processing
-  // =========================
-  const mediaSlug = slugifyText(normalizeText(mediaType));
-
-  // =========================
-  // Source Processing & Markdown link
+  // Source processing
   // =========================
   let sourceDomain = "";
   let sourceMarkdownLink = "";
-
   if (sourceLink) {
     try {
-      const url = new URL(sourceLink);
-      sourceDomain = url.hostname.replace(/^www\./, "");
-    } catch {
-      // invalid URL, leave empty
-    }
-
-    // Markdown link format: [Authors - Title](URL)
-    sourceMarkdownLink = `[${originalAuthors} - ${originalTitle}](${sourceLink})`;
+      sourceDomain = new URL(sourceLink).hostname.replace(/^www\./, "");
+      sourceMarkdownLink = `[${authorsRaw} - ${originalTitle}](${sourceLink})`;
+    } catch {}
   }
 
   // =========================
-  // Final Output
+  // Final slug and display title
   // =========================
   const finalSlug = `${combinedAuthorSlug}-${abbreviatedTitle}`;
+  const displayTitle = `${shortAuthorsDisplay} - ${toDisplayName(abbreviatedTitle)}`;
 
   // =========================
-  // Variables for QuickAdd
+  // Output variables
   // =========================
-
   variables.media = mediaType;
-  // EX: "articles"
-
   variables.sourceLink = sourceLink;
-  // EX: "https://example.com/article"
-
   variables.sourceDomain = sourceDomain;
-  // EX: "example.com"
-
   variables.sourceMarkdownLink = sourceMarkdownLink;
-  // EX: "[Doe, John; Smith, Jane - Human Resources Training Documentation](https://example.com/article)"
-
-  variables.originalAuthors = originalAuthors;
-  // EX: "Doe, John; Smith, Jane; Brown, Bob"
-
+  variables.originalAuthors = authorsRaw;
   variables.originalTitle = originalTitle;
-  // EX: "Human Resources Training Documentation"
-
-  variables.fullTitle = `${originalAuthors} - ${originalTitle}`;
-  // EX: "Doe, John; Smith, Jane - Human Resources Training Documentation"
-
+  variables.fullTitle = `${authorsRaw} - ${originalTitle}`;
   variables.authorList = authorList;
-  // EX: ["Doe, John", "Smith, Jane", "Brown, Bob"]
-
   variables.authorSlug = combinedAuthorSlug;
-  // EX (≤2 authors): "doe-john-smith-jane"
-  // EX (>2 authors): "doe-et-al"
-
   variables.shortAuthorsDisplay = shortAuthorsDisplay;
-  // EX (≤2): "Doe, John; Smith, Jane"
-  // EX (>2): "Doe et al."
-
-  variables.shortTitle = `${shortAuthorsDisplay} - ${originalTitle}`;
-  // EX: "Doe et al. - Human Resources Training Documentation"
-
+  variables.shortTitle = displayTitle;
   variables.slugifiedTitle = finalSlug;
-  // EX: "doe-et-al-hr-trn-docs"
-
   variables.fileName = finalSlug;
-  // EX: "doe-et-al-hr-trn-docs"
-
-  variables.normalizedTitle = `${authorList.join("; ")} - ${toDisplayName(slugifiedTitle)}`;
-  // EX: "Doe, John; Smith, Jane - Human Resources Training Docs"
-
+  variables.displayTitle = displayTitle;
   variables.yamlSafeTitle = yamlSafeTitle;
 
-  // =========================
-  // Notification
-  // =========================
   new Notice(`[${mediaType}] "${variables.fullTitle}" → "${finalSlug}"`);
-
   return finalSlug;
 };
 
@@ -185,7 +116,6 @@ module.exports = async (params) => {
    Constants & Abbreviations
    ========================= */
 const RESERVED_NAMES = /^(con|prn|aux|nul|com\d|lpt\d)$/;
-
 const abbreviationMap = {
   "project-management": "pm",
   "human-resources": "hr",
@@ -197,25 +127,25 @@ const abbreviationMap = {
   development: "dev",
   documentation: "docs",
 };
-
 const ABBREVIATIONS = Object.entries(abbreviationMap)
   .sort(([a], [b]) => b.length - a.length)
-  .map(([key, value]) => ({
-    regex: new RegExp(`\\b${key}\\b`, "g"),
-    value,
-  }));
+  .map(([key, value]) => ({ regex: new RegExp(`\\b${key}\\b`, "g"), value }));
+
+const SMALL_WORDS = new Set([
+  "a", "an", "and", "as", "at", "but", "by", "for", "in",
+  "nor", "of", "on", "or", "per", "the", "to", "via", "vs",
+]);
+const FORCE_UPPER = new Set(["api", "ai", "qa", "hr", "it"]);
 
 /* =========================
-   Processing Functions
+   Processing functions
    ========================= */
 function normalizeText(text) {
   let normalized = text
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
-  if (RESERVED_NAMES.test(normalized)) {
-    normalized = `-${normalized}-`;
-  }
+  if (RESERVED_NAMES.test(normalized)) normalized = `-${normalized}-`;
   return normalized;
 }
 
@@ -229,18 +159,27 @@ function slugifyText(text) {
 }
 
 function applyAbbreviations(slug) {
-  let result = slug;
-  for (const { regex, value } of ABBREVIATIONS) {
-    result = result.replace(regex, value);
-  }
-  return result.replace(/--+/g, "-");
+  return ABBREVIATIONS.reduce(
+    (s, { regex, value }) => s.replace(regex, value),
+    slug,
+  ).replace(/--+/g, "-");
+}
+
+function buildSlug(text) {
+  const normalized = normalizeText(text);
+  const slug = slugifyText(normalized);
+  return applyAbbreviations(slug);
 }
 
 function toDisplayName(slug) {
-  return slug
-    .split("-")
-    .filter(Boolean)
-    .map((word) => word[0].toUpperCase() + word.slice(1))
+  const words = slug.split("-").filter(Boolean);
+  const last = words.length - 1;
+  return words
+    .map((w, i) => {
+      if (FORCE_UPPER.has(w)) return w.toUpperCase();
+      if (i !== 0 && i !== last && SMALL_WORDS.has(w)) return w;
+      return w.charAt(0).toUpperCase() + w.slice(1);
+    })
     .join(" ");
 }
 
