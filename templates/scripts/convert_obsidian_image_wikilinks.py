@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import re
+from urllib.parse import quote
 
 VAULT_DIR = "content"
 
@@ -23,10 +24,8 @@ def parse_image_target(content: str):
 
 def is_inside_backticks(text: str, start_pos: int):
     """
-    Check if a position in text is inside inline code (`...`) or code block (```...```).
-    Returns True if inside backticks.
+    Check if a position is inside inline code (`...`) or code block (```...```)
     """
-    # Count backticks before the match
     before = text[:start_pos]
     single_backticks = before.count("`")
 
@@ -43,20 +42,22 @@ def convert_image_wikilink(match, current_file: Path, text: str):
     content = match.group(1)
     path, alt = parse_image_target(content)
 
-    # Only process if file has a valid image extension
+    # Only process valid image extensions
     if Path(path).suffix.lower() not in IMAGE_EXTENSIONS:
-        return ""  # remove non-image links entirely
+        return ""  # remove non-image links
 
-    # Resolve relative path
     full_path = (current_file.parent / path).resolve()
 
     # Skip missing images entirely
     if not full_path.exists():
         return ""  # remove missing images
 
-    # Convert to relative path from current file
+    # Relative path from current file
     rel_path = os.path.relpath(
         full_path, start=current_file.parent).replace("\\", "/")
+
+    # URL-encode the path so spaces become %20
+    rel_path = quote(rel_path)
 
     # Use filename as alt if not provided
     if not alt:
@@ -83,10 +84,10 @@ def process_file(path: Path):
 
 def main():
     """
-    Convert Obsidian image wikilinks in all index.md files
-    to standard Markdown, only for real image files.
-    Missing images are removed entirely.
+    Convert Obsidian image wikilinks in all index.md files to standard Markdown,
+    only for real image files. Missing images are removed entirely.
     Skips links inside inline code or code blocks.
+    URL-encodes filenames so spaces become %20.
     """
     for path in Path(VAULT_DIR).rglob("index.md"):
         process_file(path)
