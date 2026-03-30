@@ -11,7 +11,8 @@ title: Collection - Anime Backlog
 
 ## Anime Backlog
 
-Heard about or have been recommended with the delusions of potentially writing a reflections, thoughts, or a "speedy" review... Welcome to my anime backlog:
+Heard about or have been recommended with the delusions of potentially writing
+a reflections, thoughts, or a "speedy" review... Welcome to my anime backlog:
 
 | Watched? | Anime                                                                                                                                                       | Link                                                                                                                        |
 | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
