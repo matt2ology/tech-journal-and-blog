@@ -1,15 +1,18 @@
 ---
+aliases:
+  - "{{VALUE:displayTitle}}"
 authors: matt2ology
 categories:
   - literature
   - "{{VALUE:media}}"
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
+slug: "{{VALUE:slug}}"
 tags:
-title: "{{VALUE:originalTitle}}"
+title: "{{VALUE:displayTitle}}"
 ---
 
-## {{VALUE:authorSlug}} - {{VALUE:originalTitle}}
+## {{VALUE:authorSlug}} - {{VALUE:displayTitle}}
 
 <!--
 SQ3R Method (Survey, Question, Read, Recite, Review).
