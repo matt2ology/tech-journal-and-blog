@@ -1,5 +1,7 @@
-import re
 from pathlib import Path
+
+import os
+import re
 
 VAULT_DIR = "content"
 
@@ -36,8 +38,8 @@ def convert_image_wikilink(match, current_file: Path):
         return ""  # remove missing images
 
     # Convert to relative path from current file
-    rel_path = full_path.relative_to(current_file.parent)
-    rel_path = str(rel_path).replace("\\", "/")
+    rel_path = os.path.relpath(
+        full_path, start=current_file.parent).replace("\\", "/")
 
     # Use filename as alt if not provided
     if not alt:
