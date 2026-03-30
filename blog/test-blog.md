@@ -8,6 +8,6 @@ tags:
 title: test blog
 ---
 
-This is a test [[test-missing-note-reference]]
+This is a test ==[[test-missing-note-reference]]==
 
 <!-- A blog is about communicating outward (you → readers) -->
