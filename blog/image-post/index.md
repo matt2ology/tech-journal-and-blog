@@ -10,8 +10,8 @@ tags:
 title: image post
 ---
 
-`![[attachments/Pasted image 20260329215315.png]]`
+`![[Pasted image 20260329215315.png]]`
 
-![[attachments/Pasted image 20260329215315.png]]
+![[Pasted image 20260329215315.png]]
 
 <!-- A blog is about communicating outward (you → readers) -->
