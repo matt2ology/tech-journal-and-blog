@@ -12,6 +12,6 @@ title: image post
 
 `![[Pasted image 20260329215315.png]]`
 
-![[pasted-image-20260329215315.png]]
+![[Pasted image 20260329215315.png]]
 
-![](pasted-image-20260329215315.png)
+![](Pasted%20image%2020260329215315.png)
