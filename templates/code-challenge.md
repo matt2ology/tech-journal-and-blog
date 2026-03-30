@@ -1,11 +1,14 @@
 ---
+aliases:
+  - "{{VALUE:displayTitle}}"
 authors: matt2ology
 categories:
   - coding-challenges
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
+slug: "{{VALUE:slug}}"
 tags:
-title: "{{VALUE:originalTitle}}"
+title: "{{VALUE:displayTitle}}"
 ---
 
 <!-- A coding challenge is about solving a problem (you → solution) -->
