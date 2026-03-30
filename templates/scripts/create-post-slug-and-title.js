@@ -1,32 +1,32 @@
 module.exports = async ({ quickAddApi, variables, abort }) => {
-  const userInput = await quickAddApi.inputPrompt("Title for post:");
-  if (!userInput?.trim()) return abort("No input entered");
+  const input = await quickAddApi.inputPrompt("Title for post:");
+  if (!input?.trim()) return abort("No input entered");
 
-  const rawTitle = userInput.trim();
+  const rawInput = input.trim();
 
-  // === Processing pipeline ===
-  const normalizedTitle = normalizeTitle(rawTitle);
-  if (!normalizedTitle) return abort("Could not normalize the title");
-
-  const baseSlug = createSlug(normalizedTitle);
-  if (!baseSlug) return abort("Could not generate valid slug");
-
-  const finalSlug = abbreviateSlug(baseSlug);
-
-  // === YAML-safe version ===
-  const yamlSafeTitle = toYamlSafeString(rawTitle);
+  // === Build slug ===
+  const slug = buildSlug(rawInput);
+  if (!slug) return abort("Could not generate valid slug");
 
   // === Output variables ===
-  variables.originalTitle = rawTitle;
-  variables.normalizedText = normalizedTitle;
-  variables.slugifiedTitle = baseSlug;
-  variables.fileName = finalSlug;
-  variables.normalizedTitle = formatDisplayTitle(baseSlug);
-  variables.yamlSafeTitle = yamlSafeTitle;
+  // "a guide to project management" (nothing changed)
+  variables.originalTitle = rawInput;
 
-  new Notice(`Original: "${rawTitle}" → Slug: "${baseSlug}"`);
+  // "a guide to project management" -> "a-guide-to-pm"
+  variables.slug = slug;
 
-  return baseSlug;
+  // "information technology update" -> "it-update"
+  variables.fileName = slug;
+
+  // "a guide to project management" -> "A Guide to PM"
+  variables.displayTitle = formatDisplayTitle(slug);
+
+  // "frequently asked questions in HR" -> "FAQ in HR"
+  variables.yamlSafeTitle = toYamlSafeString(rawInput);
+
+  new Notice(`"${rawInput}" → "${slug}"`);
+
+  return slug;
 };
 
 /* =========================
@@ -47,58 +47,77 @@ const SLUG_ABBREVIATIONS = {
   meeting: "mtg",
   training: "trn",
   development: "dev",
-  documentation: "docs"
+  documentation: "docs",
 };
 
-// Precompute abbreviation patterns (longest first)
 const ABBREVIATION_PATTERNS = Object.entries(SLUG_ABBREVIATIONS)
   .sort(([a], [b]) => b.length - a.length)
   .map(([phrase, short]) => ({
     pattern: new RegExp(`\\b${phrase}\\b`, "g"),
-    replacement: short
+    replacement: short,
   }));
 
+const SMALL_WORDS = new Set([
+  "a", "an", "and", "as", "at", "but", "by", "for", "in",
+  "nor", "of", "on", "or", "per", "the", "to", "via", "vs",
+]);
+
+const FORCE_UPPER = new Set(["api", "ai", "qa", "hr", "it"]);
+
 /* =========================
-   Processing Functions
+   Core Pipeline
    ========================= */
 
-function normalizeTitle(title) {
-  let cleaned = title
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, ""); // remove accents
+function buildSlug(title) {
+  const base = slugify(title);
+  if (!base) return null;
 
-  if (WINDOWS_RESERVED_NAMES.test(cleaned)) {
-    cleaned = `-${cleaned}-`;
-  }
-
-  return cleaned;
+  return abbreviateSlug(base);
 }
 
-function createSlug(text) {
+function slugify(title) {
+  let text = title
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+  if (WINDOWS_RESERVED_NAMES.test(text)) {
+    text = `-${text}-`;
+  }
+
   return text
-    .replace(/[\s_/|\\]+/g, "-")   // separators → hyphen
-    .replace(/[^\w.-]+/g, "")      // remove invalid chars
-    .replace(/([.-])\1+/g, "$1")   // collapse repeats
-    .replace(/^[.-]+|[.-]+$/g, "") // trim edges
-    .slice(0, 200);               // limit length
+    .replace(/[\s_/|\\]+/g, "-")
+    .replace(/[^\w.-]+/g, "")
+    .replace(/([.-])\1+/g, "$1")
+    .replace(/^[.-]+|[.-]+$/g, "")
+    .slice(0, 200);
 }
 
 function abbreviateSlug(slug) {
-  let updatedSlug = slug;
-
-  for (const { pattern, replacement } of ABBREVIATION_PATTERNS) {
-    updatedSlug = updatedSlug.replace(pattern, replacement);
-  }
-
-  return updatedSlug.replace(/--+/g, "-");
+  return ABBREVIATION_PATTERNS.reduce(
+    (acc, { pattern, replacement }) => acc.replace(pattern, replacement),
+    slug,
+  ).replace(/--+/g, "-");
 }
 
+/* =========================
+   Display Formatting
+   ========================= */
+
 function formatDisplayTitle(slug) {
-  return slug
-    .split("-")
-    .filter(Boolean)
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+  const words = slug.split("-").filter(Boolean);
+  const last = words.length - 1;
+
+  return words
+    .map((word, i) => {
+      if (FORCE_UPPER.has(word)) return word.toUpperCase();
+
+      if (i !== 0 && i !== last && SMALL_WORDS.has(word)) {
+        return word;
+      }
+
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
     .join(" ");
 }
 
@@ -107,6 +126,5 @@ function formatDisplayTitle(slug) {
    ========================= */
 
 function toYamlSafeString(value) {
-  // JSON string format is valid YAML and safely escapes everything
   return JSON.stringify(value);
 }
