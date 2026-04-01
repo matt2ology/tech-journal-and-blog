@@ -11,6 +11,7 @@ slug: jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information
 tags:
 title: "Jeffrey Kaplan - Lecture #9: How to Read so that you Retain Information"
 ---
+
 <!-- Idea 1: Key point or insights written in your own words -->
 
 > [!NOTE] Key Ideas
