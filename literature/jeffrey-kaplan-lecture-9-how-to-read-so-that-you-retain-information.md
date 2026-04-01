@@ -4,7 +4,6 @@ aliases:
 authors: matt2ology
 categories:
   - literature
-  - youtube
 date: 2026-03-31T22:38:27-07:00
 draft: false
 slug: jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information
@@ -23,9 +22,13 @@ Best for: General study and reading comprehension. It’s a well-established met
 5. **Review:** Go back over the material periodically to reinforce the information.
  -->
 
-> **Summary:**
+> [!NOTE] Summary
+> 
 
-**Review source highlights:** [[../highlights/articles/hl-jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information 1|Highlights of Jeffrey Kaplan - Lecture #9: How to Read so that you *Retain* Information]]
+> [!quote]
+> Test Quote
+
+**Review source highlights:** [[../highlights/articles/hl-jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information|Highlights of Jeffrey Kaplan - Lecture #9: How to Read so that you *Retain* Information]]
 
 ## Key Ideas
 
