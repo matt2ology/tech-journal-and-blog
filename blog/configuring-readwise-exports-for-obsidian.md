@@ -32,9 +32,9 @@ First things first, the filename. A consistent naming scheme is key for organizi
 {% macro slug(s, length) -%}
 {{ s
 | lower
+| replace('#','-')
 | replace("and","")
 | replace(' ','-')
-| replace('--','-')
 | replace(' - ','-')
 | replace(' -','-')
 | replace('- ','-')
@@ -42,20 +42,16 @@ First things first, the filename. A consistent naming scheme is key for organizi
 | replace('.','-')
 | replace('"','')
 | replace("'","")
-| replace('“','')
-| replace('”','')
-| replace('"','')
-| replace('‘','')
-| replace('’','')
 | replace('…','-')
 | replace('(','')
 | replace(')','')
 | replace(',','')
 | replace('|','')
 | replace('/','')
-| replace('^-','')
 | replace('--','-')
 | truncate(length, True, '')
+| replace('--','-')
+| replace('^-','')
 | replace('-$','')
 }}
 {%- endmacro %}
