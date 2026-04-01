@@ -23,7 +23,6 @@ Best for: General study and reading comprehension. It’s a well-established met
  -->
 
 > [!NOTE] Summary
-> 
 
 > [!quote]
 > Test Quote
