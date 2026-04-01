@@ -33,6 +33,8 @@ First things first, the filename. A consistent naming scheme is key for organizi
 {{ s
 | lower
 | replace('#','-')
+| replace('*','-')
+| replace(':','-')
 | replace("and","")
 | replace(' ','-')
 | replace(' - ','-')
@@ -56,7 +58,7 @@ First things first, the filename. A consistent naming scheme is key for organizi
 }}
 {%- endmacro %}
 
-hl-{{ slug(author, 50) }}-{{ slug(title, 30) }}
+hl-{{ slug(author, 50) }}-{{ slug(title, 50) }}
 ```
 
 Breaking it down:
@@ -77,11 +79,40 @@ For each exported highlight page, the title is formatted as:
 
 This clear header allows me to immediately identify the source material and that the page contains highlights, improving navigation inside Obsidian.
 
-## Metadata Block
+## Page Metadata Block
 
 Metadata is essential to provide context without cluttering the note. My export includes:
 
 ```markdown
+{% macro slug(s, length) -%}
+{{ s
+| lower
+| replace('#','-')
+| replace('*','-')
+| replace(':','-')
+| replace("and","")
+| replace(' ','-')
+| replace(' - ','-')
+| replace(' -','-')
+| replace('- ','-')
+| replace('..','')
+| replace('.','-')
+| replace('"','')
+| replace("'","")
+| replace('…','-')
+| replace('(','')
+| replace(')','')
+| replace(',','')
+| replace('|','')
+| replace('/','')
+| replace('--','-')
+| truncate(length, True, '')
+| replace('--','-')
+| replace('^-','')
+| replace('-$','')
+}}
+{%- endmacro %}
+
 {% if image_url -%}
 
 ![rw-book-cover]({{image_url}})
@@ -97,7 +128,7 @@ source: {{source}}
 
 <!-- Line brake - br -->
 
-- [ ] **Literature note:**
+- [ ] **Literature note:** [[{{ slug(author, 50) }}-{{ slug(title, 50) }}]]
 ```
 
 If available, the book or article cover image is included, alongside publication date. I also embed the source link when present, or fallback to a source name. This enriches the note and helps later retrieval or citation.
@@ -137,11 +168,12 @@ Each highlight is formatted with location info or ID:
 {% if highlight_location == "View Highlight" %}### id{{ highlight_id }}{% elif highlight_location == "View Tweet" %}### id{{ highlight_id }}{% else %}### {{highlight_location}}{% endif %}
 {% if highlight_tags %}**Tags:** {{ highlight_tags|join(', ') }} {% endif %}
 
+> [!cite]
 > {{ highlight_text }}{% if highlight_location_url %}
 > \- [{{ highlight_location }}]({{ highlight_location_url }}) {% elif highlight_location %} > \- {{ highlight_location }}
 > {% endif %}
 > {% if highlight_note %}
-> **Reflection:**
+> **Marginalia / Reflection:**
 > {{ highlight_note }} {% endif %}
 ```
 
@@ -159,6 +191,16 @@ This structured formatting makes it easy to visually parse each highlight and re
 Finally, each file begins with comprehensive YAML front matter metadata:
 
 ```yaml
+{% macro fixup(s) -%}
+{{ s
+| replace('*','')
+| replace('--','-')
+| replace('^-','')
+| replace('-$','')
+}}
+{%- endmacro %}
+
+aliases: "Highlights of {{author}} - {{fixup(title)}}"
 authors: {{author}}
 categories:
   - highlights
@@ -169,7 +211,7 @@ media: {{category}}
 source: {{source}}
 tags: {% for tag in document_tags %}
   - {{tag}} {% endfor %}
-title: Highlights of {{author}} - {{title}}
+title: "Highlights of {{author}} - {{fixup(title)}}"
 ```
 
 This front matter enables:
