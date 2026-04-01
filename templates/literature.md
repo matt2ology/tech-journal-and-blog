@@ -7,12 +7,10 @@ categories:
   - "{{VALUE:media}}"
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
-slug: "{{VALUE:slug}}"
+slug: "{{VALUE:slugifiedTitle}}"
 tags:
-title: "{{VALUE:displayTitle}}"
+title: "{{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}"
 ---
-
-## {{VALUE:authorSlug}} - {{VALUE:displayTitle}}
 
 <!--
 SQ3R Method (Survey, Question, Read, Recite, Review).
@@ -25,9 +23,9 @@ Best for: General study and reading comprehension. It’s a well-established met
 5. **Review:** Go back over the material periodically to reinforce the information.
  -->
 
-> **Summary:**
+> [!NOTE] Summary
 
-**Source highlights:** [[hl-{{VALUE:fileName}}]]
+**Review source highlights:** [[hl-{{VALUE:fileName}}|Highlights of {{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}]]
 
 ## Key Ideas
 
