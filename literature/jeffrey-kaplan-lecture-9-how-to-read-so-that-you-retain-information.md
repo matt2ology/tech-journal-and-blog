@@ -23,10 +23,7 @@ Best for: General study and reading comprehension. It’s a well-established met
  -->
 
 > [!NOTE] Summary
-> Test Summary
-
-> [!quote]
-> Test Quote
+> 
 
 **Review source highlights:** [[../highlights/articles/hl-jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information|Highlights of Jeffrey Kaplan - Lecture #9: How to Read so that you *Retain* Information]]
 
