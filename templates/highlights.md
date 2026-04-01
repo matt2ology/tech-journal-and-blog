@@ -30,7 +30,11 @@ Best for: General study and reading comprehension. It’s a well-established met
 5. **Review:** Go back over the material periodically to reinforce the information.
  -->
 
-## Key Highlights
+## SQ3R Method (Survey, Question, Read, Recite, Review)
+
+- [ ] #question
+
+## Highlights
 
 <!--
 Highlights of direct quotes, key points, or insights from the source content
