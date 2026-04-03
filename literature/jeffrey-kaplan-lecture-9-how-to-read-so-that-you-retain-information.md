@@ -12,6 +12,8 @@ tags:
 title: "Jeffrey Kaplan - Lecture #9: How to Read so that you Retain Information"
 ---
 
+**Review source highlights:** [[../highlights/articles/hl-jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information|Highlights of Jeffrey Kaplan - Lecture #9: How to Read So That You Retain Information]]
+
 <!-- Idea 1: Key point or insights written in your own words -->
 
 > [!NOTE] Key Ideas
@@ -28,8 +30,6 @@ title: "Jeffrey Kaplan - Lecture #9: How to Read so that you Retain Information"
 > 2. **The Second paragraph:** a sentence about the 3rd paragraph you've just read.
 >
 > Step 5) Iterate "Step 4" for each sequential paragraph then on after until end of chapter or logical idea/topic section
-
-**Review source highlights:** [[../highlights/articles/hl-jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information]]
 
 ---
 
