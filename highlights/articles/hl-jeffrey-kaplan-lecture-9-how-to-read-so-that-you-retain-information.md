@@ -22,7 +22,7 @@ Source published date: 2021-08-17
 
 <!-- Line brake - br -->
 
-- [ ] **Literature note:** [[jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information]]
+- [x] **Literature note:** [[jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information]]
 
 ## Introduction
 
