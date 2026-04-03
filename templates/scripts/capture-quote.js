@@ -121,17 +121,22 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
 
   const formatCitation = (citationRaw, mlaCitation) => {
     let result = [];
-    if (citationRaw) {
+    let videoLabel = null;
+
+    // Clean unknown source placeholder
+    const unknownPlaceholder = "\\- Unknown Source (Please provide manual MLA citation: Author, Title (p. #))";
+    const isUnknown = citationRaw?.trim() === unknownPlaceholder;
+
+    if (!citationRaw || isUnknown) {
+      result = [`>- Unknown Source (Please provide manual MLA citation: Author, Title (p. #) or URL)`];
+    } else {
       const video = formatVideoCitation(citationRaw);
       const line = video.line || (mlaCitation ? `> \\- ${citationRaw} ${mlaCitation}` : `> \\- ${citationRaw}`);
-      if (line && video.line) {
-        result = [line];
-        result.videoLabel = video.label;
-      } else {
-        result.videoLabel = null;
-        if (!video.line && !citationRaw.includes("youtu")) result = [line];
-      }
+      if (line) result = [line];
+      videoLabel = video.label || null;
     }
+
+    result.videoLabel = videoLabel;
     return result;
   };
 
