@@ -5,7 +5,7 @@ categories:
   - highlights
   - articles
 date: 2026-03-31
-draft: true
+draft: false
 media: articles
 source: reader
 tags:
@@ -24,15 +24,13 @@ Source published date: 2021-08-17
 
 - [ ] **Literature note:** [[jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information]]
 
-## Highlights
-
----
+## Introduction
 
 ### Engagement Over Consumption
 
 > [!cite]
 > force yourself to interact with the semantic content of what you're reading.
-> \- [View Highlight](https://read.readwise.io/read/01kn36zcnhqt7typpfb51nb823)
+> \- [View Highlight](<[https://read.readwise.io/read/01kn36zcnhqt7typpfb51nb823](https://www.youtube.com/watch?v=uiNB-6SuqVA&t=13s)>)
 
 **Marginalia / Reflection:**
 Engage with the material
@@ -43,7 +41,7 @@ Engage with the material
 
 > [!cite]
 > have a procedure that forces you to think through the ideas contained in the text.
-> \- [View Highlight](https://read.readwise.io/read/01kn371134rc9mv93afa893bby)
+> \- [View Highlight](<[https://read.readwise.io/read/01kn371134rc9mv93afa893bby](https://youtu.be/uiNB-6SuqVA?si=xgcDQ5rNkbQOnkTx&t=33)>)
 
 **Marginalia / Reflection:**
 Abstract the key points and ideas.
@@ -54,18 +52,18 @@ Abstract the key points and ideas.
 
 > [!cite]
 > The procedure that I'm going to recommend in this video is a version of marginalia.
-> \- [View Highlight](https://read.readwise.io/read/01kn372p257bevpwgt3w0zcs7z)
+> \- [View Highlight](https://youtu.be/uiNB-6SuqVA?si=czb0fP6GscokeSbv&t=42)
 
 **Marginalia / Reflection:**
 Jeffrey Kaplan recommends the practice of taking notes along the margins of the printed text. Providing context and locality of your notes, summarizations, questions, and reflections.
 
----
+## Muscle Memory
 
 ### Analytical Reading Practice
 
 > [!cite]
 > if you want to stand a chance of remembering that text, what you want to do is you want to read with focus and thought. You want to be thinking through the ideas, mulling them around in your mind right as you're going through.
-> \- [View Highlight](https://read.readwise.io/read/01kn37bs397pqf1bcbb38hhkhy)
+> \- [View Highlight](https://youtu.be/uiNB-6SuqVA?si=V7jBQcrSMkN5P9DM&t=169)
 
 **Marginalia / Reflection:**
 Be an active, mindful, reader. Not to read to absorb, but to read while applying critique and analysis of current text and previous arguments made from the author.
@@ -77,20 +75,21 @@ Be an active, mindful, reader. Not to read to absorb, but to read while applying
 > [!cite]
 > Here's what you do: you read the first paragraph of the reading.
 > You read that paragraph, and in the margin, you summarize that whole paragraph in one sentence.
-> \- [View Highlight](https://read.readwise.io/read/01kn37h9c652nh9pdaj2kv853r)
+> \- [View Highlight](https://youtu.be/uiNB-6SuqVA?si=_BnD023tlbL46VU2&t=210)
 
 **Marginalia / Reflection:**
 The Jeffrey Kaplan's reading procedure:
-Step 1) Read the first paragraph of the reading.
-Step 2) In the margin summarize that whole paragraph in 1 sentence.
 
----
+- Step 1) Read the first paragraph of the reading.
+- Step 2) In the margin summarize that whole paragraph in 1 sentence.
+
+## How to Read
 
 ### Compression Requires Understanding
 
 > [!cite]
 > It's important that you summarize right. So if this paragraph is six sentences long, you can't just write six sentences in the margin; that won't work because copying over text you can do that without really thinking about what it means. But summary — you can only summarize something. You can only take six sentences' worth of ideas and condense them down into one sentence of ideas. You can only do that if you understand what those six sentences mean and figure out what the central core idea is that all of those six sentences have in common. So it has to be a summary; you write a one-sentence summary in the margin.
-> \- [View Highlight](https://read.readwise.io/read/01kn3bs420pw9ydbfz755ffe63)
+> \- [View Highlight](https://youtu.be/uiNB-6SuqVA?si=MJA2YwrmVpjRiUKI&t=222)
 
 **Marginalia / Reflection:**
 Don't transcribe, don't just rephrase, the paragraph. Extract key ideas/takeaways. You'll loose some resolution, but the goal is to condense and summarize the multiple points articulated.
@@ -101,10 +100,11 @@ Don't transcribe, don't just rephrase, the paragraph. Extract key ideas/takeaway
 
 > [!cite]
 > Then you move on to the second paragraph. You read that paragraph, and for that paragraph also, you write one sentence of summary in the margin.
-> \- [View Highlight](https://read.readwise.io/read/01kn3d90vg3a1tbtejdrcdzzda)
+> \- [View Highlight](https://youtu.be/uiNB-6SuqVA?si=CaF7GVaVX3OeO0IB&t=258)
 
 **Marginalia / Reflection:**
-Step 3) Read the 2nd Paragraph and write a 1 sentence summary of the 2nd paragraph you read
+
+- Step 3) Read the 2nd Paragraph and write a 1 sentence summary of the 2nd paragraph you read
 
 ---
 
@@ -113,10 +113,11 @@ Step 3) Read the 2nd Paragraph and write a 1 sentence summary of the 2nd paragra
 > [!cite]
 > Then you get to the third paragraph, and this is where things get interesting. When you read the third paragraph of the text, you're going to write two sentences in the margin.
 > The first sentence in the margin next to the third paragraph is not going to have anything to do with the third paragraph. This sentence is going to summarize the first and second paragraphs.
-> \- [View Highlight](https://read.readwise.io/read/01kn3dc4h5g5wycszfs4hkp848)
+> \- [View Highlight](https://youtu.be/uiNB-6SuqVA?si=ZgOl7e4wsGPAev36&t=288)
 
 **Marginalia / Reflection:**
-Step 4) After reading the 3rd paragraph two sentences are written in the margins: 1 - a sentence connecting ideas and summaries leading up to the current point (summaries of paragraph 1 & 2); and, 2 - a sentence about the 3rd paragraph you've just read.
+
+- Step 4) After reading the 3rd paragraph two sentences are written in the margins: 1 - a sentence connecting ideas and summaries leading up to the current point (summaries of paragraph 1 & 2); and, 2 - a sentence about the 3rd paragraph you've just read.
 
 ---
 
@@ -125,7 +126,7 @@ Step 4) After reading the 3rd paragraph two sentences are written in the margins
 > [!cite]
 > then we move on to the fourth paragraph.
 > The fourth paragraph also gets two sentences in the margin. The first sentence in the margin next to the fourth paragraph summarizes everything the previous paragraphs, one, two, and three, and then the next one just summarizes paragraph four. Then you keep going.
-> \- [View Highlight](https://read.readwise.io/read/01kn3jt1kmppfdfaxp7jyhbt8d)
+> \- [View Highlight](https://youtu.be/uiNB-6SuqVA?si=c5yjSbpRThLKKD32&t=342)
 
 **Marginalia / Reflection:**
 From the 3rd paragraph on every paragraph gets two sentences summaries: the first sentence connects summaries prior to the current paragraph; and, the second sentence recaps the current (n-th) paragraph.
@@ -137,7 +138,7 @@ From the 3rd paragraph on every paragraph gets two sentences summaries: the firs
 > [!cite]
 > one sentence that summarizes everything that came before. You condense it all down into just one sentence. You’re going to leave things out, of course.
 > You have to, because now you’re condensing many paragraphs into just one sentence. So, you’re going to have to leave a lot of stuff out. You’re going to have to make a decision. You have to think through what’s the most important thing that all of these paragraphs have in common or that connects them, or that they’re getting across: one sentence for everything previously, and one sentence for that last new paragraph.
-> \- [View Highlight](https://read.readwise.io/read/01kn3k34ra819ws5pt82vzrcw1)
+> \- [View Highlight](https://youtu.be/uiNB-6SuqVA?si=2VzSHs_JtO4jpMcP&t=364)
 
 **Marginalia / Reflection:**
 From the 3rd paragraph on the first sentence gets updated encapsulating or highlighting the most important elements or what connects each summary.
@@ -159,7 +160,7 @@ From the 3rd paragraph on the first sentence gets updated encapsulating or highl
 > There is no way to summarize a text like this without thinking through the material and understanding it and retaining it. I want to emphasize this point again: taking notes in the margin in this way where you summarize what’s going on actually saves time.
 > \- [View Highlight](https://read.readwise.io/read/01kn3kcxgsdb4f5wwen036wqep)
 
----
+## Efficiency
 
 ### id1002158787
 
@@ -178,7 +179,7 @@ From the 3rd paragraph on the first sentence gets updated encapsulating or highl
 **Marginalia / Reflection:**
 Actively engaging with the material improves memory recall.
 
----
+## What is Economics
 
 ### id1002164751
 
@@ -194,7 +195,7 @@ Actively engaging with the material improves memory recall.
 > Speed reading is a scam.
 > \- [View Highlight](https://read.readwise.io/read/01kn3mcqmpzebfhmbw5mvkyvt6)
 
----
+## Bonus Rant
 
 ### id1002179478
 
@@ -227,7 +228,7 @@ Actively engaging with the material improves memory recall.
 > The results every single time show that speed reading works like skimming, which is to say, it doesn't work.
 > \- [View Highlight](https://read.readwise.io/read/01kn3mqmjz6ekdb92p567x05fn)
 
----
+## Pop Quiz
 
 ### id1002180218
 
