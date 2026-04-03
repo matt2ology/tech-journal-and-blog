@@ -124,15 +124,15 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   const formatQuoteBlock = (quoteText) =>
     formatBlock(quoteText, "[!cite]", false);
 
-  // Reflection - add blank line before block
-  const formatReflection = (reflection) =>
-    formatBlock(reflection, "[!note] Marginalia / Reflection", true);
-
+  
+  // Returns the Markdown line for video citation and a label for reflection
   const formatVideoCitation = (citationRaw) => {
-    let result = null;
+    let result = { line: null, label: null };
     const yt = parseYouTube(citationRaw);
     if (yt) {
-      result = `> \\- [View at ${yt.readable} (${yt.totalSeconds}s)](${yt.url})`;
+      const text = `View at ${yt.readable} (${yt.totalSeconds}s)`;
+      result.line = `> \\- [${text}](${yt.url})`;
+      result.label = text;
     }
     return result;
   };
@@ -140,13 +140,20 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   const formatCitation = (citationRaw, mlaCitation) => {
     let result = [];
     if (citationRaw) {
-      const videoLine = formatVideoCitation(citationRaw);
-      const line =
-        videoLine ||
-        `> \\- ${citationRaw}${mlaCitation ? " " + mlaCitation : ""}`;
+      const video = formatVideoCitation(citationRaw);
+      const line = video.line || `> \\- ${citationRaw}${mlaCitation ? " " + mlaCitation : ""}`;
       result = [line];
+      result.videoLabel = video.label; // save for reflection
     }
     return result;
+  };
+
+  // Reflection - add blank line before block, and include video timestamp if available
+  const formatReflection = (reflection, videoLabel = null) => {
+    const header = videoLabel
+      ? `[!note] Marginalia / Reflection at ${videoLabel}`
+      : "[!note] Marginalia / Reflection";
+    return formatBlock(reflection, header, true);
   };
 
   // =========================
@@ -189,10 +196,11 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   // =========================
   // Build output
   // =========================
+  const citationOutput = formatCitation(citation, mlaCitation);
   const output = [
     ...formatQuoteBlock(quoteText),
-    ...formatCitation(citation, mlaCitation),
-    ...formatReflection(values.reflection),
+    ...citationOutput,
+    ...formatReflection(values.reflection, citationOutput.videoLabel),
   ];
 
   const formatted = output.join("\n");
