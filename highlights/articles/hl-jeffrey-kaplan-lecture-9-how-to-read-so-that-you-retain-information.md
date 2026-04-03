@@ -18,7 +18,7 @@ title: "Highlights of Jeffrey Kaplan - Lecture #9: How to Read So That You Retai
 
 Source published date: 2021-08-17
 
-**Source link:** [Lecture #9: How to Read so that you *Retain* Information by Jeffrey Kaplan](https://youtu.be/uiNB-6SuqVA?si=k926ywQp83O_0r2r)
+**Source link:** [Lecture #9: How to Read so that you _Retain_ Information by Jeffrey Kaplan](https://youtu.be/uiNB-6SuqVA?si=k926ywQp83O_0r2r)
 
 <!-- Line brake - br -->
 
