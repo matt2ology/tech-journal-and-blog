@@ -12,12 +12,12 @@ tags:
 title: "{{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}"
 ---
 
+**Review source highlights:** [[hl-{{VALUE:fileName}}|Highlights of {{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}]]
+
 <!-- Idea 1: Key point or insights written in your own words -->
 
 > [!NOTE] Key Ideas
 >
 > 1.
-
-**Review source highlights:** [[hl-{{VALUE:fileName}}|Highlights of {{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}]]
 
 <!-- Optional: Chapters of each section -->
