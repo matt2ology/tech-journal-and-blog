@@ -7,10 +7,10 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   const splitQuoteAndCitation = (raw, manualCitation) => {
     const parts = raw
       .split(/\n{2,}/)
-      .map(p => p.trim())
+      .map((p) => p.trim())
       .filter(Boolean);
-    const quote = parts.slice(0, -1).join("\n\n") || parts[0] || "";
-    const citation = parts.length > 1 ? parts.at(-1) : manualCitation?.trim();
+    const quote = parts.join("\n\n"); // always take everything as quote
+    const citation = manualCitation?.trim() || ""; // manualCitation always wins
     return { quote, citation };
   };
 
