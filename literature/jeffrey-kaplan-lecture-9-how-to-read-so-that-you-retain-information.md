@@ -18,6 +18,18 @@ title: "Jeffrey Kaplan - Lecture #9: How to Read so that you Retain Information"
 >
 > 1.
 
-**Review source highlights:** [[hl-jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information|Highlights of Jeffrey Kaplan - Lecture #9: How to Read so that you *Retain* Information]]
+**Review source highlights:** [[../highlights/articles/hl-jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information]]
 
-<!-- Optional: Chapters of each section -->
+## Introduction
+
+## Muscle Memory
+
+## How to Read
+
+## Efficiency
+
+## What is Economics
+
+## Bonus Rant
+
+## Pop Quiz
