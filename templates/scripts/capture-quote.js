@@ -71,9 +71,9 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   const formatQuoteBlock = (text) => formatBlock(text, "[!cite]");
   const formatReflection = (text, videoLabel = null) => {
     const header = videoLabel
-      ? `[!note] Marginalia / Reflection at ${videoLabel}`
-      : "[!note] Marginalia / Reflection"; // no label if no timestamp
-    return formatBlock(text, header, true);
+      ? `**Marginalia / Reflection:**` // **Marginalia / Reflection:** @ ${videoLabel}
+      : "**Marginalia / Reflection:**"; // no label if no timestamp
+    return formatBlock(text, header, true, "");
   };
 
   const formatVideoCitation = (citationRaw) => {
@@ -81,7 +81,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
     const ytWithTime = parseYouTube(citationRaw);
     if (ytWithTime) {
       const text = `View at ${ytWithTime.readable} (${ytWithTime.totalSeconds}s)`;
-      return { line: `> - [${text}](${ytWithTime.url})`, label: text, hasTimestamp: true };
+      return { line: `>\\- [${text}](${ytWithTime.url})`, label: text, hasTimestamp: true };
     }
 
     // YouTube without timestamp
@@ -90,7 +90,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
     );
     if (ytNoTimeMatch) {
       const url = citationRaw;
-      return { line: `> - [View source](${url})`, label: null, hasTimestamp: false };
+      return { line: `>\\- [View source](${url})`, label: null, hasTimestamp: false };
     }
 
     return { line: null, label: null, hasTimestamp: false };
@@ -104,9 +104,9 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
 
     let line;
     if (video.line) line = video.line;
-    else if (mlaCitation) line = `> - ${citationRaw} ${mlaCitation}`;
-    else if (citationRaw) line = `> - ${citationRaw}`;
-    else line = `> - Unknown Source (Please provide manual MLA citation: Author, Title (p. #) or URL)`;
+    else if (mlaCitation) line = `> \\- ${citationRaw} ${mlaCitation}`;
+    else if (citationRaw) line = `> \\- ${citationRaw}`;
+    else line = `> \\- Unknown Source (Please provide manual MLA citation: Author, Title (p. #) or URL)`;
 
     const result = line ? [line] : [];
     result.videoLabel = video.hasTimestamp ? video.label : null;
