@@ -40,7 +40,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
 
   if (parts.length === 1) {
     quoteText = parts[0];
-    citationRaw = values.manualCitation?.trim() || "";
+    citationRaw = values.manualCitation?.trim() || "\- Unknown Source (Please provide manual MLA citation: Author, Title (p. #))";
   } else {
     quoteText = parts.slice(0, -1).join("\n\n");
     citationRaw = parts[parts.length - 1];
