@@ -1,6 +1,156 @@
 module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   // =========================
-  // Prompt user for input
+  // Helpers
+  // =========================
+  const cleanText = (text = "") => text.replace(/\s+/g, " ").trim();
+
+  const splitQuoteAndCitation = (raw, manualCitation) => {
+    const parts = raw
+      .split(/\n{2,}/)
+      .map((p) => p.trim())
+      .filter(Boolean);
+
+    const quote = parts.slice(0, -1).join("\n\n") || parts[0] || "";
+    const citation =
+      parts.length > 1
+        ? parts.at(-1)
+        : manualCitation?.trim() ||
+          "\\- Unknown Source (Please provide manual MLA citation: Author, Title (p. #))";
+
+    return { quote, citation };
+  };
+
+  const extractMLA = (citationRaw = "") => {
+    const lastNameMatch = citationRaw.match(/^([^,\.]+)/);
+    const pageMatch = citationRaw.match(/\((p\.|Location)\s*([^)]+)\)/i);
+
+    const lastName = lastNameMatch?.[1]?.trim();
+    const page = pageMatch?.[2]?.trim();
+
+    const mla =
+      lastName && page
+        ? `(${lastName} ${page})`
+        : lastName
+          ? `(${lastName})`
+          : "";
+
+    return mla;
+  };
+
+  /**
+   * Parse YouTube timestamps from shortened and full URLs
+   * @param {string} citationRaw
+   * @returns {object|null} { videoId, totalSeconds, readable, url } or null
+   */
+  const parseYouTube = (citationRaw = "") => {
+    let result = null;
+
+    // Match shortened youtu.be URL with ?t=
+    const shortMatch = citationRaw.match(
+      /^https:\/\/youtu\.be\/([a-zA-Z0-9_-]+)\?[^ ]*?[?&]t=([0-9]+)$/,
+    );
+
+    // Match full youtube.com/watch URL with &t= or ?t=
+    const fullMatch = citationRaw.match(
+      /^https:\/\/(www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)&?(?:.*?&)?t=([0-9]+)/,
+    );
+
+    if (shortMatch) {
+      const [, videoId, secondsStr] = shortMatch;
+      const totalSeconds = parseInt(secondsStr, 10);
+
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      const readable =
+        hours > 0
+          ? `${hours}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
+          : `${minutes}:${seconds.toString().padStart(2, "0")}`;
+
+      result = {
+        videoId,
+        totalSeconds,
+        readable,
+        url: `https://www.youtube.com/watch?v=${videoId}&t=${totalSeconds}s`,
+      };
+    } else if (fullMatch) {
+      const [, , videoId, secondsStr] = fullMatch;
+      const totalSeconds = parseInt(secondsStr, 10);
+
+      const hours = Math.floor(totalSeconds / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      const readable =
+        hours > 0
+          ? `${hours}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
+          : `${minutes}:${seconds.toString().padStart(2, "0")}`;
+
+      result = {
+        videoId,
+        totalSeconds,
+        readable,
+        url: `https://www.youtube.com/watch?v=${videoId}&t=${totalSeconds}s`,
+      };
+    }
+
+    return result;
+  };
+
+  /**
+   * Create a block of lines with optional header and optional leading blank line.
+   * @param {string} text - Main text content
+   * @param {string|null} header - Optional block header like [!cite] or [!note]
+   * @param {boolean} addLeadingBlankLine - Insert a blank line before this block
+   * @param {string} prefix - Optional prefix for each line, default ">"
+   * @returns {string[]} - Array of formatted lines
+   */
+  const formatBlock = (text, header = null, addLeadingBlankLine = false, prefix = ">") => {
+    const lines = [];
+    const trimmedText = text?.trim() || "";
+    const contentLines = trimmedText.split("\n").map(line => `${prefix} ${line}`);
+
+    if (trimmedText) {
+      if (addLeadingBlankLine) lines.push("");
+      if (header) lines.push(`${prefix} ${header}`);
+      lines.push(...contentLines);
+    }
+
+    return lines;
+  };
+
+  // First block (quote) - no leading blank line
+  const formatQuoteBlock = (quoteText) =>
+    formatBlock(quoteText, "[!cite]", false);
+
+  // Reflection - add blank line before block
+  const formatReflection = (reflection) =>
+    formatBlock(reflection, "[!note] Marginalia / Reflection", true);
+
+  const formatVideoCitation = (citationRaw) => {
+    let result = null;
+    const yt = parseYouTube(citationRaw);
+    if (yt) {
+      result = `> \\- [View at ${yt.readable} (${yt.totalSeconds}s)](${yt.url})`;
+    }
+    return result;
+  };
+
+  const formatCitation = (citationRaw, mlaCitation) => {
+    let result = [];
+    if (citationRaw) {
+      const videoLine = formatVideoCitation(citationRaw);
+      const line =
+        videoLine ||
+        `> \\- ${citationRaw}${mlaCitation ? " " + mlaCitation : ""}`;
+      result = [line];
+    }
+    return result;
+  };
+
+  // =========================
+  // Prompt user
   // =========================
   let values;
   try {
@@ -28,112 +178,28 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
     return abort("Input cancelled by user");
   }
 
+  // =========================
+  // Process data
+  // =========================
   const raw = values.quote || "";
+  const { quote, citation } = splitQuoteAndCitation(raw, values.manualCitation);
+  const quoteText = cleanText(quote);
+  const mlaCitation = extractMLA(citation);
 
   // =========================
-  // Split quote + citation
+  // Build output
   // =========================
-  const parts = raw.split(/\n{2,}/).map(p => p.trim()).filter(Boolean);
+  const output = [
+    ...formatQuoteBlock(quoteText),
+    ...formatCitation(citation, mlaCitation),
+    ...formatReflection(values.reflection),
+  ];
 
-  let quoteText = "";
-  let citationRaw = "";
-
-  if (parts.length === 1) {
-    quoteText = parts[0];
-    citationRaw =
-      values.manualCitation?.trim() ||
-      "\\- Unknown Source (Please provide manual MLA citation: Author, Title (p. #))";
-  } else {
-    quoteText = parts.slice(0, -1).join("\n\n");
-    citationRaw = parts[parts.length - 1];
-  }
-
-  // Clean quote spacing
-  quoteText = quoteText.replace(/\s+/g, " ").trim();
+  const formatted = output.join("\n");
 
   // =========================
-  // Extract MLA in-text citation
-  // =========================
-  let mlaCitation = "";
-
-  if (citationRaw) {
-    const lastNameMatch = citationRaw.match(/^([^,\.]+)/);
-    const pageMatch = citationRaw.match(/\((p\.|Location)\s*([^)]+)\)/i);
-
-    const lastName = lastNameMatch ? lastNameMatch[1].trim() : "";
-    const page = pageMatch ? pageMatch[2].trim() : "";
-
-    if (lastName && page) {
-      mlaCitation = `(${lastName} ${page})`;
-    } else if (lastName) {
-      mlaCitation = `(${lastName})`;
-    }
-  }
-
-  // =========================
-  // Format output
-  // =========================
-  const lines = [];
-
-  lines.push("> [!cite]");
-
-  quoteText.split("\n").forEach(line => {
-    lines.push(`> ${line}`);
-  });
-
-  // =========================
-  // Citation formatting (with strict YouTube handling)
-  // =========================
-  if (citationRaw) {
-    const ytStrictMatch = citationRaw.match(
-      /^https:\/\/youtu\.be\/([a-zA-Z0-9_-]+)\?[^ ]*?[?&]t=([0-9]+)$/
-    );
-
-    if (ytStrictMatch) {
-      const videoId = ytStrictMatch[1];
-      const totalSeconds = parseInt(ytStrictMatch[2], 10);
-
-      // Convert to h:mm:ss or m:ss
-      const hours = Math.floor(totalSeconds / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
-
-      let readable;
-      if (hours > 0) {
-        readable = `${hours}:${minutes
-          .toString()
-          .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-      } else {
-        readable = `${minutes}:${seconds.toString().padStart(2, "0")}`;
-      }
-
-      const cleanUrl = `https://www.youtube.com/watch?v=${videoId}&t=${totalSeconds}s`;
-
-      lines.push(
-        `> \\- [View at ${readable} (${totalSeconds}s)](${cleanUrl})`
-      );
-    } else {
-      lines.push(
-        `> \\- ${citationRaw}${mlaCitation ? " " + mlaCitation : ""}`
-      );
-    }
-  }
-
-  // =========================
-  // Reflection (optional)
-  // =========================
-  if (values.reflection && values.reflection.trim()) {
-    lines.push("");
-    lines.push("> [!note] Marginalia / Reflection");
-    lines.push("> " + values.reflection.trim());
-  }
-
-  const formatted = lines.join("\n");
-
-  // =========================
-  // Return variable
+  // Return
   // =========================
   variables.formattedQuote = formatted;
-
   return formatted;
 };
