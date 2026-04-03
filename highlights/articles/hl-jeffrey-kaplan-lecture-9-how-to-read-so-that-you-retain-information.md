@@ -18,11 +18,11 @@ title: "Highlights of Jeffrey Kaplan - Lecture #9: How to Read So That You Retai
 
 Source published date: 2021-08-17
 
-**Source link:** [[../../literature/jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information]]
+**Source link:** [Lecture #9: How to Read so that you *Retain* Information by Jeffrey Kaplan](https://youtu.be/uiNB-6SuqVA?si=k926ywQp83O_0r2r)
 
 <!-- Line brake - br -->
 
-- [x] **Literature note:** [[jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information]]
+- [x] **Literature note:** [[../../literature/jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information]]
 
 ## Introduction
 
