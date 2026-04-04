@@ -41,8 +41,35 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   };
 
   const extractMLA = (citationRaw = "") => {
-    const lastName = citationRaw.match(/^([^,\.]+)/)?.[1]?.trim();
-    const page = citationRaw.match(/\((p\.|Location)\s*([^)]+)\)/i)?.[2]?.trim();
+    // --- Extract author part (before first period) ---
+    const authorPart = citationRaw.match(/^([^.]+)/)?.[1]?.trim() || "";
+
+    let lastName = "";
+
+    if (authorPart.includes(",")) {
+      // Format: Last, First
+      lastName = authorPart.split(",")[0].trim();
+    } else {
+      // Format: First Middle Last OR multiple authors with ; or "and"
+      const firstAuthor = authorPart.split(/;| and /i)[0].trim();
+      const nameParts = firstAuthor.split(/\s+/);
+      lastName = nameParts[nameParts.length - 1]; // ✅ last word
+    }
+
+    // --- Extract ALL parentheses and find page info ---
+    const matches = [...citationRaw.matchAll(/\(([^)]+)\)/g)];
+
+    let page = "";
+
+    for (const m of matches) {
+      const content = m[1];
+      const pageMatch = content.match(/^(p\.|pp\.|Location)\s*(.+)$/i);
+      if (pageMatch) {
+        page = pageMatch[2].trim();
+        break;
+      }
+    }
+
     if (!lastName) return "";
     return page ? `(${lastName} ${page})` : `(${lastName})`;
   };
