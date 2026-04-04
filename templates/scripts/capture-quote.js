@@ -9,9 +9,35 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       .split(/\n{2,}/)
       .map((p) => p.trim())
       .filter(Boolean);
-    const quote = parts.join("\n\n"); // always take everything as quote
-    const citation = manualCitation?.trim() || ""; // manualCitation always wins
-    return { quote, citation };
+
+    // Manual citation always wins
+    if (manualCitation?.trim()) {
+      return {
+        quote: parts.join("\n\n"),
+        citation: manualCitation.trim(),
+      };
+    }
+
+    if (parts.length > 1) {
+      const last = parts[parts.length - 1];
+
+      // ✅ Strict Kindle detection
+      const isKindleCitation =
+        /\(Function\)\.\s*Kindle Edition\./i.test(last);
+
+      if (isKindleCitation) {
+        return {
+          quote: parts.slice(0, -1).join("\n\n"),
+          citation: last,
+        };
+      }
+    }
+
+    // Fallback: no split
+    return {
+      quote: parts.join("\n\n"),
+      citation: "",
+    };
   };
 
   const extractMLA = (citationRaw = "") => {
@@ -102,11 +128,20 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
 
     const video = formatVideoCitation(citationRaw);
 
+    let cleanCitation = citationRaw
+      ?.replace(/- Unknown Source.*$/i, "") // remove junk if present
+      .trim();
+
     let line;
-    if (video.line) line = video.line;
-    else if (mlaCitation) line = `> \\- ${citationRaw} ${mlaCitation}`;
-    else if (citationRaw) line = `> \\- ${citationRaw}`;
-    else line = `> \\- Unknown Source (Please provide manual MLA citation: Author, Title (p. #) or URL)`;
+    if (video.line) {
+      line = video.line;
+    } else if (cleanCitation && mlaCitation) {
+      line = `> \\- ${cleanCitation} ${mlaCitation}`;
+    } else if (cleanCitation) {
+      line = `> \\- ${cleanCitation}`;
+    } else {
+      line = `> \\- Unknown Source (Please provide manual MLA citation: Author, Title (p. #) or URL)`;
+    }
 
     const result = line ? [line] : [];
     result.videoLabel = video.hasTimestamp ? video.label : null;
