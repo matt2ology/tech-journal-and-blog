@@ -436,7 +436,7 @@
                 "enabled": false,
                 "direction": "below"
               },
-              "prepend": true,
+              "prepend": false,
               "task": false,
               "openFile": false,
               "fileOpening": {
