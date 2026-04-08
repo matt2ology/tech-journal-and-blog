@@ -205,9 +205,9 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   // will be null for plain YouTube links
   const reflectionLabel = citationOutput.videoLabel || null;
   const output = [
+    ...formatReflection(values.reflection, reflectionLabel),
     ...formatQuoteBlock(quoteText),
     ...citationOutput,
-    ...formatReflection(values.reflection, reflectionLabel),
   ];
 
   const formatted = output.join("\n");
