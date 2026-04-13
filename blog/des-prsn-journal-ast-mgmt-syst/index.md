@@ -29,11 +29,13 @@ The system I want to design should have the following attributes:
 - **Structured:** conveys meaning (not just random numbers)
 - **Scalable:** works when you have 10 or 1,000 journals
 
+To create the asset tags, I’m using a Brother P-touch PT-D600 with the older P-touch Editor (v5.4.016). Unfortunately, Brother requires users to enter a device serial number to download the newer P-touch Editor 6.x. Despite multiple attempts to provide the correct serial, the system repeatedly returns a “Serial input error.” As a result, I’m continuing with the 2023 version of the software for now.
+
 ## Version 01: imposed structure for notebook/journal management
 
 ![[journal-asset-tag-version-01-layout-example.png]]
 
-**Layout File:** [jrn-asset-tag-version-01.lbx](jrn-asset-tag-version-01.lbx)
+**LBX - Layout File:** [jrn-asset-tag-version-01.lbx](jrn-asset-tag-version-01.lbx)
 
 The identifier should be modular similar to that of a "part number".
 
@@ -43,9 +45,11 @@ JRN-[CATEGORY]-[YEAR]-[WEEK]
 
 - **JRN** = Leading Classifier that it's a journal
 
-Realistically will probably keep it simple by using the following format encoded using [CODE128](https://en.wikipedia.org/wiki/Code_128) with showing characters underneath of barcode (with QR Code as backup): `JRN-PER-2024-01`.
+For simplicity, the identifier will be encoded using **[Code 128](https://en.wikipedia.org/wiki/Code_128)** with human-readable characters displayed beneath the barcode (e.g. `JRN-PER-2024-01`). A QR code may be included as a backup.
 
 ### Category
+
+Abbreviated category code:
 
 - **CMN** = Commonplace Book - a repository of all my favorite quotes and insights
 - **GYM** = Gym log and tracking of workouts
@@ -57,9 +61,9 @@ Realistically will probably keep it simple by using the following format encoded
 
 Using date `Friday, February 9th, 2024` as an example:
 
-- **YEAR:** `2024` = based on the year of first entry
-- **WEEK:** `06` = based on the week of the year of first entry
-  - **Reminder:** there are 52 weeks in a year, so `64` is an invalid input
+- **YEAR:** `2024` = Four-digit year - based on the year of first entry
+- **WEEK:** `06` = Two-digit week number - based on the week of the year of first entry
+  - ⚠️ **Reminder:** there are 52 weeks in a year, so `64` is an invalid input
 
 Examples:
 
