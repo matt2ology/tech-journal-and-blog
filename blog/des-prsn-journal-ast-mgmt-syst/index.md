@@ -31,7 +31,7 @@ The system I want to design should have the following attributes:
 
 ## Version 01: imposed structure for notebook/journal management
 
-![[journal-asset-tag-version-01.png]]
+![[journal-asset-tag-version-01-layout-example.png]]
 
 The identifier should be modular similar to that of a "part number".
 
