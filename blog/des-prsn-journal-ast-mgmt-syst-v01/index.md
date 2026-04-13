@@ -39,7 +39,7 @@ To create the asset tags, I’m using a Brother P-touch PT-D600 with the older P
 
 ![[journal-asset-tag-version-01-047-layout-example.png|Journal Asset Tag Version 01 on 0.47 Tape]]
 
-The identifier should be modular similar to that of a "part number".
+The identifier should be modular similar to that of a "[part number](https://www.kingston.com/en/solutions/ssd-part-number-decoder)".
 
 ```md
 JRN-[CATEGORY]-[YEAR]-[WEEK]
