@@ -43,11 +43,7 @@ JRN-[CATEGORY]-[YEAR]-[WEEK]
 
 - **JRN** = Leading Classifier that it's a journal
 
-Realistically will probably keep it simple by using the following format encoded using [CODE128](https://en.wikipedia.org/wiki/Code_128) with showing characters underneath of barcode (with QR Code as backup):
-
-```md
-JRN-PER-2024-01
-```
+Realistically will probably keep it simple by using the following format encoded using [CODE128](https://en.wikipedia.org/wiki/Code_128) with showing characters underneath of barcode (with QR Code as backup): `JRN-PER-2024-01`.
 
 ### Category
 
