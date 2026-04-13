@@ -33,6 +33,8 @@ The system I want to design should have the following attributes:
 
 ![[journal-asset-tag-version-01-layout-example.png]]
 
+**Layout File:** [jrn-asset-tag-version-01.lbx](jrn-asset-tag-version-01.lbx)
+
 The identifier should be modular similar to that of a "part number".
 
 ```md
