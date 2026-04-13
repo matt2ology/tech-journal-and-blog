@@ -33,7 +33,7 @@ To create the asset tags, I’m using a Brother P-touch PT-D600 with the older P
 
 ## Version 01: imposed structure for notebook/journal management
 
-![[journal-asset-tag-version-01-layout-example.png]]
+![[journal-asset-tag-version-01-094-layout-example.png| Journal Asset Tag Version 01 on Tape 0.94"]]
 
 **LBX - Layout File:** [jrn-asset-tag-version-01.lbx](jrn-asset-tag-version-01.lbx)
 
