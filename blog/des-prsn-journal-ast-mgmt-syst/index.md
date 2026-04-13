@@ -24,10 +24,10 @@ I want to invent my own personal library from scratch and learn new things along
 The system I want to design should have the following attributes:
 
 - **Unique:** no duplicates, ever
-- **Readable:** you can understand it without scanning
+- **Readable:** I can understand it without scanning
 - **Short:** fits cleanly on a label
 - **Structured:** conveys meaning (not just random numbers)
-- **Scalable:** works when you have 10 or 1,000 journals
+- **Scalable:** works when I have 10 or 1,000 journals
 
 To create the asset tags, I’m using a Brother P-touch PT-D600 with the older P-touch Editor (v5.4.016). Unfortunately, Brother requires users to enter a device serial number to download the newer P-touch Editor 6.x. Despite multiple attempts to provide the correct serial, the system repeatedly returns a “Serial input error.” As a result, I’m continuing with the 2023 version of the software for now.
 
