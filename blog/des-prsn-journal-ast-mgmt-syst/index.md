@@ -5,7 +5,7 @@ authors: matt2ology
 categories:
   - blog
 date: 2026-04-11T14:31:38-07:00
-draft: true
+draft: false
 slug: designing-a-personal-journal-asset-management-system
 tags:
 title: Designing a Personal Journal Asset Management System
