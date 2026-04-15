@@ -12,6 +12,7 @@ title: "Advent of Code 2025 Day 01"
 ---
 
 <!-- A coding challenge is about solving a problem (you → solution) -->
+
 **Link:** <https://adventofcode.com/2025/day/1>
 
 ## Challenge
