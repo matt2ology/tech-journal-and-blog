@@ -15,6 +15,7 @@ title: "{{VALUE:displayTitle}}"
 A coding challenge is about solving a problem (you → solution)
 Try 1-2 lines in your own words
 Challenge -> Insight -> Pattern
+Next time - what would I do differently
 -->
 
 **Link:**
