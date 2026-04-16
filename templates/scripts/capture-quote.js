@@ -2,10 +2,17 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   // =========================
   // Helpers
   // =========================
-  const cleanText = (text = "") => text.replace(/\s+/g, " ").trim();
+
+  const normalizeNewlines = (text = "") =>
+    text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+
+  const cleanText = (text = "") =>
+    normalizeNewlines(text).replace(/[ \t]+/g, " ").trim();
 
   const splitQuoteAndCitation = (raw, manualCitation) => {
-    const parts = raw
+    const normalized = normalizeNewlines(raw);
+
+    const parts = normalized
       .split(/\n{2,}/)
       .map((p) => p.trim())
       .filter(Boolean);
@@ -41,8 +48,9 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   };
 
   const extractMLA = (citationRaw = "") => {
-    // --- Extract author part (before first period) ---
-    const authorPart = citationRaw.match(/^([^.]+)/)?.[1]?.trim() || "";
+    const normalized = normalizeNewlines(citationRaw);
+
+    const authorPart = normalized.match(/^([^.]+)/)?.[1]?.trim() || "";
 
     let lastName = "";
 
@@ -53,11 +61,10 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       // Format: First Middle Last OR multiple authors with ; or "and"
       const firstAuthor = authorPart.split(/;| and /i)[0].trim();
       const nameParts = firstAuthor.split(/\s+/);
-      lastName = nameParts[nameParts.length - 1]; // ✅ last word
+      lastName = nameParts[nameParts.length - 1] || "";
     }
 
-    // --- Extract ALL parentheses and find page info ---
-    const matches = [...citationRaw.matchAll(/\(([^)]+)\)/g)];
+    const matches = [...normalized.matchAll(/\(([^)]+)\)/g)];
 
     let page = "";
 
@@ -75,75 +82,96 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   };
 
   const parseYouTube = (url = "") => {
-    const shortMatch = url.match(
-      /^https:\/\/youtu\.be\/([a-zA-Z0-9_-]+)\?[^ ]*?[?&]t=(\d+)/
-    );
-    const fullMatch = url.match(
-      /^https:\/\/(www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)&?(?:.*?&)?t=(\d+)/
-    );
+    const safeUrl = url.trim();
 
-    const buildResult = (videoId, totalSeconds) => {
-      const hours = Math.floor(totalSeconds / 3600);
-      const minutes = Math.floor((totalSeconds % 3600) / 60);
-      const seconds = totalSeconds % 60;
-      const readable = hours > 0
-        ? `${hours}:${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`
-        : `${minutes}:${seconds.toString().padStart(2, "0")}`;
-      return {
-        videoId,
-        totalSeconds,
-        readable,
-        url: `https://www.youtube.com/watch?v=${videoId}&t=${totalSeconds}s`
-      };
-    };
+    const patterns = [
+      /youtu\.be\/([a-zA-Z0-9_-]+).*?[?&]t=(\d+)/,
+      /youtube\.com\/watch\?v=([a-zA-Z0-9_-]+).*?[?&]t=(\d+)/,
+    ];
 
-    if (shortMatch) return buildResult(shortMatch[1], parseInt(shortMatch[2], 10));
-    if (fullMatch) return buildResult(fullMatch[2], parseInt(fullMatch[3], 10));
+    for (const pattern of patterns) {
+      const match = safeUrl.match(pattern);
+      if (match) {
+        return buildResult(match[1], parseInt(match[2], 10));
+      }
+    }
+
     return null;
+  };
+
+  const buildResult = (videoId, totalSeconds) => {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    const readable =
+      hours > 0
+        ? `${hours}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
+        : `${minutes}:${String(seconds).padStart(2, "0")}`;
+
+    return {
+      videoId,
+      totalSeconds,
+      readable,
+      url: `https://www.youtube.com/watch?v=${videoId}&t=${totalSeconds}s`,
+    };
   };
 
   const formatBlock = (
     text,
     header = null,
     leadingBlank = false,
-    prefix = ">",
+    prefix = ">"
   ) => {
     if (!text?.trim()) return [];
+
+    const normalized = normalizeNewlines(text);
+
     const lines = [];
     if (leadingBlank) lines.push("");
     if (header) lines.push(`${prefix} ${header}`);
+
     lines.push(
-      ...text
+      ...normalized
         .trim()
         .split("\n")
-        .map((line) => `${prefix} ${line}`),
+        .map((line) => `${prefix} ${line}`)
     );
+
     return lines;
   };
 
   const formatQuoteBlock = (text) => formatBlock(text, "[!cite]");
+
   const formatReflection = (text, videoLabel = null) => {
-    const header = videoLabel
-      ? `**Marginalia / Reflection:**` // **Marginalia / Reflection:** @ ${videoLabel}
-      : "**Marginalia / Reflection:**"; // no label if no timestamp
+    const header = "**Marginalia / Reflection:**";
     return formatBlock(text, header, true, "");
   };
 
   const formatVideoCitation = (citationRaw) => {
     // YouTube with timestamp
     const ytWithTime = parseYouTube(citationRaw);
+
     if (ytWithTime) {
       const text = `View at ${ytWithTime.readable} (${ytWithTime.totalSeconds}s)`;
-      return { line: `>\\- [${text}](${ytWithTime.url})`, label: text, hasTimestamp: true };
+      return {
+        line: `>\\- [${text}](${ytWithTime.url})`,
+        label: text,
+        hasTimestamp: true,
+      };
     }
 
     // YouTube without timestamp
     const ytNoTimeMatch = citationRaw.match(
-      /^https:\/\/(www\.)?youtu(be\.com\/watch\?v=|\.be\/)([a-zA-Z0-9_-]+)/
+      /youtu(be\.com\/watch\?v=|\.be\/)[a-zA-Z0-9_-]+/
     );
+
     if (ytNoTimeMatch) {
-      const url = citationRaw;
-      return { line: `>\\- [View source](${url})`, label: null, hasTimestamp: false };
+      return {
+        line: `>\\- [View source](${citationRaw.trim()})`,
+        label: null,
+        hasTimestamp: false,
+      };
     }
 
     return { line: null, label: null, hasTimestamp: false };
@@ -155,11 +183,12 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
 
     const video = formatVideoCitation(citationRaw);
 
-    let cleanCitation = citationRaw
-      ?.replace(/- Unknown Source.*$/i, "") // remove junk if present
+    let cleanCitation = (citationRaw || "")
+      .replace(/- Unknown Source.*$/i, "")
       .trim();
 
     let line;
+
     if (video.line) {
       line = video.line;
     } else if (cleanCitation && mlaCitation) {
@@ -167,11 +196,13 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
     } else if (cleanCitation) {
       line = `> \\- ${cleanCitation}`;
     } else {
-      line = `> \\- Unknown Source (Please provide manual MLA citation: Author, Title (p. #) or URL)`;
+      line =
+        "> \\- Unknown Source (Please provide manual MLA citation: Author, Title (p. #) or URL)";
     }
 
     const result = line ? [line] : [];
     result.videoLabel = video.hasTimestamp ? video.label : null;
+
     return result;
   };
 
@@ -181,9 +212,9 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   let values;
   try {
     values = await qa.requestInputs([
-      { id: "quote", label: "Quote", type: "textarea", placeholder: "Paste Kindle quote here..." },
-      { id: "manualCitation", label: "Manual Citation (or YouTube URL with timestamp)", type: "text", placeholder: "Author, Title (p. #)..." },
-      { id: "reflection", label: "Marginalia / Reflection (optional)", type: "textarea", placeholder: "Your thoughts, interpretation, connections..." },
+      { id: "quote", label: "Quote", type: "textarea" },
+      { id: "manualCitation", label: "Manual Citation (or YouTube URL with timestamp)", type: "text" },
+      { id: "reflection", label: "Marginalia / Reflection (optional)", type: "textarea" },
     ]);
   } catch {
     return abort("Input cancelled by user");
@@ -193,17 +224,26 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   // Process data
   // =========================
   const raw = values.quote || "";
-  const { quote, citation } = splitQuoteAndCitation(raw, values.manualCitation);
+
+  const { quote, citation } = splitQuoteAndCitation(
+    raw,
+    values.manualCitation
+  );
+
   const quoteText = cleanText(quote);
   const mlaCitation = extractMLA(citation);
 
   // =========================
   // Build output
   // =========================
-  const citationOutput = formatCitation(citation, mlaCitation, !!quoteText);
+  const citationOutput = formatCitation(
+    citation,
+    mlaCitation,
+    !!quoteText
+  );
 
-  // will be null for plain YouTube links
   const reflectionLabel = citationOutput.videoLabel || null;
+
   const output = [
     ...formatReflection(values.reflection, reflectionLabel),
     ...formatQuoteBlock(quoteText),
