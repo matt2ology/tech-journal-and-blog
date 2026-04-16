@@ -246,6 +246,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
 
   const output = [
     ...formatReflection(values.reflection, reflectionLabel),
+    "",
     ...formatQuoteBlock(quoteText),
     ...citationOutput,
   ];
