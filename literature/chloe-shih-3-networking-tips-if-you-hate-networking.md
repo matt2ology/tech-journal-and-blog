@@ -19,7 +19,7 @@ title: Chloe Shih - 3 Networking Tips if you Hate Networking
 > [!NOTE] Key Ideas
 >
 > 1. **Strength of weak ties:** networking with new, different, people can expose you to new opportunities
-> 2. Invest into others - don't be the "gunner" in trying to be interesting for others. Get to know people:
+> 2. Invest into others - don't be the ["gunner"](http://gunner.urbanup.com/315287) in trying to be interesting for others. Get to know people:
 >     - What brings you to this event?
 >     - How do you know the host?
 >     - What's the dream?
