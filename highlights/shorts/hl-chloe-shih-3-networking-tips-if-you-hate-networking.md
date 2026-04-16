@@ -3,12 +3,13 @@ aliases: Highlights of Chloe Shih - 3 Networking Tips if You Hate Networking
 authors: Chloe Shih
 categories:
   - highlights
-  - shorts
+  - youtube
 date: 2026-04-15
 draft: false
 media: articles
 source: reader
 tags:
+  - shorts
 title: Highlights of Chloe Shih - 3 Networking Tips if You Hate Networking
 ---
 
