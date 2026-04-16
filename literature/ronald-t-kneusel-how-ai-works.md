@@ -22,7 +22,7 @@ Source highlights: [[../Readwise/books/hl-ronald-t-kneusel-how-ai-works]]
 ## Preface
 
 >[!summary]
-> This book offers a conceptual exploration of artificial intelligence (AI), bridging the gap between complex mathematics and high-level abstractions, focusing on the processes and procedures that drive AI without delving into technical details. Through personal insights and a historical overview, the author provides a clear understanding of AI's evolution, its societal impact, and how generative AI has brought this technology to the masses.
+> "How AI Works: From Sorcery to Science" offers a conceptual exploration of artificial intelligence (AI), bridging the gap between complex mathematics and high-level abstractions, focusing on the processes and procedures that drive AI without delving into technical details. Through personal insights and a historical overview, the Ronald T. Kneusel provides a clear understanding of AI's evolution, its societal impact, and how generative AI has brought this technology to the masses.
 
 ## Chapter 1: And Away We Go: An AI Overview
 
