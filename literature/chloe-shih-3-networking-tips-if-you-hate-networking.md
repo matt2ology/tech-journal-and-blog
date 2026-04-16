@@ -20,10 +20,10 @@ title: Chloe Shih - 3 Networking Tips if you Hate Networking
 >
 > 1. **Strength of weak ties:** networking with new, different, people can expose you to new opportunities
 > 2. Invest into others - don't be the "gunner" in trying to be interesting for others. Get to know people:
->     - What brings you to this event?
->     - How do you know the host?
->     - What's the dream?
->     - What've you been excited about lately?
->     - What's been in the back of your mind?
->     - What's a problem you've been working though? 
+>    - What brings you to this event?
+>    - How do you know the host?
+>    - What's the dream?
+>    - What've you been excited about lately?
+>    - What's been in the back of your mind?
+>    - What's a problem you've been working though?
 > 3. Be intentional to networking opportunities. If you are excited to meet members in the community, seek help, or engage in conversation with insightful people - go for it "heck yes"; otherwise, it's "no thank you".

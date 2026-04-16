@@ -11,6 +11,7 @@ source: reader
 tags:
 title: Highlights of Chloe Shih - 3 Networking Tips if You Hate Networking
 ---
+
 ## 3 Networking Tips if You Hate Networking
 
 ![rw-book-cover](https://i.ytimg.com/vi/CA1XvITzGB4/maxresdefault.jpg?sqp=-oaymwEoCIAKENAF8quKqQMcGADwAQH4AbYIgAKAD4oCDAgAEAEYciBXKDowDw==&rs=AOn4CLA0sxPAqwpFAoRNqypBrHSae_L-uA)
@@ -18,7 +19,9 @@ title: Highlights of Chloe Shih - 3 Networking Tips if You Hate Networking
 Source published date: 2024-07-11
 
 **Source link:** [3 Networking Tips if You Hate Networking](https://youtube.com/shorts/CA1XvITzGB4?si=1CoaeTb94X29Qlhu)
+
 <!-- Line brake - br -->
+
 - [x] **Literature note:** [[../../literature/chloe-shih-3-networking-tips-if-you-hate-networking]]
 
 ## Highlights
@@ -29,8 +32,7 @@ Source published date: 2024-07-11
 
 > [!cite]
 > it's not your closed Circle that gets you your next job it's actually the people you kind of know
-> \- [View Highlight](https://read.readwise.io/read/01kpa4zzjz7cyqj1rhn459cw19) 
-
+> \- [View Highlight](https://read.readwise.io/read/01kpa4zzjz7cyqj1rhn459cw19)
 
 ---
 
@@ -38,8 +40,7 @@ Source published date: 2024-07-11
 
 > [!cite]
 > these people have different networks and can expose you to New Opportunities this is called the strength of weak ties
-> \- [View Highlight](https://read.readwise.io/read/01kpa50x0esb0ty09asd1319e4) 
-
+> \- [View Highlight](https://read.readwise.io/read/01kpa50x0esb0ty09asd1319e4)
 
 ---
 
@@ -47,8 +48,7 @@ Source published date: 2024-07-11
 
 > [!cite]
 > be interested not interesting
-> \- [View Highlight](https://read.readwise.io/read/01kpa51v1v8cp2td1545hsgjen) 
-
+> \- [View Highlight](https://read.readwise.io/read/01kpa51v1v8cp2td1545hsgjen)
 
 ---
 
@@ -56,15 +56,16 @@ Source published date: 2024-07-11
 
 > [!cite]
 > starter questions to ask
-> \- [View Highlight](https://read.readwise.io/read/01kpa52ghj7c0vnht45bf27m1q) 
+> \- [View Highlight](https://read.readwise.io/read/01kpa52ghj7c0vnht45bf27m1q)
 
 **Marginalia / Reflection:**
+
 - What brings you to this event?
 - How do you know the host?
 - What's the dream?
 - What've you been excited about lately?
 - What's been in the back of your mind?
-- What's a problem you've been working though? 
+- What's a problem you've been working though?
 
 ---
 
@@ -72,8 +73,7 @@ Source published date: 2024-07-11
 
 > [!cite]
 > don't Network for the sake of it if you'd rather be doing something else go with your gut
-> \- [View Highlight](https://read.readwise.io/read/01kpa6h5x4gwpyyzgzetkydv8m) 
-
+> \- [View Highlight](https://read.readwise.io/read/01kpa6h5x4gwpyyzgzetkydv8m)
 
 ---
 
@@ -81,12 +81,13 @@ Source published date: 2024-07-11
 
 > [!cite]
 > make sure I have a goal
-> \- [View Highlight](https://read.readwise.io/read/01kpa6j6ncrvcp1h3m0bg5qqw2) 
+> \- [View Highlight](https://read.readwise.io/read/01kpa6j6ncrvcp1h3m0bg5qqw2)
 
 **Marginalia / Reflection:**
+
 - Learn about a new community.
 - Get specific advice.
-- Have deep conversations. 
+- Have deep conversations.
 
 ---
 
@@ -94,8 +95,7 @@ Source published date: 2024-07-11
 
 > [!cite]
 > learn about people and stay connected
-> \- [View Highlight](https://read.readwise.io/read/01kpa6m90hebmxy01jkfsbdvg1) 
-
+> \- [View Highlight](https://read.readwise.io/read/01kpa6m90hebmxy01jkfsbdvg1)
 
 ---
 
@@ -103,5 +103,4 @@ Source published date: 2024-07-11
 
 > [!cite]
 > networking is a lot but there's a way to lean in and out that can work
-> \- [View Highlight](https://read.readwise.io/read/01kpa6msv4cykvdwpb06zyzwd1) 
-
+> \- [View Highlight](https://read.readwise.io/read/01kpa6msv4cykvdwpb06zyzwd1)
