@@ -4,7 +4,6 @@ aliases:
 authors: matt2ology
 categories:
   - literature
-  - "{{VALUE:media}}"
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
 slug: "{{VALUE:slugifiedTitle}}"
