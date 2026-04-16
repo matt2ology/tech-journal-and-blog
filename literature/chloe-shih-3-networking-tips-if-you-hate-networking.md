@@ -4,7 +4,6 @@ aliases:
 authors: matt2ology
 categories:
   - literature
-  - articles
 date: 2026-04-15T20:55:00-07:00
 draft: false
 slug: chloe-shih-3-networking-tips-if-you-hate-networking
