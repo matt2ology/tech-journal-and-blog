@@ -30,7 +30,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
 
       // ✅ Strict Kindle detection
       const isKindleCitation =
-        /\(Function\)\.\s*Kindle Edition\./i.test(last);
+        /(Kindle Edition\.|\. eBook\.|\. Ebook\.)\s*$/i.test(last);
 
       if (isKindleCitation) {
         return {
