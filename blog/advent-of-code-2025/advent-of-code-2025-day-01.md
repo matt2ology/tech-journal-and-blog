@@ -5,7 +5,7 @@ authors: matt2ology
 categories:
   - coding-challenges
 date: 2026-04-14T21:52:09-07:00
-draft: true
+draft: false
 math: true
 slug: advent-of-code-2025-day-01
 tags:
