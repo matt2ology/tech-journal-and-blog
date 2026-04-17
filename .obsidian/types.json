@@ -4,6 +4,7 @@
     "cssclasses": "multitext",
     "tags": "tags",
     "authors": "multitext",
-    "toc": "checkbox"
+    "toc": "checkbox",
+    "math": "checkbox"
   }
 }
