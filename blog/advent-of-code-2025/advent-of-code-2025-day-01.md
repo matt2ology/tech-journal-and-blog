@@ -65,7 +65,7 @@ From position `8`, `R3` would move it to position `1`. We would check if these p
 The formula for updating the pointer's position after a rotation is:
 
 $$
-New\:Position\:=\:\left(\left(Current\:Position\:+Rotation\right)\%10\right)
+\text{New Position} = \left( \left( \text{Current Position} + \text{Rotation} \right) \bmod 10 \right)
 $$
 
 ### Simulation
