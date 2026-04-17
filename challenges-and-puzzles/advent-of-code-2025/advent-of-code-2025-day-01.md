@@ -60,7 +60,7 @@ For example, at position `52`, the value is `2`, since $52 \bmod 10 = 2$.
 | :-: | :-: | :-----: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 |  0  |  1  |    2    |  3  |  4  |  5  |  6  |  7  |  8  |  9  |
 
-Then given a series of rotations (left or right), we can simulate the movement
+Then given a series of rotations (`L`eft or `R`ight), we can simulate the movement
 of the pointer `L` **is negative** (we subtract from the pointer's position)
 and `R` **is positive** (we add to the pointer's position).
 After each rotation, we check if the pointer lands on a position
