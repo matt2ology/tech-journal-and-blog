@@ -1,14 +1,15 @@
 ---
 aliases:
-  - "Advent of Code 2025 Day 01"
+  - Advent of Code 2025 Day 01
 authors: matt2ology
 categories:
   - coding-challenges
-date: "2026-04-14T21:52:09-07:00"
+date: 2026-04-14T21:52:09-07:00
 draft: true
-slug: "advent-of-code-2025-day-01"
+math: true
+slug: advent-of-code-2025-day-01
 tags:
-title: "Advent of Code 2025 Day 01"
+title: Advent of Code 2025 Day 01
 ---
 
 <!-- A coding challenge is about solving a problem (you → solution) -->
