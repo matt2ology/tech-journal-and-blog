@@ -46,7 +46,7 @@ A circular array can be represented as a 2D table with the pointer at the top an
 
 The input range from 0 to 99 can be simplified to 0 to 9 by taking modulo 10, since the value at any pointer position depends only on its position modulo 10. This works because the values repeat every 10 steps (0 through 9, then cycling back to 0).
 
-In other words, the value at a given position is equal to the position modulo 10. For example, at position `52`, the value is `2`, since $52\:mod\:10\:=\:2$.
+In other words, the value at a given position is equal to the position modulo 10. For example, at position `52`, the value is `2`, since $52 \bmod 10 = 2$.
 
 |     |     | Pointer |     |     |     |     |     |     |     |
 | :-: | :-: | :-----: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -54,7 +54,7 @@ In other words, the value at a given position is equal to the position modulo 10
 
 Then given a series of rotations (left or right), we can simulate the movement of the pointer `L` **is negative** (we subtract from the pointer's position) and `R` **is positive** (we add to the pointer's position). After each rotation, we check if the pointer lands on a position where the value is zero (i.e., the pointer's position modulo 10 equals zero) and count how many times this happens.
 
-So, from position `2`, `L4` would move the pointer 4 positions to the left, resulting in position `8` (since $2 - 4 = -2$ and $-2\:mod\:10\:=\:8$). We would check if this position corresponds to a value of zero by taking modulo 10.
+So, from position `2`, `L4` would move the pointer 4 positions to the left, resulting in position `8` (since $2 - 4 = -2$ and $-2 \bmod 10 = 8$). We would check if this position corresponds to a value of zero by taking modulo 10.
 
 |     |     |     |     |     |     |     |     | Pointer |     |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-----: | :-: |
