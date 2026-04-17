@@ -86,19 +86,6 @@ $$
 
 ### Simulation
 
-- The dial starts by pointing at 50.
-- The dial is rotated L68 to point at 82.
-- The dial is rotated L30 to point at 52.
-- The dial is rotated R48 to point at 0.
-- The dial is rotated L5 to point at 95.
-- The dial is rotated R60 to point at 55.
-- The dial is rotated L55 to point at 0.
-- The dial is rotated L1 to point at 99.
-- The dial is rotated L99 to point at 0.
-- The dial is rotated R14 to point at 14.
-- The dial is rotated L82 to point at 32.
-- Because the dial points at 0 a total of three times during this process, the password in this example is 3.
-
 > The dial starts by pointing at 50.
 
 |  v  |     |     |     |     |     |     |     |     |     |
@@ -114,25 +101,77 @@ $$
 | 80  | 81  | 82  | 83  | 84  | 85  | 86  | 87  | 88  | 89  |
 | 90  | 91  | 92  | 93  | 94  | 95  | 96  | 97  | 98  | 99  |
 
+Simplified to modulo 10:
+
 |  v  |     |     |     |     |     |     |     |     |     |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |
 
 > The dial is rotated L68 to point at 82.
 
-|     |     |  v  |     |     |     |     |     |     |     | **(Position + Rotation) % 10** |
-| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :----------------------------: |
-|  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |      (2 + (-68)) % 10 = 4      |
+|     |     |  v  |     |     |     |     |     |     |     | **(Position + Rotation) % 10 = New Position** |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-------------------------------------------: |
+|  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |          $(0 + (-68)) \bmod 10 = 2$           |
 
-- The dial is rotated L30 to point at 52.
-- The dial is rotated R48 to point at 0.
-- The dial is rotated L5 to point at 95.
-- The dial is rotated R60 to point at 55.
-- The dial is rotated L55 to point at 0.
-- The dial is rotated L1 to point at 99.
-- The dial is rotated L99 to point at 0.
-- The dial is rotated R14 to point at 14.
-- The dial is rotated L82 to point at 32.
+> The dial is rotated L30 to point at 52.
+
+|     |     |  v  |     |     |     |     |     |     |     | **(Position + Rotation) % 10 = New Position** |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-------------------------------------------: |
+|  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |          $(2 + (-30)) \bmod 10 = 2$           |
+
+> The dial is rotated R48 to point at 0.
+> Note: the dial points at 0 here, so we count this as 1 occurrence of landing on zero.
+
+|  v  |     |     |     |     |     |     |     |     |     | **(Position + Rotation) % 10 = New Position** |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-------------------------------------------: |
+|  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |           $(2 + (48)) \bmod 10 = 0$           |
+
+> The dial is rotated L5 to point at 95.
+
+|     |     |     |     |     |  v  |     |     |     |     | **(Position + Rotation) % 10 = New Position** |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-------------------------------------------: |
+|  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |           $(0 + (-5)) \bmod 10 = 5$           |
+
+> The dial is rotated R60 to point at 55.
+
+|     |     |     |     |     |  v  |     |     |     |     | **(Position + Rotation) % 10 = New Position** |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-------------------------------------------: |
+|  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |           $(5 + (60)) \bmod 10 = 5$           |
+
+> The dial is rotated L55 to point at 0.
+> Note: the dial points at 0 here, so we count this as 2 occurrences of landing on zero.
+
+|  v  |     |     |     |     |     |     |     |     |     | **(Position + Rotation) % 10 = New Position** |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-------------------------------------------: |
+|  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |          $(5 + (-55)) \bmod 10 = 0$           |
+
+> The dial is rotated L1 to point at 99.
+
+|     |     |     |     |     |     |     |     |     |  v  | **(Position + Rotation) % 10 = New Position** |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-------------------------------------------: |
+|  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |           $(0 + (-1)) \bmod 10 = 9$           |
+
+> The dial is rotated L99 to point at 0.
+> Note: the dial points at 0 here, so we count this as 3 occurrences of landing on zero.
+
+|  v  |     |     |     |     |     |     |     |     |     | **(Position + Rotation) % 10 = New Position** |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-------------------------------------------: |
+|  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |          $(9 + (-99)) \bmod 10 = 0$           |
+
+> The dial is rotated R14 to point at 14.
+
+|     |     |     |     |  v  |     |     |     |     |     | **(Position + Rotation) % 10 = New Position** |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-------------------------------------------: |
+|  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |           $(0 + (14)) \bmod 10 = 4$           |
+
+> The dial is rotated L82 to point at 32.
+
+|     |     |     |     |     |     |     |     |     |     | **(Position + Rotation) % 10 = New Position** |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-------------------------------------------: |
+|  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |          $(4 + (-82)) \bmod 10 = 2$           |
+
+Because the **dial points at 0 a total of three times** during this process,
+the password in this example is **`3`**.
 
 ## Pitfalls / Stuck
 
