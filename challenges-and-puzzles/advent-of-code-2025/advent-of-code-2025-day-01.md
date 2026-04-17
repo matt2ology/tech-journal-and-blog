@@ -18,7 +18,9 @@ title: Advent of Code 2025 Day 01
 
 ## Challenge
 
-Pointing at a fixed starting position (`50`) in a wrap around linear sequence (from `0` to `99`). Count the number of times the pointer lands on the number zero (`0`).
+Pointing at a fixed starting position (`50`) in a wrap around
+linear sequence (from `0` to `99`). Count the number of times the pointer
+lands on the number zero (`0`).
 
 ## Insight
 
@@ -29,7 +31,9 @@ Focus on the unlock, not the full solution.
 That “Ohhh” moment
 -->
 
-A circular array can be represented as a 2D table with the pointer at the top and the values from 0 to 99 filling the table. Each row represents a cycle of 10 values, and the pointer moves through these values based on the rotations.
+A circular array can be represented as a 2D table with the pointer at the top
+and the values from 0 to 99 filling the table. Each row represents a cycle of
+10 values, and the pointer moves through these values based on the rotations.
 
 | Pointer |     |     |     |     |     |     |     |     |     |
 | :-----: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -44,23 +48,35 @@ A circular array can be represented as a 2D table with the pointer at the top an
 |   80    | 81  | 82  | 83  | 84  | 85  | 86  | 87  | 88  | 89  |
 |   90    | 91  | 92  | 93  | 94  | 95  | 96  | 97  | 98  | 99  |
 
-The input range from 0 to 99 can be simplified to 0 to 9 by taking modulo 10, since the value at any pointer position depends only on its position modulo 10. This works because the values repeat every 10 steps (0 through 9, then cycling back to 0).
+The input range from 0 to 99 can be simplified to 0 to 9 by taking modulo 10,
+since the value at any pointer position depends only on its position modulo 10.
+This works because the values repeat every 10 steps (0 through 9,
+then cycling back to 0).
 
-In other words, the value at a given position is equal to the position modulo 10. For example, at position `52`, the value is `2`, since $52 \bmod 10 = 2$.
+In other words, the value at a given position is equal to the position modulo 10.
+For example, at position `52`, the value is `2`, since $52 \bmod 10 = 2$.
 
 |     |     | Pointer |     |     |     |     |     |     |     |
 | :-: | :-: | :-----: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 |  0  |  1  |    2    |  3  |  4  |  5  |  6  |  7  |  8  |  9  |
 
-Then given a series of rotations (left or right), we can simulate the movement of the pointer `L` **is negative** (we subtract from the pointer's position) and `R` **is positive** (we add to the pointer's position). After each rotation, we check if the pointer lands on a position where the value is zero (i.e., the pointer's position modulo 10 equals zero) and count how many times this happens.
+Then given a series of rotations (left or right), we can simulate the movement
+of the pointer `L` **is negative** (we subtract from the pointer's position)
+and `R` **is positive** (we add to the pointer's position).
+After each rotation, we check if the pointer lands on a position
+where the value is zero (i.e., the pointer's position modulo 10 equals zero)
+and count how many times this happens.
 
-So, from position `2`, `L4` would move the pointer 4 positions to the left, resulting in position `8` (since $2 - 4 = -2$ and $-2 \bmod 10 = 8$). We would check if this position corresponds to a value of zero by taking modulo 10.
+So, from position `2`, `L4` would move the pointer 4 positions to the left,
+resulting in position `8` (since $2 - 4 = -2$ and $-2 \bmod 10 = 8$).
+We would check if this position corresponds to a value of zero by taking modulo 10.
 
 |     |     |     |     |     |     |     |     | Pointer |     |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-----: | :-: |
 |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |    8    |  9  |
 
-From position `8`, `R3` would move it to position `1`. We would check if these positions correspond to a value of zero by taking modulo 10.
+From position `8`, `R3` would move it to position `1`.
+We would check if these positions correspond to a value of zero by taking modulo 10.
 
 The formula for updating the pointer's position after a rotation is:
 
