@@ -6,6 +6,7 @@ categories:
   - coding-challenges
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
+math: true
 slug: "{{VALUE:slug}}"
 tags:
 title: "{{VALUE:displayTitle}}"
