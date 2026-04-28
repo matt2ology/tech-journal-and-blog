@@ -4,35 +4,19 @@ aliases:
 authors: matt2ology
 categories:
   - literature
-  - "{{VALUE:media}}"
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
-slug: "{{VALUE:slug}}"
+slug: "{{VALUE:slugifiedTitle}}"
 tags:
-title: "{{VALUE:displayTitle}}"
+title: "{{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}"
 ---
 
-## {{VALUE:authorSlug}} - {{VALUE:displayTitle}}
-
-<!--
-SQ3R Method (Survey, Question, Read, Recite, Review).
-Best for: General study and reading comprehension. It’s a well-established method for extracting key information from texts.
-
-1. **Survey:** Skim the chapter to get an overview by examining headings, visuals, and summaries.
-2. **Question:** Turn headings and key parts into questions to guide your focus while reading.
-3. **Read:** Read the material actively to find answers while noting key ideas.
-4. **Recite:** Summarize or recall the information in your own words.
-5. **Review:** Go back over the material periodically to reinforce the information.
- -->
-
-> **Summary:**
-
-**Source highlights:** [[hl-{{VALUE:fileName}}]]
-
-## Key Ideas
+**Review source highlights:** [[hl-{{VALUE:fileName}}|Highlights of {{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}]]
 
 <!-- Idea 1: Key point or insights written in your own words -->
 
-1.
+> [!NOTE] Key Ideas
+>
+> 1.
 
 <!-- Optional: Chapters of each section -->

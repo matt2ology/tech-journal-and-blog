@@ -11,20 +11,7 @@ title: "Ronald T. Kneusel How AI Works: From Sorcery to Science"
 
 ## Literature note: Ronald T. Kneusel How AI Works: From Sorcery to Science
 
-<!--
-SQ3R Method (Survey, Question, Read, Recite, Review).
-Best for: General study and reading comprehension. It’s a well-established method for extracting key information from texts.
-
-1. **Survey:** Skim the chapter to get an overview by examining headings, visuals, and summaries.
-2. **Question:** Turn headings and key parts into questions to guide your focus while reading.
-3. **Read:** Read the material actively to find answers while noting key ideas.
-4. **Recite:** Summarize or recall the information in your own words.
-5. **Review:** Go back over the material periodically to reinforce the information.
- -->
-
 Source highlights: [[../Readwise/books/hl-ronald-t-kneusel-how-ai-works]]
-
-> **Summary:**
 
 ## Key Ideas
 
@@ -34,9 +21,18 @@ Source highlights: [[../Readwise/books/hl-ronald-t-kneusel-how-ai-works]]
 
 ## Preface
 
+> [!summary]
+> "How AI Works: From Sorcery to Science" offers a conceptual exploration of artificial intelligence (AI), bridging the gap between complex mathematics and high-level abstractions, focusing on the processes and procedures that drive AI without delving into technical details. Through personal insights and a historical overview, the Ronald T. Kneusel provides a clear understanding of AI's evolution, its societal impact, and how generative AI has brought this technology to the masses.
+
 ## Chapter 1: And Away We Go: An AI Overview
 
+> [!abstract]
+> A quick overview of AI essentials and a basic example.
+
 ## Chapter 2: Why Now? A History of AI
+
+> [!abstract]
+> AI’s backstory and clarifies why the revolution is happening now.
 
 ### Pre-1900
 
@@ -62,13 +58,28 @@ Source highlights: [[../Readwise/books/hl-ronald-t-kneusel-how-ai-works]]
 
 ## Chapter 3: Classical Models: Old-School Machine Learning
 
+> [!abstract]
+> Modern AI is all neural networks, but to understand what neural networks are doing, it helps to understand the models that came before.
+
 ## Chapter 4: Neural Networks: Brain-Like AI
+
+> [!abstract]
+> Know what a neural network is, how it’s trained, and how it’s used.
 
 ## Chapter 5: Convolutional Neural Networks: AI Learns to See
 
+> [!abstract]
+> Much of the power of modern AI comes from learning new ways to represent data.
+
 ## Chapter 6: Generative AI: AI Gets Creative
 
+> [!abstract]
+> Creative Traditional supervised machine learning models attach labels to inputs. Generative AI produces novel output, including text, images, and even video. This chapter explores two popular approaches: generative adversarial networks (GANs) and diffusion models. GANs provide the intuition we need to explore diffusion models. Diffusion models are adept at producing detailed, photorealistic images and videos from text prompts.
+
 ## Chapter 7: Large Language Models: True AI at Last?
+
+> [!abstract]
+> This chapter explores LLMs: what they are, how they work, and the claim that they are something new and disruptive.
 
 ### GPT-4
 
@@ -88,4 +99,5 @@ Source highlights: [[../Readwise/books/hl-ronald-t-kneusel-how-ai-works]]
 
 ## Chapter 8: Musings: The Implications of AI
 
-## Related Literature Notes or Atomic Notes
+> [!abstract]
+> The advent of large language models has altered the AI landscape.

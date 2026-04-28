@@ -380,6 +380,78 @@
           }
         ]
       }
+    },
+    {
+      "id": "87f00870-d0ec-4989-900f-1daf488ef75f",
+      "name": "capture-kindle-quote",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "macro": {
+        "name": "capture-kindle-quote",
+        "id": "d70f7b11-06b2-4205-8803-7aa5a53f9c59",
+        "commands": [
+          {
+            "name": "capture-quote",
+            "type": "UserScript",
+            "id": "564b886a-bf5d-47f7-98a9-7e2a16c214aa",
+            "path": "templates/scripts/capture-quote.js",
+            "settings": {}
+          },
+          {
+            "name": "append",
+            "type": "NestedChoice",
+            "id": "ae96c135-f2c2-490e-9589-9242dbaff5c3",
+            "choice": {
+              "id": "b46c4be1-3fd8-4232-b08a-76d57b76d224",
+              "name": "append",
+              "type": "Capture",
+              "command": false,
+              "appendLink": false,
+              "captureTo": "",
+              "captureToActiveFile": true,
+              "captureToCanvasNodeId": "",
+              "activeFileWritePosition": "cursor",
+              "createFileIfItDoesntExist": {
+                "enabled": false,
+                "createWithTemplate": false,
+                "template": ""
+              },
+              "format": {
+                "enabled": true,
+                "format": "---\n\n{{VALUE:formattedQuote}}\n"
+              },
+              "insertAfter": {
+                "enabled": false,
+                "after": "",
+                "insertAtEnd": false,
+                "considerSubsections": false,
+                "createIfNotFound": false,
+                "createIfNotFoundLocation": "top",
+                "inline": false,
+                "replaceExisting": false,
+                "blankLineAfterMatchMode": "auto"
+              },
+              "newLineCapture": {
+                "enabled": false,
+                "direction": "below"
+              },
+              "prepend": false,
+              "task": false,
+              "openFile": false,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "templater": {
+                "afterCapture": "none"
+              }
+            }
+          }
+        ]
+      }
     }
   ],
   "inputPrompt": "single-line",
