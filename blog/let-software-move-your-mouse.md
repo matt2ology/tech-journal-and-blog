@@ -12,17 +12,18 @@ title: Let Software Move Your Mouse
 ---
 
 <!-- A blog is about communicating outward (you → readers) -->
+
 A colleague recommended a [Mouse Jiggler with Adjustable Interval Timer](https://a.co/d/0iwfSZCI), but I already have a talent for wasting money; case in point, I’ve bought [Final Fantasy X](https://en.wikipedia.org/wiki/Final_Fantasy_X) across multiple console generations and platforms, only to play it for a few hours before getting distracted with other endeavors...
 
-Greg this is for you ✨
+Greg, this is for you ✨
 
 ## Prerequisite
 
 1. Have python installed: <https://www.python.org/downloads/>
-    1. Check installation: `python --version`
+   1. Check installation: `python --version`
 2. Install dependencies
-    1. [PyAutoGUI](https://pypi.org/project/PyAutoGUI/)
-    2. [keyboard](https://pypi.org/project/keyboard/)
+   1. [PyAutoGUI](https://pypi.org/project/PyAutoGUI/)
+   2. [keyboard](https://pypi.org/project/keyboard/)
 
 ```sh
 python.exe -m pip install --upgrade pip
