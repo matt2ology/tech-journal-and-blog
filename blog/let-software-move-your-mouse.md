@@ -36,7 +36,7 @@ Save the following code as `main.py` or whatever.
 
 To run type the following:
 
-```
+```sh
 py .\main.py
 ```
 
