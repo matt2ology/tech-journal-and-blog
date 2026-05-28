@@ -110,6 +110,22 @@ As FANG companies (champions/leaders in technology companies) continue to buy ou
 
 ## Chapter 1: And Away We Go: An AI Overview
 
+**Marginalia / Reflection:**
+In the 1950s John McCarthy coined "artificial intelligence" as the means to prompt a computer to output a behavior that emulates human intelligence.
+
+> [!cite]
+> Artificial intelligence attempts to coax a machine, typically a computer, to behave in ways humans judge to be intelligent. The phrase was coined in the 1950s by prominent computer scientist John McCarthy (1927–2011).
+> \- Kneusel, Ronald T.. How AI Works: From Sorcery to Science (p. 5). (Function). Kindle Edition. (Kneusel 5)
+
+---
+
+**Marginalia / Reflection:**
+An overview of artificial intelligence as a whole - Chapter 1, "AND AWAY WE GO: AN AI OVERVIEW", aims to strictly define, make connections, and delineate the two concepts: "machine learning" (with example) and "deep learning".
+
+> [!cite]
+> This chapter aims to clarify what AI is and its relationship to machine learning and deep learning, two terms you may have heard in recent years. We’ll dive in with an example of machine learning in action. Think of this chapter as an overview of AI as a whole. Later chapters will build on and review the concepts introduced here.
+> \- Kneusel, Ronald T.. How AI Works: From Sorcery to Science (p. 5). (Function). Kindle Edition. (Kneusel 5)
+
 ## Chapter 2: Why Now? A History of AI
 
 ### Pre-1900
