@@ -90,8 +90,10 @@ for combination in _data: # Example: Index 0 - Element 1
 |   90   | 91  | 92  | 93  | 94  | 95  | 96  | 97  | 98  | 99  |
 
 > The dial is rotated L68 to point at 82.
+> > **(Position + Rotation) % 10 = New Position**
+> > $(0 + (-68)) \bmod 10 = 82$
 
-| **(Position + Rotation) % 10 = New Position** |     |     | **P**  |     |     |     |     |     |     |     |
+|  |     |     | **P**  |     |     |     |     |     |     |     |
 | :-------------------------------------------: | :-: | :-: | :----: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 |          $(0 + (-68)) \bmod 10 = 82$          |  0  |  1  |   2    |  3  |  4  |  5  |  6  |  7  |  8  |  9  |
 |                                               | 10  | 11  |   12   | 13  | 14  | 15  | 16  | 17  | 18  | 19  |
