@@ -18,6 +18,7 @@ Try 1-2 lines in your own words
 Challenge -> Insight -> Pattern
 Next time - what would I do differently
 -->
+
 **Link:** <https://adventofcode.com/2025/day/1>
 **Advent of Code 2025 Day 01 Part 1:** [[advent-of-code-2025-day-01-part-01]]
 
