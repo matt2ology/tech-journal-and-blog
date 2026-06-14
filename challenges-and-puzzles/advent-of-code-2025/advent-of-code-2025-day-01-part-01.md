@@ -43,22 +43,20 @@ $$
 
 The strategy:
 
-```md
-BEGIN
-Read a list of dial rotation instructions from a file.
-Set the dial to its starting position.
-Set the counter to zero.
-FOR each instruction
-Determine the direction of rotation.
-Determine how far to rotate the dial.
-Rotate the dial in the specified direction.
-IF the dial is pointing at zero THEN
-Increase the counter.
-END IF
-END FOR
-Return the total number of times the dial pointed at zero.
-END
-```
+    BEGIN
+        Read a list of dial rotation instructions from a file.
+        Set the dial to its starting position.
+        Set the counter to zero.
+        FOR each instruction
+            Determine the direction of rotation.
+            Determine how far to rotate the dial.
+            Rotate the dial in the specified direction.
+            IF the dial is pointing at zero THEN
+                Increase the counter.
+            END IF
+        END FOR
+        Return the total number of times the dial pointed at zero.
+    END
 
 ### Core concept reminder: strings are iterable sequences
 
