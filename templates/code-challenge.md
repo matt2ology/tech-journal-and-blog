@@ -29,6 +29,15 @@ What was I supposed to do?
 - what success means (goal)
 -->
 
+## Pattern / Concept Takeaway
+
+<!--
+One phrase only:
+> What category of problem is this?
+This builds your mental library.
+One thing to remember next time (e.g., HashMap, two pointers)
+-->
+
 ## Insight
 
 <!--
@@ -38,21 +47,16 @@ Focus on the unlock, not the full solution.
 That “Ohhh” moment
 -->
 
+<!-- ### Core concept reminder:  -->
+
+<!-- ### Simulation -->
+
 ## Pitfalls / Stuck
 
 <!--
 Only write this if you actually learned something
 > What slowed me down or was confusing?
 Optional: one thing you got wrong, struggled, slowed down with - where learning happens
--->
-
-## Pattern / Concept Takeaway
-
-<!--
-One phrase only:
-> What category of problem is this?
-This builds your mental library.
-One thing to remember next time (e.g., HashMap, two pointers)
 -->
 
 ---
