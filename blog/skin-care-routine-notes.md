@@ -1,0 +1,42 @@
+---
+aliases:
+  - Skin Care Routine Notes
+authors: matt2ology
+categories:
+  - blog
+date: 2026-06-15T07:25:10-07:00
+draft: false
+slug: skin-care-routine-notes
+tags:
+  - self-care
+title: Skin Care Routine Notes
+---
+
+<!-- A blog is about communicating outward (you → readers) -->
+
+I'm working on taking better care of myself and moving beyond the stigma that can surround men's skincare and self-care. To build healthier habits, these are a few notes in steps for both a morning routine and an evening routine.
+
+To keep things simple, I’ve stuck with a single brand: Dr. G, founded by dermatologist Dr. Gun-Young Ahn. Friends, [Jimin](https://m.blog.naver.com/anna8457) and [Yun-jeong](https://m.blog.naver.com/yunjeongiya), first recommended it to me while I was traveling in Seoul at an Olive Young store.
+
+[SciShow: No, You Can’t Make Your Own Sunscreen](https://youtu.be/nIhY_Z7s7Nc?si=Yo-0NFvrH-PhN5_J) - The internet is full of myths, including a few dangerous ones about sunscreen (spoiler alert: homemade sunscreen is not effective!). Sunscreen is important for anyone with skin, so here are 6 sunscreen myths debunked, to help you minimize your risk of burns, premature aging, and cancers.
+
+## Morning Routine (5 Minutes)
+
+| STEPS                                                                   | WHY                                                                                                                                                                                                                                                                                                                                 | PRODUCTS                                                                                                                                                                                                                                                      |
+| ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Step 1:** Cleanse - Use a gentle cleanser                             | Gently removes excess oil, sweat, and impurities accumulated overnight without stripping the skin's natural moisture barrier.                                                                                                                                                                                                       | [DR.G PH CLEANSING GEL FOAM](https://a.co/d/08J1y4ZB)                                                                                                                                                                                                         |
+| **Step 2:** Tone - Apply a balancing toner                              | Helps replenish hydration, soothe the skin, and prepare it to better absorb the next skincare steps.                                                                                                                                                                                                                                | [Dr.G R.E.D Blemish Clear Soothing Toner](https://a.co/d/0g4ElDPG)                                                                                                                                                                                            |
+| **Step 3:** Treat - Use a targeted serum or capsule essence             | This is where you address specific skin concerns such as dullness, dehydration, uneven tone, or sensitivity with concentrated active ingredients.                                                                                                                                                                                   | **Not yet incorporated in routine**<br><br>[Dr.G Black Snail Retinol Ampoule](https://us.oliveyoung.com/products/UA13223586) or Dr.G Royal Black Snail First Essence                                                                                          |
+| **Step 4:** Moisturize - Apply a lightweight emulsion or soothing cream | Helps strengthen the skin barrier, lock in hydration, and keep skin comfortable throughout the day.                                                                                                                                                                                                                                 | [Dr.G Red Blemish Clear Soothing Cream](https://a.co/d/09xy5Hxo) or Dr.G Red Blemish Clear Soothing Emulsion                                                                                                                                                  |
+| **Step 5:** Sunscreen                                                   | Apply liberally 15 minutes before sun exposure. Reapply at least every 2 hours.<br><br>Daily sun protection helps prevent premature aging, dark spots, and UV damage, making it one of the most important steps in any skincare routine.<br><br>SPF 30 is all you need; and, look for "Broad Spectrum" or "PA+" featured sunscreen. | I like [Dr.G R.E.D Blemish Soothing Up Moisture Sunscreen](https://a.co/d/0i1jGEPz) for it is a "hybrid sunscreen".<br><br>An alternative would be [Dr.G Green Mild Up Defense Mineral Sunscreen](https://a.co/d/024Ewvis) but is just a "mineral sunscreen". |
+
+## Evening Routine
+
+Generally, an end-of-day shower routine.
+
+| STEPS                                    | WHY                                                                                                                                                              | PRODUCTS                                                                                                                                                                                                               |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Step 1:** Cleanse (in shower)          | Removes sunscreen, makeup residue, dirt, and daily pollutants while maintaining the skin's moisture balance.                                                     | [DR.G PH CLEANSING GEL FOAM](https://a.co/d/08J1y4ZB)                                                                                                                                                                  |
+| **Step 2:** Exfoliate (in shower) / Tone | **Exfoliation** (in shower) helps remove dead skin cells and improve skin texture <br><br>**Toner** restores hydration and prepares skin for treatment products. | **2 times per week (Tuesdays and Thursdays):** [Dr.G Brightening Peeling Gel](https://a.co/d/0f28r6u5) <br><br>**On non-exfoliation days:** [Dr.G Red Blemish Clear Soothing Toner](https://a.co/d/0gdd6kyx)           |
+| **Step 3:** Treat                        | Supports overnight skin renewal and helps address concerns such as fine lines, uneven texture, and blemishes.                                                    | **Not yet incorporated in routine**<br><br>[Dr.G Black Snail Retinol Ampoule](https://us.oliveyoung.com/products/UA13223586)                                                                                           |
+| **Step 4:** Nourish/Moisturize           | Provides rich hydration and nourishment to support the skin barrier and promote overnight recovery while you sleep.                                              | [Dr.G Black Snail Cream](https://a.co/d/0gDHBCd0) - daily hydration, barrier repair, and skin recovery<br><br>[Dr.G Royal Black Snail Cream](https://a.co/d/0eLPWS2j) - firming, brightening, and mature skin concerns |
