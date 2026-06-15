@@ -20,7 +20,7 @@ Next time - what would I do differently
 -->
 
 **Link:** <https://adventofcode.com/2025/day/1>
-**Advent of Code 2025 Day 01 Part 1:** [[advent-of-code-2025-day-01-part-01]]
+**Advent of Code 2025 Day 01 Part 1:** [[advent-of-code-2025-day-01-part-1]]
 
 ## Challenge
 
