@@ -15,6 +15,7 @@ title: Advent of Code 2025 Day 01 Part 1
 <!-- A coding challenge is about solving a problem (you → solution) -->
 
 **Link:** <https://adventofcode.com/2025/day/1>
+
 <!-- **Advent of Code 2025 Day 01 Part 2:** [[advent-of-code-2025-day-01-part-2]] -->
 
 ## Challenge
