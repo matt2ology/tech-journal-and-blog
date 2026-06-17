@@ -18,16 +18,16 @@ title: "Jeffrey Kaplan - Lecture #9: How to Read so that you Retain Information"
 
 > [!NOTE] Key Ideas
 >
-> Step 1) Read the first paragraph of the reading.
+> Step 1) Read the first paragraph of the reading assignment, book, media, etc.
 >
-> Step 2) In the margin summarize that whole paragraph in 1 sentence.
+> Step 2) In the margin summarize that whole paragraph (the paragraph you've just read) in 1 sentence.
 >
-> Step 3) Read the 2nd Paragraph and write a 1 sentence summary of the 2nd paragraph you read.
+> Step 3) Read the 2nd Paragraph and write a 1 sentence summary in the margins.
 >
-> Step 4) After reading the 3rd paragraph where two sentences are written in the margins
+> Step 4) After reading the 3rd paragraph write two sentences are written in the margins
 >
-> 1. **The first paragraph:** a sentence connecting ideas and summaries leading up to the current point (summaries of paragraph 1 & 2)
-> 2. **The Second paragraph:** a sentence about the 3rd paragraph you've just read.
+> 1. **The first sentence:** a sentence connecting ideas and summaries leading up to the current point (summaries of paragraph 1 & 2; and onward as you read further)
+> 2. **The Second sentence:** a sentence about the 3rd paragraph you've just read.
 >
 > Step 5) Iterate "Step 4" for each sequential paragraph then on after until end of chapter or logical idea/topic section
 
