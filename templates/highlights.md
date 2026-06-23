@@ -12,7 +12,7 @@ draft: true
 media: "{{VALUE:media}}"
 slug: "{{VALUE:slug}}"
 tags:
-title: Highlights - {{VALUE:yamlSafeTitle}}
+title: My highlights of - {{VALUE:yamlSafeTitle}}
 ---
 
 ## Highlights of {{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}

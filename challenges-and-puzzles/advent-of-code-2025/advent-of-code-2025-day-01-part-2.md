@@ -1,15 +1,15 @@
 ---
 aliases:
-  - "{{VALUE:displayTitle}}"
+  - Advent of Code 2025 Day 01 Part 2
 authors: matt2ology
 categories:
   - coding-challenges
-date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
+date: 2026-06-13T23:56:22-07:00
 draft: true
 math: true
-slug: "{{VALUE:slug}}"
+slug: advent-of-code-2025-day-01-part-2
 tags:
-title: "{{VALUE:displayTitle}}"
+title: Advent of Code 2025 Day 01 Part 2
 ---
 
 <!--
@@ -19,7 +19,8 @@ Challenge -> Insight -> Pattern
 Next time - what would I do differently
 -->
 
-**Link:**
+**Link:** <https://adventofcode.com/2025/day/1>
+**Advent of Code 2025 Day 01 Part 1:** [[advent-of-code-2025-day-01-part-1]]
 
 ## Challenge
 
