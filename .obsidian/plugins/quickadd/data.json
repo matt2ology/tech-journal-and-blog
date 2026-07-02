@@ -48,8 +48,10 @@
                 "mode": "default",
                 "focus": true
               },
-              "fileExistsMode": "Increment the file name",
-              "setFileExistsBehavior": true
+              "fileExistsBehavior": {
+                "kind": "apply",
+                "mode": "increment"
+              }
             }
           }
         ]
@@ -103,8 +105,10 @@
                 "mode": "default",
                 "focus": true
               },
-              "fileExistsMode": "Nothing",
-              "setFileExistsBehavior": true
+              "fileExistsBehavior": {
+                "kind": "apply",
+                "mode": "doNothing"
+              }
             }
           }
         ]
@@ -158,8 +162,10 @@
                 "mode": "default",
                 "focus": true
               },
-              "fileExistsMode": "Nothing",
-              "setFileExistsBehavior": true
+              "fileExistsBehavior": {
+                "kind": "apply",
+                "mode": "doNothing"
+              }
             }
           }
         ]
@@ -213,8 +219,9 @@
                 "mode": "default",
                 "focus": true
               },
-              "fileExistsMode": "Increment the file name",
-              "setFileExistsBehavior": false
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              }
             }
           }
         ]
@@ -268,8 +275,10 @@
                 "mode": "default",
                 "focus": true
               },
-              "fileExistsMode": "Increment the file name",
-              "setFileExistsBehavior": true
+              "fileExistsBehavior": {
+                "kind": "apply",
+                "mode": "increment"
+              }
             }
           }
         ]
@@ -321,8 +330,10 @@
                 "mode": "default",
                 "focus": true
               },
-              "fileExistsMode": "Increment the file name",
-              "setFileExistsBehavior": true
+              "fileExistsBehavior": {
+                "kind": "apply",
+                "mode": "increment"
+              }
             }
           }
         ]
@@ -374,8 +385,10 @@
                 "mode": "default",
                 "focus": true
               },
-              "fileExistsMode": "Increment the file name",
-              "setFileExistsBehavior": true
+              "fileExistsBehavior": {
+                "kind": "apply",
+                "mode": "increment"
+              }
             }
           }
         ]
@@ -460,7 +473,7 @@
   "devMode": false,
   "templateFolderPath": "templates",
   "announceUpdates": "major",
-  "version": "2.12.0",
+  "version": "2.12.3",
   "globalVariables": {},
   "onePageInputEnabled": false,
   "disableOnlineFeatures": true,
@@ -564,6 +577,9 @@
     "migrateFileOpeningSettings": true,
     "backfillFileOpeningDefaults": true,
     "setProviderModelDiscoveryMode": true,
-    "migrateProviderApiKeysToSecretStorage": true
-  }
+    "migrateProviderApiKeysToSecretStorage": true,
+    "consolidateFileExistsBehavior": true,
+    "repairTemplateFileExistsBehavior": true
+  },
+  "macros": []
 }
