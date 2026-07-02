@@ -11,7 +11,7 @@ tags:
 title: "{{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}"
 ---
 
-**Review source highlights:** [[hl-{{VALUE:fileName}}|Highlights of {{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}]]
+**Review source highlights:** [[hl-{{VALUE]]
 
 <!-- Idea 1: Key point or insights written in your own words -->
 
