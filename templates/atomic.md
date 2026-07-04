@@ -5,7 +5,7 @@ authors: matt2ology
 categories:
   - atomic
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
-draft: true
+draft: false
 slug: "{{VALUE:slug}}"
 tags:
 title: "{{VALUE:displayTitle}}"
