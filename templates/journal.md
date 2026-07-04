@@ -7,6 +7,7 @@ authors: matt2ology
 categories:
   - journal
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
+multi_year: "{{date:MM-DD}}"
 draft: true
 tags:
 title: Journal - {{title}}
@@ -24,29 +25,4 @@ What did I learn or realize?
 Write freely here — anecdotes, thoughts, questions, anything I want to explore.
 -->
 
-### 🎯 Focus
-
-- Topic:
-- Goal for today:
-
-### 📘 What I learned
-
 -
-
-### 🔍 Questions / Gaps
-
--
-
-### 💡 Insights
-
--
-
-## ✅ Ideas / Actions / Next Steps
-
-<!--
-Write down what I plan to do next—tasks, experiments, or intentions.
--->
-
--
-
-### 🔗 External Links, Resources, and Related Notes
