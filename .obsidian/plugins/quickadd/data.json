@@ -465,6 +465,62 @@
           }
         ]
       }
+    },
+    {
+      "id": "f6c74ad9-b3c7-45c5-8988-566ef6d52fe5",
+      "name": "add-contact",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "macro": {
+        "name": "add-contact",
+        "id": "fbc89c55-f651-43ba-9c82-93285d767747",
+        "commands": [
+          {
+            "name": "create-contact",
+            "type": "UserScript",
+            "id": "92a9bcbb-9e05-4216-90eb-c0ecacf87607",
+            "path": "templates/scripts/create-contact.js",
+            "settings": {}
+          },
+          {
+            "name": "People Contact Template",
+            "type": "NestedChoice",
+            "id": "b24b5f5d-f0d6-4d45-8363-a927e9fce91d",
+            "choice": {
+              "id": "ee0936bd-4756-40c7-a453-802b847e1620",
+              "name": "People Contact Template",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/people.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "{{VALUE:fileName}}"
+              },
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "journal/contacts"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              }
+            }
+          }
+        ]
+      }
     }
   ],
   "inputPrompt": "single-line",
