@@ -10,6 +10,7 @@ slug: "{{VALUE:slugifiedTitle}}"
 tags:
 title: "{{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}"
 ---
+
 <!-- Capture quote: Ctrl + Shift + Q -->
 
 **Review source highlights:** [[hl-{{VALUE]]
