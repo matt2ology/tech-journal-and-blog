@@ -46,5 +46,4 @@ title: The Knowledge Academy - What Is ITIL? | ITIL Explained For Beginners | IT
 > [!cite]
 > Information Technology Infrastructure Library is a set of detailed practices for it service management that focuses on aligning IT services with the needs of business.
 > ... ITIL helps organizations manage their IT services efficiently and effectively ensuring they deliver maximum value.
-
 >\- [View at 0:26 (26s)](https://www.youtube.com/watch?v=Md0c86PnhXo&t=26s)
