@@ -45,9 +45,10 @@ Information Technology Infrastructure Library outlines what services an agency o
 > [!cite]
 > Information Technology Infrastructure Library is a set of detailed practices for it service management that focuses on aligning IT services with the needs of business.
 > ... ITIL helps organizations manage their IT services efficiently and effectively ensuring they deliver maximum value.
-<<<<<<< HEAD
->\- [View at 0:26 (26s)](https://www.youtube.com/watch?v=Md0c86PnhXo&t=26s)
-=======
+> <<<<<<< HEAD
+> \- [View at 0:26 (26s)](https://www.youtube.com/watch?v=Md0c86PnhXo&t=26s)
+> \=======
 
 > \- [View at 0:26 (26s)](https://www.youtube.com/watch?v=Md0c86PnhXo&t=26s)
->>>>>>> e34212b0e4bbd5f12d77b23e9f696216411fff46
+>
+> > > > > > > e34212b0e4bbd5f12d77b23e9f696216411fff46
