@@ -4,10 +4,9 @@ import re
 
 def _convert_youtube(content):
     """
-    Converts YouTube URLs and iframe embeds to Hugo youtube shortcodes,
-    EXCEPT when the link contains start time parameters (e.g., ?t=, &t=, ?start=).
+    Converts YouTube URLs and iframe embeds to Hugo youtube shortcodes.
+    Skips conversion if the link contains start time parameters (t= or start=).
     """
-    # Helper check for start time parameters in a URL or string
     def has_start_time(text):
         return bool(re.search(r'[\?&](?:t|start)=\w+', text, re.IGNORECASE))
 
@@ -18,11 +17,11 @@ def _convert_youtube(content):
         full_url = match.group(2)
         video_id = match.group(3)
 
-        # Skip conversion if link contains timestamp
         if has_start_time(full_url):
             return match.group(0)
 
-        return f'{{{{< youtube {video_id} >}}}}'
+        # Quote the video ID argument
+        return f'{{{{< youtube "{video_id}" >}}}}'
 
     content = re.sub(md_url_pattern, md_url_replacement, content)
 
@@ -33,11 +32,10 @@ def _convert_youtube(content):
         full_src = match.group(1)
         video_id = match.group(2)
 
-        # Skip conversion if embed URL contains start time
         if has_start_time(full_src):
             return match.group(0)
 
-        return f'{{{{< youtube {video_id} >}}}}'
+        return f'{{{{< youtube "{video_id}" >}}}}'
 
     content = re.sub(iframe_pattern, iframe_replacement, content)
 
@@ -47,6 +45,7 @@ def _convert_youtube(content):
 def _convert_wikilinks(content):
     """
     Converts Obsidian style wikilinks to Hugo relref shortcodes.
+    Ensures target path in relref is enclosed in quotes.
     """
     pattern = r'\[\[\s*([^\]|#]+)(#[^\]|]+)?\s*(?:\|\s*([^\]]+))?\s*\]\]'
 
