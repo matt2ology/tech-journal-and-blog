@@ -11,7 +11,7 @@ tags:
 title: Chloe Shih - 3 Networking Tips if you Hate Networking
 ---
 
-**Review source highlights:** [[../highlights/shorts/hl-chloe-shih-3-networking-tips-if-you-hate-networking]]
+[Chloe Shih - 3 Networking Tips if you Hate Networking](https://youtube.com/shorts/CA1XvITzGB4?si=_RIdUcTqnZgwJv0z)
 
 <!-- Idea 1: Key point or insights written in your own words -->
 
