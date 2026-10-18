@@ -25,20 +25,6 @@ def _convert_youtube(content):
 
     content = re.sub(md_url_pattern, md_url_replacement, content)
 
-    # 2. Convert standard YouTube iframe embed blocks
-    iframe_pattern = r'<iframe[^>]*src=["\']([^"\']*(?:youtube\.com/embed/)([\w-]+)[^"\']*)["\'][^>]*></iframe>'
-
-    def iframe_replacement(match):
-        full_src = match.group(1)
-        video_id = match.group(2)
-
-        if has_start_time(full_src):
-            return match.group(0)
-
-        return f'{{{{< youtube "{video_id}" >}}}}'
-
-    content = re.sub(iframe_pattern, iframe_replacement, content)
-
     return content
 
 
