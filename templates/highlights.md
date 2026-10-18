@@ -1,11 +1,11 @@
 ---
 aliases:
-  - Highlights of {{VALUE:yamlSafeTitle}}
+  - Literature of {{VALUE:yamlSafeTitle}}
 authors:
   - "{{VALUE:authorList}}"
   - matt2ology
 categories:
-  - highlights
+  - literature
   - "{{VALUE:media}}"
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
