@@ -3,7 +3,7 @@ aliases:
   - "Jeffrey Kaplan - Lecture #9: How to Read so that you Retain Information"
 authors: matt2ology
 categories:
-  - literature
+  - permanent
   - youtube
 date: 2026-04-01T00:03:40-07:00
 draft: false
@@ -45,4 +45,4 @@ title: "Jeffrey Kaplan - Lecture #9: How to Read so that you Retain Information"
 >
 > The divide between "Didactic" vs. "Pedantic" the goal isn't to over analyize every paragraph, you'll take forever doing that for any and all books you're trying to work though.
 >
-> As you read you'll naturally get the feel of key and important ideas, abstracts, and points. When high value infromation is presented - take the time to summarize and engage with the material.
+> As you read you'll naturally get the feel of key and important ideas, abstracts, and points. When high value information is presented - take the time to summarize and engage with the material.
