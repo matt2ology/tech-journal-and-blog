@@ -13,6 +13,8 @@ categories: []
 
 blog/nmixx-cool-your-rainbow-special-video/index
 
+![[test-image-20261018024409.png]]
+
 ![[../des-prsn-journal-ast-mgmt-syst-v01/journal-asset-tag-version-01-094-layout-example.png]]
 
 Hello, World
