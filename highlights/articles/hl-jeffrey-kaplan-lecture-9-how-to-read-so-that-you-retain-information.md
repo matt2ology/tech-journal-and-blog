@@ -2,7 +2,7 @@
 aliases: "Highlights of Jeffrey Kaplan - Lecture #9: How to Read So That You Retain Information"
 authors: Jeffrey Kaplan
 categories:
-  - highlights
+  - literature
   - articles
 date: 2026-04-01
 draft: false
@@ -21,7 +21,7 @@ Source published date: 2021-08-17
 **Source link:** [Lecture #9: How to Read So That You _Retain_ Information](https://youtube.com/watch?v=uiNB-6SuqVA)
 <!-- Line brake - br -->
 
-- [ ] **Literature note:** [[jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information]]
+- [ ] **Permanent note:** [[jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information]]
 
 ## Highlights
 
