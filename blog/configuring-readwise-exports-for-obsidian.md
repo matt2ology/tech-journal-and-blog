@@ -128,7 +128,7 @@ source: {{source}}
 
 <!-- Line brake - br -->
 
-- [ ] **Literature note:** [[{{ slug(author, 50) }}-{{ slug(title, 50) }}]]
+- [ ] **Permanent note:** [[{{ slug(author, 50) }}-{{ slug(title, 50) }}]]
 ```
 
 If available, the book or article cover image is included, alongside publication date. I also embed the source link when present, or fallback to a source name. This enriches the note and helps later retrieval or citation.
@@ -137,8 +137,8 @@ Literature note is made to a checkbox to signify that the highlighted note has b
 
 Example:
 
-- [ ] **Literature note:** Has not been "consumed" and summarized in my own words for quick recall and comprehension
-- [x] **Literature note:** Source has been summarized in my own words and has been, to my best ability, written for future recall and quick comprehension.
+- [ ] **Permanent note:** Has not been "consumed" and summarized in my own words for quick recall and comprehension
+- [x] **Permanent note:** Source has been summarized in my own words and has been, to my best ability, written for future recall and quick comprehension.
 
 ### Highlight Section Headers
 
@@ -203,7 +203,7 @@ Finally, each file begins with comprehensive YAML front matter metadata:
 aliases: "Highlights of {{author}} - {{fixup(title)}}"
 authors: {{author}}
 categories:
-  - highlights
+  - literature
   - {{category}}
 date: {{date|date("Y-m-d")}}
 draft: true
