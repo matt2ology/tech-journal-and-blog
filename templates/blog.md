@@ -1,14 +1,13 @@
 ---
-aliases:
-  - "{{VALUE:displayTitle}}"
+title: "{{VALUE:displayTitle}}"
 authors: matt2ology
-categories:
-  - blog
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
+description:
 draft: true
 slug: "{{VALUE:slug}}"
 tags:
-title: "{{VALUE:displayTitle}}"
+categories:
+  - blog
 ---
 
 <!-- A blog is about communicating outward (you → readers) -->
