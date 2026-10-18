@@ -7,6 +7,12 @@
     "toc": "checkbox",
     "math": "checkbox",
     "birthday": "date",
-    "date_met": "date"
+    "date_met": "date",
+    "date": "datetime",
+    "title": "text",
+    "draft": "checkbox",
+    "description": "text",
+    "slug": "text",
+    "categories": "multitext"
   }
 }
