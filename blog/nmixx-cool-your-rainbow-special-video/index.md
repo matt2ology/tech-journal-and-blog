@@ -4,7 +4,7 @@ date: 2026-10-17T21:48:48-07:00
 lastmod: 2026-10-17T21:48:48-07:00
 draft: false
 description: ""
-slug: nmixx-cool-your-rainbow-special-video
+slug: index-nmixx-cool-your-rainbow-special-video
 tags: []
 categories: []
 ---
