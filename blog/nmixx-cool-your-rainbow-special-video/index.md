@@ -18,6 +18,5 @@ blog/nmixx-cool-your-rainbow-special-video/index
 Hello, World
 
 Link to TEST: [[../test]]
-Link to post in page bundle: [[./my-test-post-series]]
 
 [TWICE "TT" M/V](https://www.youtube.com/watch?v=ePpPVE-GGJw&list=PLGiXVWQwjbjIYnUI84tZffjQK9pGciT49&index=33)
