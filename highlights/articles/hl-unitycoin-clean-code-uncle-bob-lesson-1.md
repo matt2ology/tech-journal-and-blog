@@ -2,7 +2,7 @@
 aliases: "Highlights of UnityCoin - Clean Code - Uncle Bob / Lesson 1"
 authors: UnityCoin
 categories:
-  - highlights
+  - literature
   - articles
 date: 2026-04-01
 draft: true
@@ -23,7 +23,7 @@ Source published date: 2019-08-09
 **Source link:** [Clean Code - Uncle Bob / Lesson 1](https://www.youtube.com/watch?v=7EmboKQH8lM&list=PLmmYSbUCWJ4x1GO839azG_BBw8rkh-zOj)
 <!-- Line brake - br -->
 
-- [ ] **Literature note:** [[unitycoin-clean-code-uncle-bob-lesson-1]]
+- [ ] **Permanent note:** [[unitycoin-clean-code-uncle-bob-lesson-1]]
 
 ## Highlights
 
