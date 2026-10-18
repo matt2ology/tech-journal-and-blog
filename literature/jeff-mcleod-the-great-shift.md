@@ -2,7 +2,7 @@
 authors:
   - matt2ology
 categories:
-  - literature/books
+  - permanent/books
 date: 2025-10-05T20:16:23-07:00
 draft: true
 tags:
