@@ -18,7 +18,9 @@ I'm working on taking better care of myself and moving beyond the stigma that ca
 
 To keep things simple, I’ve stuck with a single brand: Dr. G, founded by dermatologist Dr. Gun-Young Ahn. Friends, [Jimin](https://m.blog.naver.com/anna8457) and [Yun-jeong](https://m.blog.naver.com/yunjeongiya), first recommended it to me while I was traveling in Seoul at an Olive Young store.
 
-[SciShow: No, You Can’t Make Your Own Sunscreen](https://youtu.be/nIhY_Z7s7Nc?si=Yo-0NFvrH-PhN5_J) - The internet is full of myths, including a few dangerous ones about sunscreen (spoiler alert: homemade sunscreen is not effective!). Sunscreen is important for anyone with skin, so here are 6 sunscreen myths debunked, to help you minimize your risk of burns, premature aging, and cancers.
+[SciShow: No, You Can’t Make Your Own Sunscreen](https://youtu.be/nIhY_Z7s7Nc?si=Yo-0NFvrH-PhN5_J)
+
+The internet is full of myths, including a few dangerous ones about sunscreen (spoiler alert: homemade sunscreen is not effective!). Sunscreen is important for anyone with skin, so here are 6 sunscreen myths debunked, to help you minimize your risk of burns, premature aging, and cancers.
 
 ## Morning Routine (5 Minutes)
 
