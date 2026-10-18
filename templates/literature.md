@@ -3,7 +3,7 @@ aliases:
   - "{{VALUE:displayTitle}}"
 authors: matt2ology
 categories:
-  - literature
+  - permanent
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 draft: true
 slug: "{{VALUE:slugifiedTitle}}"
@@ -13,7 +13,7 @@ title: "{{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}"
 
 <!-- Capture quote: Ctrl + Shift + Q -->
 
-**Review source highlights:** [[hl-{{VALUE]]
+**Review literature note:**
 
 <!-- Idea 1: Key point or insights written in your own words -->
 
