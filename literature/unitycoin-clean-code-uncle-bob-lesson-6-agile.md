@@ -1,7 +1,7 @@
 ---
 authors: matt2ology
 categories:
-  - literature
+  - permanent
 date: 2025-10-20
 draft: false
 tags:
