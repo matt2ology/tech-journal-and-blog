@@ -1,107 +1,196 @@
-import os
 import re
+import os
+from pathlib import Path
+
+VAULT_DIR = "content"
+
+WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
+MD_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+\.md(?:#[^)]+)?)\)")
 
 
-def _convert_youtube(content):
+def slugify(text: str) -> str:
+    text = text.strip().lower()
+    text = re.sub(r"\.md$", "", text)
+    text = text.replace(" ", "-")
+    text = re.sub(r"[^a-z0-9\-_/]", "", text)
+    return text
+
+
+def resolve_full_path(current_file: Path, target: str) -> Path:
+    """Resolve target to an absolute .md file path."""
+    return (current_file.parent / target).with_suffix(".md").resolve()
+
+
+def resolve_content_path(current_file: Path, target: str) -> str:
+    """Resolve target to a path relative to content/ (without .md)."""
+    content_root = Path(VAULT_DIR).resolve()
+    resolved = resolve_full_path(current_file, target)
+
+    rel = resolved.relative_to(content_root)
+    return str(rel).replace("\\", "/").removesuffix(".md")
+
+
+def parse_target(content: str) -> tuple[str, str | None, str | None]:
     """
-    Converts YouTube URLs and iframe embeds to Hugo youtube shortcodes.
-    Skips conversion if the link contains start time parameters (t= or start=).
+    Parse a wikilink string into its target, alias, and section components.
+
+    Args:
+        content: The inner content of a wikilink (e.g., "folder/page#section|alias").
+
+    Returns:
+        A tuple of (target, alias, section):
+            - target (str): The page path (e.g., "folder/page").
+            - alias (str | None): The display label, if provided.
+            - section (str | None): The section name, if provided.
+
+    Examples:
+        "[[folder/page]]"
+            -> ("folder/page", None, None)
+
+        "[[folder/page|Custom Label]]"
+            -> ("folder/page", "Custom Label", None)
+
+        "[[folder/page#Section Name]]"
+            -> ("folder/page", None, "Section Name")
+
+        "[[folder/page#Section Name|Custom Label]]"
+            -> ("folder/page", "Custom Label", "Section Name")
     """
-    def has_start_time(text):
-        return bool(re.search(r'[\?&](?:t|start)=\w+', text, re.IGNORECASE))
+    alias = None
+    section = None
 
-    # 1. Convert YouTube Markdown links/embeds: [title](url) or ![](url)
-    md_url_pattern = r'(!?\[[^\]]*\]\()((?:https?://)?(?:www\.)?(?:youtube\.com/(?:watch\?v=|shorts/)|youtu\.be/)([\w-]+)[^\)]*)(\))'
-
-    def md_url_replacement(match):
-        full_url = match.group(2)
-        video_id = match.group(3)
-
-        if has_start_time(full_url):
-            return match.group(0)
-
-        # Quote the video ID argument
-        return f'{{{{< youtube "{video_id}" >}}}}'
-
-    content = re.sub(md_url_pattern, md_url_replacement, content)
-
-    return content
-
-
-def _convert_wikilinks(content):
-    """
-    Converts Obsidian style wikilinks to Hugo relref shortcodes.
-    Ensures target path in relref is enclosed in quotes.
-    """
-    pattern = r'\[\[\s*([^\]|#]+)(#[^\]|]+)?\s*(?:\|\s*([^\]]+))?\s*\]\]'
-
-    def replacement(match):
-        target = match.group(1).strip()
-        anchor = match.group(2) or ''
-        alias = match.group(3)
-
-        link_path = f"{target}{anchor}"
-
-        if alias:
-            display_text = alias.strip()
-        else:
-            display_text = os.path.basename(target)
-
-        return f'[{display_text}]({{{{< relref "{link_path}" >}}}})'
-
-    return re.sub(pattern, replacement, content)
-
-
-def _convert_markdown_links(content):
-    """
-    Converts standard relative markdown links to Hugo relref shortcodes,
-    ignoring external URLs, anchors, and images.
-    """
-    pattern = r'(?<!\!)\[([^\]]+)\]\(([^)]+)\)'
-
-    def replacement(match):
-        text = match.group(1)
-        dest = match.group(2).strip()
-
-        # Ignore external links, anchors, or protocol links
-        if dest.startswith(('http://', 'https://', 'mailto:', 'ftp://', '#', 'obsidian://')):
-            return match.group(0)
-
-        return f'[{text}]({{{{< relref "{dest}" >}}}})'
-
-    return re.sub(pattern, replacement, content)
-
-
-def _process_file(file_path):
-    with open(file_path, 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    # Apply conversions
-    new_content = _convert_youtube(content)
-    new_content = _convert_wikilinks(new_content)
-    new_content = _convert_markdown_links(new_content)
-
-    if new_content != content:
-        with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(new_content)
-        print(f"Updated: {file_path}")
+    if "|" in content:
+        target, alias = content.split("|", 1)
     else:
-        print(f"No changes needed: {file_path}")
+        target = content
+
+    if "#" in target:
+        target, section = target.split("#", 1)
+
+    return target, alias, section
 
 
-def process_vault(directory):
-    if not os.path.exists(directory):
-        print(f"Directory not found: {directory}")
+def build_ref(page: str, section: str | None) -> str:
+    """Build Hugo relref string.
+        - For page: "folder/page"
+        - For section: "folder/page#section"
+        - Slugify section for URL compatibility
+    """
+    ref = page
+    if section:
+        ref += f"#{slugify(section)}"
+    return ref
+
+
+def convert_wikilink(match, current_file: Path) -> str:
+    """
+    Convert a wikilink match into a Hugo relref-style Markdown link.
+
+    The function parses a wikilink of the form:
+        [[target#section|alias]]
+
+    It finds the target file based on the current file, checks if it exists,
+    and converts the link to a Hugo relref. If the file doesn't exist,
+    it leaves the link as is.
+
+    Args:
+        match: A regex match object containing the wikilink content.
+        current_file: The path to the file where the link was found.
+
+    Returns:
+        A Markdown link string using Hugo relref syntax, or the original match
+        string if the target cannot be resolved.
+
+    Notes:
+        - If an alias is provided, it is used as the link label.
+        - Otherwise, the label is derived from the target filename with hyphens
+          replaced by spaces.
+        - Section anchors are preserved in the generated reference.
+    """
+    content = match.group(1)
+    target, alias, section = parse_target(content)
+
+    full_path = resolve_full_path(current_file, target)
+
+    # 🚫 Do not convert if file does not exist
+    if not full_path.exists():
+        return match.group(0)
+
+    page = resolve_content_path(current_file, target)
+    ref = build_ref(page, section)
+
+    label = alias or Path(page).name.replace("-", " ")
+
+    return f"[{label}]({{{{< relref \"{ref}\" >}}}})"
+
+
+def convert_mdlink(match, current_file: Path) -> str:
+    """
+    Convert a standard Markdown link into a Hugo relref-style link.
+
+    The function processes links of the form:
+        [text](target#section)
+
+    It skips external links (e.g., starting with "http"), resolves the target
+    path relative to the current file, and converts valid internal links into
+    Hugo relref format. If the target file does not exist, the original match
+    is returned unchanged.
+
+    Args:
+        match: A regex match object containing the link text and target.
+        current_file: The path to the file where the link was found.
+
+    Returns:
+        A Markdown link string using Hugo relref syntax, or the original match
+        string if the link is external or cannot be resolved.
+
+    Notes:
+        - External links (starting with "http") are not modified.
+        - Section anchors (after '#') are preserved in the generated reference.
+    """
+    text, target = match.groups()
+
+    # 🚫 Skip external links
+    if target.startswith("http"):
+        return match.group(0)
+
+    if "#" in target:
+        path, section = target.split("#", 1)
+    else:
+        path, section = target, None
+
+    full_path = resolve_full_path(current_file, path)
+
+    # 🚫 Do not convert if file does not exist
+    if not full_path.exists():
+        return match.group(0)
+
+    page = resolve_content_path(current_file, path)
+    ref = build_ref(page, section)
+
+    return f"[{text}]({{{{< relref \"{ref}\" >}}}})"
+
+
+def process_file(path: Path) -> None:
+    text = path.read_text(encoding="utf-8")
+
+    if "[[" not in text and ".md)" not in text:
         return
 
-    print(f"Scanning directory: {directory}")
-    for root, _, files in os.walk(directory):
+    new_text = WIKILINK_RE.sub(lambda m: convert_wikilink(m, path), text)
+    new_text = MD_LINK_RE.sub(lambda m: convert_mdlink(m, path), new_text)
+
+    if new_text != text:
+        path.write_text(new_text, encoding="utf-8")
+        print(f"Converted: {path}")
+
+
+def main():
+    for root, _, files in os.walk(VAULT_DIR):
         for file in files:
-            if file.endswith('.md'):
-                file_path = os.path.join(root, file)
-                _process_file(file_path)
+            if file.endswith(".md"):
+                process_file(Path(root) / file)
 
 
-if __name__ == '__main__':
-    target_directory = './content'
-    process_vault(target_directory)
+if __name__ == "__main__":
+    main()
