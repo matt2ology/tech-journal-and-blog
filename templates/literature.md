@@ -1,21 +1,14 @@
 ---
-aliases:
-  - Literature of {{VALUE:yamlSafeTitle}}
-authors:
-  - "{{VALUE:authorList}}"
-  - matt2ology
-categories:
-  - literature
-  - "{{VALUE:media}}"
-date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
+title:
+date: {{date:YYYY-MM-DDTHH:mm:ssZ}}
+description:
 draft: true
-media: "{{VALUE:media}}"
 slug: "{{VALUE:slug}}"
 tags:
-title: My highlights of - {{VALUE:yamlSafeTitle}}
+categories:
 ---
 
-## Highlights of {{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}
+## Summary of 
 
 **Link to source:** {{VALUE: sourceMarkdownLink}}
 
