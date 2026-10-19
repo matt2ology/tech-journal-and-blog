@@ -10,7 +10,7 @@ Notes managed by Obsidian and transpiled to HTML via Hugo static site generator.
 
 ```mermaid
 flowchart TD
-    A([Read or research]) -->|Capture useful ideas and source details| B(Literature notes)
+    A([Media consumption]) -->|Capture useful ideas and source details| B(Literature notes)
     B --> |Summarize what the source says| C[Permanent notes]
     C -->|Reformulate ideas in your own words and make connections| D{Knowledge network}
     D --> |Connect ideas to| E([support thinking])
