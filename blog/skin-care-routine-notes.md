@@ -8,7 +8,6 @@ date: 2026-06-15T07:25:10-07:00
 draft: false
 slug: skin-care-routine-notes
 tags:
-  - self-care
 title: Skin Care Routine Notes
 ---
 
