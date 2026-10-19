@@ -1,14 +1,11 @@
 ---
-aliases:
-  - "{{VALUE:displayTitle}}"
-authors: matt2ology
-categories:
-  - permanent
-date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
+title:
+date: {{date:YYYY-MM-DDTHH:mm:ssZ}}
+description:
 draft: true
-slug: "{{VALUE:slugifiedTitle}}"
+slug: "{{VALUE:slug}}"
 tags:
-title: "{{VALUE:shortAuthorsDisplay}} - {{VALUE:originalTitle}}"
+categories:
 ---
 
 <!-- Capture quote: Ctrl + Shift + Q -->
