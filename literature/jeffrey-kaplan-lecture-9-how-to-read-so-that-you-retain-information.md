@@ -4,7 +4,6 @@ aliases:
 authors: matt2ology
 categories:
   - permanent
-  - youtube
 date: 2026-04-01T00:03:40-07:00
 draft: false
 slug: jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information
