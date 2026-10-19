@@ -2,19 +2,19 @@
   "choices": [
     {
       "id": "87f00870-d0ec-4989-900f-1daf488ef75f",
-      "name": "capture-kindle-quote",
+      "name": "capture-quote-kindle-app",
       "type": "Macro",
       "command": true,
       "runOnStartup": false,
       "macro": {
-        "name": "capture-kindle-quote",
+        "name": "capture-quote-kindle-app",
         "id": "d70f7b11-06b2-4205-8803-7aa5a53f9c59",
         "commands": [
           {
-            "name": "capture-quote",
+            "name": "capture-quote-kindle-app",
             "type": "UserScript",
-            "id": "d52f5b36-fb3c-4c55-b616-381f7545c4c1",
-            "path": "_quickadd/capture-quote.js",
+            "id": "bbf6060a-922b-44f5-9e98-d66ee905e2f2",
+            "path": "scripts/_quickadd/capture-quote-kindle-app.js",
             "settings": {}
           },
           {
@@ -66,6 +66,12 @@
               },
               "templater": {
                 "afterCapture": "none"
+              },
+              "insertBefore": {
+                "enabled": false,
+                "before": "",
+                "createIfNotFound": false,
+                "createIfNotFoundLocation": "top"
               }
             }
           }
