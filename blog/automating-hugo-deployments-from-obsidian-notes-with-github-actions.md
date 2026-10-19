@@ -7,16 +7,6 @@ categories:
 date: 2025-09-24T00:01:22-07:00
 draft: false
 tags:
-  - obsidian
-  - hugo
-  - github-pages
-  - github-actions
-  - static-site-generator
-  - automation
-  - ci-cd
-  - deployment
-  - devops
-  - git-submodules
 title: Automating Hugo Deployments from Obsidian Notes with GitHub Actions
 ---
 
