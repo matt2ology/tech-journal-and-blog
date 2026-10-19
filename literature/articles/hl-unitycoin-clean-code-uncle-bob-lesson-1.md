@@ -1,5 +1,5 @@
 ---
-aliases: "Highlights of UnityCoin - Clean Code - Uncle Bob / Lesson 1"
+aliases: Highlights of UnityCoin - Clean Code - Uncle Bob / Lesson 1
 authors: UnityCoin
 categories:
   - literature
@@ -11,7 +11,7 @@ source: reader
 tags:
   - consumed
   - media-consumed
-title: "Highlights of UnityCoin - Clean Code - Uncle Bob / Lesson 1"
+title: Highlights of UnityCoin - Clean Code - Uncle Bob / Lesson 1
 ---
 
 ## Clean Code - Uncle Bob / Lesson 1

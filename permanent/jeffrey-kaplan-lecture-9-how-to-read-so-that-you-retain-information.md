@@ -13,7 +13,7 @@ title: "Jeffrey Kaplan - Lecture #9: How to Read so that you Retain Information"
 
 ![rw-book-cover](https://i.ytimg.com/vi/uiNB-6SuqVA/maxresdefault.jpg)
 
-**Review literature note:** [[../highlights/articles/hl-jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information|Highlights of Jeffrey Kaplan - Lecture #9]]
+**Review literature note:** [[../literature/articles/hl-jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information|Highlights of Jeffrey Kaplan - Lecture #9]]
 
 <!-- Idea 1: Key point or insights written in your own words -->
 
