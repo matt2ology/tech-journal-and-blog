@@ -13,7 +13,7 @@ Source highlights: [[../literature/articles/hl-unitycoin-clean-code-uncle-bob-le
 
 > **Summary:** Agile isn't about speed... It's about visibility. Agile replaces hope with data so teams can manage reality instead of wishful thinking; to clarify, Agile is a feedback system for managing uncertainty - not a process for going faster.
 
-[[../literature/articles/hl-unitycoin-clean-code-uncle-bob-lesson-7-agile]]
+TEST LINK: [[../blog/test-note-to-be-linked-to/index]]
 
 ## Key Ideas
 
