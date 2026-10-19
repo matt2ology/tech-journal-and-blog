@@ -38,7 +38,7 @@
               },
               "format": {
                 "enabled": true,
-                "format": "---\n\n{{VALUE:formattedQuote}}\n"
+                "format": "---\n\n### id{{RANDOM:10}}\n{{VALUE:formattedQuote}}\n"
               },
               "insertAfter": {
                 "enabled": false,
