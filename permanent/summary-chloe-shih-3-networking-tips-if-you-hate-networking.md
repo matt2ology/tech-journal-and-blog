@@ -6,9 +6,9 @@ categories:
   - permanent
 date: 2026-04-15T20:55:00-07:00
 draft: false
-slug: chloe-shih-3-networking-tips-if-you-hate-networking
+slug: summary-chloe-shih-3-networking-tips-if-you-hate-networking
 tags:
-title: Chloe Shih - 3 Networking Tips if you Hate Networking
+title: Summary of Chloe Shih - 3 Networking Tips if you Hate Networking
 ---
 
 [Chloe Shih - 3 Networking Tips if you Hate Networking](https://youtube.com/shorts/CA1XvITzGB4?si=_RIdUcTqnZgwJv0z)
