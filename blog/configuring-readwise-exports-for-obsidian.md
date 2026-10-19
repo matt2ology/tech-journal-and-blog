@@ -6,11 +6,6 @@ categories:
 date: 2025-10-05T01:50:28-07:00
 draft: false
 tags:
-  - readwise
-  - obsidian
-  - note-taking
-  - digital-notes
-  - knowledge-management
 title: "Automating Your Readwise Exports into Obsidian: A Deep Dive into My Configuration"
 ---
 
