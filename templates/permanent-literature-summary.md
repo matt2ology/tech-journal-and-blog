@@ -9,7 +9,7 @@ categories:
   - "permanent"{{VALUE:categories}}
 ---
 
-## Summary of 
+## Summary of
 
 **Link to source:** {{VALUE: sourceMarkdownLink}}
 
