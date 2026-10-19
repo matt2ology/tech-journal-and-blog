@@ -9,8 +9,6 @@ draft: true
 media: articles
 source: reader
 tags:
-  - consumed
-  - media-consumed
 title: Highlights of UnityCoin - Clean Code - Uncle Bob / Lesson 1
 ---
 
