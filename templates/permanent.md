@@ -1,6 +1,6 @@
 ---
 title:
-date: {{date:YYYY-MM-DDTHH:mm:ssZ}}
+date: { { date:YYYY-MM-DDTHH:mm:ssZ } }
 description:
 draft: true
 slug: "{{VALUE:slug}}"
