@@ -4,11 +4,11 @@ from pathlib import Path
 
 VAULT_DIR = "content"
 
-# Captures Obsidian wikilinks anywhere in a line (e.g., [[path|alias#section]])
+# Captures Obsidian wikilinks anywhere in a line: [[target#section|alias]]
 WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
 
-# Captures standard relative markdown links (.md) anywhere within a line (e.g., in task lists or paragraphs)
-MD_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+\.md(?:#[^)]+)?)\)")
+# Captures standard relative markdown links (.md) anywhere in a line, supporting anchors: [text](target.md#section)
+MD_LINK_RE = re.compile(r"\[([^\]]+)\]\((([^)]+\.md)(?:#[^)]+)?)\)")
 
 
 def slugify(text: str) -> str:
@@ -35,20 +35,23 @@ def resolve_content_path(current_file: Path, target: str) -> str:
 
 def parse_target(content: str) -> tuple[str, str | None, str | None]:
     """
-    Parse a wikilink string into its target, alias, and section components.
+    Parse a link string into its target, alias, and section components.
+    Handles:
+        - target
+        - target#section
+        - target|alias
+        - target#section|alias
     """
     alias = None
     section = None
 
     if "|" in content:
-        target, alias = content.split("|", 1)
-    else:
-        target = content
+        content, alias = content.split("|", 1)
 
-    if "#" in target:
-        target, section = target.split("#", 1)
+    if "#" in content:
+        content, section = content.split("#", 1)
 
-    return target, alias, section
+    return content.strip(), alias.strip() if alias else None, section.strip() if section else None
 
 
 def build_ref(page: str, section: str | None) -> str:
@@ -91,8 +94,11 @@ def convert_youtube(content: str) -> str:
 
 def convert_wikilink(match, current_file: Path) -> str:
     """
-    Convert an Obsidian-style wikilink match into a Hugo relref-style Markdown link,
-    whether it appears in a paragraph, list, or checkbox line.
+    Convert an Obsidian-style wikilink match into a Hugo
+    relref-style Markdown link. Supports:
+    - Targets
+    - Header sections (`#`)
+    - and custom aliases (`|`).
     """
     content = match.group(1)
     target, alias, section = parse_target(content)
@@ -113,19 +119,22 @@ def convert_wikilink(match, current_file: Path) -> str:
 
 def convert_mdlink(match, current_file: Path) -> str:
     """
-    Convert a standard Markdown link into a Hugo relref-style link,
-    whether it appears in a paragraph, list, or checkbox line.
+    Convert a standard Markdown link into a Hugo relref-style link.
+    Supports relative .md paths, header sections (#), and explicit text labels (aliases).
     """
-    text, target = match.groups()
+    text, full_target = match.groups()
 
     # Skip external links
-    if target.startswith("http"):
+    if full_target.startswith(
+        ("http://", "https://", "mailto:", "ftp://", "obsidian://")
+    ):
         return match.group(0)
 
-    if "#" in target:
-        path, section = target.split("#", 1)
+    # Separate path from anchor section if present (e.g., page.md#my-header)
+    if "#" in full_target:
+        path, section = full_target.split("#", 1)
     else:
-        path, section = target, None
+        path, section = full_target, None
 
     full_path = resolve_full_path(current_file, path)
 
@@ -145,11 +154,13 @@ def process_file(path: Path) -> None:
     # Apply all conversion routines
     new_text = convert_youtube(text)
 
+    # Only run regex if potential links are present
     if "[[" in new_text or ".md" in new_text:
         new_text = WIKILINK_RE.sub(
             lambda m: convert_wikilink(m, path), new_text)
         new_text = MD_LINK_RE.sub(lambda m: convert_mdlink(m, path), new_text)
 
+    # Only write if changes were made
     if new_text != text:
         path.write_text(new_text, encoding="utf-8")
         print(f"Converted: {path}")
