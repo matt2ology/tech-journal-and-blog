@@ -1,15 +1,11 @@
 ---
-aliases:
-  - "{{VALUE:displayTitle}}"
-authors: matt2ology
-categories:
-  - coding-challenges
-date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
+title:
+date: {{date:YYYY-MM-DDTHH:mm:ssZ}}
+description:
 draft: true
-math: true
 slug: "{{VALUE:slug}}"
 tags:
-title: "{{VALUE:displayTitle}}"
+categories:
 ---
 
 <!--
