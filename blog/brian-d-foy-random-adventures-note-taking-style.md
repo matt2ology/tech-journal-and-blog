@@ -5,12 +5,6 @@ categories:
 date: 2026-03-16T04:30:31-07:00
 draft: false
 tags:
-  - agile
-  - project-management
-  - software-development
-  - brian-d-foy
-  - uncle-bob
-  - robert-c-martin
 title: I like brian d foy's Random Adventures Note Taking Style
 ---
 
