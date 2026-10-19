@@ -16,7 +16,7 @@ title: I like brian d foy's Random Adventures Note Taking Style
 
 ## I like brian d foy's Random Adventures Note Taking Style
 
-In contrast to my own "literature" note: [[../literature/unitycoin-clean-code-uncle-bob-lesson-6-agile]]
+In contrast to my own "literature" note: [[../permanent/unitycoin-clean-code-uncle-bob-lesson-6-agile]]
 
 I like, Perl trainer and writer, [brian d foy](https://www.amazon.com/stores/brian-d-foy/author/B002MRC39U?ref=ap_rdr&shoppingPortalEnabled=true) – [Random Adventures](https://briandfoy.github.io/) for his summary note of [_"Coding Better World Together"_ - Clean Code Lesson 6](https://briandfoy.github.io/uncle-bob-lesson-6/). His notes are concise and practical, capturing the core ideas without unnecessary detail.
 
