@@ -7,6 +7,7 @@ draft: false
 tags:
 title: Summary of UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile
 ---
+
 ![rw-book-cover](https://i.ytimg.com/vi/l-gF0vDhJVI/maxresdefault.jpg)
 
 Source highlights: [[../literature/articles/hl-unitycoin-clean-code-uncle-bob-lesson-6-agile|Clean Code - Uncle Bob / Lesson 6 (Highlights)]]
