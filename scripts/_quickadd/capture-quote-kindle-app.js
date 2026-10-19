@@ -128,12 +128,16 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
     if (isBlockEmpty(text)) return [];
 
     const lines = leadingBlank ? [""] : [];
-    if (header) lines.push(`${prefix} ${header}`);
+    if (header) {
+      lines.push(prefix ? `${prefix} ${header}` : header);
+    }
 
     normalizeNewlines(text)
       .trim()
       .split("\n")
-      .forEach((line) => lines.push(`${prefix} ${line}`));
+      .forEach((line) => {
+        lines.push(prefix ? `${prefix} ${line}` : line);
+      });
 
     return lines;
   };
