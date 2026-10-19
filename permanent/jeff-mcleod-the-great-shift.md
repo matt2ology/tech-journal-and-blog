@@ -6,12 +6,6 @@ categories:
 date: 2025-10-05T20:16:23-07:00
 draft: true
 tags:
-  - artificial-intelligence
-  - career-development
-  - career-planning
-  - entrepreneurship
-  - self-improvement
-  - technology-industry
 title: "The Great Shift: Your Roadmap to Thriving in the Age of AI Kindle Edition by Jeff McLeod"
 ---
 
