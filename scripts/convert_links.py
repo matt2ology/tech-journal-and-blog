@@ -4,7 +4,10 @@ from pathlib import Path
 
 VAULT_DIR = "content"
 
+# Captures Obsidian wikilinks anywhere in a line (e.g., [[path|alias#section]])
 WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
+
+# Captures standard relative markdown links (.md) anywhere within a line (e.g., in task lists or paragraphs)
 MD_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+\.md(?:#[^)]+)?)\)")
 
 
@@ -88,7 +91,8 @@ def convert_youtube(content: str) -> str:
 
 def convert_wikilink(match, current_file: Path) -> str:
     """
-    Convert a wikilink match into a Hugo relref-style Markdown link.
+    Convert an Obsidian-style wikilink match into a Hugo relref-style Markdown link,
+    whether it appears in a paragraph, list, or checkbox line.
     """
     content = match.group(1)
     target, alias, section = parse_target(content)
@@ -109,7 +113,8 @@ def convert_wikilink(match, current_file: Path) -> str:
 
 def convert_mdlink(match, current_file: Path) -> str:
     """
-    Convert a standard Markdown link into a Hugo relref-style link.
+    Convert a standard Markdown link into a Hugo relref-style link,
+    whether it appears in a paragraph, list, or checkbox line.
     """
     text, target = match.groups()
 
@@ -140,7 +145,7 @@ def process_file(path: Path) -> None:
     # Apply all conversion routines
     new_text = convert_youtube(text)
 
-    if "[[" in new_text or ".md)" in new_text:
+    if "[[" in new_text or ".md" in new_text:
         new_text = WIKILINK_RE.sub(
             lambda m: convert_wikilink(m, path), new_text)
         new_text = MD_LINK_RE.sub(lambda m: convert_mdlink(m, path), new_text)
