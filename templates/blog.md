@@ -1,11 +1,12 @@
 ---
-title:
-date: { { date:YYYY-MM-DDTHH:mm:ssZ } }
-description:
+title: "{{VALUE:cleanTitle}}"
+date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
+description: "{{VALUE:description}}"
 draft: true
 slug: "{{VALUE:slug}}"
-tags:
+tags:{{VALUE:tags}}
 categories:
+  - "blog"{{VALUE:categories}}
 ---
 
-<!-- A blog is about communicating outward (you → readers) -->
+<!-- A blog is about communicating outward (you → readers) --
