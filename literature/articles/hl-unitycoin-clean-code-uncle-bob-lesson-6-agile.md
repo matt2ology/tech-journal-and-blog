@@ -13,11 +13,9 @@ title: Highlights of UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile
 
 ## Clean Code - Uncle Bob / Lesson 6 (Highlights)
 
-![rw-book-cover](https://i.ytimg.com/vi/l-gF0vDhJVI/maxresdefault.jpg)
+[Clean Code - Uncle Bob / Lesson 6](https://www.youtube.com/watch?v=l-gF0vDhJVI&list=PLmmYSbUCWJ4x1GO839azG_BBw8rkh-zOj&index=7)
 
 Source published date: 2019-08-09
-
-**Source link:** [Clean Code - Uncle Bob / Lesson 6](https://www.youtube.com/watch?v=l-gF0vDhJVI&list=PLmmYSbUCWJ4x1GO839azG_BBw8rkh-zOj&index=7)
 
 **Permanent note:** [[../../permanent/summary-unitycoin-clean-code-uncle-bob-lesson-6-agile|UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile Solutions for Balancing Deadlines and Software Quality]]
 
