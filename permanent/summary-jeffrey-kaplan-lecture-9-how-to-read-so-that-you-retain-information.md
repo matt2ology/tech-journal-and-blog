@@ -6,9 +6,9 @@ categories:
   - permanent
 date: 2026-04-01T00:03:40-07:00
 draft: false
-slug: jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information
+slug: summary-jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information
 tags:
-title: "Jeffrey Kaplan - Lecture #9: How to Read so that you Retain Information"
+title: "Summary of Jeffrey Kaplan - Lecture #9: How to Read so that you Retain Information"
 ---
 
 ![rw-book-cover](https://i.ytimg.com/vi/uiNB-6SuqVA/maxresdefault.jpg)
