@@ -139,6 +139,130 @@
       },
       "icon": "podcast",
       "pickDayCommand": false
+    },
+    {
+      "id": "5d2ba420-c171-4015-89e5-2cef0ab300d7",
+      "name": "capture-question",
+      "type": "Capture",
+      "command": true,
+      "appendLink": {
+        "enabled": false,
+        "placement": "replaceSelection",
+        "requireActiveFile": true,
+        "linkType": "link",
+        "displayText": "none",
+        "destination": {
+          "type": "activeFile"
+        }
+      },
+      "copyLinkToClipboard": false,
+      "captureTo": "",
+      "captureToActiveFile": true,
+      "captureToCanvasNodeId": "",
+      "activeFileWritePosition": "cursor",
+      "createFileIfItDoesntExist": {
+        "enabled": true,
+        "createWithTemplate": false,
+        "template": ""
+      },
+      "format": {
+        "enabled": true,
+        "format": "- {{VALUE}}"
+      },
+      "insertAfter": {
+        "enabled": false,
+        "after": "",
+        "insertAtEnd": true,
+        "considerSubsections": false,
+        "createIfNotFound": true,
+        "createIfNotFoundLocation": "top",
+        "inline": false,
+        "replaceExisting": false,
+        "blankLineAfterMatchMode": "auto",
+        "promptHeading": false
+      },
+      "insertBefore": {
+        "enabled": false,
+        "before": "",
+        "createIfNotFound": false,
+        "createIfNotFoundLocation": "top"
+      },
+      "newLineCapture": {
+        "enabled": false,
+        "direction": "below"
+      },
+      "prepend": false,
+      "task": false,
+      "openFile": false,
+      "fileOpening": {
+        "location": "tab",
+        "direction": "vertical",
+        "mode": "default",
+        "focus": true
+      },
+      "templater": {
+        "afterCapture": "none"
+      },
+      "eachLine": true,
+      "icon": "type"
+    },
+    {
+      "id": "72e2e2e8-3f3b-467e-9e6a-4756103e87c8",
+      "name": "BOOK",
+      "type": "Macro",
+      "command": false,
+      "runOnStartup": false,
+      "macro": {
+        "name": "BOOK",
+        "id": "8d05ae32-3f9a-4307-bd13-82ca1348bb42",
+        "commands": [
+          {
+            "name": "create-book-note",
+            "type": "UserScript",
+            "id": "b23eb7aa-b789-4b84-b520-67d1cac44003",
+            "path": "scripts/_quickadd/create-book-note.js",
+            "settings": {}
+          },
+          {
+            "name": "Untitled Template Choice",
+            "type": "NestedChoice",
+            "id": "bfb4cef1-a009-4335-8d10-d81cc319a5f2",
+            "choice": {
+              "id": "b88bc111-ecda-4e0b-a2f4-709568c5d2b2",
+              "name": "Untitled Template Choice",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/tester-template.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "{{VALUE:slug}}"
+              },
+              "discoverExistingNotesBeforeCreate": false,
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "literature"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "copyLinkToClipboard": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              }
+            }
+          }
+        ]
+      }
     }
   ],
   "inputPrompt": "single-line",
