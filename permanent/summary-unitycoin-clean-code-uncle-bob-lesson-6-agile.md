@@ -14,8 +14,6 @@ Source highlights: [[../literature/articles/hl-unitycoin-clean-code-uncle-bob-le
 
 > **Summary:** Agile isn't about speed... It's about visibility. Agile replaces hope with data so teams can manage reality instead of wishful thinking; to clarify, Agile is a feedback system for managing uncertainty - not a process for going faster.
 
-TEST LINK: [[../blog/test-note-to-be-linked-to/index]]
-
 ## Key Ideas
 
 1. Agile's purpose: **get the bad news fast**, not to move faster. Shorter iterations - higher visibility resolution.
