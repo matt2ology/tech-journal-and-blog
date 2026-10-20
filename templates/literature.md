@@ -1,5 +1,5 @@
 ---
-title: "{{VALUE:cleanTitle}}"
+title: "{{VALUE:formattedTitle}}"
 date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
 description: "{{VALUE:description}}"
 draft: true
