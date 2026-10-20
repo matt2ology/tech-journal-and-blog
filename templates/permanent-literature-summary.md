@@ -11,7 +11,7 @@ categories:
 
 ## Summary of
 
-**Link to source:** {{VALUE: sourceMarkdownLink}}
+**Link to source:**
 
 ## Summary
 
