@@ -74,9 +74,30 @@ module.exports = async function runBaseIntake(
   });
 
   // Execute polymorphic child processing if provided
-  if (typeof customProcessor === "function") {
-    await customProcessor(results, variables, quickAddApi);
-  }
+  await executeCustomProcessor(
+    customProcessor,
+    results,
+    variables,
+    quickAddApi,
+  );
 
   return variables;
 };
+
+/**
+ * Executes the child-specific custom processor if it is a valid function.
+ * @param {Function} [customProcessor] - The optional child processor
+ * @param {Object} results - The raw user input results
+ * @param {Object} variables - The QuickAdd variables object
+ * @param {Object} quickAddApi - The QuickAdd API instance
+ */
+async function executeCustomProcessor(
+  customProcessor,
+  results,
+  variables,
+  quickAddApi,
+) {
+  if (typeof customProcessor === "function") {
+    await customProcessor(results, variables, quickAddApi);
+  }
+}
