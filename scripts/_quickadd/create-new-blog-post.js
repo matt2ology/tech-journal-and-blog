@@ -5,6 +5,10 @@ const { slugify } = require(
   path.join(vaultPath, "scripts", "_quickadd", "utils", "slugify.js"),
 );
 
+const titleCase = require(
+  path.join(vaultPath, "scripts", "_quickadd", "utils", "titleCase.js"),
+);
+
 module.exports = async (params) => {
   const { quickAddApi, variables } = params;
 
@@ -58,7 +62,7 @@ module.exports = async (params) => {
   };
 
   Object.assign(variables, {
-    cleanTitle: results.title.trim(),
+    formattedTitle: titleCase(results.title.trim()),
     slug: slugify(results.title.trim()),
     description: results.description.trim() || "",
     tags: formatYamlList(results.tags), // Fixed variable name to match template
