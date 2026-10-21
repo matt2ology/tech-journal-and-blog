@@ -105,21 +105,59 @@ function _parseUniqueCommaSeparated(input, shouldSlugify = false) {
   return [...new Set(items)];
 }
 
+/**
+ * Normalizes text and splits it into lowercase words.
+ *
+ * Applies Unicode NFC normalization, collapses consecutive whitespace into a
+ * single space, trims leading and trailing whitespace, and converts the text
+ * to lowercase before splitting it into words.
+ *
+ * @param {string} text - The text to normalize and tokenize.
+ * @returns {string[]} An array of lowercase words.
+ */
 function _tokenizeNormalizedText(text) {
   const normalized = text.normalize("NFC").replace(/\s+/g, " ").trim();
   return normalized.toLowerCase().split(" ");
 }
 
+/**
+ * Checks whether a word is the first or last word in a sequence.
+ *
+ * @param {number} index - The zero-based index of the word.
+ * @param {number} totalWords - The total number of words in the sequence.
+ * @returns {boolean} True if the word is the first or last; otherwise, false.
+ */
 function _isFirstOrLastWord(index, totalWords) {
   return index === 0 || index === totalWords - 1;
 }
 
+/**
+ * Determines whether a minor word should remain lowercase.
+ *
+ * Words at the beginning or end of the sequence are never treated as minor
+ * words for capitalization purposes. For other words, leading and trailing
+ * non-word characters are removed before checking membership in MINOR_WORDS.
+ *
+ * @param {string} word - The word to evaluate.
+ * @param {number} index - The zero-based index of the word.
+ * @param {number} totalWords - The total number of words in the sequence.
+ * @returns {boolean} True if the word is an interior minor word; otherwise, false.
+ */
 function _shouldKeepMinorWordLower(word, index, totalWords) {
   if (_isFirstOrLastWord(index, totalWords)) return false;
   const cleanWord = word.replace(/^[^\w]+|[^\w]+$/g, "");
   return MINOR_WORDS.has(cleanWord);
 }
 
+/**
+ * Capitalizes the first letter matched at a word boundary.
+ *
+ * Finds the first ASCII letter that follows a word boundary and converts it
+ * to uppercase, leaving the rest of the word unchanged.
+ *
+ * @param {string} word - The word to capitalize.
+ * @returns {string} The word with its first matched letter capitalized.
+ */
 function _capitalizeFirstLetter(word) {
   return word.replace(/\b[a-z]/i, (char) => char.toUpperCase());
 }
