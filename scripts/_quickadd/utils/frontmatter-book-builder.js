@@ -48,3 +48,5 @@ class BookFrontmatterBuilder extends BaseFrontmatterBuilder {
     ];
   }
 }
+
+module.exports = BookFrontmatterBuilder;
