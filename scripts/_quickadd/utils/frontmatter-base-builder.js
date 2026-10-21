@@ -44,8 +44,12 @@ class BaseFrontmatterBuilder {
       .split(",")
       .map((i) => i.trim())
       .filter(Boolean);
-    if (items.length === 0) return " []";
-    return "\n  - " + items.join("\n  - ");
+
+    // Use a Set to ensure unique values (handling duplicates)
+    const uniqueItems = [...new Set(items)];
+
+    if (uniqueItems.length === 0) return " []";
+    return "\n  - " + uniqueItems.join("\n  - ");
   }
 
   buildStandardProperties(values) {
@@ -55,7 +59,14 @@ class BaseFrontmatterBuilder {
       `date: "${now}"`,
       `description: "${values.description || ""}"`,
       `draft: true`,
-      `slug: "${values.title ? values.title.toLowerCase().replace(/[^\w ]+/g, "").replace(/ +/g, "-") : ""}"`,
+      `slug: "${
+        values.title
+          ? values.title
+              .toLowerCase()
+              .replace(/[^\w ]+/g, "")
+              .replace(/ +/g, "-")
+          : ""
+      }"`,
       `tags:${this.formatArray(values.tags)}`,
       `categories:${this.formatArray(values.categories)}`,
     ];
