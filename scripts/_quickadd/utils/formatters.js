@@ -15,9 +15,9 @@ function slugify(text = "") {
 /**
  * Formats a comma-separated string into a YAML-formatted list array.
  * @param {string} input - Comma-separated items.
- * @param {boolean} [shouldSlugify=false] - Whether to apply slugify to each item.
+ * @param {boolean} [shouldSlugify=true] - Whether to apply slugify to each item.
  */
-function formatYAMLArray(input = "", shouldSlugify = false) {
+function formatYAMLArray(input = "", shouldSlugify = true) {
   if (_isEmptyInput(input)) return " []";
 
   const items = _parseUniqueCommaSeparated(input, shouldSlugify);
