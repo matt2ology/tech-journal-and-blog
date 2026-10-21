@@ -92,7 +92,7 @@
           {
             "name": "create-new-blog-post",
             "type": "UserScript",
-            "id": "fe9560b1-efff-4a88-9ccc-8afe43040851",
+            "id": "168613c2-c535-4028-87c9-4f24c0f35484",
             "path": "scripts/_quickadd/create-new-blog-post.js",
             "settings": {}
           },
@@ -242,6 +242,245 @@
                 "enabled": true,
                 "folders": [
                   "literature"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "copyLinkToClipboard": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "fd543e8b-482a-4763-a73e-5589fe52f521",
+      "name": "lecture",
+      "type": "Macro",
+      "command": false,
+      "runOnStartup": false,
+      "macro": {
+        "name": "lecture",
+        "id": "d87cb866-abe5-42de-8428-82a920ad1c34",
+        "commands": [
+          {
+            "name": "create-lecture-note",
+            "type": "UserScript",
+            "id": "96a44a71-eee1-4ca0-b24c-56b1aa6504ab",
+            "path": "scripts/_quickadd/create-lecture-note.js",
+            "settings": {}
+          },
+          {
+            "name": "Untitled Template Choice",
+            "type": "NestedChoice",
+            "id": "39921e47-6d51-4fe3-8921-b9bca80512e7",
+            "choice": {
+              "id": "0f3946e1-9781-4332-86d4-c63878769a69",
+              "name": "Untitled Template Choice",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/tester-template.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "{{VALUE:slug}}"
+              },
+              "discoverExistingNotesBeforeCreate": false,
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "literature"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "copyLinkToClipboard": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "3c7df513-0831-4767-9806-37236fab5985",
+      "name": "Create Note with Dynamic Frontmatter",
+      "type": "Macro",
+      "command": false,
+      "runOnStartup": false,
+      "macro": {
+        "name": "Create Note with Dynamic Frontmatter",
+        "id": "d956ce34-0ed7-40b5-9c71-95e5105ebe5e",
+        "commands": [
+          {
+            "name": "frontmatterBuilder",
+            "type": "UserScript",
+            "id": "b07e0217-7dd7-44e3-9bf4-fd84a954a592",
+            "path": "scripts/_quickadd/utils/frontmatterBuilder.js",
+            "settings": {}
+          },
+          {
+            "name": "appendMetadata",
+            "type": "UserScript",
+            "id": "5dde5a33-e536-4999-a065-82d60f76ed6a",
+            "path": "scripts/_quickadd/appendMetadata.js",
+            "settings": {}
+          },
+          {
+            "name": "Untitled Template Choice",
+            "type": "NestedChoice",
+            "id": "ac8088fc-db40-41d3-8e10-be077f8db343",
+            "choice": {
+              "id": "37ca2c4e-f69e-4bcc-b27b-0f4096bf50e2",
+              "name": "Untitled Template Choice",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/tester-template.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "index"
+              },
+              "discoverExistingNotesBeforeCreate": false,
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "blog/{{VALUE:slug}}"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "copyLinkToClipboard": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "c8765ff2-a6cd-40f0-8295-cd053a06d9e3",
+      "name": "blogPostExtension",
+      "type": "Macro",
+      "command": false,
+      "runOnStartup": false,
+      "macro": {
+        "name": "blogPostExtension",
+        "id": "35dfdb41-b3ed-46ed-85e6-71ea76fd5d79",
+        "commands": [
+          {
+            "name": "blogPostExtension",
+            "type": "UserScript",
+            "id": "ecb7e3dc-0b04-4962-8349-00a9846930af",
+            "path": "scripts/_quickadd/blogPostExtension.js",
+            "settings": {}
+          },
+          {
+            "name": "Untitled Template Choice",
+            "type": "NestedChoice",
+            "id": "99f1f40b-e457-42f2-b7e2-9844a41de02b",
+            "choice": {
+              "id": "54dd90a2-ac2f-403b-9655-aba8c17813df",
+              "name": "Untitled Template Choice",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/tester-template.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "index"
+              },
+              "discoverExistingNotesBeforeCreate": false,
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "blog/{{VALUE:slug}}"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "copyLinkToClipboard": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "f7ff7b89-7f6a-4ac1-8b87-ad0f017b79fd",
+      "name": "Frontmatter WORKING SOLUTION",
+      "type": "Macro",
+      "command": false,
+      "runOnStartup": false,
+      "macro": {
+        "name": "Frontmatter WORKING SOLUTION",
+        "id": "ba91b5ad-4117-4d3a-b1f8-0e9365c35bdc",
+        "commands": [
+          {
+            "name": "article-frontmatter",
+            "type": "UserScript",
+            "id": "cbcb5b69-195d-49d9-bbce-8edd98db3f92",
+            "path": "scripts/_quickadd/article-frontmatter.js",
+            "settings": {}
+          },
+          {
+            "name": "Untitled Template Choice",
+            "type": "NestedChoice",
+            "id": "e2116924-26e1-4a19-aef7-a0e7d2a04afb",
+            "choice": {
+              "id": "7cbac501-f2ad-41e7-9de2-6df8b25516a3",
+              "name": "Untitled Template Choice",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/tester-template.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "index"
+              },
+              "discoverExistingNotesBeforeCreate": false,
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "blog/{{VALUE:slug}}"
                 ],
                 "chooseWhenCreatingNote": false,
                 "createInSameFolderAsActiveFile": false,
