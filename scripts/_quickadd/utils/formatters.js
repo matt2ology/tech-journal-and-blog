@@ -14,11 +14,13 @@ function slugify(text = "") {
 
 /**
  * Formats a comma-separated string into a YAML-formatted list array.
+ * @param {string} input - Comma-separated items.
+ * @param {boolean} [shouldSlugify=false] - Whether to apply slugify to each item.
  */
-function formatYAMLArray(input = "") {
+function formatYAMLArray(input = "", shouldSlugify = false) {
   if (_isEmptyInput(input)) return " []";
 
-  const items = _parseUniqueCommaSeparated(input);
+  const items = _parseUniqueCommaSeparated(input, shouldSlugify);
   if (_hasNoItems(items)) return " []";
 
   return "\n  - " + items.join("\n  - ");
@@ -81,11 +83,25 @@ function _isInvalidStringInput(input) {
   return !input || typeof input !== "string";
 }
 
-function _parseUniqueCommaSeparated(input) {
+/**
+ * Parses a comma-separated string into an array of unique, non-empty items.
+ *
+ * Trims whitespace from each item, optionally slugifies the items, removes
+ * empty values, and eliminates duplicates while preserving the original order.
+ *
+ * @param {string} input - The comma-separated string to parse.
+ * @param {boolean} [shouldSlugify=false] - Whether to slugify each item before
+ *   removing duplicates.
+ * @returns {string[]} An array of unique, non-empty items.
+ */
+function _parseUniqueCommaSeparated(input, shouldSlugify = false) {
   const items = input
     .split(",")
     .map((item) => item.trim())
+    .filter(Boolean)
+    .map((item) => (shouldSlugify ? slugify(item) : item))
     .filter(Boolean);
+
   return [...new Set(items)];
 }
 
