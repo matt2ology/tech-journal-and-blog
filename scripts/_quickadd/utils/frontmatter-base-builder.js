@@ -4,18 +4,6 @@ class BaseFrontmatterBuilder {
     this.baseFields = [
       { id: "title", label: "Title", type: "text", placeholder: "Note Title" },
       {
-        id: "description",
-        label: "Description",
-        type: "text",
-        placeholder: "Brief description...",
-      },
-      {
-        id: "slug",
-        label: "Slug",
-        type: "text",
-        placeholder: "url-friendly-slug",
-      },
-      {
         id: "tags",
         label: "Tags (comma separated)",
         type: "text",
