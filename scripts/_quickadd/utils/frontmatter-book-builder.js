@@ -26,19 +26,18 @@ class BookFrontmatterBuilder extends BaseFrontmatterBuilder {
   }
 
   processValues(values) {
-    // Append "book" to categories automatically
-    let categories = values.categories
+    // Parse categories into a Set to automatically handle duplicates and ensure uniqueness
+    const categories = values.categories
       ? values.categories
           .split(",")
           .map((c) => c.trim())
           .filter(Boolean)
       : [];
 
-    if (!categories.includes("book")) {
-      categories.push("book");
-    }
+    const categorySet = new Set(categories);
+    categorySet.add("book");
 
-    values.categories = categories.join(", ");
+    values.categories = Array.from(categorySet).join(", ");
     return values;
   }
 
