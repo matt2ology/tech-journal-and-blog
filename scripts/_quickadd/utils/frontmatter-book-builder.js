@@ -33,32 +33,17 @@ class BookFrontmatterBuilder extends BaseFrontmatterBuilder {
   }
 
   processValues(values) {
-    values.categories = this.#appendCategory(values.categories, "book");
-    return values;
+    return {
+      ...values,
+      categories: this.appendToList(values.categories, "book"),
+    };
   }
 
-  buildExtraProperties(values, computed = {}) {
+  buildExtraProperties(values) {
     return [
       `author: "${values.author || ""}"`,
       `rating: ${values.rating || "0"}`,
     ];
-  }
-
-  // --- Private Helpers ---
-
-  #parseCommaSeparated(input = "") {
-    if (!input) return [];
-    return input
-      .split(",")
-      .map((item) => item.trim())
-      .filter(Boolean);
-  }
-
-  #appendCategory(existingCategories, newCategory) {
-    const list = this.#parseCommaSeparated(existingCategories);
-    const categorySet = new Set(list);
-    categorySet.add(newCategory);
-    return Array.from(categorySet).join(", ");
   }
 }
 
