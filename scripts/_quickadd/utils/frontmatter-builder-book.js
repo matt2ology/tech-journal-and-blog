@@ -1,6 +1,9 @@
 const path = require("path");
 const vaultPath = app.vault.adapter.getBasePath();
 
+const { slugify } = require(
+  path.join(vaultPath, "scripts", "_quickadd", "utils", "formatters"),
+);
 const FrontmatterBuilderBase = require(
   path.join(
     vaultPath,
@@ -39,6 +42,7 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
     return {
       ...values,
       categories: this.appendToList(values.categories, "book"),
+      slug: slugify(`${values.author}-${values.title}`),
     };
   }
 
