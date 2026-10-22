@@ -107,7 +107,7 @@ class BaseFrontmatterBuilder {
     return {
       title: titleCase(values.title) || "",
       slug: slugify(values.title) || "",
-      date: new Date().toISOString(),
+      date: this.#quickAddApi.date.now("YYYY-MM-DD HH:mm:ss"),
       draft: true,
       tags: this.formatArray(values.tags),
       categories: this.formatArray(values.categories),
