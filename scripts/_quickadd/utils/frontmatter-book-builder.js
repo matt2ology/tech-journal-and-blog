@@ -11,6 +11,9 @@ const BaseFrontmatterBuilder = require(
   ),
 );
 
+/**
+ * Adds book-specific inputs and metadata to the shared frontmatter workflow.
+ */
 class BookFrontmatterBuilder extends BaseFrontmatterBuilder {
   getFields() {
     return [
