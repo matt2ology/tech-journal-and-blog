@@ -1,8 +1,7 @@
 {{VALUE:frontmatter}}
 
-# {{VALUE:formattedTitle}}
+# {{VALUE:title}}
 
 Write your note content here...
 
-{{VALUE:author}}
-{{VALUE:noteType}}
+{{VALUE:slug}}
