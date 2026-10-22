@@ -2,7 +2,7 @@
 title: Roasted Garlic Butternut Squash Soup by Sophie Chelin
 date: 2026-10-21T19:38:00
 draft: false
-slug: sophie-chelin-by-roasted-garlic-butternut-squash-soup
+slug: sophie-chelin-roasted-garlic-butternut-squash-soup
 categories:
   - cookbook
 tags: []
@@ -10,6 +10,8 @@ dish: Roasted Garlic Butternut Squash Soup
 chef: "[[sophie-chelin|Sophie Chelin]]"
 meal: Dinner
 ---
+
+![[roasted-garlic-butternut-squash-soup-20261021_194118.jpg]]
 
 ## 💡 Notes & Variations
 
