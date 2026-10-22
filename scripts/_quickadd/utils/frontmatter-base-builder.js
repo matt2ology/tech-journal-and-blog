@@ -4,11 +4,32 @@ const vaultPath = app.vault.adapter.getBasePath();
 const { slugify, formatYAMLArray, titleCase } = require(
   path.join(vaultPath, "scripts", "_quickadd", "utils", "formatters"),
 );
+const { appendUniqueItem } = require(
+  path.join(vaultPath, "scripts", "_quickadd", "utils", "list-utils"),
+);
+const { serializeFrontmatter } = require(
+  path.join(
+    vaultPath,
+    "scripts",
+    "_quickadd",
+    "utils",
+    "frontmatter-serializer",
+  ),
+);
 
+/**
+ * Coordinates the shared frontmatter workflow.
+ * Subclasses customize fields, value processing, and extra properties.
+ */
 class BaseFrontmatterBuilder {
   #quickAddApi;
 
   constructor(quickAddApi) {
+    if (!quickAddApi || typeof quickAddApi.requestInputs !== "function") {
+      throw new TypeError(
+        "BaseFrontmatterBuilder requires a QuickAdd API with requestInputs().",
+      );
+    }
     this.#quickAddApi = quickAddApi;
   }
 
@@ -46,23 +67,14 @@ class BaseFrontmatterBuilder {
     return formatYAMLArray(input);
   }
 
-  buildStandardProperties(values, computed = {}) {
-    const properties = {
-      title: computed.title ?? (titleCase(values.title) || ""),
-      date: computed.date ?? new Date().toISOString(),
-      draft: computed.draft ?? true,
-      slug: computed.slug ?? (slugify(values.title) || ""),
-      tags: computed.tags ?? this.formatArray(values.tags),
-      categories: computed.categories ?? this.formatArray(values.categories),
-    };
-
+  buildStandardProperties(values, computed) {
     return [
-      `title: "${properties.title}"`,
-      `date: "${properties.date}"`,
-      `draft: ${properties.draft}`,
-      `slug: "${properties.slug}"`,
-      `tags:${properties.tags}`,
-      `categories:${properties.categories}`,
+      `title: "${computed.title}"`,
+      `date: "${computed.date}"`,
+      `draft: ${computed.draft}`,
+      `slug: "${computed.slug}"`,
+      `tags:${computed.tags}`,
+      `categories:${computed.categories}`,
     ];
   }
 
@@ -71,16 +83,7 @@ class BaseFrontmatterBuilder {
   }
 
   appendToList(list = "", item) {
-    const items = new Set(
-      list
-        .split(",")
-        .map((value) => value.trim())
-        .filter(Boolean),
-    );
-
-    items.add(item);
-
-    return [...items].join(", ");
+    return appendUniqueItem(list, item);
   }
 
   async run(params) {
@@ -94,7 +97,7 @@ class BaseFrontmatterBuilder {
       ...this.buildStandardProperties(values, computed),
       ...this.buildExtraProperties(values, computed),
     ];
-    const frontmatter = this.#formatFrontmatter(properties);
+    const frontmatter = serializeFrontmatter(properties);
 
     this.#syncParamsVariables(params, computed, frontmatter);
     return frontmatter;
@@ -113,12 +116,7 @@ class BaseFrontmatterBuilder {
 
   #syncParamsVariables(params, computed, frontmatter) {
     if (!params?.variables) return;
-
     Object.assign(params.variables, computed, { frontmatter });
-  }
-
-  #formatFrontmatter(properties) {
-    return `---\n${properties.join("\n")}\n---`;
   }
 }
 
