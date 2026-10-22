@@ -40,7 +40,7 @@ class FrontmatterBuilderBase {
         label: "Title",
         type: "text",
         placeholder: "Note Title",
-        defaultValue: "the title of a large book and it was returned on time",
+        defaultValue: "",
       },
       {
         id: "categories",
