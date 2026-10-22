@@ -1,25 +1,45 @@
+const path = require("path");
+const vaultPath = app.vault.adapter.getBasePath();
+
+const { slugify, formatYAMLArray, titleCase } = require(
+  path.join(vaultPath, "scripts", "_quickadd", "utils", "formatters"),
+);
+
 class BaseFrontmatterBuilder {
+  #quickAddApi;
+  #baseFields;
+
   constructor(quickAddApi) {
-    this.quickAddApi = quickAddApi;
-    this.baseFields = [
-      { id: "title", label: "Title", type: "text", placeholder: "Note Title" },
+    this.#quickAddApi = quickAddApi;
+    this.#baseFields = [
+      {
+        id: "title",
+        label: "Title",
+        type: "text",
+        placeholder: "Note Title",
+        defaultValue: "the title of a large book and it was returned on time",
+      },
       {
         id: "tags",
         label: "Tags (comma separated)",
         type: "text",
         placeholder: "tag1, tag2",
+        defaultValue: "a, b, c d",
       },
       {
         id: "categories",
         label: "Categories (comma separated)",
         type: "text",
         placeholder: "cat1, cat2",
+        defaultValue: "a, b, c d",
       },
     ];
   }
 
+  title = "";
+
   getFields() {
-    return this.baseFields;
+    return this.#baseFields;
   }
 
   processValues(values) {
@@ -27,34 +47,16 @@ class BaseFrontmatterBuilder {
   }
 
   formatArray(input) {
-    if (!input) return " []";
-    const items = input
-      .split(",")
-      .map((i) => i.trim())
-      .filter(Boolean);
-
-    // Use a Set to ensure unique values (handling duplicates)
-    const uniqueItems = [...new Set(items)];
-
-    if (uniqueItems.length === 0) return " []";
-    return "\n  - " + uniqueItems.join("\n  - ");
+    return formatYAMLArray(input);
   }
 
   buildStandardProperties(values) {
     const now = new Date().toISOString();
     return [
-      `title: "${values.title || ""}"`,
+      `title: "${titleCase(values.title) || ""}"`,
       `date: "${now}"`,
-      `description: "${values.description || ""}"`,
       `draft: true`,
-      `slug: "${
-        values.title
-          ? values.title
-              .toLowerCase()
-              .replace(/[^\w ]+/g, "")
-              .replace(/ +/g, "-")
-          : ""
-      }"`,
+      `slug: "${slugify(values.title) || ""}"`,
       `tags:${this.formatArray(values.tags)}`,
       `categories:${this.formatArray(values.categories)}`,
     ];
@@ -66,33 +68,46 @@ class BaseFrontmatterBuilder {
 
   async run(params) {
     const fields = this.getFields();
-    let values = await this.quickAddApi.requestInputs(fields);
+    let values = await this.#quickAddApi.requestInputs(fields);
 
-    // Allow derived classes to modify/append base field values
     values = this.processValues(values);
-
-    if (!values.slug && values.title) {
-      values.slug = values.title
-        .toLowerCase()
-        .replace(/[^\w ]+/g, "")
-        .replace(/ +/g, "-");
-    }
-
-    if (params && params.variables) {
-      params.variables["slug"] = values.slug;
-      params.variables["formattedTitle"] = values.title;
-    }
 
     const standardProps = this.buildStandardProperties(values);
     const extraProps = this.buildExtraProperties(values);
+    const frontmatter = this.#formatFrontmatterBlock([
+      ...standardProps,
+      ...extraProps,
+    ]);
 
-    const frontmatter = `---\n${[...standardProps, ...extraProps].join("\n")}\n---`;
-
-    if (params && params.variables) {
-      params.variables["frontmatter"] = frontmatter;
-    }
+    // Pass frontmatter into sync helper after it is created
+    this.#syncParamsVariables(params, values, frontmatter);
 
     return frontmatter;
+  }
+
+  // --- Private Class Methods ---
+
+  #hasParamsVariables(params) {
+    return Boolean(params && params.variables);
+  }
+
+  /**
+   * Synchronizes parameter variables with the provided values.
+   *
+   * If the parameters contain variables, updates the `slug`, `title`,
+   * and `frontmatter` variables using the corresponding values.
+   * @returns {void}
+   */
+  #syncParamsVariables(params, values, frontmatter) {
+    if (this.#hasParamsVariables(params)) {
+      params.variables["slug"] = slugify(values.title) || "";
+      params.variables["title"] = titleCase(values.title) || "";
+      params.variables["frontmatter"] = frontmatter;
+    }
+  }
+
+  #formatFrontmatterBlock(properties) {
+    return `---\n${properties.join("\n")}\n---`;
   }
 }
 
