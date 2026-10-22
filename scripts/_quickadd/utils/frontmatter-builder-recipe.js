@@ -68,7 +68,7 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
       `chef: "${values.chef || "NoName"}"`,
       `meal: ${values.meal || "NoMealListed"}`,
       `link: ${values.source || ""}`,
-      `dish_image: ${""}`,
+      `image: ${""}`,
     ];
   }
 }
