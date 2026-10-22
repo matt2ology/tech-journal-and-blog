@@ -53,8 +53,14 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
   }
 
   processValues(values) {
+    const chefName = values.chef;
+    const formattedSource = values.source
+      ? `\n**Source:** [${titleCase(values.dish) || "Recipe"} by ${titleCase(chefName) || "Chef"}](${values.source})`
+      : "";
+
     return {
       ...values,
+      source: formattedSource, // Overrides the raw URL input with your formatted markdown string
       categories: this.appendToList(values.categories, "cookbook"),
       slug: slugify(`${values.chef} ${values.dish}`),
       title: titleCase(`${values.dish} by ${values.chef}`),
