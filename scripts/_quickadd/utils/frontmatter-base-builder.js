@@ -7,11 +7,13 @@ const { slugify, formatYAMLArray, titleCase } = require(
 
 class BaseFrontmatterBuilder {
   #quickAddApi;
-  #baseFields;
 
   constructor(quickAddApi) {
     this.#quickAddApi = quickAddApi;
-    this.#baseFields = [
+  }
+
+  getFields() {
+    return [
       {
         id: "title",
         label: "Title",
@@ -36,12 +38,6 @@ class BaseFrontmatterBuilder {
     ];
   }
 
-  title = "";
-
-  getFields() {
-    return this.#baseFields;
-  }
-
   processValues(values) {
     return values;
   }
@@ -50,48 +46,62 @@ class BaseFrontmatterBuilder {
     return formatYAMLArray(input);
   }
 
-  /**
-   * Builds an array of standard frontmatter property strings.
-   *
-   * Uses pre-computed values if available; otherwise, falls back to computing
-   * them dynamically from the provided values.
-   *
-   * @param {Object} values - The raw or processed input values object.
-   * @param {Object} [computed={}] - Optional pre-computed standard property values
-   *                                  (e.g., title, slug, date, draft, tags, categories).
-   * @returns {string[]} An array of formatted frontmatter property assignment strings.
-   */
   buildStandardProperties(values, computed = {}) {
-    const title = computed.title ?? (titleCase(values.title) || "");
-    const slug = computed.slug ?? (slugify(values.title) || "");
-    const date = computed.date ?? new Date().toISOString();
-    const tags = computed.tags ?? this.formatArray(values.tags);
-    const categories =
-      computed.categories ?? this.formatArray(values.categories);
-    const draft = computed.draft ?? true;
+    const properties = {
+      title: computed.title ?? (titleCase(values.title) || ""),
+      date: computed.date ?? new Date().toISOString(),
+      draft: computed.draft ?? true,
+      slug: computed.slug ?? (slugify(values.title) || ""),
+      tags: computed.tags ?? this.formatArray(values.tags),
+      categories: computed.categories ?? this.formatArray(values.categories),
+    };
 
     return [
-      `title: "${title}"`,
-      `date: "${date}"`,
-      `draft: ${draft}`,
-      `slug: "${slug}"`,
-      `tags:${tags}`,
-      `categories:${categories}`,
+      `title: "${properties.title}"`,
+      `date: "${properties.date}"`,
+      `draft: ${properties.draft}`,
+      `slug: "${properties.slug}"`,
+      `tags:${properties.tags}`,
+      `categories:${properties.categories}`,
     ];
   }
 
-  buildExtraProperties(values, computed = {}) {
+  buildExtraProperties() {
     return [];
   }
 
+  appendToList(list = "", item) {
+    const items = new Set(
+      list
+        .split(",")
+        .map((value) => value.trim())
+        .filter(Boolean),
+    );
+
+    items.add(item);
+
+    return [...items].join(", ");
+  }
+
   async run(params) {
-    const fields = this.getFields();
-    let values = await this.#quickAddApi.requestInputs(fields);
+    const requestedValues = await this.#quickAddApi.requestInputs(
+      this.getFields(),
+    );
+    const values = this.processValues(requestedValues);
+    const computed = this.#computeStandardValues(values);
 
-    values = this.processValues(values);
+    const properties = [
+      ...this.buildStandardProperties(values, computed),
+      ...this.buildExtraProperties(values, computed),
+    ];
+    const frontmatter = this.#formatFrontmatter(properties);
 
-    // Compute and assign standard property values once
-    const computed = {
+    this.#syncParamsVariables(params, computed, frontmatter);
+    return frontmatter;
+  }
+
+  #computeStandardValues(values) {
+    return {
       title: titleCase(values.title) || "",
       slug: slugify(values.title) || "",
       date: new Date().toISOString(),
@@ -99,47 +109,15 @@ class BaseFrontmatterBuilder {
       tags: this.formatArray(values.tags),
       categories: this.formatArray(values.categories),
     };
-
-    const standardProps = this.buildStandardProperties(values, computed);
-    const extraProps = this.buildExtraProperties(values, computed);
-    const frontmatter = this.#formatFrontmatterBlock([
-      ...standardProps,
-      ...extraProps,
-    ]);
-
-    // Sync all standard properties and frontmatter into params.variables
-    this.#syncParamsVariables(params, computed, frontmatter);
-
-    return frontmatter;
   }
 
-  // --- Private Class Methods ---
-
-  /**
-   * Checks whether the given parameters object contains a `variables` property.
-   * 
-   * @param {Object} [params] - The parameters object passed to the QuickAdd script.
-   * @returns {boolean} True if both `params` and `params.variables` are present, otherwise false.
-   */
-  #hasParamsVariables(params) {
-    return Boolean(params && params.variables);
-  }
-
-  /**
-   * Synchronizes all computed standard properties and frontmatter with parameter variables.
-   * @returns {void}
-   */
   #syncParamsVariables(params, computed, frontmatter) {
-    if (this.#hasParamsVariables(params)) {
-      for (const [key, value] of Object.entries(computed)) {
-        params.variables[key] = value;
-        new Notice(`${value}`);
-      }
-      params.variables["frontmatter"] = frontmatter;
-    }
+    if (!params?.variables) return;
+
+    Object.assign(params.variables, computed, { frontmatter });
   }
 
-  #formatFrontmatterBlock(properties) {
+  #formatFrontmatter(properties) {
     return `---\n${properties.join("\n")}\n---`;
   }
 }
