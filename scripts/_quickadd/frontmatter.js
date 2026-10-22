@@ -1,29 +1,29 @@
 const path = require("path");
 const vaultPath = app.vault.adapter.getBasePath();
 
-const BaseFrontmatterBuilder = require(
+const FrontmatterBuilderBase = require(
   path.join(
     vaultPath,
     "scripts",
     "_quickadd",
     "utils",
-    "BaseFrontmatterBuilder",
+    "frontmatter-builder-base",
   ),
 );
-const BookFrontmatterBuilder = require(
+const FrontmatterBuilderBook = require(
   path.join(
     vaultPath,
     "scripts",
     "_quickadd",
     "utils",
-    "frontmatter-book-builder",
+    "frontmatter-builder-book",
   ),
 );
 
 // Registry mapping display names to builder classes
 const builders = {
-  "Standard Note": BaseFrontmatterBuilder,
-  "Book Note": BookFrontmatterBuilder,
+  "Standard Note": FrontmatterBuilderBase,
+  "Book Note": FrontmatterBuilderBook,
 };
 
 module.exports = async function (params) {

@@ -21,13 +21,13 @@ const { serializeFrontmatter } = require(
  * Coordinates the shared frontmatter workflow.
  * Subclasses customize fields, value processing, and extra properties.
  */
-class BaseFrontmatterBuilder {
+class FrontmatterBuilderBase {
   #quickAddApi;
 
   constructor(quickAddApi) {
     if (!quickAddApi || typeof quickAddApi.requestInputs !== "function") {
       throw new TypeError(
-        "BaseFrontmatterBuilder requires a QuickAdd API with requestInputs().",
+        "FrontmatterBuilderBase requires a QuickAdd API with requestInputs().",
       );
     }
     this.#quickAddApi = quickAddApi;
@@ -120,4 +120,4 @@ class BaseFrontmatterBuilder {
   }
 }
 
-module.exports = BaseFrontmatterBuilder;
+module.exports = FrontmatterBuilderBase;

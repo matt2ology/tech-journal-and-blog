@@ -1,20 +1,20 @@
 const path = require("path");
 const vaultPath = app.vault.adapter.getBasePath();
 
-const BaseFrontmatterBuilder = require(
+const FrontmatterBuilderBase = require(
   path.join(
     vaultPath,
     "scripts",
     "_quickadd",
     "utils",
-    "BaseFrontmatterBuilder",
+    "frontmatter-builder-base",
   ),
 );
 
 /**
  * Adds book-specific inputs and metadata to the shared frontmatter workflow.
  */
-class BookFrontmatterBuilder extends BaseFrontmatterBuilder {
+class FrontmatterBuilderBook extends FrontmatterBuilderBase {
   getFields() {
     return [
       ...super.getFields(),
@@ -50,4 +50,4 @@ class BookFrontmatterBuilder extends BaseFrontmatterBuilder {
   }
 }
 
-module.exports = BookFrontmatterBuilder;
+module.exports = FrontmatterBuilderBook;
