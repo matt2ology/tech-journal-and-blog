@@ -13,6 +13,8 @@ meal: Dinner
 
 ![[roasted-garlic-butternut-squash-soup-20261021_194118.jpg]]
 
+**Source:** [Instagram - Butternut Squash Soup @soph.chelin](https://www.instagram.com/reel/Ddrf1L3S3kh/?vrfl=MWZ4djNzY2Nsa29tNw==)
+
 ## 💡 Notes & Variations
 
 - I used chicken stock
