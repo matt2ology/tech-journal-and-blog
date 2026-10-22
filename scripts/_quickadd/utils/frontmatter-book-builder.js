@@ -7,7 +7,7 @@ const BaseFrontmatterBuilder = require(
     "scripts",
     "_quickadd",
     "utils",
-    "frontmatter-base-builder",
+    "BaseFrontmatterBuilder",
   ),
 );
 
