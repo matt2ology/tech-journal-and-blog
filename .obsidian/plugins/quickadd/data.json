@@ -207,64 +207,6 @@
       "icon": "type"
     },
     {
-      "id": "a3855d58-d10e-43b6-ae65-62edec100985",
-      "name": "frontmatter.js",
-      "type": "Macro",
-      "command": false,
-      "runOnStartup": false,
-      "macro": {
-        "name": "frontmatter.js",
-        "id": "10f6a400-2cb1-4d3a-932f-3b391c8eff19",
-        "commands": [
-          {
-            "name": "frontmatter",
-            "type": "UserScript",
-            "id": "ab2681e5-92a7-45b6-9d4a-104567a5830b",
-            "path": "scripts/_quickadd/frontmatter.js",
-            "settings": {}
-          },
-          {
-            "name": "Untitled Template Choice",
-            "type": "NestedChoice",
-            "id": "0e167ee0-cffd-425c-8910-dcebe950de9f",
-            "choice": {
-              "id": "4c767961-aac4-40fb-b19a-e7ad1b5d3e8c",
-              "name": "Untitled Template Choice",
-              "type": "Template",
-              "command": false,
-              "templatePath": "templates/tester-template.md",
-              "fileNameFormat": {
-                "enabled": true,
-                "format": "index"
-              },
-              "discoverExistingNotesBeforeCreate": false,
-              "folder": {
-                "enabled": true,
-                "folders": [
-                  "blog/{{VALUE:slug}}"
-                ],
-                "chooseWhenCreatingNote": false,
-                "createInSameFolderAsActiveFile": false,
-                "chooseFromSubfolders": false
-              },
-              "appendLink": false,
-              "copyLinkToClipboard": false,
-              "openFile": true,
-              "fileOpening": {
-                "location": "tab",
-                "direction": "vertical",
-                "mode": "default",
-                "focus": true
-              },
-              "fileExistsBehavior": {
-                "kind": "prompt"
-              }
-            }
-          }
-        ]
-      }
-    },
-    {
       "id": "7e908ad8-c3ce-46eb-b46c-ed51803de18b",
       "name": "Recipe Log",
       "type": "Macro",
@@ -275,10 +217,10 @@
         "id": "37127f75-9054-4ed8-8023-cded47d9d95e",
         "commands": [
           {
-            "name": "frontmatter",
+            "name": "recipe-note",
             "type": "UserScript",
-            "id": "f8bf457e-01b9-404b-a3b3-611e65525282",
-            "path": "scripts/_quickadd/frontmatter.js",
+            "id": "d2c90292-44c6-43cc-8f39-31908cab5693",
+            "path": "scripts/_quickadd/recipe-note.js",
             "settings": {}
           },
           {
