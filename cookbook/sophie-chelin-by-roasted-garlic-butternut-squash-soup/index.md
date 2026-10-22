@@ -17,10 +17,10 @@ image: roasted-garlic-butternut-squash-soup-20261021_194118.jpg
 ## 💡 Notes & Variations
 
 - I used chicken stock
-- I added
-  - Spinach to the soup after blending and when in the pot to warm-up
-  - I pan-fried some sliced white button mushrooms as "toppings"
-  - In a small sandwich zip-lock bag - I crushed peanuts for topping
+- Added
+  - Spinach to the soup, after blending, in the pot while warming-up
+  - Pan-fried some sliced white button mushrooms as "toppings"
+  - In a small sandwich zip-lock bag - crushed peanuts for topping
   - Drizzled coconut milk for style and contrast
 
 ## 🛒 Ingredients
