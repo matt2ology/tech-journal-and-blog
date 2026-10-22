@@ -21,7 +21,6 @@ const FrontmatterBuilderBase = require(
 class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
   getFields() {
     return [
-      ...super.getFields(),
       {
         id: "dish",
         label: "Dish Name",
@@ -63,11 +62,15 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
   }
 
   buildExtraProperties(values) {
+    const chefName = values.chef;
+    const chefValue = chefName
+      ? `[[${slugify(chefName)}|${titleCase(chefName)}]]`
+      : "NoChefNamed";
+
     return [
       `dish: "${titleCase(values.dish) || "NoNameDish"}"`,
-      `chef: "${values.chef || "NoName"}"`,
+      `chef: "${chefValue}"`,
       `meal: ${values.meal || "NoMealListed"}`,
-      `link: ${values.source || ""}`,
       `image: ${""}`,
     ];
   }
