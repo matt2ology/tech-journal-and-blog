@@ -105,7 +105,7 @@ class FrontmatterBuilderBase {
 
   #computeStandardValues(values) {
     return {
-      title: titleCase(values.title) || "",
+      title: titleCase(values.title) || "NoTitle",
       slug: slugify(values.title) || "",
       date: this.#quickAddApi.date.now("YYYY-MM-DD HH:mm:ss"),
       draft: true,
