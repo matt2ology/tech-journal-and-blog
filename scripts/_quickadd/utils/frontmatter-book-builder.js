@@ -20,24 +20,20 @@ class BookFrontmatterBuilder extends BaseFrontmatterBuilder {
         label: "Author",
         type: "text",
         placeholder: "Book Author",
+        defaultValue: "matt2ology",
       },
-      { id: "rating", label: "Rating (1-5)", type: "text", placeholder: "5" },
+      {
+        id: "rating",
+        label: "Rating (1-5)",
+        type: "text",
+        placeholder: "5",
+        defaultValue: "2",
+      },
     ];
   }
 
   processValues(values) {
-    // Parse categories into a Set to automatically handle duplicates and ensure uniqueness
-    const categories = values.categories
-      ? values.categories
-          .split(",")
-          .map((c) => c.trim())
-          .filter(Boolean)
-      : [];
-
-    const categorySet = new Set(categories);
-    categorySet.add("book");
-
-    values.categories = Array.from(categorySet).join(", ");
+    values.categories = this.#appendCategory(values.categories, "book");
     return values;
   }
 
@@ -46,6 +42,23 @@ class BookFrontmatterBuilder extends BaseFrontmatterBuilder {
       `author: "${values.author || ""}"`,
       `rating: ${values.rating || "0"}`,
     ];
+  }
+
+  // --- Private Helpers ---
+
+  #parseCommaSeparated(input = "") {
+    if (!input) return [];
+    return input
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+
+  #appendCategory(existingCategories, newCategory) {
+    const list = this.#parseCommaSeparated(existingCategories);
+    const categorySet = new Set(list);
+    categorySet.add(newCategory);
+    return Array.from(categorySet).join(", ");
   }
 }
 
