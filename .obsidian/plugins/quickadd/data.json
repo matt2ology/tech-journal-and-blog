@@ -263,6 +263,64 @@
           }
         ]
       }
+    },
+    {
+      "id": "7e908ad8-c3ce-46eb-b46c-ed51803de18b",
+      "name": "Recipe Log",
+      "type": "Macro",
+      "command": false,
+      "runOnStartup": false,
+      "macro": {
+        "name": "Recipe Log",
+        "id": "37127f75-9054-4ed8-8023-cded47d9d95e",
+        "commands": [
+          {
+            "name": "frontmatter",
+            "type": "UserScript",
+            "id": "f8bf457e-01b9-404b-a3b3-611e65525282",
+            "path": "scripts/_quickadd/frontmatter.js",
+            "settings": {}
+          },
+          {
+            "name": "Recipe Log Template",
+            "type": "NestedChoice",
+            "id": "fc38717c-8181-4043-928f-0352529f902d",
+            "choice": {
+              "id": "6f2f6b90-8aba-4aea-9acd-2e35ae51a552",
+              "name": "Recipe Log Template",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/recipe-log.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "index"
+              },
+              "discoverExistingNotesBeforeCreate": false,
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "cookbook/{{VALUE:slug}}"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "copyLinkToClipboard": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              }
+            }
+          }
+        ]
+      }
     }
   ],
   "inputPrompt": "single-line",
