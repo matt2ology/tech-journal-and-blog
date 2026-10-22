@@ -12,6 +12,21 @@ IMAGE_WIKILINK_RE = re.compile(r"!\[\[([^\]]+)\]\]")
 IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp"}
 
 
+def split_frontmatter(text: str) -> tuple[str, str]:
+    """
+    Splits markdown content into frontmatter and body.
+    If frontmatter exists (starts with '---'), returns (frontmatter, body).
+    Otherwise, returns ('', text).
+    """
+    if text.startswith("---"):
+        parts = text.split("---", 2)
+        if len(parts) >= 3:
+            frontmatter = "---" + parts[1] + "---"
+            body = parts[2]
+            return frontmatter, body
+    return "", text
+
+
 def parse_image_target(content: str):
     """Extract path and optional alt text from Obsidian image wikilink."""
     if "|" in content:
@@ -69,13 +84,18 @@ def convert_image_wikilink(match, current_file: Path, text: str):
 def process_file(path: Path):
     text = path.read_text(encoding="utf-8")
 
-    if "![[ " not in text and "![[" not in text:
+    # Separate frontmatter from body
+    frontmatter, body = split_frontmatter(text)
+
+    if "![[ " not in body and "![[" not in body:
         return
 
-    # Pass full text to converter so it can check for backticks
-    new_text = IMAGE_WIKILINK_RE.sub(
-        lambda m: convert_image_wikilink(m, path, text), text
+    # Pass body to converter so it can check backticks within the body
+    new_body = IMAGE_WIKILINK_RE.sub(
+        lambda m: convert_image_wikilink(m, path, body), body
     )
+
+    new_text = frontmatter + new_body
 
     if new_text != text:
         path.write_text(new_text, encoding="utf-8")
