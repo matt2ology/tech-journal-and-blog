@@ -47,14 +47,14 @@ class FrontmatterBuilderBase {
         label: "Tags (comma separated)",
         type: "text",
         placeholder: "tag1, tag2",
-        defaultValue: "a, b, c d",
+        defaultValue: "",
       },
       {
         id: "categories",
         label: "Categories (comma separated)",
         type: "text",
         placeholder: "cat1, cat2",
-        defaultValue: "a, b, c d",
+        defaultValue: "",
       },
     ];
   }
