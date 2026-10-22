@@ -11,21 +11,6 @@ WIKILINK_RE = re.compile(r"\[\[([^\]]+)\]\]")
 MD_LINK_RE = re.compile(r"\[([^\]]+)\]\((([^)]+\.md)(?:#[^)]+)?)\)")
 
 
-def split_frontmatter(text: str) -> tuple[str, str]:
-    """
-    Splits markdown content into frontmatter and body.
-    If frontmatter exists (starts with '---'), returns (frontmatter, body).
-    Otherwise, returns ('', text).
-    """
-    if text.startswith("---"):
-        parts = text.split("---", 2)
-        if len(parts) >= 3:
-            frontmatter = "---" + parts[1] + "---"
-            body = parts[2]
-            return frontmatter, body
-    return "", text
-
-
 def slugify(text: str) -> str:
     text = text.strip().lower()
     text = re.sub(r"\.md$", "", text)
@@ -91,7 +76,7 @@ def convert_youtube(content: str) -> str:
         return bool(re.search(r'[\?&](?:t|start)=\w+', text, re.IGNORECASE))
 
     # Convert YouTube Markdown links/embeds: [title](url) or ![](url)
-    md_url_pattern = r'(!?\[[^\]]*\]\()((?:https?://)?(?:www\.)?(?:youtube\.com/(?:watch\?v=\vert{}shorts/)\vert{}youtu\.be/)([\w-]+)[^\)]*)(\))'
+    md_url_pattern = r'(!?\[[^\]]*\]\()((?:https?://)?(?:www\.)?(?:youtube\.com/(?:watch\?v=|shorts/)|youtu\.be/)([\w-]+)[^\)]*)(\))'
 
     def md_url_replacement(match):
         full_url = match.group(2)
@@ -166,19 +151,14 @@ def convert_mdlink(match, current_file: Path) -> str:
 def process_file(path: Path) -> None:
     text = path.read_text(encoding="utf-8")
 
-    # Separate frontmatter from body
-    frontmatter, body = split_frontmatter(text)
+    # Apply all conversion routines
+    new_text = convert_youtube(text)
 
-    # Apply all conversion routines to the body only
-    new_body = convert_youtube(body)
-
-    # Only run regex if potential links are present in the body
-    if "[[" in new_body or ".md" in new_body:
-        new_body = WIKILINK_RE.sub(
-            lambda m: convert_wikilink(m, path), new_body)
-        new_body = MD_LINK_RE.sub(lambda m: convert_mdlink(m, path), new_body)
-
-    new_text = frontmatter + new_body
+    # Only run regex if potential links are present
+    if "[[" in new_text or ".md" in new_text:
+        new_text = WIKILINK_RE.sub(
+            lambda m: convert_wikilink(m, path), new_text)
+        new_text = MD_LINK_RE.sub(lambda m: convert_mdlink(m, path), new_text)
 
     # Only write if changes were made
     if new_text != text:
