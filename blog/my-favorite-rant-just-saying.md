@@ -8,7 +8,7 @@ tags:
 title: My favorite rant on "just saying" from Regular Car Reviews
 ---
 
-<!-- A blog is about communicating outward (you → readers) -->
+[Regular Car Reviews: 2000 Toyota MR2 ZZW30 - "just saying"](https://youtu.be/dn_HAvA33q8?si=zeIoVCGBHTvHEf_y)
 
 Don't say that you're "just saying."
 
