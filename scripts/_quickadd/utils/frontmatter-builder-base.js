@@ -43,17 +43,17 @@ class FrontmatterBuilderBase {
         defaultValue: "the title of a large book and it was returned on time",
       },
       {
-        id: "tags",
-        label: "Tags (comma separated)",
-        type: "text",
-        placeholder: "tag1, tag2",
-        defaultValue: "",
-      },
-      {
         id: "categories",
         label: "Categories (comma separated)",
         type: "text",
         placeholder: "cat1, cat2",
+        defaultValue: "",
+      },
+      {
+        id: "tags",
+        label: "Tags (comma separated)",
+        type: "text",
+        placeholder: "tag1, tag2",
         defaultValue: "",
       },
     ];
@@ -73,8 +73,8 @@ class FrontmatterBuilderBase {
       `date: "${computed.date}"`,
       `draft: ${computed.draft}`,
       `slug: "${computed.slug}"`,
-      `tags:${computed.tags}`,
       `categories:${computed.categories}`,
+      `tags:${computed.tags}`,
     ];
   }
 
@@ -106,11 +106,11 @@ class FrontmatterBuilderBase {
   #computeStandardValues(values) {
     return {
       title: titleCase(values.title) || "NoTitle",
-      slug: slugify(values.title) || "",
-      date: this.#quickAddApi.date.now("YYYY-MM-DD HH:mm:ss"),
+      slug: slugify(values.title),
+      date: this.#quickAddApi.date.now("YYYY-MM-DD"),
       draft: true,
-      tags: this.formatArray(values.tags),
       categories: this.formatArray(values.categories),
+      tags: this.formatArray(values.tags),
     };
   }
 
