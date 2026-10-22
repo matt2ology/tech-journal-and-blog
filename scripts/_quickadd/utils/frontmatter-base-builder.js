@@ -50,19 +50,37 @@ class BaseFrontmatterBuilder {
     return formatYAMLArray(input);
   }
 
-  buildStandardProperties(values) {
-    const now = new Date().toISOString();
+  /**
+   * Builds an array of standard frontmatter property strings.
+   *
+   * Uses pre-computed values if available; otherwise, falls back to computing
+   * them dynamically from the provided values.
+   *
+   * @param {Object} values - The raw or processed input values object.
+   * @param {Object} [computed={}] - Optional pre-computed standard property values
+   *                                  (e.g., title, slug, date, draft, tags, categories).
+   * @returns {string[]} An array of formatted frontmatter property assignment strings.
+   */
+  buildStandardProperties(values, computed = {}) {
+    const title = computed.title ?? (titleCase(values.title) || "");
+    const slug = computed.slug ?? (slugify(values.title) || "");
+    const date = computed.date ?? new Date().toISOString();
+    const tags = computed.tags ?? this.formatArray(values.tags);
+    const categories =
+      computed.categories ?? this.formatArray(values.categories);
+    const draft = computed.draft ?? true;
+
     return [
-      `title: "${titleCase(values.title) || ""}"`,
-      `date: "${now}"`,
-      `draft: true`,
-      `slug: "${slugify(values.title) || ""}"`,
-      `tags:${this.formatArray(values.tags)}`,
-      `categories:${this.formatArray(values.categories)}`,
+      `title: "${title}"`,
+      `date: "${date}"`,
+      `draft: ${draft}`,
+      `slug: "${slug}"`,
+      `tags:${tags}`,
+      `categories:${categories}`,
     ];
   }
 
-  buildExtraProperties(values) {
+  buildExtraProperties(values, computed = {}) {
     return [];
   }
 
@@ -72,36 +90,51 @@ class BaseFrontmatterBuilder {
 
     values = this.processValues(values);
 
-    const standardProps = this.buildStandardProperties(values);
-    const extraProps = this.buildExtraProperties(values);
+    // Compute and assign standard property values once
+    const computed = {
+      title: titleCase(values.title) || "",
+      slug: slugify(values.title) || "",
+      date: new Date().toISOString(),
+      draft: true,
+      tags: this.formatArray(values.tags),
+      categories: this.formatArray(values.categories),
+    };
+
+    const standardProps = this.buildStandardProperties(values, computed);
+    const extraProps = this.buildExtraProperties(values, computed);
     const frontmatter = this.#formatFrontmatterBlock([
       ...standardProps,
       ...extraProps,
     ]);
 
-    // Pass frontmatter into sync helper after it is created
-    this.#syncParamsVariables(params, values, frontmatter);
+    // Sync all standard properties and frontmatter into params.variables
+    this.#syncParamsVariables(params, computed, frontmatter);
 
     return frontmatter;
   }
 
   // --- Private Class Methods ---
 
+  /**
+   * Checks whether the given parameters object contains a `variables` property.
+   * 
+   * @param {Object} [params] - The parameters object passed to the QuickAdd script.
+   * @returns {boolean} True if both `params` and `params.variables` are present, otherwise false.
+   */
   #hasParamsVariables(params) {
     return Boolean(params && params.variables);
   }
 
   /**
-   * Synchronizes parameter variables with the provided values.
-   *
-   * If the parameters contain variables, updates the `slug`, `title`,
-   * and `frontmatter` variables using the corresponding values.
+   * Synchronizes all computed standard properties and frontmatter with parameter variables.
    * @returns {void}
    */
-  #syncParamsVariables(params, values, frontmatter) {
+  #syncParamsVariables(params, computed, frontmatter) {
     if (this.#hasParamsVariables(params)) {
-      params.variables["slug"] = slugify(values.title) || "";
-      params.variables["title"] = titleCase(values.title) || "";
+      for (const [key, value] of Object.entries(computed)) {
+        params.variables[key] = value;
+        new Notice(`${value}`);
+      }
       params.variables["frontmatter"] = frontmatter;
     }
   }

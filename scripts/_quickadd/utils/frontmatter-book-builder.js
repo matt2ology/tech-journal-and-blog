@@ -37,7 +37,7 @@ class BookFrontmatterBuilder extends BaseFrontmatterBuilder {
     return values;
   }
 
-  buildExtraProperties(values) {
+  buildExtraProperties(values, computed = {}) {
     return [
       `author: "${values.author || ""}"`,
       `rating: ${values.rating || "0"}`,
