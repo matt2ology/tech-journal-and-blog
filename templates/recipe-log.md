@@ -1,4 +1,5 @@
 {{VALUE:frontmatter}}
+{{VALUE:source}}
 
 ## 💡 Notes & Variations
 
