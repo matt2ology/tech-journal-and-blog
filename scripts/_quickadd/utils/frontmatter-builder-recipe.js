@@ -44,7 +44,7 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
         suggesterConfig: { caseSensitive: false, multiSelect: true },
       },
       {
-        id: "link",
+        id: "source",
         label: "Source / URL Link",
         type: "text",
         placeholder: "e.g. [Title](URL) or plain link",
