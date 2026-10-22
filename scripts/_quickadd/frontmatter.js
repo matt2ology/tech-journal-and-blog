@@ -19,11 +19,21 @@ const FrontmatterBuilderBook = require(
     "frontmatter-builder-book",
   ),
 );
+const FrontmatterBuilderRecipe = require(
+  path.join(
+    vaultPath,
+    "scripts",
+    "_quickadd",
+    "utils",
+    "frontmatter-builder-recipe",
+  ),
+);
 
 // Registry mapping display names to builder classes
 const builders = {
   "Standard Note": FrontmatterBuilderBase,
   "Book Note": FrontmatterBuilderBook,
+  "Recipe Note": FrontmatterBuilderRecipe,
 };
 
 module.exports = async function (params) {
