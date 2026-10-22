@@ -99,7 +99,7 @@ class FrontmatterBuilderBase {
     ];
     const frontmatter = serializeFrontmatter(properties);
 
-    this.#syncParamsVariables(params, computed, frontmatter);
+    this.#syncParamsVariables(params, computed, frontmatter, values);
     return frontmatter;
   }
 
@@ -114,9 +114,9 @@ class FrontmatterBuilderBase {
     };
   }
 
-  #syncParamsVariables(params, computed, frontmatter) {
+  #syncParamsVariables(params, computed, frontmatter, values) {
     if (!params?.variables) return;
-    Object.assign(params.variables, computed, { frontmatter });
+    Object.assign(params.variables, computed, values, { frontmatter });
   }
 }
 
