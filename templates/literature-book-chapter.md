@@ -4,11 +4,11 @@
 
 ## Summary in 3 Sentences
 
-- 
+-
 
 ## Key Takeaways & Core Concepts
 
-* **Concept 1:** Brief explanation.
+- **Concept 1:** Brief explanation.
 
 ---
 
