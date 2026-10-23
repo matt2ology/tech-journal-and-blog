@@ -11,29 +11,46 @@ class VaultQueryService {
    * @returns {string[]} Array of unique field values
    */
   static getFieldValues(app, fieldName, folderPath) {
-    if (!app || !app.vault || !app.metadataCache) return [];
+    if (!VaultQueryService.#isValidApp(app)) return [];
 
-    const files = app.vault
-      .getMarkdownFiles()
-      .filter((file) => file.path.startsWith(folderPath));
-
+    const files = VaultQueryService.#getMarkdownFilesInFolder(app, folderPath);
     const values = new Set();
 
     files.forEach((file) => {
       const cache = app.metadataCache.getFileCache(file);
-      if (cache?.frontmatter && cache.frontmatter[fieldName]) {
-        const val = cache.frontmatter[fieldName];
-        if (Array.isArray(val)) {
-          val.forEach((item) => {
-            if (item) values.add(item);
-          });
-        } else {
-          values.add(val);
-        }
+      if (VaultQueryService.#hasFrontmatterField(cache, fieldName)) {
+        VaultQueryService.#extractFieldValues(
+          cache.frontmatter[fieldName],
+          values,
+        );
       }
     });
 
     return Array.from(values);
+  }
+
+  static #isValidApp(app) {
+    return Boolean(app && app.vault && app.metadataCache);
+  }
+
+  static #getMarkdownFilesInFolder(app, folderPath) {
+    return app.vault
+      .getMarkdownFiles()
+      .filter((file) => file.path.startsWith(folderPath));
+  }
+
+  static #hasFrontmatterField(cache, fieldName) {
+    return Boolean(cache?.frontmatter && cache.frontmatter[fieldName]);
+  }
+
+  static #extractFieldValues(val, valuesSet) {
+    if (Array.isArray(val)) {
+      val.forEach((item) => {
+        if (item) valuesSet.add(item);
+      });
+    } else {
+      valuesSet.add(val);
+    }
   }
 }
 
