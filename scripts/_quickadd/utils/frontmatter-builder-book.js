@@ -70,7 +70,7 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
       tags: this.appendToList(
         values.tags,
         "question",
-        ...TextFormatter.parseCommaSeparatedList(values.author, true),
+        ...this.parseAndSlugifyCommaSeparatedList(values.author),
       ),
       title: `Notes on ${this.#removeAfterColon(values.book)} - ${this.#removeAfterColon(values.chapter)}`,
     };
