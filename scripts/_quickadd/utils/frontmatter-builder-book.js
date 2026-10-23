@@ -39,16 +39,15 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
   }
 
   processValues(values) {
-    const authorsArray = Array.isArray(values.author)
-      ? values.author
-      : typeof values.author === "string"
+    const authors =
+      typeof values.author === "string"
         ? values.author
             .split(",")
             .map((a) => a.trim())
             .filter(Boolean)
         : [];
-    const primaryAuthor =
-      authorsArray.length > 0 ? authorsArray[0] : "matt2ology";
+
+    const primaryAuthor = authors[0] || "matt2ology";
 
     return {
       ...values,
