@@ -1,7 +1,7 @@
 const path = require("path");
 const vaultPath = app.vault.adapter.getBasePath();
 
-const { slugify, formatYAMLArray, titleCase } = require(
+const { slugify, formatYAMLArray, titleCase, formatYAMLNameList } = require(
   path.join(vaultPath, "scripts", "_quickadd", "utils", "formatters"),
 );
 const { appendUniqueItem } = require(
@@ -67,6 +67,10 @@ class FrontmatterBuilderBase {
     return formatYAMLArray(input);
   }
 
+  formatNameList(input, fallback) {
+    return formatYAMLNameList(input, fallback);
+  }
+
   buildStandardProperties(values, computed) {
     return [
       `title: "${computed.title}"`,
@@ -103,7 +107,7 @@ class FrontmatterBuilderBase {
     return frontmatter;
   }
 
-  #computeStandardValues(values) {
+  #computeStandardValue(values) {
     return {
       title: titleCase(values.title) || "NoTitle",
       slug: values.slug ?? slugify(values.title),
@@ -112,6 +116,10 @@ class FrontmatterBuilderBase {
       categories: this.formatArray(values.categories),
       tags: this.formatArray(values.tags),
     };
+  }
+
+  #computeStandardValues(values) {
+    return this.#computeStandardValue(values);
   }
 
   #syncParamsVariables(params, computed, frontmatter, values) {
