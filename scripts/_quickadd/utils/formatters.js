@@ -38,64 +38,43 @@ function slugify(text = "") {
     .replace(/^-+|-+$/g, "");
 }
 
-function formatYAMLArray(input = "", shouldSlugify = true) {
-  if (!input) return " []";
+function parseUniqueCommaSeparated(input = "", shouldSlugify = false) {
+  if (typeof input !== "string") return [];
+  const items = input
+    .split(",")
+    .map((item) => item.trim())
+    .filter(Boolean)
+    .map((item) => (shouldSlugify ? slugify(item) : item));
+  return [...new Set(items)];
+}
 
+function formatYAMLArray(input = "", shouldSlugify = true) {
   const items = parseUniqueCommaSeparated(input, shouldSlugify);
   if (items.length === 0) return " []";
-
   return "\n  - " + items.join("\n  - ");
 }
 
 function titleCase(inputText = "") {
   if (!inputText || typeof inputText !== "string") return "";
 
-  const words = tokenizeNormalizedText(inputText);
-
-  return words
-    .map((word, index) => {
-      if (!word) return "";
-      if (shouldKeepMinorWordLower(word, index, words.length)) return word;
-      return capitalizeFirstLetter(word);
-    })
-    .join(" ");
-}
-
-function parseUniqueCommaSeparated(input, shouldSlugify = false) {
-  if (typeof input !== "string") return [];
-
-  const items = input
-    .split(",")
-    .map((item) => item.trim())
-    .filter(Boolean)
-    .map((item) => (shouldSlugify ? slugify(item) : item))
-    .filter(Boolean);
-
-  return [...new Set(items)];
-}
-
-function tokenizeNormalizedText(text) {
-  return text
+  const words = inputText
     .normalize("NFC")
     .replace(/\s+/g, " ")
     .trim()
     .toLowerCase()
     .split(" ");
+
+  return words
+    .map((word, index) => {
+      if (!word) return "";
+      if (index > 0 && index < words.length - 1 && MINOR_WORDS.has(word)) {
+        return word;
+      }
+      return word.replace(/^\b[a-z]/i, (char) => char.toUpperCase());
+    })
+    .join(" ");
 }
 
-function shouldKeepMinorWordLower(word, index, totalWords) {
-  if (index === 0 || index === totalWords - 1) return false;
-  const cleanWord = word.replace(/^[^\w]+|[^\w]+$/g, "");
-  return MINOR_WORDS.has(cleanWord);
-}
-
-function capitalizeFirstLetter(word) {
-  return word.replace(/\b[a-z]/i, (char) => char.toUpperCase());
-}
-
-/**
- * Formats a full name into an Obsidian wikilink: [[slug|DisplayName]]
- */
 function formatNameAsWikilink(input = "") {
   if (!input || typeof input !== "string") return "";
 
@@ -104,7 +83,7 @@ function formatNameAsWikilink(input = "") {
 
   const processedWords = words.map((word, index) => {
     const cleaned = word.replace(/[.,]/g, "");
-    const capitalized = capitalizeFirstLetter(word.toLowerCase());
+    const capitalized = word.replace(/^\b[a-z]/i, (c) => c.toUpperCase());
 
     if (index > 0 && index < words.length - 1 && cleaned.length === 1) {
       return capitalized.endsWith(".") ? capitalized : capitalized + ".";
@@ -113,9 +92,7 @@ function formatNameAsWikilink(input = "") {
   });
 
   const displayName = processedWords.join(" ");
-  const slug = slugify(displayName);
-
-  return `[[${slug}|${displayName}]]`;
+  return `[[${slugify(displayName)}|${displayName}]]`;
 }
 
 /**
@@ -140,11 +117,6 @@ function formatYAMLNameList(input, fallback = '"NoName"') {
   );
 }
 
-/**
- * Cleans a wiki-link string and extracts its alias or target text.
- * e.g. "[[slug|Name]]" -> "Name"
- *      "[[Name]]" -> "Name"
- */
 function cleanWikiLink(opt) {
   if (typeof opt !== "string") return opt;
   const cleaned = opt.replace(/^"?"?\[\[|\]\]"?"?$/g, "");
@@ -158,5 +130,5 @@ module.exports = {
   titleCase,
   formatNameAsWikilink,
   formatYAMLNameList,
-  cleanWikiLink, // Exported for shared use
+  cleanWikiLink,
 };
