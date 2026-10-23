@@ -39,14 +39,7 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
   }
 
   processValues(values) {
-    const authors =
-      typeof values.author === "string"
-        ? values.author
-            .split(",")
-            .map((a) => a.trim())
-            .filter(Boolean)
-        : [];
-
+    const authors = this.parseCommaSeparatedList(values.author);
     const primaryAuthor = authors[0] || "matt2ology";
 
     return {
