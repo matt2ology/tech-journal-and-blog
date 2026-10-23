@@ -1,7 +1,7 @@
 const path = require("path");
 const vaultPath = app.vault.adapter.getBasePath();
 
-const { slugify } = require(
+const { slugify, formatNaturalNameList } = require(
   path.join(vaultPath, "scripts", "_quickadd", "utils", "formatters"),
 );
 const FrontmatterBuilderBase = require(
@@ -40,7 +40,7 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
 
   processValues(values) {
     const authors = this.parseCommaSeparatedList(values.author);
-    const primaryAuthor = authors[0] || "matt2ology";
+    const primaryAuthor = authors[0] || "noAuthorListed";
 
     return {
       ...values,
@@ -50,9 +50,15 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
   }
 
   buildExtraProperties(values) {
+    const authorList = formatNaturalNameList(values.author);
+    const detailText = values.title
+      ? `${values.title} by ${authorList}`
+      : authorList;
+
     return [
       `author:${this.formatNameList(values.author, '"NoAuthorNamed"')}`,
       `rating: ${values.rating || "0"}`,
+      `detail: "${detailText}"`,
     ];
   }
 }
