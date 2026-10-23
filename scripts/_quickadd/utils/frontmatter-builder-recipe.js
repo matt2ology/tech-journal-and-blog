@@ -71,17 +71,28 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
   }
 
   processValues(values) {
-    const formattedSource = values.source
-      ? `\n**Source:** [${TextFormatter.titleCase(values.dish) || "Recipe"} by ${TextFormatter.titleCase(values.chef) || "Chef"}](${values.source})`
-      : "";
+    const formattedSource = FrontmatterBuilderRecipe.#formatSourceLink(
+      values.source,
+      values.dish,
+      values.chef,
+    );
 
     return {
       ...values,
       source: formattedSource,
       categories: this.appendToList(values.categories, "cookbook"),
       slug: TextFormatter.slugify(`${values.chef} ${values.dish}`),
-      title: TextFormatter.titleCase(`${values.dish} by ${TextFormatter.formatNaturalNameList(values.chef, false)}`),
+      title: TextFormatter.titleCase(
+        `${values.dish} by ${TextFormatter.formatPlainNaturalNameList(values.chef)}`,
+      ),
     };
+  }
+
+  static #formatSourceLink(source, dish, chef) {
+    if (!source) return "";
+    const dishTitle = TextFormatter.titleCase(dish) || "Recipe";
+    const chefTitle = TextFormatter.titleCase(chef) || "Chef";
+    return `\n**Source:** [${dishTitle} by ${chefTitle}](${source})`;
   }
 
   buildExtraProperties(values) {
