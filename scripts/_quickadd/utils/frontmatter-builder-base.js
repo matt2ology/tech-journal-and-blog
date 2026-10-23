@@ -1,10 +1,10 @@
 const path = require("path");
 const vaultPath = app.vault.adapter.getBasePath();
 
-const { slugify, formatYAMLArray, titleCase, formatYAMLNameList } = require(
-  path.join(vaultPath, "scripts", "_quickadd", "utils", "formatters"),
+const TextFormatter = require(
+  path.join(vaultPath, "scripts", "_quickadd", "utils", "text-formatter"),
 );
-const { appendUniqueItem } = require(
+const ListUtils = require(
   path.join(vaultPath, "scripts", "_quickadd", "utils", "list-utils"),
 );
 const { serializeFrontmatter } = require(
@@ -18,8 +18,7 @@ const { serializeFrontmatter } = require(
 );
 
 /**
- * Coordinates the shared frontmatter workflow.
- * Subclasses customize fields, value processing, and extra properties.
+ * Coordinates the shared frontmatter workflow using OOP design principles.
  */
 class FrontmatterBuilderBase {
   #quickAddApi;
@@ -64,11 +63,11 @@ class FrontmatterBuilderBase {
   }
 
   formatArray(input) {
-    return formatYAMLArray(input);
+    return TextFormatter.formatYAMLArray(input);
   }
 
   formatNameList(input, fallback) {
-    return formatYAMLNameList(input, fallback);
+    return TextFormatter.formatYAMLNameList(input, fallback);
   }
 
   buildStandardProperties(values, computed) {
@@ -88,10 +87,6 @@ class FrontmatterBuilderBase {
 
   /**
    * Appends one or more unique items to a list.
-   * Accepts multiple individual arguments or an array of items.
-   * @param {string|string[]} list - The original list
-   * @param {...(string|string[])} items - Items to append
-   * @returns {string|string[]} The updated list
    */
   appendToList(list = "", ...items) {
     let result = list;
@@ -99,11 +94,11 @@ class FrontmatterBuilderBase {
       if (Array.isArray(entry)) {
         for (const item of entry) {
           if (item) {
-            result = appendUniqueItem(result, item);
+            result = ListUtils.appendUniqueItem(result, item);
           }
         }
       } else if (entry) {
-        result = appendUniqueItem(result, entry);
+        result = ListUtils.appendUniqueItem(result, entry);
       }
     }
     return result;
@@ -111,20 +106,10 @@ class FrontmatterBuilderBase {
 
   /**
    * Parses a comma-separated string or array into a clean array of trimmed strings.
-   * @param {string|string[]} input - The input to parse
-   * @returns {string[]} Cleaned array of items
+   * Delegates to TextFormatter for consistency.
    */
-  parseCommaSeparatedList(input) {
-    if (Array.isArray(input)) {
-      return input.map((item) => String(item).trim()).filter(Boolean);
-    }
-    if (typeof input === "string") {
-      return input
-        .split(",")
-        .map((item) => item.trim())
-        .filter(Boolean);
-    }
-    return [];
+  parseCommaSeparatedList(input, shouldSlugify = false) {
+    return TextFormatter.parseCommaSeparatedList(input, shouldSlugify);
   }
 
   async run(params) {
@@ -146,8 +131,8 @@ class FrontmatterBuilderBase {
 
   #computeStandardValues(values) {
     return {
-      title: titleCase(values.title) || "NoTitle",
-      slug: values.slug ?? slugify(values.title),
+      title: TextFormatter.titleCase(values.title) || "NoTitle",
+      slug: values.slug ?? TextFormatter.slugify(values.title),
       date: this.#quickAddApi.date.now("YYYY-MM-DD"),
       draft: true,
       categories: this.formatArray(values.categories),
