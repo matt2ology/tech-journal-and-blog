@@ -37,30 +37,36 @@ class TextFormatter {
       .replace(/^-+|-+$/g, "");
   }
 
-  static parseCommaSeparatedList(input = "", shouldSlugify = false) {
-    const rawItems = Array.isArray(input)
-      ? input
-      : typeof input === "string"
-        ? input
-            .split(",")
-            .map((item) => item.trim())
-            .filter(Boolean)
-        : [];
+  static parseCommaSeparatedList(input = "") {
+    return TextFormatter.#extractRawItems(input);
+  }
 
-    const processed = rawItems.map((item) =>
-      shouldSlugify ? this.slugify(item) : item,
-    );
-    return [...new Set(processed)];
+  static parseAndSlugifyCommaSeparatedList(input = "") {
+    const rawItems = TextFormatter.#extractRawItems(input);
+    return [...new Set(rawItems.map((item) => TextFormatter.slugify(item)))];
+  }
+
+  static #extractRawItems(input) {
+    if (Array.isArray(input)) return input;
+    if (typeof input === "string") {
+      return input
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+    return [];
   }
 
   static formatYAMLArray(input = "", shouldSlugify = true) {
-    const items = this.parseCommaSeparatedList(input, shouldSlugify);
+    const items = shouldSlugify
+      ? TextFormatter.parseAndSlugifyCommaSeparatedList(input)
+      : TextFormatter.parseCommaSeparatedList(input);
     if (items.length === 0) return " []";
     return "\n  - " + items.join("\n  - ");
   }
 
   static titleCase(inputText = "") {
-    if (!inputText || typeof inputText !== "string") return "";
+    if (TextFormatter.#isInvalidText(inputText)) return "";
 
     const words = inputText
       .normalize("NFC")
@@ -73,84 +79,129 @@ class TextFormatter {
       .map((word, index) => {
         if (!word) return "";
         if (
-          index > 0 &&
-          index < words.length - 1 &&
-          this.MINOR_WORDS.has(word)
+          TextFormatter.#shouldPreserveLowercaseWord(word, index, words.length)
         ) {
           return word;
         }
-        return word.replace(/^\b[a-z]/i, (char) => char.toUpperCase());
+        return TextFormatter.#capitalizeWord(word);
       })
       .join(" ");
   }
 
-  static formatNameAsWikilink(input = "") {
-    if (!input || typeof input !== "string") return "";
+  static #isInvalidText(text) {
+    return !text || typeof text !== "string";
+  }
 
-    let trimmedInput = input.trim().replace(/\s+/g, " ");
+  static #shouldPreserveLowercaseWord(word, index, length) {
+    return (
+      index > 0 && index < length - 1 && TextFormatter.MINOR_WORDS.has(word)
+    );
+  }
+
+  static #capitalizeWord(word) {
+    return word.replace(/^\b[a-z]/i, (char) => char.toUpperCase());
+  }
+
+  static formatNameAsWikilink(input = "") {
+    if (TextFormatter.#isInvalidText(input)) return "";
+
+    let trimmedInput = TextFormatter.#normalizeWhitespace(input);
     if (!trimmedInput) return "";
 
-    if (trimmedInput.includes(",")) {
-      const parts = trimmedInput.split(",").map((p) => p.trim());
-      if (parts.length >= 2 && parts[0] && parts[1]) {
-        const lastName = parts[0];
-        const rest = parts.slice(1).join(" ");
-        trimmedInput = `${rest} ${lastName}`;
-      }
-    }
+    trimmedInput = TextFormatter.#reorderCommaSeparatedName(trimmedInput);
 
-    const isAllUpper =
-      trimmedInput === trimmedInput.toUpperCase() &&
-      trimmedInput !== trimmedInput.toLowerCase();
-    const isAllLower =
-      trimmedInput === trimmedInput.toLowerCase() &&
-      trimmedInput !== trimmedInput.toUpperCase();
+    const isAllUpper = TextFormatter.#isAllUpperCase(trimmedInput);
+    const isAllLower = TextFormatter.#isAllLowerCase(trimmedInput);
 
     const words = trimmedInput.split(" ");
     const processedWords = words.map((word, index) => {
       const cleaned = word.replace(/[.,]/g, "");
       let targetWord = word;
       if (isAllUpper || isAllLower) {
-        targetWord = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+        targetWord = TextFormatter.#toTitleCaseSingle(word);
       }
 
-      if (index > 0 && index < words.length - 1 && cleaned.length === 1) {
-        const capitalized = targetWord.replace(/^\b[a-z]/i, (c) =>
-          c.toUpperCase(),
-        );
-        return capitalized.endsWith(".") ? capitalized : capitalized + ".";
+      if (
+        TextFormatter.#isSingleLetterAbbreviation(index, words.length, cleaned)
+      ) {
+        return TextFormatter.#formatAbbreviation(targetWord);
       }
 
       return targetWord;
     });
 
     const displayName = processedWords.join(" ");
-    const slug = this.slugify(displayName);
+    const slug = TextFormatter.slugify(displayName);
 
     return `[[${slug}|${displayName}]]`;
   }
 
+  static #normalizeWhitespace(input) {
+    return input.trim().replace(/\s+/g, " ");
+  }
+
+  static #reorderCommaSeparatedName(trimmedInput) {
+    if (trimmedInput.includes(",")) {
+      const parts = trimmedInput.split(",").map((p) => p.trim());
+      if (parts.length >= 2 && parts[0] && parts[1]) {
+        const lastName = parts[0];
+        const rest = parts.slice(1).join(" ");
+        return `${rest} ${lastName}`;
+      }
+    }
+    return trimmedInput;
+  }
+
+  static #isAllUpperCase(text) {
+    return text === text.toUpperCase() && text !== text.toLowerCase();
+  }
+
+  static #isAllLowerCase(text) {
+    return text === text.toLowerCase() && text !== text.toUpperCase();
+  }
+
+  static #toTitleCaseSingle(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  }
+
+  static #isSingleLetterAbbreviation(index, length, cleaned) {
+    return index > 0 && index < length - 1 && cleaned.length === 1;
+  }
+
+  static #formatAbbreviation(targetWord) {
+    const capitalized = targetWord.replace(/^\b[a-z]/i, (c) => c.toUpperCase());
+    return capitalized.endsWith(".") ? capitalized : capitalized + ".";
+  }
+
   static formatYAMLNameList(input, fallback = '"NoName"') {
-    const items = this.parseCommaSeparatedList(input, false);
+    const items = TextFormatter.parseCommaSeparatedList(input);
 
     if (items.length === 0) return ` ${fallback}`;
 
     return (
       '\n  - "' +
-      items.map((item) => this.formatNameAsWikilink(item)).join('"\n  - "') +
+      items
+        .map((item) => TextFormatter.formatNameAsWikilink(item))
+        .join('"\n  - "') +
       '"'
     );
   }
 
-  static formatNaturalNameList(input, formatAsWikilink = true) {
-    const items = this.parseCommaSeparatedList(input, false);
-
-    if (items.length === 0) return "No Author";
-
+  static formatNaturalNameList(input) {
+    const items = TextFormatter.parseCommaSeparatedList(input);
     const processedItems = items.map((item) =>
-      formatAsWikilink ? this.formatNameAsWikilink(item) : item,
+      TextFormatter.formatNameAsWikilink(item),
     );
+    return TextFormatter.#joinNaturalList(processedItems);
+  }
 
+  static formatPlainNaturalNameList(input) {
+    const items = TextFormatter.parseCommaSeparatedList(input);
+    return TextFormatter.#joinNaturalList(items);
+  }
+
+  static #joinNaturalList(processedItems) {
+    if (processedItems.length === 0) return "No Author";
     if (processedItems.length === 1) return processedItems[0];
     if (processedItems.length === 2)
       return `${processedItems[0]} and ${processedItems[1]}`;
