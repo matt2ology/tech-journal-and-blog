@@ -12,6 +12,8 @@ categories:
 
 **Link to source:** {{VALUE: sourceMarkdownLink}}
 
+## SQ3R Method (Survey, Question, Read, Recite, Review)
+
 <!--
 SQ3R Method (Survey, Question, Read, Recite, Review).
 Best for: General study and reading comprehension. It’s a well-established method for extracting key information from texts.
@@ -22,8 +24,6 @@ Best for: General study and reading comprehension. It’s a well-established met
 4. **Recite:** Summarize or recall the information in your own words.
 5. **Review:** Go back over the material periodically to reinforce the information.
  -->
-
-## SQ3R Method (Survey, Question, Read, Recite, Review)
 
 - [ ] #question
 
