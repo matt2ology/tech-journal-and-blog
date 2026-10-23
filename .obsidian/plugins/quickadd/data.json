@@ -217,10 +217,10 @@
         "id": "37127f75-9054-4ed8-8023-cded47d9d95e",
         "commands": [
           {
-            "name": "recipe-note",
+            "name": "note-recipe",
             "type": "UserScript",
-            "id": "d2c90292-44c6-43cc-8f39-31908cab5693",
-            "path": "scripts/_quickadd/recipe-note.js",
+            "id": "7c817fcd-8f85-49e0-8242-fd00b892f96b",
+            "path": "scripts/_quickadd/note-recipe.js",
             "settings": {}
           },
           {
@@ -262,7 +262,67 @@
             }
           }
         ]
-      }
+      },
+      "icon": "cookie"
+    },
+    {
+      "id": "48bedaf3-fb5f-4dac-bbc6-c9cc64356283",
+      "name": "Book Chapter Literature Note",
+      "type": "Macro",
+      "command": false,
+      "runOnStartup": false,
+      "macro": {
+        "name": "Book Chapter Literature Note",
+        "id": "1a06c150-fc31-4610-8a09-7e72368d8baa",
+        "commands": [
+          {
+            "name": "note-chapter",
+            "type": "UserScript",
+            "id": "a8b86d1f-342d-4593-8a98-2c6fe0c10e0b",
+            "path": "scripts/_quickadd/note-chapter.js",
+            "settings": {}
+          },
+          {
+            "name": "literature-book-template",
+            "type": "NestedChoice",
+            "id": "2ea1ae0f-07e9-4c58-8889-466b37359106",
+            "choice": {
+              "id": "cf305b18-053d-4530-bd38-03f8bd51d3ba",
+              "name": "literature-book-template",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/literature-book-chapter.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "{{VALUE:filename}}"
+              },
+              "discoverExistingNotesBeforeCreate": false,
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "literature/books/{{VALUE:folder}}"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "copyLinkToClipboard": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              }
+            }
+          }
+        ]
+      },
+      "icon": "book-open"
     }
   ],
   "inputPrompt": "single-line",
