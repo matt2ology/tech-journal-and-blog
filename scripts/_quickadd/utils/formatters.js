@@ -117,6 +117,25 @@ function formatYAMLNameList(input, fallback = '"NoName"') {
   );
 }
 
+/**
+ * Formats a list of names into a natural language string (e.g., "A", "A and B", or "A, B, and C").
+ */
+function formatNaturalNameList(input) {
+  const items = Array.isArray(input)
+    ? input
+    : typeof input === "string"
+      ? input
+          .split(",")
+          .map((i) => i.trim())
+          .filter(Boolean)
+      : [];
+
+  if (items.length === 0) return "No Author";
+  if (items.length === 1) return items[0];
+  if (items.length === 2) return `${items[0]} and ${items[1]}`;
+  return `${items.slice(0, -1).join(", ")}, and ${items[items.length - 1]}`;
+}
+
 function cleanWikiLink(opt) {
   if (typeof opt !== "string") return opt;
   const cleaned = opt.replace(/^"?"?\[\[|\]\]"?"?$/g, "");
@@ -131,4 +150,5 @@ module.exports = {
   formatNameAsWikilink,
   formatYAMLNameList,
   cleanWikiLink,
+  formatNaturalNameList,
 };
