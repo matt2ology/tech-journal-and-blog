@@ -96,9 +96,17 @@ function formatNameAsWikilink(input = "") {
 }
 
 /**
- * Formats an array or comma-separated string of names into a YAML bulleted list of quoted wikilinks.
+ * Formats an array or comma-separated string of names into a YAML bulleted list
+ * of quoted strings or wikilinks.
+ *
+ * @param {Array<string>|string} input - The names to format, provided as an array or a comma-separated string.
+ * @param {string} [fallback='"NoName"'] - The fallback string returned if the input list is empty.
+ * @returns {string} A YAML-formatted bulleted string of names or the fallback value.
  */
-function formatYAMLNameList(input, fallback = '"NoName"') {
+function formatYAMLNameList(
+  input,
+  fallback = '"NoName"',
+) {
   const items = Array.isArray(input)
     ? input
     : typeof input === "string"
