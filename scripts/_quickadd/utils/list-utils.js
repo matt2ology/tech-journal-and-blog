@@ -10,8 +10,14 @@ class ListUtils {
         .filter(Boolean),
     );
 
-    if (item) items.add(item);
+    if (ListUtils.#isValidItem(item)) {
+      items.add(item);
+    }
     return [...items].join(", ");
+  }
+
+  static #isValidItem(item) {
+    return Boolean(item);
   }
 }
 
