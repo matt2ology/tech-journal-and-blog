@@ -101,13 +101,13 @@ class FrontmatterBuilderBase {
       ...this.buildStandardProperties(values, computed),
       ...this.buildExtraProperties(values, computed),
     ];
-    const frontmatter = serializeFrontmatter(properties);
 
+    const frontmatter = serializeFrontmatter(properties);
     this.#syncParamsVariables(params, computed, frontmatter, values);
     return frontmatter;
   }
 
-  #computeStandardValue(values) {
+  #computeStandardValues(values) {
     return {
       title: titleCase(values.title) || "NoTitle",
       slug: values.slug ?? slugify(values.title),
@@ -116,10 +116,6 @@ class FrontmatterBuilderBase {
       categories: this.formatArray(values.categories),
       tags: this.formatArray(values.tags),
     };
-  }
-
-  #computeStandardValues(values) {
-    return this.#computeStandardValue(values);
   }
 
   #syncParamsVariables(params, computed, frontmatter, values) {
