@@ -1,8 +1,8 @@
 const path = require("path");
 const vaultPath = app.vault.adapter.getBasePath();
 
-const { titleCase, cleanWikiLink, slugify } = require(
-  path.join(vaultPath, "scripts", "_quickadd", "utils", "formatters"),
+const TextFormatter = require(
+  path.join(vaultPath, "scripts", "_quickadd", "utils", "text-formatter"),
 );
 const FrontmatterBuilderBase = require(
   path.join(
@@ -13,14 +13,22 @@ const FrontmatterBuilderBase = require(
     "frontmatter-builder-base",
   ),
 );
-const { getFieldValues } = require(
-  path.join(vaultPath, "scripts", "_quickadd", "utils", "getFieldValues"),
+const VaultQueryService = require(
+  path.join(vaultPath, "scripts", "_quickadd", "utils", "vault-query-service"),
 );
 
+/**
+ * Recipe-specific frontmatter builder.
+ */
 class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
   getFields() {
-    const processedChefOptions = getFieldValues(app, "chef", "cookbook").map(
-      cleanWikiLink,
+    const rawChefOptions = VaultQueryService.getFieldValues(
+      app,
+      "chef",
+      "cookbook",
+    );
+    const processedChefOptions = rawChefOptions.map((chef) =>
+      TextFormatter.cleanWikiLink(chef),
     );
 
     return [
@@ -64,21 +72,21 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
 
   processValues(values) {
     const formattedSource = values.source
-      ? `\n**Source:** [${titleCase(values.dish) || "Recipe"} by ${titleCase(values.chef) || "Chef"}](${values.source})`
+      ? `\n**Source:** [${TextFormatter.titleCase(values.dish) || "Recipe"} by ${TextFormatter.titleCase(values.chef) || "Chef"}](${values.source})`
       : "";
 
     return {
       ...values,
       source: formattedSource,
       categories: this.appendToList(values.categories, "cookbook"),
-      slug: slugify(`${values.chef} ${values.dish}`),
-      title: titleCase(`${values.dish} by ${values.chef}`),
+      slug: TextFormatter.slugify(`${values.chef} ${values.dish}`),
+      title: TextFormatter.titleCase(`${values.dish} by ${TextFormatter.formatNaturalNameList(values.chef, false)}`),
     };
   }
 
   buildExtraProperties(values) {
     return [
-      `dish: "${titleCase(values.dish) || "NoNameDish"}"`,
+      `dish: "${TextFormatter.titleCase(values.dish) || "NoNameDish"}"`,
       `chef:${this.formatNameList(values.chef, '"NoChefNamed"')}`,
       `meal: ${values.meal || "NoMealListed"}`,
       `image: ""`,
