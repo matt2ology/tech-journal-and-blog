@@ -23,9 +23,9 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
       ...super.getFields(),
       {
         id: "author",
-        label: "Author",
+        label: "Author(s)",
         type: "text",
-        placeholder: "Book Author",
+        placeholder: "Book Author(s), comma separated",
         defaultValue: "matt2ology",
       },
       {
@@ -39,16 +39,27 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
   }
 
   processValues(values) {
+    const authorsArray = Array.isArray(values.author)
+      ? values.author
+      : typeof values.author === "string"
+        ? values.author
+            .split(",")
+            .map((a) => a.trim())
+            .filter(Boolean)
+        : [];
+    const primaryAuthor =
+      authorsArray.length > 0 ? authorsArray[0] : "matt2ology";
+
     return {
       ...values,
-      categories: this.appendToList(values.categories, "book"),
-      slug: slugify(`${values.author}-${values.title}`),
+      categories: this.appendToList(values.categories, "literature"),
+      slug: slugify(`${primaryAuthor}-${values.title}`),
     };
   }
 
   buildExtraProperties(values) {
     return [
-      `author: "${values.author || ""}"`,
+      `author:${this.formatNameList(values.author, '"NoAuthorNamed"')}`,
       `rating: ${values.rating || "0"}`,
     ];
   }
