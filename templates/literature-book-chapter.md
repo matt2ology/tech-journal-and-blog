@@ -2,6 +2,16 @@
 
 {{VALUE:detail}}
 
+## Summary in 3 Sentences
+
+- 
+
+## Key Takeaways & Core Concepts
+
+* **Concept 1:** Brief explanation.
+
+---
+
 ## SQ3R Method (Survey, Question, Read, Recite, Review)
 
 <!--
@@ -27,4 +37,8 @@ Format:
 >> \- cited
 
 **Reflection**:
+-->
+
+<!--
+### Section 1: [Subtitle/Topic]
 -->
