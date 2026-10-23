@@ -1,8 +1,8 @@
 const path = require("path");
 const vaultPath = app.vault.adapter.getBasePath();
 
-const { titleCase, slugify, formatNaturalNameList } = require(
-  path.join(vaultPath, "scripts", "_quickadd", "utils", "formatters"),
+const TextFormatter = require(
+  path.join(vaultPath, "scripts", "_quickadd", "utils", "text-formatter"),
 );
 const FrontmatterBuilderBase = require(
   path.join(
@@ -15,7 +15,7 @@ const FrontmatterBuilderBase = require(
 );
 
 /**
- * Adds book-specific inputs and metadata to the shared frontmatter workflow.
+ * Book-specific frontmatter builder.
  */
 class FrontmatterBuilderBook extends FrontmatterBuilderBase {
   getFields() {
@@ -44,29 +44,34 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
     ];
   }
 
-  /**
-   * Removes everything after a colon and trims whitespace.
-   * @param {string} text - The input string
-   * @returns {string} The cleaned string
-   */
   #removeAfterColon(text) {
     return text ? text.split(":")[0].trim() : "";
   }
 
   processValues(values) {
     const authors = this.parseCommaSeparatedList(values.author);
-    const authorList = formatNaturalNameList(values.author);
+    const authorList = TextFormatter.formatNaturalNameList(values.author);
     const primaryAuthor = authors[0] || "noAuthorListed";
-    const detailText = `${values.chapter} - [[${slugify(values.book)}|${values.book}]] by ${authorList}`;
+    const detailText = `${values.chapter} - [[${TextFormatter.slugify(values.book)}|${values.book}]] by ${authorList}`;
 
     return {
       ...values,
       categories: this.appendToList(values.categories, "books", "literature"),
       detail: detailText,
-      filename: slugify(`lit-${this.#removeAfterColon(values.book)}-${this.#removeAfterColon(values.chapter)}`,),
-      folder: slugify(`${primaryAuthor}-${this.#removeAfterColon(values.book)}`),
-      slug: slugify(`${this.#removeAfterColon(values.book)}-${this.#removeAfterColon(values.chapter)}`,),
-      tags: this.appendToList(values.tags, "question", slugify(values.author)),
+      filename: TextFormatter.slugify(
+        `lit-${this.#removeAfterColon(values.book)}-${this.#removeAfterColon(values.chapter)}`,
+      ),
+      folder: TextFormatter.slugify(
+        `${primaryAuthor}-${this.#removeAfterColon(values.book)}`,
+      ),
+      slug: TextFormatter.slugify(
+        `${this.#removeAfterColon(values.book)}-${this.#removeAfterColon(values.chapter)}`,
+      ),
+      tags: this.appendToList(
+        values.tags,
+        "question",
+        ...TextFormatter.parseCommaSeparatedList(values.author, true),
+      ),
       title: `Notes on ${this.#removeAfterColon(values.book)} - ${this.#removeAfterColon(values.chapter)}`,
     };
   }
