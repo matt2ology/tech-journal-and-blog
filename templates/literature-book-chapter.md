@@ -1,16 +1,6 @@
----
-title: "{{VALUE:formattedTitle}}"
-date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
-description: "{{VALUE:description}}"
-draft: true
-slug: "{{VALUE:slug}}"
-tags:{{VALUE:tags}}
-categories:
----
+{{VALUE:frontmatter}}
 
-## Summary of
-
-**Link to source:** {{VALUE: sourceMarkdownLink}}
+{{VALUE:detail}}
 
 ## SQ3R Method (Survey, Question, Read, Recite, Review)
 
@@ -25,7 +15,7 @@ Best for: General study and reading comprehension. It’s a well-established met
 5. **Review:** Go back over the material periodically to reinforce the information.
  -->
 
-- [ ] #question
+- [ ] question_who_what_when_where_why_how
 
 ## Highlights
 
@@ -38,5 +28,3 @@ Format:
 
 **Reflection**:
 -->
-
-<!-- Optional: Chapters of each section -->
