@@ -40,25 +40,24 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
 
   processValues(values) {
     const authors = this.parseCommaSeparatedList(values.author);
+    const authorList = formatNaturalNameList(values.author);
     const primaryAuthor = authors[0] || "noAuthorListed";
+    const detailText = values.title
+      ? `${values.title} by ${authorList}`
+      : authorList;
 
     return {
       ...values,
       categories: this.appendToList(values.categories, "literature"),
       slug: slugify(`${primaryAuthor}-${values.title}`),
+      detail: detailText,
     };
   }
 
   buildExtraProperties(values) {
-    const authorList = formatNaturalNameList(values.author);
-    const detailText = values.title
-      ? `${values.title} by ${authorList}`
-      : authorList;
-
     return [
       `author:${this.formatNameList(values.author, '"NoAuthorNamed"')}`,
       `rating: ${values.rating || "0"}`,
-      `detail: "${detailText}"`,
     ];
   }
 }
