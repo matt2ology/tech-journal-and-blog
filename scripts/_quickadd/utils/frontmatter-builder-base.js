@@ -86,8 +86,27 @@ class FrontmatterBuilderBase {
     return [];
   }
 
-  appendToList(list = "", item) {
-    return appendUniqueItem(list, item);
+  /**
+   * Appends one or more unique items to a list.
+   * Accepts multiple individual arguments or an array of items.
+   * @param {string|string[]} list - The original list
+   * @param {...(string|string[])} items - Items to append
+   * @returns {string|string[]} The updated list
+   */
+  appendToList(list = "", ...items) {
+    let result = list;
+    for (const entry of items) {
+      if (Array.isArray(entry)) {
+        for (const item of entry) {
+          if (item) {
+            result = appendUniqueItem(result, item);
+          }
+        }
+      } else if (entry) {
+        result = appendUniqueItem(result, entry);
+      }
+    }
+    return result;
   }
 
   /**

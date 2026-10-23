@@ -75,24 +75,62 @@ function titleCase(inputText = "") {
     .join(" ");
 }
 
+/**
+ * Formats a full name into an Obsidian wikilink: [[slug|DisplayName]]
+ * - Preserves mixed capitalization (e.g., Heather deMesa).
+ * - Normalizes all-caps or all-lowercase to proper title/name casing.
+ * - Handles "LastName, FirstName" formatting by flipping them to "FirstName LastName".
+ */
 function formatNameAsWikilink(input = "") {
   if (!input || typeof input !== "string") return "";
 
-  const words = input.trim().replace(/\s+/g, " ").split(" ");
-  if (words.length === 0 || !words[0]) return "";
+  let trimmedInput = input.trim().replace(/\s+/g, " ");
+  if (!trimmedInput) return "";
 
+  // 1. Handle "LastName, FirstName" format
+  if (trimmedInput.includes(",")) {
+    const parts = trimmedInput.split(",").map((p) => p.trim());
+    if (parts.length >= 2 && parts[0] && parts[1]) {
+      // Reorder from [LastName, FirstName] to [FirstName, LastName]
+      // (Preserving middle names or extra parts if present)
+      const lastName = parts[0];
+      const rest = parts.slice(1).join(" ");
+      trimmedInput = `${rest} ${lastName}`;
+    }
+  }
+
+  // 2. Check capitalization rules
+  const isAllUpper =
+    trimmedInput === trimmedInput.toUpperCase() &&
+    trimmedInput !== trimmedInput.toLowerCase();
+  const isAllLower =
+    trimmedInput === trimmedInput.toLowerCase() &&
+    trimmedInput !== trimmedInput.toUpperCase();
+
+  const words = trimmedInput.split(" ");
   const processedWords = words.map((word, index) => {
     const cleaned = word.replace(/[.,]/g, "");
-    const capitalized = word.replace(/^\b[a-z]/i, (c) => c.toUpperCase());
 
+    let targetWord = word;
+    if (isAllUpper || isAllLower) {
+      targetWord = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }
+
+    // Ensure single-letter middle initials have a period
     if (index > 0 && index < words.length - 1 && cleaned.length === 1) {
+      const capitalized = targetWord.replace(/^\b[a-z]/i, (c) =>
+        c.toUpperCase(),
+      );
       return capitalized.endsWith(".") ? capitalized : capitalized + ".";
     }
-    return capitalized;
+
+    return targetWord;
   });
 
   const displayName = processedWords.join(" ");
-  return `[[${slugify(displayName)}|${displayName}]]`;
+  const slug = slugify(displayName);
+
+  return `[[${slug}|${displayName}]]`;
 }
 
 /**
@@ -103,10 +141,7 @@ function formatNameAsWikilink(input = "") {
  * @param {string} [fallback='"NoName"'] - The fallback string returned if the input list is empty.
  * @returns {string} A YAML-formatted bulleted string of names or the fallback value.
  */
-function formatYAMLNameList(
-  input,
-  fallback = '"NoName"',
-) {
+function formatYAMLNameList(input, fallback = '"NoName"') {
   const items = Array.isArray(input)
     ? input
     : typeof input === "string"
