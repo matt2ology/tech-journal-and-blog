@@ -90,6 +90,24 @@ class FrontmatterBuilderBase {
     return appendUniqueItem(list, item);
   }
 
+  /**
+   * Parses a comma-separated string or array into a clean array of trimmed strings.
+   * @param {string|string[]} input - The input to parse
+   * @returns {string[]} Cleaned array of items
+   */
+  parseCommaSeparatedList(input) {
+    if (Array.isArray(input)) {
+      return input.map((item) => String(item).trim()).filter(Boolean);
+    }
+    if (typeof input === "string") {
+      return input
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+    return [];
+  }
+
   async run(params) {
     const requestedValues = await this.#quickAddApi.requestInputs(
       this.getFields(),
