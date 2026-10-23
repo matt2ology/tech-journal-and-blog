@@ -24,12 +24,18 @@ class FrontmatterBuilderBase {
   #quickAddApi;
 
   constructor(quickAddApi) {
-    if (!quickAddApi || typeof quickAddApi.requestInputs !== "function") {
+    if (!FrontmatterBuilderBase.#isValidQuickAddApi(quickAddApi)) {
       throw new TypeError(
         "FrontmatterBuilderBase requires a QuickAdd API with requestInputs().",
       );
     }
     this.#quickAddApi = quickAddApi;
+  }
+
+  static #isValidQuickAddApi(quickAddApi) {
+    return Boolean(
+      quickAddApi && typeof quickAddApi.requestInputs === "function",
+    );
   }
 
   getFields() {
@@ -92,11 +98,7 @@ class FrontmatterBuilderBase {
     let result = list;
     for (const entry of items) {
       if (Array.isArray(entry)) {
-        for (const item of entry) {
-          if (item) {
-            result = ListUtils.appendUniqueItem(result, item);
-          }
-        }
+        result = this.#appendArrayItems(result, entry);
       } else if (entry) {
         result = ListUtils.appendUniqueItem(result, entry);
       }
@@ -104,12 +106,22 @@ class FrontmatterBuilderBase {
     return result;
   }
 
-  /**
-   * Parses a comma-separated string or array into a clean array of trimmed strings.
-   * Delegates to TextFormatter for consistency.
-   */
-  parseCommaSeparatedList(input, shouldSlugify = false) {
-    return TextFormatter.parseCommaSeparatedList(input, shouldSlugify);
+  #appendArrayItems(result, entryArray) {
+    let currentResult = result;
+    for (const item of entryArray) {
+      if (item) {
+        currentResult = ListUtils.appendUniqueItem(currentResult, item);
+      }
+    }
+    return currentResult;
+  }
+
+  parseCommaSeparatedList(input) {
+    return TextFormatter.parseCommaSeparatedList(input);
+  }
+
+  parseAndSlugifyCommaSeparatedList(input) {
+    return TextFormatter.parseAndSlugifyCommaSeparatedList(input);
   }
 
   async run(params) {
