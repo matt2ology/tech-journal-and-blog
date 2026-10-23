@@ -1,11 +1,9 @@
 const path = require("path");
 const vaultPath = app.vault.adapter.getBasePath();
 
-// Import cleanWikiLink from your central formatters utility
-const { titleCase, cleanWikiLink } = require(
+const { titleCase, cleanWikiLink, slugify } = require(
   path.join(vaultPath, "scripts", "_quickadd", "utils", "formatters"),
 );
-
 const FrontmatterBuilderBase = require(
   path.join(
     vaultPath,
@@ -15,16 +13,15 @@ const FrontmatterBuilderBase = require(
     "frontmatter-builder-base",
   ),
 );
-
 const { getFieldValues } = require(
   path.join(vaultPath, "scripts", "_quickadd", "utils", "getFieldValues"),
 );
 
 class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
   getFields() {
-    // Dynamically fetch unique chef values from the cookbook folder
-    const rawChefOptions = getFieldValues(app, "chef", "cookbook");
-    const processedChefOptions = rawChefOptions.map(cleanWikiLink);
+    const processedChefOptions = getFieldValues(app, "chef", "cookbook").map(
+      cleanWikiLink,
+    );
 
     return [
       {
@@ -66,14 +63,13 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
   }
 
   processValues(values) {
-    const chefName = values.chef;
     const formattedSource = values.source
-      ? `\n**Source:** [${titleCase(values.dish) || "Recipe"} by ${titleCase(chefName) || "Chef"}](${values.source})`
+      ? `\n**Source:** [${titleCase(values.dish) || "Recipe"} by ${titleCase(values.chef) || "Chef"}](${values.source})`
       : "";
 
     return {
       ...values,
-      source: formattedSource, // Overrides the raw URL input with formatted markdown string
+      source: formattedSource,
       categories: this.appendToList(values.categories, "cookbook"),
       slug: slugify(`${values.chef} ${values.dish}`),
       title: titleCase(`${values.dish} by ${values.chef}`),
@@ -85,7 +81,7 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
       `dish: "${titleCase(values.dish) || "NoNameDish"}"`,
       `chef:${this.formatNameList(values.chef, '"NoChefNamed"')}`,
       `meal: ${values.meal || "NoMealListed"}`,
-      `image: ${""}`,
+      `image: ""`,
     ];
   }
 }
