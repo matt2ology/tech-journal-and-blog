@@ -93,4 +93,70 @@ function capitalizeFirstLetter(word) {
   return word.replace(/\b[a-z]/i, (char) => char.toUpperCase());
 }
 
-module.exports = { slugify, formatYAMLArray, titleCase };
+/**
+ * Formats a full name into an Obsidian wikilink: [[slug|DisplayName]]
+ */
+function formatNameAsWikilink(input = "") {
+  if (!input || typeof input !== "string") return "";
+
+  const words = input.trim().replace(/\s+/g, " ").split(" ");
+  if (words.length === 0 || !words[0]) return "";
+
+  const processedWords = words.map((word, index) => {
+    const cleaned = word.replace(/[.,]/g, "");
+    const capitalized = capitalizeFirstLetter(word.toLowerCase());
+
+    if (index > 0 && index < words.length - 1 && cleaned.length === 1) {
+      return capitalized.endsWith(".") ? capitalized : capitalized + ".";
+    }
+    return capitalized;
+  });
+
+  const displayName = processedWords.join(" ");
+  const slug = slugify(displayName);
+
+  return `[[${slug}|${displayName}]]`;
+}
+
+/**
+ * Formats an array or comma-separated string of names into a YAML bulleted list of quoted wikilinks.
+ */
+function formatYAMLNameList(input, fallback = '"NoName"') {
+  const items = Array.isArray(input)
+    ? input
+    : typeof input === "string"
+      ? input
+          .split(",")
+          .map((i) => i.trim())
+          .filter(Boolean)
+      : [];
+
+  if (items.length === 0) return ` ${fallback}`;
+
+  return (
+    '\n  - "' +
+    items.map((item) => formatNameAsWikilink(item)).join('"\n  - "') +
+    '"'
+  );
+}
+
+/**
+ * Cleans a wiki-link string and extracts its alias or target text.
+ * e.g. "[[slug|Name]]" -> "Name"
+ *      "[[Name]]" -> "Name"
+ */
+function cleanWikiLink(opt) {
+  if (typeof opt !== "string") return opt;
+  const cleaned = opt.replace(/^"?"?\[\[|\]\]"?"?$/g, "");
+  const parts = cleaned.split("|");
+  return parts.length > 1 ? parts[1] : parts[0];
+}
+
+module.exports = {
+  slugify,
+  formatYAMLArray,
+  titleCase,
+  formatNameAsWikilink,
+  formatYAMLNameList,
+  cleanWikiLink, // Exported for shared use
+};
