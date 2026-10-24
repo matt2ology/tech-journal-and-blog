@@ -70,10 +70,6 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
         .filter(Boolean);
     }
 
-    #hasMultipleParagraphs(index) {
-      return index > 0;
-    }
-
     #generateCumulativeMarginalia() {
       this.marginaliaNotes = [];
 
@@ -124,7 +120,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
         ``,
       ];
 
-      this.marginaliaNotes.forEach((note, idx) => {
+      this.marginaliaNotes.forEach((note) => {
         outputLines.push(`### Paragraph ${note.paragraphNumber}`);
         outputLines.push(
           ...this.#formatBlock({
