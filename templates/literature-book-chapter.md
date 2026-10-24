@@ -2,13 +2,14 @@
 
 {{VALUE:detail}}
 
-## Summary in 3 Sentences
-
--
-
 ## Key Takeaways & Core Concepts
 
-- **Concept 1:** Brief explanation.
+> [!abstract] Overview
+> **Core Objective / Takeaway:** One or two sentences answering: *What problem does this chapter solve, or what principle does it establish?*
+
+* **Concept 1:** Define the term or mechanism simply. How does it work? Why does it matter?
+* **Concept 2:** Paraphrase rule, formula, or mental model introduced in the text.
+* **Concept 3:** Connection to prior knowledge or other chapters `[[Related Permanent Concept Note]]`.
 
 ---
 
@@ -27,9 +28,13 @@ Best for: General study and reading comprehension. It’s a well-established met
 
 - [ ] question_who_what_when_where_why_how
 
-## Highlights
+## Essential Textbook Highlights
 
 <!--
+> [!quote] Key Definition / Axiom
+> "Insert crucial verbatim definition, formula, or theorem from the chapter if exact wording is vital."
+> \- *p. {{page_number}}*
+========
 Highlights of direct quotes, key points, or insights from the source content
 Format:
 
