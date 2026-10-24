@@ -5,7 +5,7 @@ Return to the Obsidian app to initiate a sync. If you take new highlights on doc
 ## File name
 
 ```python
-{% macro slug(s, length) -%} {{ s | lower | replace('#','-') | replace('*','-') | replace(':','-') | replace("and","") | replace(' ','-') | replace(' - ','-') | replace(' -','-') | replace('- ','-') | replace('..','') | replace('.','-') | replace('"','') | replace("'","") | replace('…','-') | replace('(','') | replace(')','') | replace(',','') | replace('|','') | replace('/','') | replace('--','-') | truncate(length, True, '') | replace('--','-') | replace('^-','') | replace('-$','') }} {%- endmacro %}  rw-{{ slug(author, 50) }}-{{ slug(title, 50) }}
+{% macro slug(s, length) -%} {{ s | lower | replace('#','-') | replace('*','-') | replace(':','-') | replace("and","") | replace(' ','-') | replace(' - ','-') | replace(' -','-') | replace('- ','-') | replace('..','') | replace('.','-') | replace('"','') | replace("'","") | replace('…','-') | replace('(','') | replace(')','') | replace(',','') | replace('|','') | replace('/','') | replace('--','-') | truncate(length, True, '') | replace('--','-') | replace('^-','') | replace('-$','') }} {%- endmacro %}  mgn-{{ slug(author, 50) }}-{{ slug(title, 50) }}
 ```
 
 ## Page title
