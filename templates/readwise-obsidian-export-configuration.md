@@ -98,6 +98,16 @@ The formatting of each individual highlight.
 Don't include the triple dashes. Leave blank to disable YAML front matter altogether.
 
 ```python
+{% macro slugify_and_fixup(s) -%}
+{{ s
+  | lower
+  | replace('*', '')
+  | regex_replace('[^\w\s-]', '')
+  | regex_replace('[\s_]+', '-')
+  | regex_replace('-+', '-')
+  | regex_replace('^-+|-+$', '')
+}}
+{%- endmacro %}
 {% macro fixup(s) -%}
 {{ s
 | replace('*','')
@@ -107,18 +117,18 @@ Don't include the triple dashes. Leave blank to disable YAML front matter altoge
 }}
 {%- endmacro %}
 
-aliases: "Highlights of {{author}} - {{fixup(title)}}"
-authors: {{author}}
-categories:
-  - highlights
-  - {{category}}
+title: "Marginal Notes on {{author}} - {{fixup(title)}}"
 date: {{date|date("Y-m-d")}}
 draft: true
-media: {{category}}
-source: {{source}}
+slug: "mgn-{{slugify_and_fixup(title)}}"
+categories:
+  - marginalia
+  - {{category}}
+  - {{source}}
 tags: {% for tag in document_tags %}
   - {{tag}} {% endfor %}
-title: "Highlights of {{author}} - {{fixup(title)}}"
+authors: [[{{slugify_and_fixup(author)}}|{{author}}]]
+book: {{ full_title }}
 ```
 
 ## Sync notification
