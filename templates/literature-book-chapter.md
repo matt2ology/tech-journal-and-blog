@@ -5,11 +5,11 @@
 ## Key Takeaways & Core Concepts
 
 > [!abstract] Overview
-> **Core Objective / Takeaway:** One or two sentences answering: *What problem does this chapter solve, or what principle does it establish?*
+> **Core Objective / Takeaway:** One or two sentences answering: _What problem does this chapter solve, or what principle does it establish?_
 
-* **Concept 1:** Define the term or mechanism simply. How does it work? Why does it matter?
-* **Concept 2:** Paraphrase rule, formula, or mental model introduced in the text.
-* **Concept 3:** Connection to prior knowledge or other chapters `[[Related Permanent Concept Note]]`.
+- **Concept 1:** Define the term or mechanism simply. How does it work? Why does it matter?
+- **Concept 2:** Paraphrase rule, formula, or mental model introduced in the text.
+- **Concept 3:** Connection to prior knowledge or other chapters `[[Related Permanent Concept Note]]`.
 
 ---
 
