@@ -1,242 +1,285 @@
 module.exports = async ({ quickAddApi: qa, variables, abort }) => {
-  // =========================
-  // Helpers: Text & Condition Predicates
-  // =========================
-  const normalizeNewlines = (text = "") =>
-    text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-
-  const cleanText = (text = "") =>
-    normalizeNewlines(text)
-      .replace(/[ \t]+/g, " ")
-      .trim();
-
-  const hasManualCitation = (manualCitation) => Boolean(manualCitation?.trim());
-
-  const isKindleCitationText = (text) =>
-    /(Kindle Edition\.|\. eBook\.|\. Ebook\.)\s*$/i.test(text);
-
-  const hasMultipleParts = (parts) => parts.length > 1;
-
-  // =========================
-  // Helpers: Citation Parsers
-  // =========================
-  const splitQuoteAndCitation = (raw, manualCitation) => {
-    const normalized = normalizeNewlines(raw);
-    const parts = normalized
-      .split(/\n{2,}/)
-      .map((p) => p.trim())
-      .filter(Boolean);
-
-    if (hasManualCitation(manualCitation)) {
-      return {
-        quote: parts.join("\n\n"),
-        citation: manualCitation.trim(),
-      };
+  class QuoteProcessor {
+    // =========================
+    // Public Methods
+    // =========================
+    constructor(qaApi, vars, abortFn) {
+      this.qa = qaApi;
+      this.variables = vars;
+      this.abort = abortFn;
+      this.rawQuote = "";
+      this.manualCitation = "";
+      this.reflection = "";
+      this.quote = "";
+      this.citation = "";
+      this.mlaCitation = "";
     }
 
-    const lastPart = parts[parts.length - 1];
-    if (hasMultipleParts(parts) && isKindleCitationText(lastPart)) {
-      return {
-        quote: parts.slice(0, -1).join("\n\n"),
-        citation: lastPart,
-      };
+    async run() {
+      const isSuccess = await this.#requestInputs();
+      if (!isSuccess) return;
+
+      this.#processQuoteAndCitation();
+      this.#formatAndStoreOutput();
+      return this.variables.formattedQuote;
     }
 
-    return {
-      quote: parts.join("\n\n"),
-      citation: "",
-    };
-  };
-
-  const hasCommaFormat = (authorPart) => authorPart.includes(",");
-
-  const extractLastName = (authorPart) => {
-    if (hasCommaFormat(authorPart)) {
-      return authorPart.split(",")[0].trim();
-    }
-    const firstAuthor = authorPart.split(/;| and /i)[0].trim();
-    const nameParts = firstAuthor.split(/\s+/);
-    return nameParts[nameParts.length - 1] || "";
-  };
-
-  const extractPageNumber = (content) => {
-    const pageMatch = content.match(/^(p\.|pp\.|Location)\s*(.+)$/i);
-    return pageMatch ? pageMatch[2].trim() : "";
-  };
-
-  const extractMLA = (citationRaw = "") => {
-    const normalized = normalizeNewlines(citationRaw);
-    const authorPart = normalized.match(/^([^.]+)/)?.[1]?.trim() || "";
-    const lastName = extractLastName(authorPart);
-
-    let page = "";
-    for (const m of normalized.matchAll(/\(([^)]+)\)/g)) {
-      const extractedPage = extractPageNumber(m[1]);
-      if (extractedPage) {
-        page = extractedPage;
-        break;
+    // =========================
+    // Private Methods (#)
+    // =========================
+    async #requestInputs() {
+      try {
+        const values = await this.qa.requestInputs([
+          { id: "quote", label: "Quote", type: "textarea" },
+          {
+            id: "manualCitation",
+            label: "Manual Citation (or YouTube URL with timestamp)",
+            type: "text",
+            placeholder: "Optional: Author, Title (p. #) or URL",
+            optional: true,
+          },
+          {
+            id: "reflection",
+            label: "Marginalia / Reflection (optional)",
+            type: "textarea",
+          },
+        ]);
+        this.rawQuote = values.quote || "";
+        this.manualCitation = values.manualCitation || "";
+        this.reflection = values.reflection || "";
+        return true;
+      } catch {
+        this.abort("Input cancelled by user");
+        return false;
       }
     }
 
-    if (!lastName) return "";
-    return page ? `(${lastName} ${page})` : `(${lastName})`;
-  };
+    #normalizeText(text = "") {
+      return text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+    }
 
-  const parseYouTube = (url = "") => {
-    const safeUrl = url.trim();
-    const patterns = [
-      /youtu\.be\/([a-zA-Z0-9_-]+).*?[?&]t=(\d+)/,
-      /youtube\.com\/watch\?v=([a-zA-Z0-9_-]+).*?[?&]t=(\d+)/,
-    ];
+    #cleanText(text = "") {
+      return this.#normalizeText(text)
+        .replace(/[ \t]+/g, " ")
+        .trim();
+    }
 
-    for (const pattern of patterns) {
-      const match = safeUrl.match(pattern);
-      if (match) {
-        const totalSeconds = parseInt(match[2], 10);
-        const hours = Math.floor(totalSeconds / 3600);
-        const minutes = Math.floor((totalSeconds % 3600) / 60);
-        const seconds = totalSeconds % 60;
+    #hasManualCitation() {
+      return Boolean(this.manualCitation?.trim());
+    }
 
-        const readable =
-          hours > 0
-            ? `${hours}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
-            : `${minutes}:${String(seconds).padStart(2, "0")}`;
+    #isKindleCitationText(text = "") {
+      return /(Kindle Edition\.|\. eBook\.|\. Ebook\.)\s*$/i.test(text);
+    }
 
+    #hasMultipleParts(parts = []) {
+      return parts.length > 1;
+    }
+
+    #splitQuoteAndCitation() {
+      const normalized = this.#normalizeText(this.rawQuote);
+      const parts = normalized
+        .split(/\n{2,}/)
+        .map((p) => p.trim())
+        .filter(Boolean);
+
+      if (this.#hasManualCitation()) {
+        this.quote = this.#cleanText(parts.join("\n\n"));
+        this.citation = this.manualCitation.trim();
+        return;
+      }
+
+      const lastPart = parts[parts.length - 1];
+      if (
+        this.#hasMultipleParts(parts) &&
+        this.#isKindleCitationText(lastPart)
+      ) {
+        this.quote = this.#cleanText(parts.slice(0, -1).join("\n\n"));
+        this.citation = lastPart;
+        return;
+      }
+
+      this.quote = this.#cleanText(parts.join("\n\n"));
+      this.citation = "";
+    }
+
+    #hasCommaFormat(authorPart = "") {
+      return authorPart.includes(",");
+    }
+
+    #extractLastName(authorPart = "") {
+      if (this.#hasCommaFormat(authorPart)) {
+        return authorPart.split(",")[0].trim();
+      }
+      const firstAuthor = authorPart.split(/;| and /i)[0].trim();
+      const nameParts = firstAuthor.split(/\s+/);
+      return nameParts[nameParts.length - 1] || "";
+    }
+
+    #extractPageNumber(content = "") {
+      const pageMatch = content.match(/^(p\.|pp\.|Location)\s*(.+)$/i);
+      return pageMatch ? pageMatch[2].trim() : "";
+    }
+
+    #extractMLA() {
+      const normalized = this.#normalizeText(this.citation);
+      const authorPart = normalized.match(/^([^.]+)/)?.[1]?.trim() || "";
+      const lastName = this.#extractLastName(authorPart);
+
+      let page = "";
+      for (const m of normalized.matchAll(/\(([^)]+)\)/g)) {
+        const extractedPage = this.#extractPageNumber(m[1]);
+        if (extractedPage) {
+          page = extractedPage;
+          break;
+        }
+      }
+
+      if (!lastName) return "";
+      return page ? `(${lastName} ${page})` : `(${lastName})`;
+    }
+
+    #parseYouTube(url = "") {
+      const safeUrl = url.trim();
+      const patterns = [
+        /youtu\.be\/([a-zA-Z0-9_-]+).*?[?&]t=(\d+)/,
+        /youtube\.com\/watch\?v=([a-zA-Z0-9_-]+).*?[?&]t=(\d+)/,
+      ];
+
+      for (const pattern of patterns) {
+        const match = safeUrl.match(pattern);
+        if (match) {
+          const totalSeconds = parseInt(match[2], 10);
+          const hours = Math.floor(totalSeconds / 3600);
+          const minutes = Math.floor((totalSeconds % 3600) / 60);
+          const seconds = totalSeconds % 60;
+
+          const readable =
+            hours > 0
+              ? `${hours}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
+              : `${minutes}:${String(seconds).padStart(2, "0")}`;
+
+          return {
+            videoId: match[1],
+            totalSeconds,
+            readable,
+            url: `https://www.youtube.com/watch?v=${match[1]}&t=${totalSeconds}s`,
+          };
+        }
+      }
+
+      return null;
+    }
+
+    #isBlockEmpty(text = "") {
+      return !text?.trim();
+    }
+
+    #formatBlock({
+      text = "",
+      header = null,
+      leadingBlank = false,
+      prefix = ">",
+    } = {}) {
+      if (this.#isBlockEmpty(text)) return [];
+
+      const lines = leadingBlank ? [""] : [];
+      if (header) {
+        lines.push(prefix ? `${prefix} ${header}` : header);
+      }
+
+      this.#normalizeText(text)
+        .trim()
+        .split("\n")
+        .forEach((line) => {
+          lines.push(prefix ? `${prefix} ${line}` : line);
+        });
+
+      return lines;
+    }
+
+    #isYouTubeUrlWithoutTimestamp(citationRaw = "") {
+      return /youtu(be\.com\/watch\?v=|\.be\/)[a-zA-Z0-9_-]+/.test(citationRaw);
+    }
+
+    #formatVideoCitation() {
+      const ytWithTime = this.#parseYouTube(this.citation);
+      if (ytWithTime) {
+        const text = `View at ${ytWithTime.readable} (${ytWithTime.totalSeconds}s)`;
         return {
-          videoId: match[1],
-          totalSeconds,
-          readable,
-          url: `https://www.youtube.com/watch?v=${match[1]}&t=${totalSeconds}s`,
+          line: `>\\- [${text}](${ytWithTime.url})`,
+          label: text,
+          hasTimestamp: true,
         };
       }
+
+      if (this.#isYouTubeUrlWithoutTimestamp(this.citation)) {
+        return {
+          line: `>\\- [View source](${this.citation.trim()})`,
+          label: null,
+          hasTimestamp: false,
+        };
+      }
+
+      return { line: null, label: null, hasTimestamp: false };
     }
 
-    return null;
-  };
+    #resolveCitationLine(video) {
+      if (video.line) {
+        return video.line;
+      }
+      const cleanCitation = (this.citation || "")
+        .replace(/- Unknown Source.*$/i, "")
+        .trim();
 
-  // =========================
-  // Helpers: Formatters
-  // =========================
-  const isBlockEmpty = (text) => !text?.trim();
-
-  const formatBlock = (
-    text,
-    header = null,
-    leadingBlank = false,
-    prefix = ">",
-  ) => {
-    if (isBlockEmpty(text)) return [];
-
-    const lines = leadingBlank ? [""] : [];
-    if (header) {
-      lines.push(prefix ? `${prefix} ${header}` : header);
+      if (cleanCitation && this.mlaCitation) {
+        return `> \\- ${cleanCitation} ${this.mlaCitation}`;
+      }
+      if (cleanCitation) {
+        return `> \\- ${cleanCitation}`;
+      }
+      return "> \\- Unknown Source (Please provide manual MLA citation: Author, Title (p. #) or URL)";
     }
 
-    normalizeNewlines(text)
-      .trim()
-      .split("\n")
-      .forEach((line) => {
-        lines.push(prefix ? `${prefix} ${line}` : line);
+    #formatCitation() {
+      if (!this.quote) return [];
+
+      const video = this.#formatVideoCitation();
+      const line = this.#resolveCitationLine(video);
+
+      const result = [line];
+      result.videoLabel = video.hasTimestamp ? video.label : null;
+      return result;
+    }
+
+    #processQuoteAndCitation() {
+      this.#splitQuoteAndCitation();
+      this.mlaCitation = this.#extractMLA();
+    }
+
+    #formatAndStoreOutput() {
+      const citationOutput = this.#formatCitation();
+      const reflectionOutput = this.#formatBlock({
+        text: this.reflection,
+        header: "**Marginalia / Reflection:**",
+        leadingBlank: true,
+        prefix: "",
+      });
+      const quoteOutput = this.#formatBlock({
+        text: this.quote,
+        header: "[!cite]",
       });
 
-    return lines;
-  };
-
-  const isYouTubeUrlWithoutTimestamp = (citationRaw) =>
-    /youtu(be\.com\/watch\?v=|\.be\/)[a-zA-Z0-9_-]+/.test(citationRaw);
-
-  const formatVideoCitation = (citationRaw) => {
-    const ytWithTime = parseYouTube(citationRaw);
-    if (ytWithTime) {
-      const text = `View at ${ytWithTime.readable} (${ytWithTime.totalSeconds}s)`;
-      return {
-        line: `>\\- [${text}](${ytWithTime.url})`,
-        label: text,
-        hasTimestamp: true,
-      };
+      const output = [
+        ...reflectionOutput,
+        "",
+        ...quoteOutput,
+        ...citationOutput,
+      ];
+      this.variables.formattedQuote = output.join("\n");
     }
-
-    if (isYouTubeUrlWithoutTimestamp(citationRaw)) {
-      return {
-        line: `>\\- [View source](${citationRaw.trim()})`,
-        label: null,
-        hasTimestamp: false,
-      };
-    }
-
-    return { line: null, label: null, hasTimestamp: false };
-  };
-
-  const resolveCitationLine = (video, cleanCitation, mlaCitation) => {
-    if (video.line) {
-      return video.line;
-    }
-    if (cleanCitation && mlaCitation) {
-      return `> \\- ${cleanCitation} ${mlaCitation}`;
-    }
-    if (cleanCitation) {
-      return `> \\- ${cleanCitation}`;
-    }
-    return "> \\- Unknown Source (Please provide manual MLA citation: Author, Title (p. #) or URL)";
-  };
-
-  const formatCitation = (citationRaw, mlaCitation, hasQuote = true) => {
-    if (!hasQuote) return [];
-
-    const video = formatVideoCitation(citationRaw);
-    const cleanCitation = (citationRaw || "")
-      .replace(/- Unknown Source.*$/i, "")
-      .trim();
-    const line = resolveCitationLine(video, cleanCitation, mlaCitation);
-
-    const result = [line];
-    result.videoLabel = video.hasTimestamp ? video.label : null;
-    return result;
-  };
-
-  // =========================
-  // Execution Flow
-  // =========================
-  let values;
-  try {
-    values = await qa.requestInputs([
-      { id: "quote", label: "Quote", type: "textarea" },
-      {
-        id: "manualCitation",
-        label: "Manual Citation (or YouTube URL with timestamp)",
-        type: "text",
-        placeholder: "Optional: Author, Title (p. #) or URL",
-        optional: true,
-      },
-      {
-        id: "reflection",
-        label: "Marginalia / Reflection (optional)",
-        type: "textarea",
-      },
-    ]);
-  } catch {
-    return abort("Input cancelled by user");
   }
 
-  const { quote, citation } = splitQuoteAndCitation(
-    values.quote || "",
-    values.manualCitation,
-  );
-  const quoteText = cleanText(quote);
-  const mlaCitation = extractMLA(citation);
-
-  const citationOutput = formatCitation(citation, mlaCitation, !!quoteText);
-  const reflectionOutput = formatBlock(
-    values.reflection,
-    "**Marginalia / Reflection:**",
-    true,
-    "",
-  );
-  const quoteOutput = formatBlock(quoteText, "[!cite]");
-
-  const output = [...reflectionOutput, "", ...quoteOutput, ...citationOutput];
-
-  const formatted = output.join("\n");
-  variables.formattedQuote = formatted;
-  return formatted;
+  const processor = new QuoteProcessor(qa, variables, abort);
+  return await processor.run();
 };
