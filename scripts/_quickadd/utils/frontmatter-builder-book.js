@@ -44,6 +44,20 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
     ];
   }
 
+  #getAuthorLastName(authorString) {
+    if (!authorString) return "unknown";
+
+    // Split comma-separated list to take the primary (first) author
+    const firstAuthor = authorString.split(",")[0].trim();
+
+    // Split by spaces to separate individual name parts (first, middle, last)
+    const nameParts = firstAuthor.split(/\s+/);
+
+    // Return the last element, cleaned of any leftover punctuation
+    const lastName = nameParts[nameParts.length - 1];
+    return lastName.replace(/[^a-zA-Z]/g, "") || "unknown";
+  }
+
   #removeAfterColon(text) {
     return text ? text.split(":")[0].trim() : "";
   }
@@ -65,14 +79,14 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
         `${primaryAuthor}-${this.#removeAfterColon(values.book)}`,
       ),
       slug: TextFormatter.slugify(
-        `${this.#removeAfterColon(values.book)}-${this.#removeAfterColon(values.chapter)}`,
+        `lit-${this.#getAuthorLastName(values.author)}-${this.#removeAfterColon(values.book)}-${this.#removeAfterColon(values.chapter)}`,
       ),
       tags: this.appendToList(
         values.tags,
         "question",
         ...this.parseAndSlugifyCommaSeparatedList(values.author),
       ),
-      title: `Notes on ${this.#removeAfterColon(values.book)} - ${this.#removeAfterColon(values.chapter)}`,
+      title: `Summary of ${this.#removeAfterColon(values.book)} - ${this.#removeAfterColon(values.chapter)}`,
     };
   }
 
