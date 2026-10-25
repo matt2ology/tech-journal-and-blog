@@ -37,18 +37,19 @@ flowchart TD
 ---
 
 ### idRYCu4NXfuB
+
 # Cumulative Marginalia: https://gohugo.io/
 
 > [!info] Active Reading Procedure
-> *"Force yourself to interact with the semantic content... summarize previous ideas combined with the new paragraph."* — Jeffrey Kaplan
+> _"Force yourself to interact with the semantic content... summarize previous ideas combined with the new paragraph."_ — Jeffrey Kaplan
 
 ### Paragraph 1
+
 > Original Text
 > Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again.
 
 **Cumulative Margin Note:**
-- *[Write your cumulative 1-sentence summary connecting paragraphs 1 through 1 here]*
+
+- _[Write your cumulative 1-sentence summary connecting paragraphs 1 through 1 here]_
 
 ---
-
-
