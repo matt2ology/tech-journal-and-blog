@@ -1,8 +1,8 @@
 ---
 title: "Marginal Notes and Highlights on Parthknowsai - Hot Take : AI Is Popular Because It Makes Dumb People Feel Smart #Ai #Tech"
 date: 2026-10-25
-draft: true
-slug: "mgn-hot-take-ai-is-popular-because-it-makes-dumb-people-feel-smart-ai-tech"
+draft: false
+slug: mgn-hot-take-ai-is-popular-because-it-makes-dumb-people-feel-smart-ai-tech
 categories:
   - marginalia
   - articles
