@@ -11,7 +11,7 @@ Return to the Obsidian app to initiate a sync. If you take new highlights on doc
 ## Page title
 
 ```python
-## {{ full_title }}
+## {{ full_title| replace('#', '\#') }}
 ```
 
 ## Page metadata
