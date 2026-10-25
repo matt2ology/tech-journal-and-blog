@@ -51,7 +51,7 @@ The formatting of each individual highlight.
 {{ highlight_note }}
 {% else -%}
 **Marginalia / Reflection:**
-_I just liked the words (this might be useful for later)_
+_I just liked the words_
 {% endif %}
 > [!quote]
 > {{ highlight_text | replace('\n', ' ') }}
