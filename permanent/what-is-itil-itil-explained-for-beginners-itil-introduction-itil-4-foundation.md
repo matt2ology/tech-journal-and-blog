@@ -3,7 +3,7 @@ aliases:
   - The Knowledge Academy - What Is Itil Itil Explained for Beginners Itil Introduction Itil 4 Foundation
 authors: matt2ology
 categories:
-  - permanent
+  - concept
 date: 2026-07-15T23:07:42-07:00
 draft: false
 slug: the-knowledge-academy-what-is-itil-itil-explained-for-beginners-itil-introduction-itil-4-foundation
