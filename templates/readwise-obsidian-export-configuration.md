@@ -112,6 +112,7 @@ draft: true
 slug: "mgn-{{slugify_and_fixup(title)}}"
 categories:
   - marginalia
+  - {{category}}
 tags: {% for tag in document_tags %}
   - {{tag}} {% endfor %}
   - {{source}}
