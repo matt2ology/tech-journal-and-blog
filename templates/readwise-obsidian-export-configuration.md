@@ -106,18 +106,17 @@ Don't include the triple dashes. Leave blank to disable YAML front matter altoge
 }}
 {%- endmacro %}
 
-title: "Marginal Notes on {{author}} - {{fixup(title)}}"
+title: "Marginal Notes and Highlights on {{author}} - {{fixup(title)}}"
 date: {{date|date("Y-m-d")}}
 draft: true
 slug: "mgn-{{slugify_and_fixup(title)}}"
 categories:
   - marginalia
-  - {{category}}
-  - {{source}}
 tags: {% for tag in document_tags %}
   - {{tag}} {% endfor %}
+  - {{source}}
 authors: "{{ '[[' ~ slugify_and_fixup(author) ~ '|' ~ author ~ ']]' }}"
-book: {{ full_title }}
+{{category}}: "{{ full_title }}"
 ```
 
 ## Sync notification
