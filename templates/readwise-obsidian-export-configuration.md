@@ -72,18 +72,32 @@ Don't include the triple dashes. Leave blank to disable YAML front matter altoge
 {{ s
   | lower
   | replace('*', '')
-  | regex_replace('[^\w\s-]', '')
-  | regex_replace('[\s_]+', '-')
-  | regex_replace('-+', '-')
-  | regex_replace('^-+|-+$', '')
+  | replace('?', '')
+  | replace('!', '')
+  | replace(':', '')
+  | replace(';', '')
+  | replace('.', '')
+  | replace(',', '')
+  | replace("'", '')
+  | replace('"', '')
+  | replace('(', '')
+  | replace(')', '')
+  | replace('[', '')
+  | replace(']', '')
+  | replace('/', '-')
+  | replace('|', '-')
+  | replace('&', 'and')
+  | replace(' ', '-')
+  | replace('--', '-')
+  | replace('--', '-')
+  | trim
 }}
 {%- endmacro %}
 {% macro fixup(s) -%}
 {{ s
-| replace('*','')
-| replace('--','-')
-| replace('^-','')
-| replace('-$','')
+  | replace('*', '')
+  | replace('--', '-')
+  | trim
 }}
 {%- endmacro %}
 
@@ -97,7 +111,7 @@ categories:
   - {{source}}
 tags: {% for tag in document_tags %}
   - {{tag}} {% endfor %}
-authors: [[{{slugify_and_fixup(author)}}|{{author}}]]
+authors: "{{ '[[' ~ slugify_and_fixup(author) ~ '|' ~ author ~ ']]' }}"
 book: {{ full_title }}
 ```
 
