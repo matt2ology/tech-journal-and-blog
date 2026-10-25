@@ -110,7 +110,7 @@ Metadata is essential to provide context without cluttering the note. My export 
 
 {% if image_url -%}
 
-![rw-book-cover]({{image_url}})
+![source-image-cover]({{image_url}})
 
 Source published date: {{published_date}}
 
