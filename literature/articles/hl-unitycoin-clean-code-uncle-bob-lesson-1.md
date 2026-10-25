@@ -14,7 +14,7 @@ title: Highlights of UnityCoin - Clean Code - Uncle Bob / Lesson 1
 
 ## Clean Code - Uncle Bob / Lesson 1
 
-![rw-book-cover](https://i.ytimg.com/vi/7EmboKQH8lM/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgWCheMA8=&rs=AOn4CLDKQ2ugSLGr1Q8cqPI4il8SmG6uBA)
+![source-image-cover](https://i.ytimg.com/vi/7EmboKQH8lM/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgWCheMA8=&rs=AOn4CLDKQ2ugSLGr1Q8cqPI4il8SmG6uBA)
 
 Source published date: 2019-08-09
 
