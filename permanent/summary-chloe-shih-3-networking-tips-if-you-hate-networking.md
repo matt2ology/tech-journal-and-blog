@@ -3,7 +3,7 @@ aliases:
   - Chloe Shih - 3 Networking Tips If You Hate Networking
 authors: matt2ology
 categories:
-  - permanent
+  - concept
 date: 2026-04-15T20:55:00-07:00
 draft: false
 slug: summary-chloe-shih-3-networking-tips-if-you-hate-networking
