@@ -1,8 +1,8 @@
 ---
 title: "Marginal Notes and Highlights on Parthknowsai - Hot Take : AI Is Popular Because It Makes Dumb People Feel Smart #Ai #Tech"
-date: 2026-10-24T00:00:00
-draft: false
-slug: mgn-hot-take-ai-is-popular-because-it-makes-dumb-people-feel-smart-ai-tech
+date: 2026-10-25
+draft: true
+slug: "mgn-hot-take-ai-is-popular-because-it-makes-dumb-people-feel-smart-ai-tech"
 categories:
   - marginalia
   - articles
@@ -11,13 +11,18 @@ tags:
   - reader
 authors: "[[parthknowsai|Parthknowsai]]"
 articles: "Hot Take : AI Is Popular Because It Makes Dumb People Feel Smart #Ai #Tech"
+image: https://i.ytimg.com/vi/yVvIlUq-GM8/sddefault.jpg?sqp=-oaymwEmCIAFEOAD8quKqQMa8AEB-AG2CIACgA-KAgwIABABGGUgUShMMA8=&rs=AOn4CLDBbWxJgB4QHLMTWgk3zLYyfaJKew
 ---
 
-## Hot Take : AI Is Popular Because It Makes Dumb People Feel Smart \#Ai \#Tech
+## Parthknowsai - Hot Take : AI Is Popular Because It Makes Dumb People Feel Smart \#Ai \#Tech
+
+![rw-book-cover](https://i.ytimg.com/vi/yVvIlUq-GM8/sddefault.jpg?sqp=-oaymwEmCIAFEOAD8quKqQMa8AEB-AG2CIACgA-KAgwIABABGGUgUShMMA8=&rs=AOn4CLDBbWxJgB4QHLMTWgk3zLYyfaJKew)
 
 **Source link:** [Hot Take : AI Is Popular Because It Makes Dumb People Feel Smart #Ai #Tech](https://youtube.com/shorts/yVvIlUq-GM8)
 
 ## Highlights & Marginalia
+
+### id1066810269
 
 **Marginalia / Reflection:**
 _I just liked the words_
@@ -28,6 +33,8 @@ _I just liked the words_
 
 ---
 
+### id1066810280
+
 **Marginalia / Reflection:**
 _I just liked the words_
 
@@ -36,6 +43,8 @@ _I just liked the words_
 > \- ([View Highlight](https://read.readwise.io/read/01m5s0n3y4ddjh2daqttyevh4f))
 
 ---
+
+### id1066810307
 
 **Marginalia / Reflection:**
 _I just liked the words_
@@ -46,6 +55,8 @@ _I just liked the words_
 
 ---
 
+### id1066810318
+
 **Marginalia / Reflection:**
 _I just liked the words_
 
@@ -54,6 +65,8 @@ _I just liked the words_
 > \- ([View Highlight](https://read.readwise.io/read/01m5s0q46cnhvcdzr0hefhy5bz))
 
 ---
+
+### id1066810326
 
 **Marginalia / Reflection:**
 _I just liked the words_
@@ -65,6 +78,8 @@ _I just liked the words_
 
 ---
 
+### id1066810519
+
 **Marginalia / Reflection:**
 _I just liked the words_
 
@@ -73,6 +88,8 @@ _I just liked the words_
 > \- ([View Highlight](https://read.readwise.io/read/01m5s0rg7725mt1sc2tan2xbj8))
 
 ---
+
+### id1066810536
 
 **Marginalia / Reflection:**
 Sycophancy - overly pleasing, subservient
@@ -83,6 +100,8 @@ Sycophancy - overly pleasing, subservient
 
 ---
 
+### id1066810597
+
 **Marginalia / Reflection:**
 _I just liked the words_
 
@@ -92,6 +111,8 @@ _I just liked the words_
 
 ---
 
+### id1066810610
+
 **Marginalia / Reflection:**
 _I just liked the words_
 
@@ -100,6 +121,8 @@ _I just liked the words_
 > \- ([View Highlight](https://read.readwise.io/read/01m5s0wfezx62wtpzh6xfp8mc6))
 
 ---
+
+### id1066810629
 
 **Marginalia / Reflection:**
 _I just liked the words_
