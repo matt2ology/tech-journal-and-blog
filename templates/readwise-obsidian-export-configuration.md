@@ -34,7 +34,7 @@ Header text above each set of synced highlights. Leave blank to omit header.
 
 ```python
 {% if is_new_page %}
-## Highlights
+## Highlights & Marginalia
 {% elif has_new_highlights -%}
 ## New highlights added {{date|date('F j, Y')}}
 {% endif -%}
@@ -54,7 +54,7 @@ The formatting of each individual highlight.
 _I just liked the words_
 {% endif %}
 > [!quote]
-> {{ highlight_text | replace('\n', ' ') }}
+> {{ highlight_text }}
 > \- ({% if highlight_location_url %}[View Highlight]({{ highlight_location_url }}){% elif highlight_location %}Location {{ highlight_location }}{% endif %})
 {%- if highlight_tags %}
 **Tags:** {% for tag in highlight_tags %}{{ tag }} {% endfor %}
