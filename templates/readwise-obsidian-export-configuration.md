@@ -21,7 +21,7 @@ Return to the Obsidian app to initiate a sync. If you take new highlights on doc
 ![rw-book-cover]({{image_url}})
 {% endif -%}
 
-{% if url -%}
+{% if url %}
 **Source link:** [{{full_title}}]({{url}})
 {% else %}
 source: {{source}}
