@@ -71,6 +71,11 @@ Don't include the triple dashes. Leave blank to disable YAML front matter altoge
 {% macro slugify_and_fixup(s) -%}
 {{ s
   | lower
+  | replace('#', '')
+  | replace('@', '')
+  | replace('$', '')
+  | replace('%', '')
+  | replace('^', '')
   | replace('*', '')
   | replace('?', '')
   | replace('!', '')
