@@ -11,7 +11,7 @@ Return to the Obsidian app to initiate a sync. If you take new highlights on doc
 ## Page title
 
 ```python
-## {{ full_title| replace('#', '\#') }}
+## {{author}} - {{ full_title| replace('#', '\#') }}
 ```
 
 ## Page metadata
@@ -45,6 +45,8 @@ Header text above each set of synced highlights. Leave blank to omit header.
 The formatting of each individual highlight.
 
 ```python
+
+### id{{ highlight_id }}
 
 {% if highlight_note -%}
 **Marginalia / Reflection:**
@@ -118,6 +120,7 @@ tags: {% for tag in document_tags %}
   - {{source}}
 authors: "{{ '[[' ~ slugify_and_fixup(author) ~ '|' ~ author ~ ']]' }}"
 {{category}}: "{{ full_title }}"
+image: {%- if image_url -%}{{image_url}}{%- endif -%}
 ```
 
 ## Sync notification
