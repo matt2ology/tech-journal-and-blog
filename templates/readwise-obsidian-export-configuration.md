@@ -17,14 +17,10 @@ Return to the Obsidian app to initiate a sync. If you take new highlights on doc
 ## Page metadata
 
 ```python
-{% if image_url -%}
-![rw-book-cover]({{image_url}})
-{% endif -%}
-
 {% if url %}
 **Source link:** [{{full_title}}]({{url}})
 {% else %}
-source: {{source}}
+**source:** {{source}}
 {% endif -%}
 ```
 
@@ -110,17 +106,17 @@ Don't include the triple dashes. Leave blank to disable YAML front matter altoge
 
 title: "Marginal Notes and Highlights on {{author}} - {{fixup(title)}}"
 date: {{date|date("Y-m-d")}}
-draft: true
+draft: false
 slug: "mgn-{{slugify_and_fixup(title)}}"
 categories:
   - marginalia
   - {{category}}
-tags: {% for tag in document_tags %}
-  - {{tag}} {% endfor %}
+tags:{% for tag in document_tags %}
+  - {{tag}}{% endfor %}
   - {{source}}
 authors: "{{ '[[' ~ slugify_and_fixup(author) ~ '|' ~ author ~ ']]' }}"
 {{category}}: "{{ full_title }}"
-image: {%- if image_url -%}{{image_url}}{%- endif -%}
+image: {% if image_url -%}{{image_url}}{%- endif -%}
 ```
 
 ## Sync notification
