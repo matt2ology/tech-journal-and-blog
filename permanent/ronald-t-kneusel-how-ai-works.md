@@ -1,7 +1,7 @@
 ---
 authors: matt2ology
 categories:
-  - permanent
+  - concept
   - book
 date: 2025-12-26T18:55:21-08:00
 draft: true
