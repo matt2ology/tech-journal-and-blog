@@ -44,30 +44,23 @@ Header text above each set of synced highlights. Leave blank to omit header.
 
 The formatting of each individual highlight.
 
-1. `replace('*', '')`
-  - Removes all asterisk characters (*) from the string.
-2. `regex_replace('[^\w\s-]', '')`
-  - Strips out all punctuation and special characters. It keeps only word characters (\w: letters, digits, and underscores), whitespace (\s), and hyphens (-).
-3. `regex_replace('[\s_]+', '-')`
-  - Replaces any sequence of spaces or underscores ([\s_]+) with a single hyphen (-).
-4. `regex_replace('-+', '-')`
-  - Collapses multiple consecutive hyphens (-+) down into a single hyphen (-).
-5. `regex_replace('^-+|-+$', '')`
-  - Trims any leftover hyphens from the very beginning (^+) or very end (+$) of the string.
-
 ```python
 
 {% if highlight_note -%}
 **Marginalia / Reflection:**
-{{ highlight_note }}{%- endif %}
-{% if highlight_tags %}
-Tags: {% for tag in highlight_tags %}[[{{tag}}]]{% endfor %}
+{{ highlight_note }}
+{% else -%}
+**Marginalia / Reflection:**
+_I just liked the words (this might be useful for later)_
 {% endif %}
-{% if highlight_text -%}
-> [!quote] Key Definition / Axiom
-> "{{ highlight_text }}"
-> \- _{% if author %}{{ author }}. {% endif %}{% if title %}{{ title }}{% endif %}{% if highlight_location_url and highlight_location %} ([{{ highlight_location }}]({{ highlight_location_url }})){% elif highlight_location %} ({{ highlight_location }}){% endif %}{% if source %}. {{ source }}{% endif %}_
+> [!quote]
+> {{ highlight_text | replace('\n', ' ') }}
+> \- ({% if highlight_location_url %}[View Highlight]({{ highlight_location_url }}){% elif highlight_location %}Location {{ highlight_location }}{% endif %})
+{%- if highlight_tags %}
+**Tags:** {% for tag in highlight_tags %}{{ tag }} {% endfor %}
 {%- endif %}
+
+---
 ```
 
 ## YAML front matter
