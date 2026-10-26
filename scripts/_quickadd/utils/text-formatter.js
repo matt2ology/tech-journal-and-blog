@@ -70,7 +70,8 @@ class TextFormatter {
 
     const words = inputText
       .normalize("NFC")
-      .replace(/\s+/g, " ")
+      .replace(/[-_]+/g, " ") // Convert hyphens and underscores to spaces
+      .replace(/\s+/g, " ")   // Normalize multiple spaces
       .trim()
       .toLowerCase()
       .split(" ");
