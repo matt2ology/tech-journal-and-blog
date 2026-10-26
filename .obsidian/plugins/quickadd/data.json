@@ -224,24 +224,24 @@
             "settings": {}
           },
           {
-            "name": "Recipe Log Template",
+            "name": "Course Lecture Template",
             "type": "NestedChoice",
             "id": "5471be2b-c0bb-45c2-84bb-db45628359d1",
             "choice": {
               "id": "51494665-3880-4114-8bfe-d7e4a0723079",
-              "name": "Recipe Log Template",
+              "name": "Course Lecture Template",
               "type": "Template",
               "command": false,
               "templatePath": "templates/course-lecture-series.md",
               "fileNameFormat": {
                 "enabled": true,
-                "format": "index"
+                "format": "{{VALUE:filename}}"
               },
               "discoverExistingNotesBeforeCreate": false,
               "folder": {
                 "enabled": true,
                 "folders": [
-                  "course-lecture/{{VALUE:slug}}"
+                  "course-lecture/{{VALUE:foldername}}"
                 ],
                 "chooseWhenCreatingNote": false,
                 "createInSameFolderAsActiveFile": false,
