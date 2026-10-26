@@ -24,7 +24,7 @@ class FrontmatterBuilderBase {
   #quickAddApi;
 
   constructor(quickAddApi) {
-    if (!FrontmatterBuilderBase.#isValidQuickAddApi(quickAddApi)) {
+    if (FrontmatterBuilderBase.#isInvalidQuickAddApi({ quickAddApi })) {
       throw new TypeError(
         "FrontmatterBuilderBase requires a QuickAdd API with requestInputs().",
       );
@@ -32,8 +32,8 @@ class FrontmatterBuilderBase {
     this.#quickAddApi = quickAddApi;
   }
 
-  static #isValidQuickAddApi(quickAddApi) {
-    return Boolean(
+  static #isInvalidQuickAddApi({ quickAddApi }) {
+    return !Boolean(
       quickAddApi && typeof quickAddApi.requestInputs === "function",
     );
   }
@@ -69,14 +69,14 @@ class FrontmatterBuilderBase {
   }
 
   formatArray(input) {
-    return TextFormatter.formatYAMLArray(input);
+    return TextFormatter.formatYAMLArray({ input });
   }
 
   formatNameList(input, fallback) {
-    return TextFormatter.formatYAMLNameList(input, fallback);
+    return TextFormatter.formatYAMLNameList({ input, fallback });
   }
 
-  buildStandardProperties(values, computed) {
+  buildStandardProperties({ computed }) {
     return [
       `title: "${computed.title}"`,
       `date: "${computed.date}"`,
@@ -94,24 +94,49 @@ class FrontmatterBuilderBase {
   /**
    * Appends one or more unique items to a list.
    */
-  appendToList(list = "", ...items) {
+  appendToList({ list = "", items = [] }) {
     let result = list;
     for (const entry of items) {
-      if (Array.isArray(entry)) {
-        result = this.#appendArrayItems(result, entry);
-      } else if (entry) {
-        result = ListUtils.appendUniqueItem(result, entry);
-      }
+      result = FrontmatterBuilderBase.#processEntry({ result, entry });
     }
     return result;
   }
 
-  #appendArrayItems(result, entryArray) {
+  static #processEntry({ result, entry }) {
+    if (FrontmatterBuilderBase.#isArrayEntry({ entry })) {
+      return FrontmatterBuilderBase.#appendArrayItems({
+        result,
+        entryArray: entry,
+      });
+    }
+    if (FrontmatterBuilderBase.#isTruthyEntry({ entry })) {
+      return ListUtils.appendUniqueItem({ list: result, item: entry });
+    }
+    return result;
+  }
+
+  static #isArrayEntry({ entry }) {
+    return Array.isArray(entry);
+  }
+
+  static #isTruthyEntry({ entry }) {
+    return Boolean(entry);
+  }
+
+  static #appendArrayItems({ result, entryArray }) {
     let currentResult = result;
     for (const item of entryArray) {
-      if (item) {
-        currentResult = ListUtils.appendUniqueItem(currentResult, item);
-      }
+      currentResult = FrontmatterBuilderBase.#processArrayItem({
+        currentResult,
+        item,
+      });
+    }
+    return currentResult;
+  }
+
+  static #processArrayItem({ currentResult, item }) {
+    if (FrontmatterBuilderBase.#isTruthyEntry({ entry: item })) {
+      return ListUtils.appendUniqueItem({ list: currentResult, item });
     }
     return currentResult;
   }
@@ -132,12 +157,12 @@ class FrontmatterBuilderBase {
     const computed = this.#computeStandardValues(values);
 
     const properties = [
-      ...this.buildStandardProperties(values, computed),
-      ...this.buildExtraProperties(values, computed),
+      ...this.buildStandardProperties({ values, computed }),
+      ...this.buildExtraProperties({ values, computed }),
     ];
 
     const frontmatter = serializeFrontmatter(properties);
-    this.#syncParamsVariables(params, computed, frontmatter, values);
+    this.#syncParamsVariables({ params, computed, frontmatter, values });
     return frontmatter;
   }
 
@@ -153,9 +178,13 @@ class FrontmatterBuilderBase {
     };
   }
 
-  #syncParamsVariables(params, computed, frontmatter, values) {
-    if (!params?.variables) return;
+  #syncParamsVariables({ params, computed, frontmatter, values }) {
+    if (FrontmatterBuilderBase.#shouldSkipVariableSync({ params })) return;
     Object.assign(params.variables, computed, values, { frontmatter });
+  }
+
+  static #shouldSkipVariableSync({ params }) {
+    return !params?.variables;
   }
 }
 

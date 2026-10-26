@@ -2,7 +2,7 @@
  * Utilities for working with comma-separated lists.
  */
 class ListUtils {
-  static appendUniqueItem(list = "", item) {
+  static appendUniqueItem({ list = "", item }) {
     const items = new Set(
       String(list)
         .split(",")
@@ -10,13 +10,13 @@ class ListUtils {
         .filter(Boolean),
     );
 
-    if (ListUtils.#isValidItem(item)) {
+    if (ListUtils.#isValidItem({ item })) {
       items.add(item);
     }
     return [...items].join(", ");
   }
 
-  static #isValidItem(item) {
+  static #isValidItem({ item }) {
     return Boolean(item);
   }
 }

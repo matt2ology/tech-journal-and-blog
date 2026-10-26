@@ -22,11 +22,11 @@ const VaultQueryService = require(
  */
 class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
   getFields() {
-    const rawChefOptions = VaultQueryService.getFieldValues(
+    const rawChefOptions = VaultQueryService.getFieldValues({
       app,
-      "chef",
-      "cookbook",
-    );
+      fieldName: "chef",
+      folderPath: "cookbook",
+    });
     const processedChefOptions = rawChefOptions.map((chef) =>
       TextFormatter.cleanWikiLink(chef),
     );
@@ -71,16 +71,19 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
   }
 
   processValues(values) {
-    const formattedSource = FrontmatterBuilderRecipe.#formatSourceLink(
-      values.source,
-      values.dish,
-      values.chef,
-    );
+    const formattedSource = FrontmatterBuilderRecipe.#formatSourceLink({
+      source: values.source,
+      dish: values.dish,
+      chef: values.chef,
+    });
 
     return {
       ...values,
       source: formattedSource,
-      categories: this.appendToList(values.categories, "cookbook"),
+      categories: this.appendToList({
+        list: values.categories,
+        items: ["cookbook"],
+      }),
       slug: TextFormatter.slugify(`${values.chef} ${values.dish}`),
       title: TextFormatter.titleCase(
         `${values.dish} by ${TextFormatter.formatPlainNaturalNameList(values.chef)}`,
@@ -88,14 +91,18 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
     };
   }
 
-  static #formatSourceLink(source, dish, chef) {
-    if (!source) return "";
+  static #formatSourceLink({ source, dish, chef }) {
+    if (FrontmatterBuilderRecipe.#isSourceEmpty({ source })) return "";
     const dishTitle = TextFormatter.titleCase(dish) || "Recipe";
     const chefTitle = TextFormatter.titleCase(chef) || "Chef";
     return `\n**Source:** [${dishTitle} by ${chefTitle}](${source})`;
   }
 
-  buildExtraProperties(values) {
+  static #isSourceEmpty({ source }) {
+    return !source;
+  }
+
+  buildExtraProperties({ values }) {
     return [
       `dish: "${TextFormatter.titleCase(values.dish) || "NoNameDish"}"`,
       `chef:${this.formatNameList(values.chef, '"NoChefNamed"')}`,

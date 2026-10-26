@@ -22,11 +22,10 @@ const VaultQueryService = require(
  */
 class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
   getFields() {
-    // Dynamically fetch subfolders 1 level deep from your target folder
-    const rawSeriesOptions = VaultQueryService.getSubfolderNames(
+    const rawSeriesOptions = VaultQueryService.getSubfolderNames({
       app,
-      "course-lecture", // Change this to your target root folder path if needed
-    );
+      folderPath: "course-lecture",
+    });
     const processedSeriesOptions = rawSeriesOptions.map((series) =>
       TextFormatter.titleCase(series),
     );
@@ -78,46 +77,56 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
     let lecturerInput = values.lecturer ? values.lecturer.trim() : "";
     let fileCount = 0;
 
-    // Automatically fetch lecturer/instructor and count files in the selected series folder
-    if (formattedSeries) {
+    if (
+      FrontmatterBuilderCourseLectureSeries.#hasFormattedSeries({
+        formattedSeries,
+      })
+    ) {
       const rootFolder = "course-lecture";
-      const subfolders = VaultQueryService.getSubfolderNames(app, rootFolder);
+      const subfolders = VaultQueryService.getSubfolderNames({
+        app,
+        folderPath: rootFolder,
+      });
 
-      // Find the matching subfolder name in the vault
       const matchedSubfolder = subfolders.find(
         (sub) =>
           TextFormatter.titleCase(sub) === formattedSeries ||
           sub.toLowerCase() === formattedSeries.toLowerCase(),
       );
 
-      if (matchedSubfolder) {
+      if (
+        FrontmatterBuilderCourseLectureSeries.#hasMatchedSubfolder({
+          matchedSubfolder,
+        })
+      ) {
         const seriesFolderPath = `${rootFolder}/${matchedSubfolder}`;
 
-        // Count existing markdown files in the series folder
         const filesInFolder = app.vault
           .getMarkdownFiles()
           .filter((file) => file.path.startsWith(seriesFolderPath));
         fileCount = filesInFolder.length;
 
-        // Query existing notes in the series folder for lecturer or instructor fields
-        const existingLecturers = VaultQueryService.getFieldValues(
+        const existingLecturers = VaultQueryService.getFieldValues({
           app,
-          "lecturer",
-          seriesFolderPath,
-        );
-        const existingInstructors = VaultQueryService.getFieldValues(
+          fieldName: "lecturer",
+          folderPath: seriesFolderPath,
+        });
+        const existingInstructors = VaultQueryService.getFieldValues({
           app,
-          "instructor",
-          seriesFolderPath,
-        );
+          fieldName: "instructor",
+          folderPath: seriesFolderPath,
+        });
 
         const allInstructors = [
           ...new Set([...existingLecturers, ...existingInstructors]),
         ].filter(Boolean);
 
-        // If user didn't provide a lecturer, auto-populate from existing folder files
-        if (allInstructors.length > 0 && !lecturerInput) {
-          // Clean each instructor entry (removes extra quotes or wikilink wrappers)
+        if (
+          FrontmatterBuilderCourseLectureSeries.#shouldAutoPopulateLecturer({
+            allInstructors,
+            lecturerInput,
+          })
+        ) {
           const cleanedInstructors = allInstructors.map((instructor) =>
             TextFormatter.cleanWikiLink(instructor),
           );
@@ -126,7 +135,6 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
       }
     }
 
-    // Generate incremented padded filename (e.g., 01-lecture-topic-title)
     const indexNumber = String(fileCount + 1).padStart(2, "0");
     const titleSlug = TextFormatter.slugify(values.title);
     const incrementedFilename = `${indexNumber}-${titleSlug}`;
@@ -135,7 +143,10 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
       ...values,
       series: formattedSeries,
       lecturer: lecturerInput,
-      categories: this.appendToList(values.categories, "courses-lecture"),
+      categories: this.appendToList({
+        list: values.categories,
+        items: ["courses-lecture"],
+      }),
       slug: titleSlug,
       title: TextFormatter.titleCase(values.title),
       filename: incrementedFilename,
@@ -144,7 +155,19 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
     };
   }
 
-  buildExtraProperties(values) {
+  static #hasFormattedSeries({ formattedSeries }) {
+    return Boolean(formattedSeries);
+  }
+
+  static #hasMatchedSubfolder({ matchedSubfolder }) {
+    return Boolean(matchedSubfolder);
+  }
+
+  static #shouldAutoPopulateLecturer({ allInstructors, lecturerInput }) {
+    return allInstructors.length > 0 && !lecturerInput;
+  }
+
+  buildExtraProperties({ values }) {
     return [
       `series: "${values.series || "Series Not Listed"}"`,
       `lecturer:${this.formatNameList(values.lecturer, '"Lecturer Not Listed"')}`,

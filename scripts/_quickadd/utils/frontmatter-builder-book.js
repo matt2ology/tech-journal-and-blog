@@ -45,21 +45,27 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
   }
 
   #getAuthorLastName(authorString) {
-    if (!authorString) return "unknown";
+    if (FrontmatterBuilderBook.#isAuthorStringEmpty({ authorString }))
+      return "unknown";
 
-    // Split comma-separated list to take the primary (first) author
     const firstAuthor = authorString.split(",")[0].trim();
-
-    // Split by spaces to separate individual name parts (first, middle, last)
     const nameParts = firstAuthor.split(/\s+/);
-
-    // Return the last element, cleaned of any leftover punctuation
     const lastName = nameParts[nameParts.length - 1];
     return lastName.replace(/[^a-zA-Z]/g, "") || "unknown";
   }
 
+  static #isAuthorStringEmpty({ authorString }) {
+    return !authorString;
+  }
+
   #removeAfterColon(text) {
-    return text ? text.split(":")[0].trim() : "";
+    return FrontmatterBuilderBook.#hasColonText({ text })
+      ? text.split(":")[0].trim()
+      : "";
+  }
+
+  static #hasColonText({ text }) {
+    return Boolean(text);
   }
 
   processValues(values) {
@@ -70,10 +76,13 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
 
     return {
       ...values,
-      categories: this.appendToList(values.categories, "books", "synthesis"),
+      categories: this.appendToList({
+        list: values.categories,
+        items: ["books", "synthesis"],
+      }),
       detail: detailText,
       filename: TextFormatter.slugify(
-        `lit-${this.#removeAfterColon(values.book)}-${this.#removeAfterColon(values.chapter)}`,
+        `syn-${this.#removeAfterColon(values.book)}-${this.#removeAfterColon(values.chapter)}`,
       ),
       folder: TextFormatter.slugify(
         `${primaryAuthor}-${this.#removeAfterColon(values.book)}`,
@@ -81,16 +90,18 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
       slug: TextFormatter.slugify(
         `syn-${this.#getAuthorLastName(values.author)}-${this.#removeAfterColon(values.book)}-${this.#removeAfterColon(values.chapter)}`,
       ),
-      tags: this.appendToList(
-        values.tags,
-        "question",
-        ...this.parseAndSlugifyCommaSeparatedList(values.author),
-      ),
-      title: `Summary of ${this.#removeAfterColon(values.book)} - ${this.#removeAfterColon(values.chapter)}`,
+      tags: this.appendToList({
+        list: values.tags,
+        items: [
+          "question",
+          ...this.parseAndSlugifyCommaSeparatedList(values.author),
+        ],
+      }),
+      title: `My Synthesis of ${this.#removeAfterColon(values.book)} - ${this.#removeAfterColon(values.chapter)}`,
     };
   }
 
-  buildExtraProperties(values) {
+  buildExtraProperties({ values }) {
     return [
       `author: ${this.formatNameList(values.author, '"NoAuthorNamed"')}`,
       `book: "${values.book || "NoBookTitleListed"}"`,
