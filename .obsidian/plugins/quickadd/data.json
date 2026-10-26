@@ -474,7 +474,7 @@
     "templates"
   ],
   "announceUpdates": "major",
-  "version": "2.32.1",
+  "version": "2.33.1",
   "globalVariables": {},
   "onePageInputEnabled": true,
   "disableOnlineFeatures": true,
@@ -723,5 +723,6 @@
     "refreshStaleDefaultModelSeeds": true,
     "pinAiModelRefs": true
   },
+  "templateFolderPath": "",
   "macros": []
 }
