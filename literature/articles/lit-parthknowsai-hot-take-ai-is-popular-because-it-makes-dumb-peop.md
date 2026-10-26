@@ -1,6 +1,6 @@
 ---
 title: "Summary of Parthknowsai - Hot Take : AI Is Popular Because It Makes Dumb People Feel Smart #Ai #Tech"
-date: 2026-10-25
+date: 2026-10-25T12:00:00
 draft: false
 slug: ana-hot-take-ai-is-popular-because-it-makes-dumb-people-feel-smart-ai-tech
 categories:
