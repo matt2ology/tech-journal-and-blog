@@ -140,6 +140,7 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
       title: TextFormatter.titleCase(values.title),
       filename: incrementedFilename,
       foldername: TextFormatter.slugify(values.series),
+      lectureSeriesReference: `${values.series} - ${TextFormatter.titleCase(values.title)} by ${TextFormatter.formatPlainNaturalNameList(lecturerInput)}`,
     };
   }
 
