@@ -75,7 +75,7 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
       ? TextFormatter.titleCase(values.series)
       : "";
 
-    let lecturer = values.lecturer;
+    let lecturerInput = values.lecturer ? values.lecturer.trim() : "";
     let fileCount = 0;
 
     // Automatically fetch lecturer/instructor and count files in the selected series folder
@@ -113,11 +113,15 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
 
         const allInstructors = [
           ...new Set([...existingLecturers, ...existingInstructors]),
-        ];
+        ].filter(Boolean);
 
-        // If existing notes specify a lecturer/instructor and the current value is empty, auto-populate it
-        if (allInstructors.length > 0 && !lecturer) {
-          lecturer = allInstructors[0];
+        // If user didn't provide a lecturer, auto-populate from existing folder files
+        if (allInstructors.length > 0 && !lecturerInput) {
+          // Clean each instructor entry (removes extra quotes or wikilink wrappers)
+          const cleanedInstructors = allInstructors.map((instructor) =>
+            TextFormatter.cleanWikiLink(instructor),
+          );
+          lecturerInput = cleanedInstructors.join(", ");
         }
       }
     }
@@ -130,9 +134,7 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
     return {
       ...values,
       series: formattedSeries,
-      lecturer: lecturer
-        ? TextFormatter.titleCase(lecturer)
-        : "Lecturer Not Listed",
+      lecturer: lecturerInput,
       categories: this.appendToList(values.categories, "courses-lecture"),
       slug: titleSlug,
       title: TextFormatter.titleCase(values.title),
