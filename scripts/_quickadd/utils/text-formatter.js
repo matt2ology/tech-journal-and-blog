@@ -68,23 +68,35 @@ class TextFormatter {
   static titleCase(inputText = "") {
     if (TextFormatter.#isInvalidText(inputText)) return "";
 
-    const words = inputText
+    // Split by spaces, hyphens, and underscores while keeping original tokens to check uppercase/initialisms
+    const rawWords = inputText
       .normalize("NFC")
       .replace(/[-_]+/g, " ") // Convert hyphens and underscores to spaces
-      .replace(/\s+/g, " ")   // Normalize multiple spaces
+      .replace(/\s+/g, " ") // Normalize multiple spaces
       .trim()
-      .toLowerCase()
       .split(" ");
 
-    return words
+    return rawWords
       .map((word, index) => {
         if (!word) return "";
-        if (
-          TextFormatter.#shouldPreserveLowercaseWord(word, index, words.length)
-        ) {
+
+        // Preserve words that are already fully uppercase initialisms (e.g., AI, API, UI)
+        if (TextFormatter.#isAllUpperCase(word)) {
           return word;
         }
-        return TextFormatter.#capitalizeWord(word);
+
+        const lowerWord = word.toLowerCase();
+        if (
+          TextFormatter.#shouldPreserveLowercaseWord(
+            lowerWord,
+            index,
+            rawWords.length,
+          )
+        ) {
+          return lowerWord;
+        }
+
+        return TextFormatter.#capitalizeWord(lowerWord);
       })
       .join(" ");
   }
@@ -154,7 +166,9 @@ class TextFormatter {
   }
 
   static #isAllUpperCase(text) {
-    return text === text.toUpperCase() && text !== text.toLowerCase();
+    // Checks if the text has letters and they are all uppercase (e.g. "AI" -> true, "Intro" -> false, "123" -> false)
+    const letters = text.replace(/[^a-zA-Z]/g, "");
+    return letters.length > 0 && letters === letters.toUpperCase();
   }
 
   static #isAllLowerCase(text) {
