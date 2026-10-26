@@ -70,7 +70,7 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
 
     return {
       ...values,
-      categories: this.appendToList(values.categories, "books", "literature"),
+      categories: this.appendToList(values.categories, "books", "synthesis"),
       detail: detailText,
       filename: TextFormatter.slugify(
         `lit-${this.#removeAfterColon(values.book)}-${this.#removeAfterColon(values.chapter)}`,
@@ -79,7 +79,7 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
         `${primaryAuthor}-${this.#removeAfterColon(values.book)}`,
       ),
       slug: TextFormatter.slugify(
-        `lit-${this.#getAuthorLastName(values.author)}-${this.#removeAfterColon(values.book)}-${this.#removeAfterColon(values.chapter)}`,
+        `syn-${this.#getAuthorLastName(values.author)}-${this.#removeAfterColon(values.book)}-${this.#removeAfterColon(values.chapter)}`,
       ),
       tags: this.appendToList(
         values.tags,
