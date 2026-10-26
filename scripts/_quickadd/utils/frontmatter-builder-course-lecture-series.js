@@ -137,14 +137,14 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
       slug: titleSlug,
       title: TextFormatter.titleCase(values.title),
       filename: incrementedFilename,
-      foldername: TextFormatter.slugify(values.series)
+      foldername: TextFormatter.slugify(values.series),
     };
   }
 
   buildExtraProperties(values) {
     return [
       `series: "${values.series || "Series Not Listed"}"`,
-      `lecturer: "${values.lecturer}"`,
+      `lecturer:${this.formatNameList(values.lecturer, '"Lecturer Not Listed"')}`,
     ];
   }
 }
