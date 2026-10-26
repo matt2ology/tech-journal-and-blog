@@ -19,7 +19,7 @@ Return to the Obsidian app to initiate a sync. If you take new highlights on doc
 ```python
 **Source published date:** {{published_date}}
 {% if url %}
-**Source link:** [{{full_title}}]({{url}})
+**Source link:** [{{full_title| replace('#', '\#')}}]({{url}})
 {% else %}
 **source:** {{source}}
 {% endif -%}
