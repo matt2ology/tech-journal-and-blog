@@ -3,6 +3,33 @@
  */
 class VaultQueryService {
   /**
+   * Fetches unique subfolder titles 1 level deep within a specific folder.
+   *
+   * @param {Object} app - Obsidian App instance
+   * @param {string} folderPath - The vault folder path to scan
+   * @returns {string[]} Array of unique subfolder titles
+   */
+  static getSubfolderNames(app, folderPath) {
+    if (!VaultQueryService.#isValidApp(app)) return [];
+
+    const cleanBasePath = folderPath.replace(/\\/g, "/").replace(/\/$/, "");
+    const subfolders = new Set();
+
+    app.vault.getAllLoadedFiles().forEach((file) => {
+      const cleanFilePath = file.path.replace(/\\/g, "/");
+      if (cleanFilePath.startsWith(cleanBasePath + "/")) {
+        const relativePath = cleanFilePath.substring(cleanBasePath.length + 1);
+        const parts = relativePath.split("/");
+        if (parts.length > 1) {
+          subfolders.add(parts[0]);
+        }
+      }
+    });
+
+    return Array.from(subfolders);
+  }
+
+  /**
    * Fetches unique field values from markdown frontmatter within a specific folder.
    *
    * @param {Object} app - Obsidian App instance
