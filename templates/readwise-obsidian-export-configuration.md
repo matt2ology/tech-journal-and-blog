@@ -105,7 +105,7 @@ Don't include the triple dashes. Leave blank to disable YAML front matter altoge
 }}
 {%- endmacro %}
 
-title: "Marginal Notes and Highlights on {{author}} - {{fixup(title)}}"
+title: "Highlights and Marginal Notes on {{author}} - {{fixup(title)}}"
 date: {{last_highlighted_date}}
 draft: false
 slug: mgn-{{slugify_and_fixup(title)}}
