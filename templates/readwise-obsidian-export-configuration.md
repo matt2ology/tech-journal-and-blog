@@ -54,9 +54,9 @@ _I just liked the words_
 {% endif %}
 > [!quote]
 > {{ highlight_text }}
-> \- ({% if highlight_location_url %}[View Highlight]({{ highlight_location_url }}){% elif highlight_location %}Location {{ highlight_location }}{% endif %})
+> \- {% if highlight_location and highlight_location_url %}[{{ highlight_location }}]({{ highlight_location_url }}){% elif highlight_location %}{{ highlight_location }}{% endif %}
 {%- if highlight_tags %}
-**Tags:** {% for tag in highlight_tags %}{{ tag }} {% endfor %}
+**Tags:** {% for tag in highlight_tags %}{{ tag }}{% endfor %}
 {%- endif %}
 
 ---
