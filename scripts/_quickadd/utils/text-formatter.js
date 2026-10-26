@@ -246,7 +246,7 @@ class TextFormatter {
 
   static #joinNaturalList(processedItems) {
     if (TextFormatter.#isEmptyItemsArray({ items: processedItems }))
-      return "No Author";
+      return "NoNameProvided";
     if (TextFormatter.#hasSingleItem({ items: processedItems }))
       return processedItems[0];
     if (TextFormatter.#hasTwoItems({ items: processedItems }))
