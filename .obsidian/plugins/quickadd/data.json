@@ -342,15 +342,15 @@
             "settings": {}
           },
           {
-            "name": "literature-book-template",
+            "name": "synthesis-book-template",
             "type": "NestedChoice",
             "id": "2ea1ae0f-07e9-4c58-8889-466b37359106",
             "choice": {
               "id": "cf305b18-053d-4530-bd38-03f8bd51d3ba",
-              "name": "literature-book-template",
+              "name": "synthesis-book-template",
               "type": "Template",
               "command": false,
-              "templatePath": "templates/literature-book-chapter.md",
+              "templatePath": "templates/synthesis-book-chapter.md",
               "fileNameFormat": {
                 "enabled": true,
                 "format": "{{VALUE:filename}}"
@@ -359,7 +359,7 @@
               "folder": {
                 "enabled": true,
                 "folders": [
-                  "literature/books/{{VALUE:folder}}"
+                  "synthesis/books/{{VALUE:folder}}"
                 ],
                 "chooseWhenCreatingNote": false,
                 "createInSameFolderAsActiveFile": false,
