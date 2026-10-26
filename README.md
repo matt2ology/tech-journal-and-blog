@@ -1,5 +1,7 @@
 # zettelkasten-obsidain-notes-to-hugo-template
 
+[https://matt2ology.github.io/](https://matt2ology.github.io/)
+
 https://www.atlasworkspace.ai/blog/zettelkasten-method-guide
 
 Notes managed by Obsidian and transpiled to HTML via Hugo static site generator.
