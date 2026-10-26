@@ -143,6 +143,7 @@ class FrontmatterBuilderBase {
 
   #computeStandardValues(values) {
     return {
+      aliases: "",
       title: TextFormatter.titleCase(values.title) || "NoTitle",
       slug: values.slug ?? TextFormatter.slugify(values.title),
       date: this.#quickAddApi.date.now("YYYY-MM-DD"),
