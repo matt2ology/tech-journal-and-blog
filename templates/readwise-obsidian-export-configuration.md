@@ -17,6 +17,7 @@ Return to the Obsidian app to initiate a sync. If you take new highlights on doc
 ## Page metadata
 
 ```python
+Source published date: {{published_date}}
 {% if url %}
 **Source link:** [{{full_title}}]({{url}})
 {% else %}
@@ -105,12 +106,11 @@ Don't include the triple dashes. Leave blank to disable YAML front matter altoge
 {%- endmacro %}
 
 title: "Marginal Notes and Highlights on {{author}} - {{fixup(title)}}"
-date: {{date|date("Y-m-d")}}
+date: {{last_highlighted_date}}
 draft: false
-slug: "mgn-{{slugify_and_fixup(title)}}"
+slug: mgn-{{slugify_and_fixup(title)}}
 categories:
   - marginalia
-  - {{category}}
 tags:{% for tag in document_tags %}
   - {{tag}}{% endfor %}
   - {{source}}
