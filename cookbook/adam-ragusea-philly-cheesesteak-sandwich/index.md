@@ -1,7 +1,7 @@
 ---
 title: Philly Cheesesteak Sandwich by Adam Ragusea
 date: 2026-10-26
-draft: true
+draft: false
 slug: adam-ragusea-philly-cheesesteak-sandwich
 categories:
   - cookbook
