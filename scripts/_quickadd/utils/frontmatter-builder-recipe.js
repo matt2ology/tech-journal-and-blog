@@ -62,10 +62,17 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
         suggesterConfig: { caseSensitive: false, multiSelect: true },
       },
       {
-        id: "source",
-        label: "Source / URL Link",
+        id: "source_title",
+        label: "Source Title",
         type: "text",
-        placeholder: "e.g. [Title](URL) or plain link",
+        placeholder: "Title of the link (optional)",
+        optional: true,
+      },
+      {
+        id: "source",
+        label: "URL Link",
+        type: "text",
+        placeholder: "Plain link - the URL",
       },
     ];
   }
@@ -73,6 +80,7 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
   processValues(values) {
     const formattedSource = FrontmatterBuilderRecipe.#formatSourceLink({
       source: values.source,
+      sourceTitle: values.source_title,
       dish: values.dish,
       chef: values.chef,
     });
@@ -91,11 +99,23 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
     };
   }
 
-  static #formatSourceLink({ source, dish, chef }) {
-    if (FrontmatterBuilderRecipe.#isSourceEmpty({ source })) return "";
-    const dishTitle = TextFormatter.titleCase(dish) || "Recipe";
-    const chefTitle = TextFormatter.titleCase(chef) || "Chef";
-    return `\n**Source:** [${dishTitle} by ${chefTitle}](${source})`;
+static #formatSourceLink({ source, sourceTitle, dish, chef }) {
+    let result = "";
+
+    if (!FrontmatterBuilderRecipe.#isSourceEmpty({ source })) {
+      const trimmedSource = source.trim();
+      const trimmedTitle = sourceTitle ? sourceTitle.trim() : "";
+
+      const dishTitle = TextFormatter.titleCase(dish) || "Recipe";
+      const chefTitle = TextFormatter.titleCase(chef) || "Chef";
+      
+      // Use explicit sourceTitle if available, otherwise fall back to auto-generated title
+      const linkTitle = trimmedTitle || `${dishTitle} by ${chefTitle}`;
+
+      result = `\n**Source:** [${linkTitle}](${trimmedSource})`;
+    }
+
+    return result;
   }
 
   static #isSourceEmpty({ source }) {
