@@ -48,10 +48,10 @@ flowchart TD
 
 - **Synthesis Notes:** Structured notes created for every book, article, podcast, video, or lecture series consumed.
 - **Core Components:**
-    - Executive Summary & Core Thesis
-    - Key Takeaways & Section Breakdown
-    - Personal Reflection & Critical Commentary
-    - **Concept Candidates:** A queue of atomic idea titles waiting to be spun out.
+  - Executive Summary & Core Thesis
+  - Key Takeaways & Section Breakdown
+  - Personal Reflection & Critical Commentary
+  - **Concept Candidates:** A queue of atomic idea titles waiting to be spun out.
 - **Characteristics:** Comprehensive, source-referenced, summarized in your own language.
 
 ### Stage 3: Conceptualization (_The Networked Brain_)
@@ -60,9 +60,9 @@ flowchart TD
 
 - **Concept Notes:** Self-contained, single-idea notes written as **declarative statements** (e.g., _`[[Concept Note - Friction is a stronger behavior lever than motivation]]`_).
 - **Key Principles:**
-    - **Decoupled:** Completely separated from specific books, authors, or lectures.
-    - **Atomic:** One distinct idea per note.
-    - **Networked:** Linked directly to related Concept Notes to form interconnected clusters of thought across disciplines.
+  - **Decoupled:** Completely separated from specific books, authors, or lectures.
+  - **Atomic:** One distinct idea per note.
+  - **Networked:** Linked directly to related Concept Notes to form interconnected clusters of thought across disciplines.
 
 ### Stage 4: Output & Creation (_Optional_)
 
@@ -72,9 +72,9 @@ flowchart TD
 
 ## 💡 Summary Table
 
-|**Stage**|**Note Type**|**Function**|**Source Dependent?**|
-|---|---|---|---|
-|**1. Capture**|**Marginal Notes / Live Lecture**|Raw intake, annotations, and real-time class notes|🟢 High|
-|**2. Process**|**Synthesis Notes**|Summarizing, critiquing, and extracting core arguments|🟡 Medium (Links to source)|
-|**3. Network**|**Concept Notes**|Single, declarative ideas built for connection|🔴 Fully Decoupled|
-|**4. Output**|**Project / Writing**|Long-form articles, essays, and presentations|🟢 Context Specific|
+| **Stage**      | **Note Type**                     | **Function**                                           | **Source Dependent?**       |
+| -------------- | --------------------------------- | ------------------------------------------------------ | --------------------------- |
+| **1. Capture** | **Marginal Notes / Live Lecture** | Raw intake, annotations, and real-time class notes     | 🟢 High                     |
+| **2. Process** | **Synthesis Notes**               | Summarizing, critiquing, and extracting core arguments | 🟡 Medium (Links to source) |
+| **3. Network** | **Concept Notes**                 | Single, declarative ideas built for connection         | 🔴 Fully Decoupled          |
+| **4. Output**  | **Project / Writing**             | Long-form articles, essays, and presentations          | 🟢 Context Specific         |
