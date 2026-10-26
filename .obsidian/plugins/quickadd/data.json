@@ -207,6 +207,65 @@
       "icon": "type"
     },
     {
+      "id": "830e84f4-9ac1-4efa-acb7-706cd5a0f477",
+      "name": "Course Lecture Series",
+      "type": "Macro",
+      "command": false,
+      "runOnStartup": false,
+      "macro": {
+        "name": "Course Lecture Series",
+        "id": "a0feb68b-3550-494f-afc5-9ac48ea47cae",
+        "commands": [
+          {
+            "name": "note-course-lecture",
+            "type": "UserScript",
+            "id": "4f219195-76f9-4893-b145-60e0e11a545f",
+            "path": "scripts/_quickadd/note-course-lecture.js",
+            "settings": {}
+          },
+          {
+            "name": "Recipe Log Template",
+            "type": "NestedChoice",
+            "id": "5471be2b-c0bb-45c2-84bb-db45628359d1",
+            "choice": {
+              "id": "51494665-3880-4114-8bfe-d7e4a0723079",
+              "name": "Recipe Log Template",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/course-lecture-series.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "index"
+              },
+              "discoverExistingNotesBeforeCreate": false,
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "course-lecture/{{VALUE:slug}}"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "copyLinkToClipboard": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              }
+            }
+          }
+        ]
+      },
+      "icon": "graduation-cap"
+    },
+    {
       "id": "7e908ad8-c3ce-46eb-b46c-ed51803de18b",
       "name": "Recipe Log",
       "type": "Macro",
@@ -323,6 +382,85 @@
         ]
       },
       "icon": "book-open"
+    },
+    {
+      "id": "ee9612b8-4424-47e9-9697-0070cdef9422",
+      "name": "cumulative-marginalia",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "macro": {
+        "name": "cumulative-marginalia",
+        "id": "7251b3ba-24c3-49b3-a58e-a671b211d69e",
+        "commands": [
+          {
+            "name": "cumulative-marginalia",
+            "type": "UserScript",
+            "id": "aeff1c7c-2b78-4b93-bfa9-7be3100e8975",
+            "path": "scripts/_quickadd/cumulative-marginalia.js",
+            "settings": {}
+          },
+          {
+            "name": "append",
+            "type": "NestedChoice",
+            "id": "d4010dd1-c8fd-4c34-9185-74ce748bfe26",
+            "choice": {
+              "id": "9bb2e8fc-c35e-4c94-8449-97b0d487c54c",
+              "name": "append",
+              "type": "Capture",
+              "command": false,
+              "appendLink": false,
+              "captureTo": "",
+              "captureToActiveFile": true,
+              "captureToCanvasNodeId": "",
+              "activeFileWritePosition": "cursor",
+              "createFileIfItDoesntExist": {
+                "enabled": false,
+                "createWithTemplate": false,
+                "template": ""
+              },
+              "format": {
+                "enabled": true,
+                "format": "---\n\n### id{{RANDOM:10}}\n{{VALUE:cumulativeNotes}}\n"
+              },
+              "insertAfter": {
+                "enabled": false,
+                "after": "",
+                "insertAtEnd": false,
+                "considerSubsections": false,
+                "createIfNotFound": false,
+                "createIfNotFoundLocation": "top",
+                "inline": false,
+                "replaceExisting": false,
+                "blankLineAfterMatchMode": "auto"
+              },
+              "newLineCapture": {
+                "enabled": false,
+                "direction": "below"
+              },
+              "prepend": false,
+              "task": false,
+              "openFile": false,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "templater": {
+                "afterCapture": "none"
+              },
+              "insertBefore": {
+                "enabled": false,
+                "before": "",
+                "createIfNotFound": false,
+                "createIfNotFoundLocation": "top"
+              }
+            }
+          }
+        ]
+      },
+      "icon": "quote"
     }
   ],
   "inputPrompt": "single-line",
