@@ -12,8 +12,7 @@ authors: "[[parthknowsai|Parthknowsai]]"
 articles: "Hot Take : AI Is Popular Because It Makes Dumb People Feel Smart #Ai #Tech"
 image: https://i.ytimg.com/vi/yVvIlUq-GM8/sddefault.jpg?sqp=-oaymwEmCIAFEOAD8quKqQMa8AEB-AG2CIACgA-KAgwIABABGGUgUShMMA8=&rs=AOn4CLDBbWxJgB4QHLMTWgk3zLYyfaJKew
 ---
-
-Source published date: 2026-08-24
+**Source published date:** 2026-08-24
 
 **Source link:** [Hot Take : AI Is Popular Because It Makes Dumb People Feel Smart #Ai #Tech](https://youtube.com/shorts/yVvIlUq-GM8)
 
