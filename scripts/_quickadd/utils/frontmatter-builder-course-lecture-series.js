@@ -33,13 +33,6 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
 
     return [
       {
-        id: "title",
-        label: "Lecture / Topic Title",
-        type: "text",
-        placeholder: "Enter lecture or note title",
-        defaultValue: "",
-      },
-      {
         id: "series",
         label: "Course / Lecture Series",
         type: "suggester",
@@ -52,6 +45,13 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
           caseSensitive: false,
           multiSelect: false,
         },
+      },
+      {
+        id: "title",
+        label: "Lecture / Topic Title",
+        type: "text",
+        placeholder: "Enter lecture or note title",
+        defaultValue: "",
       },
       {
         id: "lecturer",
