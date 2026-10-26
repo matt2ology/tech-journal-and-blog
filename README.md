@@ -4,52 +4,77 @@ https://www.atlasworkspace.ai/blog/zettelkasten-method-guide
 
 Notes managed by Obsidian and transpiled to HTML via Hugo static site generator.
 
-"highlight" notes are all direct quotes and my reflection of direct quotes; and, I have "literature" notes that are written in my own words, summary of collection of highlights, abstractions, and key ideas of source material.
+# My Personal Knowledge Management (PKM) Workflow
 
-- **Highlights → Processed notes** (best conceptual distinction)
-  - Zettelkasten / PKM style: **Processed notes** → contrasts nicely with raw highlights
-- **Summary notes** → emphasizes synthesis of highlights
+This system adapts the **Zettelkasten method** to create a seamless pipeline from raw information intake to atomic, networked thinking. Rather than relying on rigid traditional terms, this workflow uses clear, functional stage names.
 
-**The 3-Tier Category Framework**
-
-| **Category**                                    | **Role in Your Vault**                                            | **What It Contains**                                                                                                       | **Example Title**                                     |
-| ----------------------------------------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| **1. Source Notes**<br><br>_(Readwise Imports)_ | **The Raw Material**<br><br>(Exogenous / Other People's Words)    | Unfiltered highlights, excerpts, and raw annotations synced straight from external articles, books, or podcasts.           | src - Ahrens 2017 - How to Take Smart Notes           |
-| **2. Literature Notes**                         | **The Contextual Summary**<br><br>(Endogenous / Your Translation) | Your structured synthesis of the source text, summarizing arguments and key points in your own words with proper citation. | lit - Ahrens 2017 - How to Take Smart Notes           |
-| **3. Permanent Notes**                          | **The Atomic Knowledge**<br><br>(Autonomous / Your Ideas)         | Self-contained, single-idea notes written as declarative statements, completely decoupled from specific books or authors.  | Writing in your own words drives conceptual synthesis |
-
-| Note Type            | Purpose                                                       | Key Feature                                                |
-| -------------------- | ------------------------------------------------------------- | ---------------------------------------------------------- |
-| **Reference Notes**  | Capture brief source details or point to a quote              | Short, raw, or exact pointers to an external source        |
-| **Literature Notes** | Summarize or translate an author's argument in your own words | Written in your own language based on a source             |
-| **Permanent Notes**  | Develop an independent, synthesized idea for long-term use    | Focused on your own original thinking rather than a source |
+## 🗺️ The Process at a Glance
 
 ```mermaid
 flowchart TD
-    A([Media consumption]) -->|Capture useful ideas and source details| B(Literature notes)
-    B --> |Summarize what the source says| C[Permanent notes]
-    C -->|Reformulate ideas in your own words and make connections| D{Knowledge network}
-    D --> |Connect ideas to| E([support thinking])
-    D --> |Connect ideas to| F([support writing])
-    D --> |Connect ideas to| G([support problem-solving])
+    %% Intake Layer
+    A1([Media Consumption]) -->|Readwise Exports| B1[Marginal Notes]
+    A1 -->|Manual Highlights & Annotations| B1
+    A2([Lectures & Seminars]) -->|Real-time Class Capture| B2[Live Lecture Notes]
+
+    %% Synthesis Layer
+    B1 -->|Summarize, Digest & Critique| C[Synthesis Notes]
+    B2 -->|Review & Structure| C
+
+    %% Concept Layer
+    C -->|Extract Single-Idea Declarative Statements| D[Concept Notes]
+
+    %% Network & Output Layer
+    D -->|Link Related Ideas & Mental Models| E{Knowledge Network}
+
+    E -->|Retrieve & Interconnect| F([Support Thinking])
+    E -->|Retrieve & Interconnect| G([Support Writing & Projects])
+    E -->|Retrieve & Interconnect| H([Support Problem-Solving])
 ```
 
----
+## 🔄 The 4-Stage Workflow
 
-### idRYCu4NXfuB
+### Stage 1: Raw Capture & Intake
 
-# Cumulative Marginalia: https://gohugo.io/
+**Purpose:** Collect raw information with zero friction as you read, listen, or watch.
 
-> [!info] Active Reading Procedure
-> _"Force yourself to interact with the semantic content... summarize previous ideas combined with the new paragraph."_ — Jeffrey Kaplan
+- **Marginal Notes & Highlights:** Quotes, annotations, and highlights automatically synced from Readwise (books, articles, web highlights).
+- **Live Lecture Notes:** Fast-paced, minimal outline notes captured during live classes, presentations, or keynotes.
+- **Characteristics:** Unfiltered, source-dependent, low-effort capture.
 
-### Paragraph 1
+### Stage 2: Digest & Synthesis (_The Processing Hub_)
 
-> Original Text
-> Hugo is one of the most popular open-source static site generators. With its amazing speed and flexibility, Hugo makes building websites fun again.
+**Purpose:** Active comprehension. Translate external information into your own words before creating standalone concepts.
 
-**Cumulative Margin Note:**
+- **Synthesis Notes:** Structured notes created for every book, article, podcast, video, or lecture series consumed.
+- **Core Components:**
+    - Executive Summary & Core Thesis
+    - Key Takeaways & Section Breakdown
+    - Personal Reflection & Critical Commentary
+    - **Concept Candidates:** A queue of atomic idea titles waiting to be spun out.
+- **Characteristics:** Comprehensive, source-referenced, summarized in your own language.
 
-- _[Write your cumulative 1-sentence summary connecting paragraphs 1 through 1 here]_
+### Stage 3: Conceptualization (_The Networked Brain_)
 
----
+**Purpose:** Distill synthesized ideas into permanent, reusable mental building blocks.
+
+- **Concept Notes:** Self-contained, single-idea notes written as **declarative statements** (e.g., _`[[Concept Note - Friction is a stronger behavior lever than motivation]]`_).
+- **Key Principles:**
+    - **Decoupled:** Completely separated from specific books, authors, or lectures.
+    - **Atomic:** One distinct idea per note.
+    - **Networked:** Linked directly to related Concept Notes to form interconnected clusters of thought across disciplines.
+
+### Stage 4: Output & Creation (_Optional_)
+
+**Purpose:** Utilize your networked Concept Notes to construct essays, research projects, articles, or presentations.
+
+- **Projects / Target Notes:** Dynamic notes where related Concept Notes are assembled into structured outlines and final creative outputs.
+
+## 💡 Summary Table
+
+|**Stage**|**Note Type**|**Function**|**Source Dependent?**|
+|---|---|---|---|
+|**1. Capture**|**Marginal Notes / Live Lecture**|Raw intake, annotations, and real-time class notes|🟢 High|
+|**2. Process**|**Synthesis Notes**|Summarizing, critiquing, and extracting core arguments|🟡 Medium (Links to source)|
+|**3. Network**|**Concept Notes**|Single, declarative ideas built for connection|🔴 Fully Decoupled|
+|**4. Output**|**Project / Writing**|Long-form articles, essays, and presentations|🟢 Context Specific|
