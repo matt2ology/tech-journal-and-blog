@@ -2,6 +2,8 @@
 
 {{VALUE:detail}}
 
+<!-- Purpose: Transmute source materials (books, articles, podcasts, lecture notes) into active comprehension and extract candidate concepts. -->
+
 <!--
 Personal Reflection & Critical Commentary
 What do you agree/disagree with? How does this connect to what you already know?
