@@ -73,8 +73,7 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
   }
 
   #getAuthorLastName(authorString) {
-    if (FrontmatterBuilderBook.#isAuthorStringEmpty({ authorString }))
-      return "unknown";
+    if (!authorString) return "unknown";
 
     const firstAuthor = authorString.split(",")[0].trim();
     const nameParts = firstAuthor.split(/\s+/);
@@ -82,18 +81,8 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
     return lastName.replace(/[^a-zA-Z]/g, "") || "unknown";
   }
 
-  static #isAuthorStringEmpty({ authorString }) {
-    return !authorString;
-  }
-
   #removeAfterColon(text) {
-    return FrontmatterBuilderBook.#hasColonText({ text })
-      ? text.split(":")[0].trim()
-      : "";
-  }
-
-  static #hasColonText({ text }) {
-    return Boolean(text);
+    return text ? text.split(":")[0].trim() : "";
   }
 
   processValues(values) {
@@ -110,7 +99,6 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
     authorInput = resolvedContext.authorInput;
     const folderName = resolvedContext.folderName;
 
-    const authors = this.parseCommaSeparatedList(authorInput);
     const authorList = TextFormatter.formatNaturalNameList(authorInput);
     const detailText = `${values.chapter} - [[${TextFormatter.slugify(formattedBook)}|${formattedBook}]] by ${authorList}`;
 
@@ -162,11 +150,7 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
         sub.toLowerCase() === formattedBook.toLowerCase(),
     );
 
-    if (
-      FrontmatterBuilderBook.#hasNotMatchedSubfolder({
-        matchedSubfolder,
-      })
-    ) {
+    if (!matchedSubfolder) {
       const authors = this.parseCommaSeparatedList(authorInput);
       const primaryAuthor = authors[0] || "noAuthorListed";
       const bookSlug = this.#removeAfterColon(formattedBook);
@@ -176,10 +160,9 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
       };
     }
 
-    const seriesFolderPath = `${rootFolder}/${matchedSubfolder}`;
     let resolvedAuthor = authorInput;
-
     if (!resolvedAuthor) {
+      const seriesFolderPath = `${rootFolder}/${matchedSubfolder}`;
       const existingAuthors = VaultQueryService.getFieldValues({
         app,
         fieldName: "author",
@@ -197,10 +180,6 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
       authorInput: resolvedAuthor,
       folderName: matchedSubfolder,
     };
-  }
-
-  static #hasNotMatchedSubfolder({ matchedSubfolder }) {
-    return !matchedSubfolder;
   }
 
   buildExtraProperties({ values }) {
