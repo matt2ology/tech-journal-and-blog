@@ -72,13 +72,22 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
     ];
   }
 
-  #getAuthorLastName(authorString) {
+  #getAuthorLastNames(authorString) {
     if (!authorString) return "unknown";
 
-    const firstAuthor = authorString.split(",")[0].trim();
-    const nameParts = firstAuthor.split(/\s+/);
-    const lastName = nameParts[nameParts.length - 1];
-    return lastName.replace(/[^a-zA-Z]/g, "") || "unknown";
+    const cleanString = TextFormatter.cleanWikiLink(authorString);
+    const authors = cleanString.split(",");
+
+    const lastNames = authors
+      .map((author) => {
+        const trimmed = author.trim();
+        const nameParts = trimmed.split(/\s+/);
+        const lastName = nameParts[nameParts.length - 1];
+        return lastName.replace(/[^a-zA-Z]/g, "") || "unknown";
+      })
+      .filter(Boolean);
+
+    return lastNames.length > 0 ? lastNames.join("-") : "unknown";
   }
 
   #removeAfterColon(text) {
@@ -111,6 +120,7 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
 
     const bookSlug = this.#removeAfterColon(formattedBook);
     const chapterSlug = this.#removeAfterColon(values.chapter);
+    const authorLastNames = this.#getAuthorLastNames(authorInput);
 
     return {
       ...values,
@@ -124,7 +134,7 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
       filename: incrementedFilename,
       foldername: folderName,
       slug: TextFormatter.slugify(
-        `syn-${this.#getAuthorLastName(authorInput)}-${bookSlug}-${chapterSlug}`,
+        `syn-${authorLastNames}-${bookSlug}-${chapterSlug}`,
       ),
       tags: this.appendToList({
         list: values.tags,
@@ -151,12 +161,11 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
     );
 
     if (!matchedSubfolder) {
-      const authors = this.parseCommaSeparatedList(authorInput);
-      const primaryAuthor = authors[0] || "noAuthorListed";
+      const authorLastNames = this.#getAuthorLastNames(authorInput);
       const bookSlug = this.#removeAfterColon(formattedBook);
       return {
         authorInput,
-        folderName: TextFormatter.slugify(`${primaryAuthor}-${bookSlug}`),
+        folderName: TextFormatter.slugify(`${authorLastNames}-${bookSlug}`),
       };
     }
 
