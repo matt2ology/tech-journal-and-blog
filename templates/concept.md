@@ -13,7 +13,6 @@ Provide an above the fold (i.e. you shouldn't have to scroll to consume the info
 -->
 
 > [!NOTE]💡 The Core Idea
->
 
 ## Mental Models & Supporting Context
 
