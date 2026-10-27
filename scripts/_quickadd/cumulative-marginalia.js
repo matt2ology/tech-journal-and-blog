@@ -41,6 +41,12 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
             optional: true,
           },
           {
+            id: "rawText",
+            label: "Paste Text Block to Quote",
+            type: "textarea",
+            placeholder: "Paste quote here...",
+          },
+          {
             id: "cumulativeSummary",
             label: "Cumulative Summary (> [!tldr])",
             type: "textarea",
@@ -53,12 +59,6 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
             type: "textarea",
             placeholder: "Leave blank for default 'I just liked the words'...",
             optional: true,
-          },
-          {
-            id: "rawText",
-            label: "Paste Text Block to Quote",
-            type: "textarea",
-            placeholder: "Paste quote here...",
           },
         ]);
 
@@ -140,7 +140,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
           highlight_location = ytParsed.location;
           highlight_location_url = ytParsed.url;
         } else if (/^https?:\/\//i.test(inputVal)) {
-          highlight_location = "Web Link";
+          highlight_location = "Link";
           highlight_location_url = inputVal;
         } else {
           // Treated as page number or text citation
@@ -173,12 +173,17 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       }
 
       const outputLines = [
+        ``,
         `> [!tldr] Cumulative Summary`,
         `> ${this.cumulativeSummary || "No summary provided."}`,
         ``,
         marginaliaBlock,
+        ``,
         `> [!quote]`,
         quotedLines,
+        ``,
+        `---`,
+        ``,
       ];
 
       if (locationLine) {
