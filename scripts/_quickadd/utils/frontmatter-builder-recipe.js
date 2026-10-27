@@ -99,27 +99,15 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
     };
   }
 
-static #formatSourceLink({ source, sourceTitle, dish, chef }) {
-    let result = "";
+  static #formatSourceLink({ source, sourceTitle, dish, chef }) {
+    if (!source) return "";
 
-    if (!FrontmatterBuilderRecipe.#isSourceEmpty({ source })) {
-      const trimmedSource = source.trim();
-      const trimmedTitle = sourceTitle ? sourceTitle.trim() : "";
+    const trimmedSource = source.trim();
+    const dishTitle = TextFormatter.titleCase(dish) || "Recipe";
+    const chefTitle = TextFormatter.titleCase(chef) || "Chef";
+    const linkTitle = sourceTitle?.trim() || `${dishTitle} by ${chefTitle}`;
 
-      const dishTitle = TextFormatter.titleCase(dish) || "Recipe";
-      const chefTitle = TextFormatter.titleCase(chef) || "Chef";
-      
-      // Use explicit sourceTitle if available, otherwise fall back to auto-generated title
-      const linkTitle = trimmedTitle || `${dishTitle} by ${chefTitle}`;
-
-      result = `\n**Source:** [${linkTitle}](${trimmedSource})`;
-    }
-
-    return result;
-  }
-
-  static #isSourceEmpty({ source }) {
-    return !source;
+    return `\n**Source:** [${linkTitle}](${trimmedSource})`;
   }
 
   buildExtraProperties({ values }) {
