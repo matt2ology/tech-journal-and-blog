@@ -16,6 +16,15 @@ const FrontmatterBuilderBase = require(
 const VaultQueryService = require(
   path.join(vaultPath, "scripts", "_quickadd", "utils", "vault-query-service"),
 );
+const IncrementedFilenameUtility = require(
+  path.join(
+    vaultPath,
+    "scripts",
+    "_quickadd",
+    "utils",
+    "incremented-filename-utility",
+  ),
+);
 
 /**
  * Course and lecture note specific frontmatter builder.
@@ -75,69 +84,26 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
       : "";
 
     let lecturerInput = values.lecturer ? values.lecturer.trim() : "";
-    let fileCount = 0;
 
     if (
       FrontmatterBuilderCourseLectureSeries.#hasFormattedSeries({
         formattedSeries,
       })
     ) {
-      const rootFolder = "course-lecture";
-      const subfolders = VaultQueryService.getSubfolderNames({
-        app,
-        folderPath: rootFolder,
+      lecturerInput = this.#resolveLecturerInput({
+        formattedSeries,
+        lecturerInput,
       });
-
-      const matchedSubfolder = subfolders.find(
-        (sub) =>
-          TextFormatter.titleCase(sub) === formattedSeries ||
-          sub.toLowerCase() === formattedSeries.toLowerCase(),
-      );
-
-      if (
-        FrontmatterBuilderCourseLectureSeries.#hasMatchedSubfolder({
-          matchedSubfolder,
-        })
-      ) {
-        const seriesFolderPath = `${rootFolder}/${matchedSubfolder}`;
-
-        const filesInFolder = app.vault
-          .getMarkdownFiles()
-          .filter((file) => file.path.startsWith(seriesFolderPath));
-        fileCount = filesInFolder.length;
-
-        const existingLecturers = VaultQueryService.getFieldValues({
-          app,
-          fieldName: "lecturer",
-          folderPath: seriesFolderPath,
-        });
-        const existingInstructors = VaultQueryService.getFieldValues({
-          app,
-          fieldName: "instructor",
-          folderPath: seriesFolderPath,
-        });
-
-        const allInstructors = [
-          ...new Set([...existingLecturers, ...existingInstructors]),
-        ].filter(Boolean);
-
-        if (
-          FrontmatterBuilderCourseLectureSeries.#shouldAutoPopulateLecturer({
-            allInstructors,
-            lecturerInput,
-          })
-        ) {
-          const cleanedInstructors = allInstructors.map((instructor) =>
-            TextFormatter.cleanWikiLink(instructor),
-          );
-          lecturerInput = cleanedInstructors.join(", ");
-        }
-      }
     }
 
-    const indexNumber = String(fileCount + 1).padStart(2, "0");
+    const incrementedFilename = IncrementedFilenameUtility.generate({
+      app,
+      folderPath: "course-lecture",
+      seriesName: values.series,
+      title: values.title,
+    });
+
     const titleSlug = TextFormatter.slugify(values.title);
-    const incrementedFilename = `${indexNumber}-${titleSlug}`;
 
     return {
       ...values,
@@ -155,12 +121,64 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
     };
   }
 
+  #resolveLecturerInput({ formattedSeries, lecturerInput }) {
+    const rootFolder = "course-lecture";
+    const subfolders = VaultQueryService.getSubfolderNames({
+      app,
+      folderPath: rootFolder,
+    });
+
+    const matchedSubfolder = subfolders.find(
+      (sub) =>
+        TextFormatter.titleCase(sub) === formattedSeries ||
+        sub.toLowerCase() === formattedSeries.toLowerCase(),
+    );
+
+    if (
+      FrontmatterBuilderCourseLectureSeries.#hasNotMatchedSubfolder({
+        matchedSubfolder,
+      })
+    ) {
+      return lecturerInput;
+    }
+
+    const seriesFolderPath = `${rootFolder}/${matchedSubfolder}`;
+    const existingLecturers = VaultQueryService.getFieldValues({
+      app,
+      fieldName: "lecturer",
+      folderPath: seriesFolderPath,
+    });
+    const existingInstructors = VaultQueryService.getFieldValues({
+      app,
+      fieldName: "instructor",
+      folderPath: seriesFolderPath,
+    });
+
+    const allInstructors = [
+      ...new Set([...existingLecturers, ...existingInstructors]),
+    ].filter(Boolean);
+
+    if (
+      FrontmatterBuilderCourseLectureSeries.#shouldAutoPopulateLecturer({
+        allInstructors,
+        lecturerInput,
+      })
+    ) {
+      const cleanedInstructors = allInstructors.map((instructor) =>
+        TextFormatter.cleanWikiLink(instructor),
+      );
+      return cleanedInstructors.join(", ");
+    }
+
+    return lecturerInput;
+  }
+
   static #hasFormattedSeries({ formattedSeries }) {
     return Boolean(formattedSeries);
   }
 
-  static #hasMatchedSubfolder({ matchedSubfolder }) {
-    return Boolean(matchedSubfolder);
+  static #hasNotMatchedSubfolder({ matchedSubfolder }) {
+    return !matchedSubfolder;
   }
 
   static #shouldAutoPopulateLecturer({ allInstructors, lecturerInput }) {
