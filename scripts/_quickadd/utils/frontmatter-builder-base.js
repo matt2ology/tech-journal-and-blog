@@ -78,6 +78,7 @@ class FrontmatterBuilderBase {
 
   buildStandardProperties({ computed }) {
     return [
+      `aliases: "${computed.title}"`,
       `title: "${computed.title}"`,
       `date: "${computed.date}"`,
       `draft: ${computed.draft}`,
