@@ -23,20 +23,17 @@ class IncrementedFilenameUtility {
   }
 
   static #resolveFileCount({ context }) {
-    if (IncrementedFilenameUtility.#hasInvalidContext(context)) return 0;
+    const { app, folderPath, seriesName } = context;
+    if (!app || !folderPath || !seriesName) return 0;
 
     const matchedSubfolder = IncrementedFilenameUtility.#findSubfolder(context);
-    if (IncrementedFilenameUtility.#hasNoSubfolder(matchedSubfolder)) return 0;
+    if (!matchedSubfolder) return 0;
 
     return IncrementedFilenameUtility.#countFiles({
-      app: context.app,
-      folderPath: context.folderPath,
+      app,
+      folderPath,
       matchedSubfolder,
     });
-  }
-
-  static #hasInvalidContext({ app, folderPath, seriesName }) {
-    return !app || !folderPath || !seriesName;
   }
 
   static #findSubfolder({ app, folderPath, seriesName }) {
@@ -48,16 +45,11 @@ class IncrementedFilenameUtility {
     );
   }
 
-  static #hasNoSubfolder(matchedSubfolder) {
-    return !matchedSubfolder;
-  }
-
   static #countFiles({ app, folderPath, matchedSubfolder }) {
     const seriesFolderPath = `${folderPath}/${matchedSubfolder}`;
-    const files = app.vault
+    return app.vault
       .getMarkdownFiles()
-      .filter((file) => file.path.startsWith(seriesFolderPath));
-    return files.length;
+      .filter((file) => file.path.startsWith(seriesFolderPath)).length;
   }
 
   static #formatFilename({ fileCount, title }) {
