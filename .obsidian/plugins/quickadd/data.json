@@ -207,28 +207,28 @@
       "icon": "type"
     },
     {
-      "id": "830e84f4-9ac1-4efa-acb7-706cd5a0f477",
+      "id": "b63cb8f5-40f6-4272-af76-2da3d7a24211",
       "name": "Course Lecture Series",
       "type": "Macro",
       "command": false,
       "runOnStartup": false,
       "macro": {
         "name": "Course Lecture Series",
-        "id": "a0feb68b-3550-494f-afc5-9ac48ea47cae",
+        "id": "723f9401-91c1-49ca-b83e-f17167c1793d",
         "commands": [
           {
             "name": "note-course-lecture",
             "type": "UserScript",
-            "id": "4f219195-76f9-4893-b145-60e0e11a545f",
+            "id": "547fd52a-8648-4ce9-b6a3-7497f0aea173",
             "path": "scripts/_quickadd/note-course-lecture.js",
             "settings": {}
           },
           {
             "name": "Course Lecture Template",
             "type": "NestedChoice",
-            "id": "5471be2b-c0bb-45c2-84bb-db45628359d1",
+            "id": "4554becd-3c31-4433-b3b1-ae3d5f3cf1a2",
             "choice": {
-              "id": "51494665-3880-4114-8bfe-d7e4a0723079",
+              "id": "79e703ed-562e-4b07-a06c-28195cb367bd",
               "name": "Course Lecture Template",
               "type": "Template",
               "command": false,
@@ -325,29 +325,29 @@
       "icon": "cookie"
     },
     {
-      "id": "48bedaf3-fb5f-4dac-bbc6-c9cc64356283",
-      "name": "Book Chapter Literature Note",
+      "id": "830e84f4-9ac1-4efa-acb7-706cd5a0f477",
+      "name": "Book Chapter synthesis Note",
       "type": "Macro",
       "command": false,
       "runOnStartup": false,
       "macro": {
-        "name": "Book Chapter Literature Note",
-        "id": "1a06c150-fc31-4610-8a09-7e72368d8baa",
+        "name": "Book Chapter synthesis Note",
+        "id": "a0feb68b-3550-494f-afc5-9ac48ea47cae",
         "commands": [
           {
             "name": "note-chapter",
             "type": "UserScript",
-            "id": "a8b86d1f-342d-4593-8a98-2c6fe0c10e0b",
+            "id": "79e256a9-c98b-4221-88e4-c2aa4408e5e3",
             "path": "scripts/_quickadd/note-chapter.js",
             "settings": {}
           },
           {
-            "name": "synthesis-book-template",
+            "name": "Book Chapter Synthesis Template",
             "type": "NestedChoice",
-            "id": "2ea1ae0f-07e9-4c58-8889-466b37359106",
+            "id": "5471be2b-c0bb-45c2-84bb-db45628359d1",
             "choice": {
-              "id": "cf305b18-053d-4530-bd38-03f8bd51d3ba",
-              "name": "synthesis-book-template",
+              "id": "51494665-3880-4114-8bfe-d7e4a0723079",
+              "name": "Book Chapter Synthesis Template",
               "type": "Template",
               "command": false,
               "templatePath": "templates/synthesis-book-chapter.md",
@@ -359,7 +359,7 @@
               "folder": {
                 "enabled": true,
                 "folders": [
-                  "synthesis/books/{{VALUE:folder}}"
+                  "synthesis/books/{{VALUE:foldername}}"
                 ],
                 "chooseWhenCreatingNote": false,
                 "createInSameFolderAsActiveFile": false,
