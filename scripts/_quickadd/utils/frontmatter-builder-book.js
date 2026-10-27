@@ -13,33 +13,61 @@ const FrontmatterBuilderBase = require(
     "frontmatter-builder-base",
   ),
 );
+const VaultQueryService = require(
+  path.join(vaultPath, "scripts", "_quickadd", "utils", "vault-query-service"),
+);
+const IncrementedFilenameUtility = require(
+  path.join(
+    vaultPath,
+    "scripts",
+    "_quickadd",
+    "utils",
+    "incremented-filename-utility",
+  ),
+);
 
 /**
- * Book-specific frontmatter builder.
+ * Book-specific frontmatter builder with auto-detection and incremented filenames.
  */
 class FrontmatterBuilderBook extends FrontmatterBuilderBase {
   getFields() {
+    const rawBookOptions = VaultQueryService.getSubfolderNames({
+      app,
+      folderPath: "synthesis/books",
+    });
+    const processedBookOptions = rawBookOptions.map((book) =>
+      TextFormatter.titleCase(book),
+    );
+
     return [
       {
         id: "book",
         label: "Book Title",
-        type: "text",
-        placeholder: "What is the title of the book?",
-        defaultValue: "How AI Works: From Sorcery to Science",
-      },
-      {
-        id: "author",
-        label: "Author(s)",
-        type: "text",
-        placeholder: "Book Author(s), comma separated",
-        defaultValue: "RONALD T. KNEUSEL",
+        type: "suggester",
+        options: processedBookOptions,
+        placeholder: "Select or enter book title",
+        defaultValue: "",
+        suggesterConfig: {
+          displayValues: processedBookOptions,
+          allowCustomInput: true,
+          caseSensitive: false,
+          multiSelect: false,
+        },
       },
       {
         id: "chapter",
         label: "Chapter",
         type: "text",
         placeholder: "What chapter are you reading?",
-        defaultValue: "Chapter 1: And Away We Go: An AI Overview",
+        defaultValue: "",
+      },
+      {
+        id: "author",
+        label: "Author(s)",
+        type: "text",
+        placeholder:
+          "Book Author(s), comma separated (Auto-detected if left empty)",
+        defaultValue: "",
       },
     ];
   }
@@ -69,36 +97,110 @@ class FrontmatterBuilderBook extends FrontmatterBuilderBase {
   }
 
   processValues(values) {
-    const authors = this.parseCommaSeparatedList(values.author);
-    const authorList = TextFormatter.formatNaturalNameList(values.author);
-    const primaryAuthor = authors[0] || "noAuthorListed";
-    const detailText = `${values.chapter} - [[${TextFormatter.slugify(values.book)}|${values.book}]] by ${authorList}`;
+    const formattedBook = values.book
+      ? TextFormatter.titleCase(values.book)
+      : "";
+    let authorInput = values.author ? values.author.trim() : "";
+
+    const resolvedContext = this.#resolveBookContext({
+      formattedBook,
+      authorInput,
+    });
+
+    authorInput = resolvedContext.authorInput;
+    const folderName = resolvedContext.folderName;
+
+    const authors = this.parseCommaSeparatedList(authorInput);
+    const authorList = TextFormatter.formatNaturalNameList(authorInput);
+    const detailText = `${values.chapter} - [[${TextFormatter.slugify(formattedBook)}|${formattedBook}]] by ${authorList}`;
+
+    const incrementedFilename = IncrementedFilenameUtility.generate({
+      app,
+      folderPath: "synthesis/books",
+      seriesName: values.book,
+      title: values.chapter,
+    });
+
+    const bookSlug = this.#removeAfterColon(formattedBook);
+    const chapterSlug = this.#removeAfterColon(values.chapter);
 
     return {
       ...values,
+      book: formattedBook,
+      author: authorInput,
       categories: this.appendToList({
         list: values.categories,
         items: ["books", "synthesis"],
       }),
       detail: detailText,
-      filename: TextFormatter.slugify(
-        `syn-${this.#removeAfterColon(values.book)}-${this.#removeAfterColon(values.chapter)}`,
-      ),
-      folder: TextFormatter.slugify(
-        `${primaryAuthor}-${this.#removeAfterColon(values.book)}`,
-      ),
+      filename: incrementedFilename,
+      foldername: folderName,
       slug: TextFormatter.slugify(
-        `syn-${this.#getAuthorLastName(values.author)}-${this.#removeAfterColon(values.book)}-${this.#removeAfterColon(values.chapter)}`,
+        `syn-${this.#getAuthorLastName(authorInput)}-${bookSlug}-${chapterSlug}`,
       ),
       tags: this.appendToList({
         list: values.tags,
         items: [
           "question",
-          ...this.parseAndSlugifyCommaSeparatedList(values.author),
+          ...this.parseAndSlugifyCommaSeparatedList(authorInput),
         ],
       }),
-      title: `My Synthesis of ${this.#removeAfterColon(values.book)} - ${this.#removeAfterColon(values.chapter)}`,
+      title: `My Synthesis of ${bookSlug} - ${chapterSlug}`,
     };
+  }
+
+  #resolveBookContext({ formattedBook, authorInput }) {
+    const rootFolder = "synthesis/books";
+    const subfolders = VaultQueryService.getSubfolderNames({
+      app,
+      folderPath: rootFolder,
+    });
+
+    const matchedSubfolder = subfolders.find(
+      (sub) =>
+        TextFormatter.titleCase(sub) === formattedBook ||
+        sub.toLowerCase() === formattedBook.toLowerCase(),
+    );
+
+    if (
+      FrontmatterBuilderBook.#hasNotMatchedSubfolder({
+        matchedSubfolder,
+      })
+    ) {
+      const authors = this.parseCommaSeparatedList(authorInput);
+      const primaryAuthor = authors[0] || "noAuthorListed";
+      const bookSlug = this.#removeAfterColon(formattedBook);
+      return {
+        authorInput,
+        folderName: TextFormatter.slugify(`${primaryAuthor}-${bookSlug}`),
+      };
+    }
+
+    const seriesFolderPath = `${rootFolder}/${matchedSubfolder}`;
+    let resolvedAuthor = authorInput;
+
+    if (!resolvedAuthor) {
+      const existingAuthors = VaultQueryService.getFieldValues({
+        app,
+        fieldName: "author",
+        folderPath: seriesFolderPath,
+      });
+      const allAuthors = [...new Set(existingAuthors)].filter(Boolean);
+      if (allAuthors.length > 0) {
+        resolvedAuthor = allAuthors
+          .map((author) => TextFormatter.cleanWikiLink(author))
+          .join(", ");
+      }
+    }
+
+    return {
+      authorInput: resolvedAuthor,
+      folderName: matchedSubfolder,
+    };
+  }
+
+  static #hasNotMatchedSubfolder({ matchedSubfolder }) {
+    return !matchedSubfolder;
   }
 
   buildExtraProperties({ values }) {
