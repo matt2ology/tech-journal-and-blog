@@ -2,20 +2,28 @@
 
 {{VALUE:detail}}
 
+<!--
+Personal Reflection & Critical Commentary
+What do you agree/disagree with? How does this connect to what you already know?
+-->
+
 ## Key Takeaways & Core Concepts
 
-> [!abstract] Overview
-> **Core Objective / Takeaway:** One or two sentences answering: _What problem does this chapter solve, or what principle does it establish?_
+<!-- A 2-3 sentence summary of the main argument or purpose in your own words. -->
 
-- **Concept 1:** Define the term or mechanism simply. How does it work? Why does it matter?
-- **Concept 2:** Paraphrase rule, formula, or mental model introduced in the text.
-- **Concept 3:** Connection to prior knowledge or other chapters `[[Related Permanent Concept Note]]`.
+> [!abstract] Executive Summary & Core Thesis
+>
+> 1.
+> 2.
+> 3.
 
 ---
 
 ## SQ3R Method (Survey, Question, Read, Recite, Review)
 
 <!--
+Extract potential atomic ideas to turn into standalone Concept Notes
+
 SQ3R Method (Survey, Question, Read, Recite, Review).
 Best for: General study and reading comprehension. It’s a well-established method for extracting key information from texts.
 
@@ -27,6 +35,19 @@ Best for: General study and reading comprehension. It’s a well-established met
  -->
 
 - [ ] question_who_what_when_where_why_how
+
+## 🔑 Key Takeaways & Section Breakdown
+
+<!--
+### Section 1: [Chapter / Subtitle / Topic]
+
+- Key point or insight...
+- Supporting detail or quote...
+
+### Section 2: [Chapter / Subtitle / Topic]
+
+- Key point or insight...
+-->
 
 ## Essential Textbook Highlights
 
@@ -42,8 +63,4 @@ Format:
 >> \- cited
 
 **Reflection**:
--->
-
-<!--
-### Section 1: [Subtitle/Topic]
 -->
