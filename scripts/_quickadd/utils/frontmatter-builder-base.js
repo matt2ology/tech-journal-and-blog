@@ -103,42 +103,16 @@ class FrontmatterBuilderBase {
   }
 
   static #processEntry({ result, entry }) {
-    if (FrontmatterBuilderBase.#isArrayEntry({ entry })) {
-      return FrontmatterBuilderBase.#appendArrayItems({
+    if (Array.isArray(entry)) {
+      return entry.reduce(
+        (acc, item) =>
+          item ? ListUtils.appendUniqueItem({ list: acc, item }) : acc,
         result,
-        entryArray: entry,
-      });
+      );
     }
-    if (FrontmatterBuilderBase.#isTruthyEntry({ entry })) {
-      return ListUtils.appendUniqueItem({ list: result, item: entry });
-    }
-    return result;
-  }
-
-  static #isArrayEntry({ entry }) {
-    return Array.isArray(entry);
-  }
-
-  static #isTruthyEntry({ entry }) {
-    return Boolean(entry);
-  }
-
-  static #appendArrayItems({ result, entryArray }) {
-    let currentResult = result;
-    for (const item of entryArray) {
-      currentResult = FrontmatterBuilderBase.#processArrayItem({
-        currentResult,
-        item,
-      });
-    }
-    return currentResult;
-  }
-
-  static #processArrayItem({ currentResult, item }) {
-    if (FrontmatterBuilderBase.#isTruthyEntry({ entry: item })) {
-      return ListUtils.appendUniqueItem({ list: currentResult, item });
-    }
-    return currentResult;
+    return entry
+      ? ListUtils.appendUniqueItem({ list: result, item: entry })
+      : result;
   }
 
   parseCommaSeparatedList(input) {
@@ -179,12 +153,8 @@ class FrontmatterBuilderBase {
   }
 
   #syncParamsVariables({ params, computed, frontmatter, values }) {
-    if (FrontmatterBuilderBase.#shouldSkipVariableSync({ params })) return;
+    if (!params?.variables) return;
     Object.assign(params.variables, computed, values, { frontmatter });
-  }
-
-  static #shouldSkipVariableSync({ params }) {
-    return !params?.variables;
   }
 }
 
