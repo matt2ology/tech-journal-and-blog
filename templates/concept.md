@@ -1,29 +1,24 @@
----
-title: "{{VALUE:formattedTitle}}"
-date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
-description: "{{VALUE:description}}"
-draft: true
-slug: "{{VALUE:slug}}"
-tags:{{VALUE:tags}}
-categories:
----
+{{VALUE:frontmatter}}
 
-<!-- Capture quote: Ctrl + Shift + Q -->
+<!-- Purpose: Atomic, fully decoupled building blocks of thought written as single declarative statements. -->
 
-Concept note
+## Core Idea
 
 <!--
-Atomic, self-contained ideas integrated into your main network ("How this idea fits into my broader thinking").
+Explain the single concept clearly and concisely in your own words (1-2 paragraphs max).
 
 Explain Like I'm 5 (ELI5): the Definition or Key Concept/Idea/Theory
 
 Provide an above the fold (i.e. you shouldn't have to scroll to consume the information), detailed, explanation of the idea - the key insight or concept.
-
-Idea 1: Key point or insights written in your own words
 -->
 
-> [!NOTE] Key Ideas
+> [!NOTE]💡 The Core Idea
 >
-> 1.
 
-<!-- Optional: Chapters of each section -->
+## Mental Models & Supporting Context
+
+<!--
+Elaborate on why this works, mechanisms, or relevant mental models.
+
+Atomic, self-contained ideas integrated into your main network ("How this idea fits into my broader thinking").
+-->
