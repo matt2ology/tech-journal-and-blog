@@ -78,6 +78,24 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
     ];
   }
 
+  #getInstructorLastNames(instructorString) {
+    if (!instructorString) return "unknown";
+
+    const cleanString = TextFormatter.cleanWikiLink(instructorString);
+    const authors = cleanString.split(",");
+
+    const lastNames = authors
+      .map((author) => {
+        const trimmed = author.trim();
+        const nameParts = trimmed.split(/\s+/);
+        const lastName = nameParts[nameParts.length - 1];
+        return lastName.replace(/[^a-zA-Z]/g, "") || "unknown";
+      })
+      .filter(Boolean);
+
+    return lastNames.length > 0 ? lastNames.join("-") : "unknown";
+  }
+
   processValues(values) {
     const formattedSeries = values.series
       ? TextFormatter.titleCase(values.series)
@@ -85,12 +103,13 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
 
     let lecturerInput = values.lecturer ? values.lecturer.trim() : "";
 
-    if (formattedSeries) {
-      lecturerInput = this.#resolveLecturerInput({
-        formattedSeries,
-        lecturerInput,
-      });
-    }
+    const resolvedContext = this.#resolveSeriesContext({
+      formattedSeries,
+      lecturerInput,
+    });
+
+    lecturerInput = resolvedContext.lecturerInput;
+    const folderName = resolvedContext.folderName;
 
     const incrementedFilename = IncrementedFilenameUtility.generate({
       app,
@@ -110,12 +129,12 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
       slug: TextFormatter.slugify(values.title),
       title: TextFormatter.titleCase(values.title),
       filename: incrementedFilename,
-      foldername: TextFormatter.slugify(values.series),
+      foldername: folderName,
       lectureSeriesReference: `${values.series} - ${TextFormatter.titleCase(values.title)} by ${TextFormatter.formatPlainNaturalNameList(lecturerInput)}`,
     };
   }
 
-  #resolveLecturerInput({ formattedSeries, lecturerInput }) {
+  #resolveSeriesContext({ formattedSeries, lecturerInput }) {
     const rootFolder = "course-lecture";
     const subfolders = VaultQueryService.getSubfolderNames({
       app,
@@ -128,31 +147,46 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
         sub.toLowerCase() === formattedSeries.toLowerCase(),
     );
 
-    if (!matchedSubfolder) return lecturerInput;
-
-    const seriesFolderPath = `${rootFolder}/${matchedSubfolder}`;
-    const existingLecturers = VaultQueryService.getFieldValues({
-      app,
-      fieldName: "lecturer",
-      folderPath: seriesFolderPath,
-    });
-    const existingInstructors = VaultQueryService.getFieldValues({
-      app,
-      fieldName: "instructor",
-      folderPath: seriesFolderPath,
-    });
-
-    const allInstructors = [
-      ...new Set([...existingLecturers, ...existingInstructors]),
-    ].filter(Boolean);
-
-    if (allInstructors.length > 0 && !lecturerInput) {
-      return allInstructors
-        .map((instructor) => TextFormatter.cleanWikiLink(instructor))
-        .join(", ");
+    if (!matchedSubfolder) {
+      const instructorLastNames = this.#getInstructorLastNames(lecturerInput);
+      const seriesSlug = TextFormatter.slugify(formattedSeries);
+      return {
+        lecturerInput,
+        folderName: TextFormatter.slugify(
+          `${instructorLastNames}-${seriesSlug}`,
+        ),
+      };
     }
 
-    return lecturerInput;
+    let resolvedLecturer = lecturerInput;
+    if (!resolvedLecturer) {
+      const seriesFolderPath = `${rootFolder}/${matchedSubfolder}`;
+      const existingLecturers = VaultQueryService.getFieldValues({
+        app,
+        fieldName: "lecturer",
+        folderPath: seriesFolderPath,
+      });
+      const existingInstructors = VaultQueryService.getFieldValues({
+        app,
+        fieldName: "instructor",
+        folderPath: seriesFolderPath,
+      });
+
+      const allInstructors = [
+        ...new Set([...existingLecturers, ...existingInstructors]),
+      ].filter(Boolean);
+
+      if (allInstructors.length > 0) {
+        resolvedLecturer = allInstructors
+          .map((instructor) => TextFormatter.cleanWikiLink(instructor))
+          .join(", ");
+      }
+    }
+
+    return {
+      lecturerInput: resolvedLecturer,
+      folderName: matchedSubfolder,
+    };
   }
 
   buildExtraProperties({ values }) {
