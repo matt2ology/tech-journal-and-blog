@@ -50,7 +50,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
             id: "cumulativeSummary",
             label: "Cumulative Summary (> [!tldr])",
             type: "textarea",
-            placeholder: "Enter cumulative summary...",
+            placeholder: "Enter cumulative summary (optional)...",
             optional: true,
           },
           {
@@ -172,23 +172,25 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
         locationLine = `> \\- ${highlight_location}`;
       }
 
-      const outputLines = [
-        ``,
-        `> [!tldr] Cumulative Summary`,
-        `> ${this.cumulativeSummary || "No summary provided."}`,
-        ``,
-        marginaliaBlock,
-        ``,
-        `> [!quote]`,
-        quotedLines,
-        ``,
-        `---`,
-        ``,
-      ];
+      const outputLines = [];
+
+      // Conditionally include Cumulative Summary block only if input is provided
+      if (this.cumulativeSummary) {
+        outputLines.push(
+          ``,
+          `> [!tldr] Cumulative Summary`,
+          `> ${this.cumulativeSummary}`,
+          ``,
+        );
+      }
+
+      outputLines.push(``, marginaliaBlock, ``, `> [!quote]`, quotedLines);
 
       if (locationLine) {
         outputLines.push(locationLine);
       }
+
+      outputLines.push(``, `---`, ``);
 
       this.variables.cumulativeNotes = outputLines.join("\n");
     }
