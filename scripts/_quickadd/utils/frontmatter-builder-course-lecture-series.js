@@ -85,11 +85,7 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
 
     let lecturerInput = values.lecturer ? values.lecturer.trim() : "";
 
-    if (
-      FrontmatterBuilderCourseLectureSeries.#hasFormattedSeries({
-        formattedSeries,
-      })
-    ) {
+    if (formattedSeries) {
       lecturerInput = this.#resolveLecturerInput({
         formattedSeries,
         lecturerInput,
@@ -103,8 +99,6 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
       title: values.title,
     });
 
-    const titleSlug = TextFormatter.slugify(values.title);
-
     return {
       ...values,
       series: formattedSeries,
@@ -113,7 +107,7 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
         list: values.categories,
         items: ["courses-lecture"],
       }),
-      slug: titleSlug,
+      slug: TextFormatter.slugify(values.title),
       title: TextFormatter.titleCase(values.title),
       filename: incrementedFilename,
       foldername: TextFormatter.slugify(values.series),
@@ -134,13 +128,7 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
         sub.toLowerCase() === formattedSeries.toLowerCase(),
     );
 
-    if (
-      FrontmatterBuilderCourseLectureSeries.#hasNotMatchedSubfolder({
-        matchedSubfolder,
-      })
-    ) {
-      return lecturerInput;
-    }
+    if (!matchedSubfolder) return lecturerInput;
 
     const seriesFolderPath = `${rootFolder}/${matchedSubfolder}`;
     const existingLecturers = VaultQueryService.getFieldValues({
@@ -158,31 +146,13 @@ class FrontmatterBuilderCourseLectureSeries extends FrontmatterBuilderBase {
       ...new Set([...existingLecturers, ...existingInstructors]),
     ].filter(Boolean);
 
-    if (
-      FrontmatterBuilderCourseLectureSeries.#shouldAutoPopulateLecturer({
-        allInstructors,
-        lecturerInput,
-      })
-    ) {
-      const cleanedInstructors = allInstructors.map((instructor) =>
-        TextFormatter.cleanWikiLink(instructor),
-      );
-      return cleanedInstructors.join(", ");
+    if (allInstructors.length > 0 && !lecturerInput) {
+      return allInstructors
+        .map((instructor) => TextFormatter.cleanWikiLink(instructor))
+        .join(", ");
     }
 
     return lecturerInput;
-  }
-
-  static #hasFormattedSeries({ formattedSeries }) {
-    return Boolean(formattedSeries);
-  }
-
-  static #hasNotMatchedSubfolder({ matchedSubfolder }) {
-    return !matchedSubfolder;
-  }
-
-  static #shouldAutoPopulateLecturer({ allInstructors, lecturerInput }) {
-    return allInstructors.length > 0 && !lecturerInput;
   }
 
   buildExtraProperties({ values }) {
