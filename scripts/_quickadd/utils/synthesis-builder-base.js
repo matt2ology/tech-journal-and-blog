@@ -23,24 +23,24 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
   }
 
   // --- Template Hooks to be implemented by derived classes ---
-  getResourceType() {
-    throw new Error("Derived classes must implement getResourceType()");
+  getCategoryType() {
+    throw new Error("Derived classes must implement getCategoryType()");
   }
 
-  getNameFieldId() {
-    throw new Error("Derived classes must implement getNameFieldId()");
+  getPersonNameFieldId() {
+    throw new Error("Derived classes must implement getPersonNameFieldId()");
   }
 
-  getNameFieldLabel() {
-    throw new Error("Derived classes must implement getNameFieldLabel()");
+  getPersonNameFieldLabel() {
+    throw new Error("Derived classes must implement getPersonNameFieldLabel()");
   }
 
-  getItemFieldId() {
-    throw new Error("Derived classes must implement getItemFieldId()");
+  getContentFieldId() {
+    throw new Error("Derived classes must implement getContentFieldId()");
   }
 
-  getItemFieldLabel() {
-    throw new Error("Derived classes must implement getItemFieldLabel()");
+  getContentFieldLabel() {
+    throw new Error("Derived classes must implement getContentFieldLabel()");
   }
 
   // --- Shared Implementation ---
@@ -48,15 +48,15 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
   getFields() {
     return [
       {
-        id: this.getItemFieldId(),
-        label: this.getItemFieldLabel(),
+        id: this.getContentFieldId(),
+        label: this.getContentFieldLabel(),
         type: "text",
         placeholder: "Enter title",
         defaultValue: "",
       },
       {
-        id: this.getNameFieldId(),
-        label: this.getNameFieldLabel(),
+        id: this.getPersonNameFieldId(),
+        label: this.getPersonNameFieldLabel(),
         type: "text",
         placeholder: "Enter name(s)",
         defaultValue: "",
@@ -66,50 +66,43 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
 
   processValues(values) {
     const processed = super.processValues(values);
-    const nameId = this.getNameFieldId();
-    const itemId = this.getItemFieldId();
+    const nameId = this.getPersonNameFieldId();
+    const itemId = this.getContentFieldId();
 
     const rawNameInput = values[nameId] || "";
     const rawItemInput = values[itemId] || "";
 
-    // 1. Extract last names (e.g., "Michael Teske, Matt Lloyd Davies" -> "Teske, Davies")
     const lastNames = TextFormatter.extractLastNames(rawNameInput);
 
-    // 2. Build filename: "syn - Teske, Davies - Course Name" -> kebab-cased: "syn-teske-davies-course-name"
-    const rawFilename = `syn - ${lastNames} - ${rawItemInput}`;
+    const rawFilename = `syn - ${this.getCategoryType().replace(/courses/g, 'course')} - ${rawItemInput}`;
     const generatedFilename = TextFormatter.slugify(rawFilename);
 
-    // 3. Override title: "My Synthesis of {Course/Item Name}"
-    const generatedTitle = `My Synthesis of ${rawItemInput}`;
+    const generatedTitle = `Synthesis of ${this.getCategoryType().replace(/courses/g, 'course')} - ${rawItemInput}`;
 
-    // 4. Automatically append domain resource type (e.g., "courses") and "synthesis" to categories
     const categories = this.appendToList({
       list: values.categories,
-      items: ["synthesis", this.getResourceType()],
+      items: ["synthesis", this.getCategoryType()],
     });
 
     return {
       ...processed,
       title: generatedTitle,
       slug: generatedFilename,
-      type: `${this.getResourceType()}`,
+      type: `${this.getCategoryType()}`,
       filename: generatedFilename,
       [nameId]: this.formatNameList(
         rawNameInput,
-        `Unknown ${this.getNameFieldLabel()}`,
+        `Unknown ${this.getPersonNameFieldLabel()}`,
       ),
       categories,
     };
   }
 
   buildExtraProperties({ values }) {
-    const nameId = this.getNameFieldId();
-    const itemId = this.getItemFieldId();
+    const contentId = this.getContentFieldId();
+    const personId = this.getPersonNameFieldId();
 
-    return [
-      `${nameId}: ${values[nameId]}`,
-      `${itemId}: "${values[itemId]}"`,
-    ];
+    return [`${contentId}: "${values[contentId]}"`, `${personId}: ${values[personId]}`];
   }
 }
 
