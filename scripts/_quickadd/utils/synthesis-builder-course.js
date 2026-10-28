@@ -11,23 +11,23 @@ class SynthesisBuilderCourse extends SynthesisBuilderBase {
     super(quickAddApi);
   }
 
-  getResourceType() {
+  getCategoryType() {
     return "courses";
   }
 
-  getNameFieldId() {
+  getPersonNameFieldId() {
     return "instructor";
   }
 
-  getNameFieldLabel() {
+  getPersonNameFieldLabel() {
     return "Instructor(s) (comma separated)";
   }
 
-  getItemFieldId() {
+  getContentFieldId() {
     return "course";
   }
 
-  getItemFieldLabel() {
+  getContentFieldLabel() {
     return "Course Name";
   }
 }
