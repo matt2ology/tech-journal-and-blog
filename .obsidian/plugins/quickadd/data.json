@@ -4,7 +4,7 @@
       "id": "87f00870-d0ec-4989-900f-1daf488ef75f",
       "name": "capture-quote-kindle-app",
       "type": "Macro",
-      "command": true,
+      "command": false,
       "runOnStartup": false,
       "macro": {
         "name": "capture-quote-kindle-app",
@@ -384,6 +384,65 @@
       "icon": "book-open"
     },
     {
+      "id": "44edd34c-88c1-4d45-a51b-4ec52a132637",
+      "name": "synthesis Note",
+      "type": "Macro",
+      "command": false,
+      "runOnStartup": false,
+      "macro": {
+        "name": "synthesis Note",
+        "id": "bf4aba3f-2a53-4457-943b-2aac60f8f37a",
+        "commands": [
+          {
+            "name": "note-synthesis",
+            "type": "UserScript",
+            "id": "5e3f8a0d-1aa8-4d43-925b-3c000c9e67e1",
+            "path": "scripts/_quickadd/note-synthesis.js",
+            "settings": {}
+          },
+          {
+            "name": "Synthesis Template",
+            "type": "NestedChoice",
+            "id": "175a46e4-3c91-4fdc-80c4-f4fbd532f470",
+            "choice": {
+              "id": "659a2fe1-e3b9-417d-bf31-af08c61c0a8a",
+              "name": "Synthesis Template",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/synthesis-book-chapter.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "{{VALUE:filename}}"
+              },
+              "discoverExistingNotesBeforeCreate": false,
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "synthesis/{{VALUE:type}}"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "copyLinkToClipboard": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              }
+            }
+          }
+        ]
+      },
+      "icon": "lightbulb"
+    },
+    {
       "id": "ee9612b8-4424-47e9-9697-0070cdef9422",
       "name": "cumulative-marginalia",
       "type": "Macro",
@@ -421,7 +480,7 @@
               },
               "format": {
                 "enabled": true,
-                "format": "---\n\n### id{{RANDOM:10}}\n{{VALUE:cumulativeNotes}}\n"
+                "format": "### id{{RANDOM:10}}\n{{VALUE:cumulativeNotes}}"
               },
               "insertAfter": {
                 "enabled": false,
