@@ -65,6 +65,27 @@ class TextFormatter {
     return typeof input === "string";
   }
 
+  /**
+   * Extracts last names from a comma-separated list of full names.
+   * Example: "Michael Teske, Matt Lloyd Davies" -> "Teske, Davies"
+   */
+  static extractLastNames(input = "") {
+    const names = TextFormatter.parseCommaSeparatedList(input);
+    if (TextFormatter.#isEmptyItemsArray({ items: names })) return "Unknown";
+
+    const lastNames = names.map((name) => {
+      // Handle names formatted as "LastName, FirstName"
+      if (name.includes(",")) {
+        return name.split(",")[0].trim();
+      }
+      // Handle standard "FirstName MiddleName LastName"
+      const parts = name.trim().split(/\s+/);
+      return parts[parts.length - 1];
+    });
+
+    return lastNames.join(", ");
+  }
+
   static formatYAMLArray({ input = "", shouldSlugify = true }) {
     const items = shouldSlugify
       ? TextFormatter.parseAndSlugifyCommaSeparatedList(input)
