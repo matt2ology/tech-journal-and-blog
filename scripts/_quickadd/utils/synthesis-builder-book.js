@@ -12,11 +12,11 @@ class SynthesisBuilderBook extends SynthesisBuilderBase {
     return "books";
   }
 
-  getPersonNameFieldId() {
+  getCreatorFieldId() {
     return "author";
   }
 
-  getPersonNameFieldLabel() {
+  getCreatorFieldLabel() {
     return "Author(s) (comma separated)";
   }
 
