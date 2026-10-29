@@ -15,11 +15,11 @@ class SynthesisBuilderCourse extends SynthesisBuilderBase {
     return "courses";
   }
 
-  getPersonNameFieldId() {
+  getCreatorFieldId() {
     return "instructor";
   }
 
-  getPersonNameFieldLabel() {
+  getCreatorFieldLabel() {
     return "Instructor(s) (comma separated)";
   }
 
