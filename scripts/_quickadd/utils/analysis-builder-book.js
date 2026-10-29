@@ -1,21 +1,21 @@
 const path = require("path");
 const vaultPath = app.vault.adapter.getBasePath();
 
-const SynthesisBuilderBase = require("./synthesis-builder-base");
+const AnalysisBuilderBase = require("./analysis-builder-base");
 const TextFormatter = require(
   path.join(vaultPath, "scripts", "_quickadd", "utils", "text-formatter"),
 );
 
 /**
- * Handles frontmatter generation for individual book chapter synthesis notes.
+ * Handles frontmatter generation for individual book chapter analysis notes.
  */
-class SynthesisBuilderBookChapter extends SynthesisBuilderBase {
+class AnalysisBuilderBookChapter extends AnalysisBuilderBase {
   constructor(quickAddApi) {
     super(quickAddApi);
   }
 
   getCategoryType() {
-    return "book-chapters";
+    return "book";
   }
 
   /**
@@ -57,11 +57,11 @@ class SynthesisBuilderBookChapter extends SynthesisBuilderBase {
     const rawFilename = `syn - book chapter - ${rawBook} - ${rawChapter}`;
     const generatedFilename = TextFormatter.slugify(rawFilename);
 
-    const generatedTitle = `Synthesis of ${rawBook} - ${rawChapter}`;
+    const generatedTitle = `Analysis of ${rawBook} - ${rawChapter}`;
 
     const categories = this.appendToList({
       list: values.categories,
-      items: ["synthesis", "books", "chapters"],
+      items: ["analysis", "books", "chapters"],
     });
 
     return {
@@ -89,4 +89,4 @@ class SynthesisBuilderBookChapter extends SynthesisBuilderBase {
   }
 }
 
-module.exports = SynthesisBuilderBookChapter;
+module.exports = AnalysisBuilderBookChapter;
