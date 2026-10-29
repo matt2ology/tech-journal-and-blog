@@ -79,6 +79,10 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
     ];
   }
 
+  #removeAfterColon(text) {
+    return text ? text.split(":")[0].trim() : "";
+  }
+
   processValues(values) {
     const processed = super.processValues(values);
     const nameId = this.getPersonNameFieldId();
@@ -89,10 +93,10 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
 
     const singularCategory = toSingularCategory(this.getCategoryType());
 
-    const rawFilename = `syn - ${singularCategory} - ${rawItemInput}`;
+    const rawFilename = `${singularCategory} ${this.#removeAfterColon(rawItemInput)}`;
     const generatedFilename = TextFormatter.slugify(rawFilename);
 
-    const generatedTitle = `Synthesis of ${singularCategory} - ${rawItemInput}`;
+    const generatedTitle = `${singularCategory} Synthesis - ${rawItemInput}`;
 
     const categories = this.appendToList({
       list: values.categories,
