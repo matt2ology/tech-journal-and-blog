@@ -27,14 +27,17 @@ class TextFormatter {
   ]);
 
   static slugify(text = "") {
-    return text
-      .normalize("NFKD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9_]+/g, "-")
-      .replace(/-+/g, "-")
-      .replace(/^-+|-+$/g, "");
+    return (
+      text
+        .normalize("NFKD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .trim()
+        .replace(/['’]/g, "") // Removes apostrophes entirely
+        .replace(/[^a-z0-9_]+/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/^-+|-+$/g, "")
+    );
   }
 
   static parseCommaSeparatedList(input = "") {
