@@ -14,69 +14,86 @@ This system adapts the **Zettelkasten method** to create a seamless pipeline fro
 
 ```mermaid
 flowchart TD
-    %% Intake Layer
-    A1([Media Consumption]) -->|Readwise Exports| B1[Marginal Notes]
-    A1 -->|Manual Highlights & Annotations| B1
-    A2([Lectures & Seminars]) -->|Real-time Class Capture| B2[Live Lecture Notes]
+    classDef stage1 fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,color:#01579b;
+    classDef stage2 fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100;
+    classDef stage3 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20;
+    classDef stage4 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c;
 
-    %% Synthesis Layer
-    B1 -->|Summarize, Digest & Critique| C[Synthesis Notes]
-    B2 -->|Review & Structure| C
+    subgraph S1 ["Stage 1: Raw Intake (High Source Dependency)"]
+        A1([Media Highlights & Annotations])
+        A2([Live Class & Seminar Capture])
+    end
 
-    %% Concept Layer
-    C -->|Extract Single-Idea Declarative Statements| D[Concept Notes]
+    subgraph S2 ["Stage 2: Processing Hub (Refinery)"]
+        B1["Analysis Notes\n(Chapters / Lectures)"]
+        B2["Synthesis Notes\n(Books / Courses)"]
+    end
 
-    %% Network & Output Layer
-    D -->|Link Related Ideas & Mental Models| E{Knowledge Network}
+    subgraph S3 ["Stage 3: Concept Network (Fully Decoupled)"]
+        C["Atomic Concept Notes\n(Declarative Mental Models)"]
+    end
 
-    E -->|Retrieve & Interconnect| F([Support Thinking])
-    E -->|Retrieve & Interconnect| G([Support Writing & Projects])
-    E -->|Retrieve & Interconnect| H([Support Problem-Solving])
+    subgraph S4 ["Stage 4: Creative Output"]
+        D1([Essays & Writing])
+        D2([Projects & Work])
+        D3([Problem Solving])
+    end
+
+    A1 -->|Import & Break Down| B1
+    A2 -->|Review & Structure| B1
+    B1 -->|Aggregate & Combine| B2
+    B1 -->|Extract Ideas| C
+    B2 -->|Extract Macro Models| C
+
+    C -->|Assemble| D1
+    C -->|Assemble| D2
+    C -->|Assemble| D3
+
+    class A1,A2 stage1;
+    class B1,B2 stage2;
+    class C stage3;
+    class D1,D2,D3 stage4;
 ```
 
 ## 🔄 The 4-Stage Workflow
 
-### Stage 1: Raw Capture & Intake
+### Stage 1: Frictionless Capture
 
-**Purpose:** Collect raw information with zero friction as you read, listen, or watch.
+- **Goal:** Collect insights in real time without interrupting flow or overthinking structure.
+- **Note Types:** Marginal notes, web quotes, book highlights (synced via Readwise), and rapid live lecture outlines.
+- **Key Characteristic:** High source dependency, quick capture, zero organization required.
 
-- **Marginal Notes & Highlights:** Quotes, annotations, and highlights automatically synced from Readwise (books, articles, web highlights).
-- **Live Lecture Notes:** Fast-paced, minimal outline notes captured during live classes, presentations, or keynotes.
-- **Characteristics:** Unfiltered, source-dependent, low-effort capture.
+### Stage 2: Digest & Processing (Analysis vs. Synthesis)
 
-### Stage 2: Digest & Synthesis (_The Processing Hub_)
+- **Goal:** Active comprehension. Translate external knowledge into your own words before creating standalone concepts.
+- **Architecture:** Uses a **Structural Separation** between breaking down parts and combining the whole:
+  - **Analysis Notes (`analysis/`):** Breaking down individual granular parts (single chapters, specific lecture classes, individual podcast episodes, or standalone conference talks).
+  - **Synthesis Notes (`synthesis/`):** Combining and summarizing the entire whole (full books, complete university courses, full podcast seasons/series, or entire multi-day conferences).
+- **Key Feature:** Every analysis and synthesis note contains a **"Concept Candidates"** section, a staging ground for raw ideas waiting to be turned into permanent concept notes.
 
-**Purpose:** Active comprehension. Translate external information into your own words before creating standalone concepts.
+### Stage 3: Conceptualization (The Networked Brain)
 
-- **Synthesis Notes:** Structured notes created for every book, article, podcast, video, or lecture series consumed.
-- **Core Components:**
-  - Executive Summary & Core Thesis
-  - Key Takeaways & Section Breakdown
-  - Personal Reflection & Critical Commentary
-  - **Concept Candidates:** A queue of atomic idea titles waiting to be spun out.
-- **Characteristics:** Comprehensive, source-referenced, summarized in your own language.
-
-### Stage 3: Conceptualization (_The Networked Brain_)
-
-**Purpose:** Distill synthesized ideas into permanent, reusable mental building blocks.
-
-- **Concept Notes:** Self-contained, single-idea notes written as **declarative statements** (e.g., _`[[Concept Note - Friction is a stronger behavior lever than motivation]]`_).
+- **Goal:** Distill processed insights into permanent, reusable building blocks.
+- **Note Types:**
+  - **Concept Notes:** Decoupled, single-idea atomic notes written as **declarative titles** (e.g., `[[Friction is a stronger behavior lever than motivation]]`).
+  - **Maps of Content (MOCs):** Higher-level index pages that curate and group related Concept Notes around specific domains.
 - **Key Principles:**
-  - **Decoupled:** Completely separated from specific books, authors, or lectures.
-  - **Atomic:** One distinct idea per note.
-  - **Networked:** Linked directly to related Concept Notes to form interconnected clusters of thought across disciplines.
+  - **Decoupled:** Completely independent of any specific author, book, or class.
+  - **Atomic:** Focused on exactly one distinct idea or principle.
+  - **Networked:** Hyperlinked to existing concept notes to form multi-disciplinary clusters.
 
-### Stage 4: Output & Creation (_Optional_)
+### Stage 4: Output & Creation (_optional_)
 
-**Purpose:** Utilize your networked Concept Notes to construct essays, research projects, articles, or presentations.
+- **Goal:** Retrieve and assemble networked concept notes into real-world deliverables.
+- **Note Types:** Article outlines, research papers, project plans, decision logs, or presentations.
+- **Key Characteristic:** Highly efficient creation. Rather than starting from scratch, projects are created by weaving together pre-existing, fully fleshed-out Concept Notes.
 
-- **Projects / Target Notes:** Dynamic notes where related Concept Notes are assembled into structured outlines and final creative outputs.
+## 💡 Summary Overview
 
-## 💡 Summary Table
-
-| **Stage**      | **Note Type**                     | **Function**                                           | **Source Dependent?**       |
-| -------------- | --------------------------------- | ------------------------------------------------------ | --------------------------- |
-| **1. Capture** | **Marginal Notes / Live Lecture** | Raw intake, annotations, and real-time class notes     | 🟢 High                     |
-| **2. Process** | **Synthesis Notes**               | Summarizing, critiquing, and extracting core arguments | 🟡 Medium (Links to source) |
-| **3. Network** | **Concept Notes**                 | Single, declarative ideas built for connection         | 🔴 Fully Decoupled          |
-| **4. Output**  | **Project / Writing**             | Long-form articles, essays, and presentations          | 🟢 Context Specific         |
+| **Stage**                  | **Note Type**                  | **Primary Function**                                  | **Source Dependency**                    | **Location / Directory** |
+| -------------------------- | ------------------------------ | ----------------------------------------------------- | ---------------------------------------- | ------------------------ |
+| **1. Capture**             | **Highlights & Live Outlines** | Quick, low-friction recording of raw inputs           | 🟢 **100% Source Dependent**             | `Readwise`, `capture`    |
+| **2a. Analysis**           | **Chapter / Lecture**          | Deconstructing & analyzing individual parts           | 🟡 **High** (Linked to Synthesis Note)   | `analysis`               |
+| **2b. Synthesis**          | **Book / Course**              | Combining parts into macro thesis & unified framework | 🟡 **Medium** (Linked to Analysis Notes) | `synthesis`              |
+| **3. Network**             | **Atomic Concept Notes**       | Reusable mental models & declarative ideas            | 🔴 **Fully Decoupled**                   | `concepts`               |
+| **4. Output** (_optional_) | **Projects & Writings**        | Essays, decision models, and deliverables             | 🔵 **Context-Specific**                  | `projects`               |
