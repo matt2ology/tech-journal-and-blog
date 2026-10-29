@@ -42,12 +42,12 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
     throw new Error("Derived classes must implement getCategoryType()");
   }
 
-  getPersonNameFieldId() {
-    throw new Error("Derived classes must implement getPersonNameFieldId()");
+  getCreatorFieldId() {
+    throw new Error("Derived classes must implement getCreatorFieldId()");
   }
 
-  getPersonNameFieldLabel() {
-    throw new Error("Derived classes must implement getPersonNameFieldLabel()");
+  getCreatorFieldLabel() {
+    throw new Error("Derived classes must implement getCreatorFieldLabel()");
   }
 
   getContentFieldId() {
@@ -70,8 +70,8 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
         defaultValue: "",
       },
       {
-        id: this.getPersonNameFieldId(),
-        label: this.getPersonNameFieldLabel(),
+        id: this.getCreatorFieldId(),
+        label: this.getCreatorFieldLabel(),
         type: "text",
         placeholder: "Enter name(s)",
         defaultValue: "",
@@ -85,18 +85,18 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
 
   processValues(values) {
     const processed = super.processValues(values);
-    const nameId = this.getPersonNameFieldId();
-    const itemId = this.getContentFieldId();
+    const nameId = this.getCreatorFieldId();
+    const contentId = this.getContentFieldId();
 
-    const rawNameInput = values[nameId] || "";
-    const rawItemInput = values[itemId] || "";
+    const rawCreatorInput = values[nameId] || "";
+    const rawContentInput = values[contentId] || "";
 
     const singularCategory = toSingularCategory(this.getCategoryType());
 
-    const rawFilename = `${singularCategory} ${this.#removeAfterColon(rawItemInput)}`;
+    const rawFilename = `${this.#removeAfterColon(rawContentInput)}`;
     const generatedFilename = TextFormatter.slugify(rawFilename);
 
-    const generatedTitle = `${singularCategory} Synthesis - ${rawItemInput}`;
+    const generatedTitle = `${rawContentInput}`;
 
     const categories = this.appendToList({
       list: values.categories,
@@ -110,8 +110,8 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
       type: `${this.getCategoryType()}`,
       filename: generatedFilename,
       [nameId]: this.formatNameList(
-        rawNameInput,
-        `Unknown ${this.getPersonNameFieldLabel()}`,
+        rawCreatorInput,
+        `Unknown ${this.getCreatorFieldLabel()}`,
       ),
       categories,
     };
@@ -119,7 +119,7 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
 
   buildExtraProperties({ values }) {
     const contentId = this.getContentFieldId();
-    const personId = this.getPersonNameFieldId();
+    const personId = this.getCreatorFieldId();
 
     return [
       `${contentId}: "${values[contentId]}"`,
