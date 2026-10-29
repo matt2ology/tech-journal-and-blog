@@ -103,7 +103,7 @@ class TextFormatter {
 
     const rawWords = inputText
       .normalize("NFC")
-      .replace(/[-_]+/g, " ")
+      .replace(/[_]+/g, " ")
       .replace(/\s+/g, " ")
       .trim()
       .split(" ");
