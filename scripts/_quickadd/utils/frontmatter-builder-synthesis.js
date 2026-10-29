@@ -1,8 +1,5 @@
 const SynthesisBuilderBook = require("./synthesis-builder-book");
 const SynthesisBuilderCourse = require("./synthesis-builder-course");
-const SynthesisBuilderArticle = require("./synthesis-builder-article");
-const SynthesisBuilderPodcast = require("./synthesis-builder-podcast");
-const SynthesisBuilderTalk = require("./synthesis-builder-talk");
 
 /**
  * Main orchestrator and factory for synthesis frontmatter generation.
@@ -23,9 +20,6 @@ class FrontmatterBuilderSynthesis {
     this.#builders = {
       books: new SynthesisBuilderBook(quickAddApi),
       courses: new SynthesisBuilderCourse(quickAddApi),
-      articles: new SynthesisBuilderArticle(quickAddApi),
-      podcasts: new SynthesisBuilderPodcast(quickAddApi),
-      talks: new SynthesisBuilderTalk(quickAddApi),
     };
   }
 
