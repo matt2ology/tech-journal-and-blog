@@ -15,6 +15,21 @@ const TextFormatter = require(
 );
 
 /**
+ * Converts a plural category string into its singular form.
+ */
+function toSingularCategory(category) {
+  const singularMap = {
+    articles: "article",
+    books: "book",
+    courses: "course",
+    podcasts: "podcast",
+    talks: "talk",
+  };
+
+  return singularMap[(category || "").toLowerCase()] || category;
+}
+
+/**
  * Intermediate base class encapsulating shared workflow behavior for all synthesis domains.
  */
 class SynthesisBuilderBase extends FrontmatterBuilderBase {
@@ -72,12 +87,12 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
     const rawNameInput = values[nameId] || "";
     const rawItemInput = values[itemId] || "";
 
-    const lastNames = TextFormatter.extractLastNames(rawNameInput);
+    const singularCategory = toSingularCategory(this.getCategoryType());
 
-    const rawFilename = `syn - ${this.getCategoryType().replace(/courses/g, 'course')} - ${rawItemInput}`;
+    const rawFilename = `syn - ${singularCategory} - ${rawItemInput}`;
     const generatedFilename = TextFormatter.slugify(rawFilename);
 
-    const generatedTitle = `Synthesis of ${this.getCategoryType().replace(/courses/g, 'course')} - ${rawItemInput}`;
+    const generatedTitle = `Synthesis of ${singularCategory} - ${rawItemInput}`;
 
     const categories = this.appendToList({
       list: values.categories,
@@ -102,7 +117,10 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
     const contentId = this.getContentFieldId();
     const personId = this.getPersonNameFieldId();
 
-    return [`${contentId}: "${values[contentId]}"`, `${personId}: ${values[personId]}`];
+    return [
+      `${contentId}: "${values[contentId]}"`,
+      `${personId}: ${values[personId]}`,
+    ];
   }
 }
 
