@@ -409,7 +409,7 @@
               "name": "Synthesis Template",
               "type": "Template",
               "command": false,
-              "templatePath": "templates/synthesis-book-chapter.md",
+              "templatePath": "templates/synthesis.md",
               "fileNameFormat": {
                 "enabled": true,
                 "format": "{{VALUE:filename}}"
