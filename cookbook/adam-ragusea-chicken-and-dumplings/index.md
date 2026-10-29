@@ -1,13 +1,14 @@
 ---
-aliases: "Chicken and Dumplings by Adam Ragusea"
-title: "Chicken and Dumplings by Adam Ragusea"
-date: "2026-10-28"
+aliases:
+  - Chicken and Dumplings by Adam Ragusea
+title: Chicken and Dumplings by Adam Ragusea
+date: 2026-10-28
 draft: true
-slug: "adam-ragusea-chicken-and-dumplings"
+slug: adam-ragusea-chicken-and-dumplings
 categories:
   - cookbook
 tags: []
-dish: "Chicken and Dumplings"
+dish: Chicken and Dumplings
 chef:
   - "[[adam-ragusea|Adam Ragusea]]"
 meal: Dinner
