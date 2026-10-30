@@ -64,49 +64,46 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
     ];
   }
 
-  #removeAfterColon(text) {
-    return text ? text.split(":")[0].trim() : "";
-  }
-
   processValues(values) {
-    const processed = super.processValues(values);
-    const creatorId = this.getCreatorFieldId();
-    const contentId = this.getContentFieldId();
+    const baseProcessedValues = super.processValues(values);
+    const creatorFieldId = this.getCreatorFieldId();
+    const contentFieldId = this.getContentFieldId();
 
-    const rawCreatorInput = values[creatorId] || "";
-    const rawContentInput = values[contentId] || "";
+    const rawCreatorInput = values[creatorFieldId] || "";
+    const rawContentInput = values[contentFieldId] || "";
 
-    const rawFileName = `00-${this.#removeAfterColon(rawContentInput)}-synthesis`;
-    const generatedFileName = TextFormatter.slugify(rawFileName);
-
+    const cleanContentTitle = TextFormatter.extractBeforeColon(rawContentInput);
+    const generatedFileName = TextFormatter.slugify(
+      `00-${cleanContentTitle}-synthesis`,
+    );
     const generatedTitle = `${rawContentInput} - Overview & Synthesis`;
 
-    const categories = this.appendToList({
+    const updatedCategories = this.appendToList({
       list: values.categories,
       items: ["synthesis", this.getCategoryType()],
     });
 
     return {
-      ...processed,
+      ...baseProcessedValues,
       title: generatedTitle,
       slug: generatedFileName,
       type: `${this.getCategoryType()}`,
       filename: generatedFileName,
-      [creatorId]: this.formatNameList(
+      [creatorFieldId]: this.formatNameList(
         rawCreatorInput,
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
-      categories,
+      categories: updatedCategories,
     };
   }
 
   buildExtraProperties({ values }) {
-    const creatorId = this.getCreatorFieldId();
-    const contentId = this.getContentFieldId();
+    const creatorFieldId = this.getCreatorFieldId();
+    const contentFieldId = this.getContentFieldId();
 
     return [
-      `${creatorId}: ${values[creatorId]}`,
-      `${contentId}: "${values[contentId]}"`,
+      `${creatorFieldId}: ${values[creatorFieldId]}`,
+      `${contentFieldId}: "${values[contentFieldId]}"`,
     ];
   }
 }
