@@ -7,10 +7,10 @@ class FileCounterUtility {
    * @param {Object} params - The parameters.
    * @param {Object} params.app - The Obsidian app instance.
    * @param {string} params.folderPath - The target folder path.
-   * @param {boolean} [params.includeNext=false] - Whether to increment the count for a new file index.
+   * @param {boolean} [params.includeNext=true] - Whether to increment the count for a new file index.
    * @returns {string} The zero-padded count (e.g., "01", "05").
    */
-  static getCount({ app, folderPath, includeNext = false }) {
+  static getCount({ app, folderPath, includeNext = true}) {
     if (!app || !folderPath) return "00";
 
     const fileCount = app.vault
