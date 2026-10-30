@@ -97,3 +97,82 @@ flowchart TD
 | **2b. Synthesis**          | **Book / Course**              | Combining parts into macro thesis & unified framework | 🟡 **Medium** (Linked to Analysis Notes) | `synthesis`              |
 | **3. Network**             | **Atomic Concept Notes**       | Reusable mental models & declarative ideas            | 🔴 **Fully Decoupled**                   | `concepts`               |
 | **4. Output** (_optional_) | **Projects & Writings**        | Essays, decision models, and deliverables             | 🔵 **Context-Specific**                  | `projects`               |
+
+## Setting up tests
+
+### Install Vitest
+
+Open the VS Code terminal and navigate to your vault directory.
+
+```bash
+npm init -y
+npm install --save-dev vitest
+```
+
+Add this script to package.json:
+
+```json
+{
+  "scripts": {
+    "test": "vitest",
+    "test:run": "vitest run"
+  }
+}
+```
+
+### Write a test
+
+```javascript
+import { describe, it, expect } from "vitest";
+import TextFormatter from "../scripts/_quickadd/utils/text-formatter.js";
+
+describe("TextFormatter.titleCase()", () => {
+  it("capitalizes a single lowercase word", () => {
+    expect(TextFormatter.titleCase("hello")).toBe("Hello");
+  });
+
+  it("capitalizes a single minor word", () => {
+    expect(TextFormatter.titleCase("the")).toBe("The");
+  });
+
+  it("converts a sentence to title case", () => {
+    expect(TextFormatter.titleCase("lord of the rings")).toBe(
+      "Lord of the Rings",
+    );
+  });
+
+  it("capitalizes the first word even when it is a minor word", () => {
+    expect(TextFormatter.titleCase("the developer's guide to AI")).toBe(
+      "The Developer's Guide to AI",
+    );
+  });
+
+  it("preserves uppercase acronyms", () => {
+    expect(TextFormatter.titleCase("artificial intelligence AI")).toBe(
+      "Artificial Intelligence AI",
+    );
+  });
+
+  it("handles empty strings", () => {
+    expect(TextFormatter.titleCase("")).toBe("");
+  });
+
+  it("handles extra whitespace", () => {
+    expect(TextFormatter.titleCase("  hello   world  ")).toBe("Hello World");
+  });
+});
+```
+
+### Run tests
+
+In the VS Code terminal:
+
+```bash
+npm run test:run
+```
+
+To run tests automatically whenever you save a file:
+
+```bash
+npm test
+```
