@@ -17,7 +17,7 @@ const TextFormatter = require(
 /**
  * Converts a plural category string into its singular form.
  */
-function toSingularCategory(category) {
+function toSingularCategory(media) {
   const singularMap = {
     articles: "article",
     books: "book",
@@ -26,7 +26,7 @@ function toSingularCategory(category) {
     talks: "talk",
   };
 
-  return singularMap[(category || "").toLowerCase()] || category;
+  return singularMap[(media || "").toLowerCase()] || media;
 }
 
 /**
