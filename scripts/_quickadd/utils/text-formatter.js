@@ -49,14 +49,24 @@ class TextFormatter {
   }
 
   static #extractRawItems({ input }) {
-    if (Array.isArray(input)) return input;
-    if (typeof input === "string") {
-      return input
-        .split(",")
-        .map((item) => item.trim())
-        .filter(Boolean);
+    const rawItems = TextFormatter.#toRawArray(input);
+    return TextFormatter.#cleanAndFilterItems(rawItems);
+  }
+
+  static #toRawArray(input) {
+    let result = [];
+    if (Array.isArray(input) || typeof input === "string") {
+      result = Array.isArray(input) ? input : input.split(",");
     }
-    return [];
+    return result;
+  }
+
+  static #cleanAndFilterItems(items) {
+    return items
+      .map((item) =>
+        typeof item === "string" ? item.trim().replace(/^and\s+/i, "") : item,
+      )
+      .filter((item) => item && String(item).toLowerCase() !== "and");
   }
 
   /**

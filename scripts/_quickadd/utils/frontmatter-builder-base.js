@@ -93,19 +93,19 @@ class FrontmatterBuilderBase {
   }
 
   /**
-   * Combines the existing list and new items into a for zero duplicates.
+   * Combines the existing list and new items into a set for zero duplicates.
    */
   appendToList({ list = "", items = [] }) {
-    const existingItems =
-      typeof list === "string"
-        ? list
-            .split(",")
-            .map((i) => i.trim())
-            .filter(Boolean)
-        : [list].flat(Infinity).filter(Boolean);
+    const existingItems = TextFormatter.parseCommaSeparatedList(list);
 
-    const newItems = [items].flat(Infinity).filter(Boolean);
-    const uniqueSet = new Set([...existingItems, ...newItems]);
+    const newItemsInput = [items].flat(Infinity);
+    const cleanedNewItems = newItemsInput
+      .map((i) =>
+        typeof i === "string" ? i.trim().replace(/^and\s+/i, "") : i,
+      )
+      .filter((i) => i && String(i).toLowerCase() !== "and");
+
+    const uniqueSet = new Set([...existingItems, ...cleanedNewItems]);
 
     return FrontmatterBuilderBase.#serializeSetToList({ uniqueSet });
   }
