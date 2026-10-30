@@ -78,7 +78,7 @@ class FrontmatterBuilderBase {
 
   buildStandardProperties({ computed }) {
     return [
-      `aliases: "${computed.title}"`,
+      `aliases:${computed.aliases}`,
       `title: "${computed.title}"`,
       `date: "${computed.date}"`,
       `draft: ${computed.draft}`,
@@ -148,7 +148,7 @@ class FrontmatterBuilderBase {
 
   #computeStandardValues(values) {
     return {
-      aliases: "",
+      aliases: this.formatArray(TextFormatter.titleCase(values.aliases)) || "",
       title: TextFormatter.titleCase(values.title) || "NoTitle",
       slug: values.slug ?? TextFormatter.slugify(values.title),
       date: this.#quickAddApi.date.now("YYYY-MM-DD"),
