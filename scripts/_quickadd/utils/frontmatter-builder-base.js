@@ -93,34 +93,39 @@ class FrontmatterBuilderBase {
   }
 
   /**
-   * Appends one or more unique items to a list.
+   * Combines the existing list and new items into a for zero duplicates.
    */
   appendToList({ list = "", items = [] }) {
-    let result = list;
-    for (const entry of items) {
-      result = FrontmatterBuilderBase.#processEntry({ result, entry });
-    }
-    return result;
+    const existingItems =
+      typeof list === "string"
+        ? list
+            .split(",")
+            .map((i) => i.trim())
+            .filter(Boolean)
+        : [list].flat(Infinity).filter(Boolean);
+
+    const newItems = [items].flat(Infinity).filter(Boolean);
+    const uniqueSet = new Set([...existingItems, ...newItems]);
+
+    return FrontmatterBuilderBase.#serializeSetToList({ uniqueSet });
   }
 
-  static #processEntry({ result, entry }) {
-    if (Array.isArray(entry)) {
-      return entry.reduce(
-        (acc, item) =>
-          item ? ListUtils.appendUniqueItem({ list: acc, item }) : acc,
-        result,
-      );
+  /**
+   * Serializes the Set back into a clean string list format (contains exactly 1 if-statement).
+   */
+  static #serializeSetToList({ uniqueSet }) {
+    const items = [...uniqueSet];
+    if (items.length > 0) {
+      return items.join(", ");
     }
-    return entry
-      ? ListUtils.appendUniqueItem({ list: result, item: entry })
-      : result;
+    return "";
   }
 
-  parseCommaSeparatedList(input) {
+  static parseCommaSeparatedList(input = "") {
     return TextFormatter.parseCommaSeparatedList(input);
   }
 
-  parseAndSlugifyCommaSeparatedList(input) {
+  static parseAndSlugifyCommaSeparatedList(input = "") {
     return TextFormatter.parseAndSlugifyCommaSeparatedList(input);
   }
 
