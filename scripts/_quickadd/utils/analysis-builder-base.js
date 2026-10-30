@@ -16,30 +16,9 @@ const TextFormatter = require(
 const VaultQueryService = require(
   path.join(vaultPath, "scripts", "_quickadd", "utils", "vault-query-service"),
 );
-const IncrementedFilenameUtility = require(
-  path.join(
-    vaultPath,
-    "scripts",
-    "_quickadd",
-    "utils",
-    "file-counter-utility",
-  ),
+const FileCounterUtility = require(
+  path.join(vaultPath, "scripts", "_quickadd", "utils", "file-counter-utility"),
 );
-
-/**
- * Converts a plural category string into its singular form.
- */
-function toSingularCategory(category) {
-  const singularMap = {
-    articles: "article",
-    books: "book",
-    courses: "course",
-    podcasts: "podcast",
-    talks: "talk",
-  };
-
-  return singularMap[(category || "").toLowerCase()] || category;
-}
 
 /**
  * Intermediate base class encapsulating shared workflow behavior for all analysis domains.
@@ -78,6 +57,14 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
     throw new Error("Derived classes must implement getUnitFieldLabel()");
   }
 
+  getSectionFieldId() {
+    throw new Error("Derived classes must implement getSectionFieldId()");
+  }
+
+  getSectionFieldLabel() {
+    throw new Error("Derived classes must implement getSectionFieldLabel()");
+  }
+
   // --- Shared Implementation ---
 
   getFields() {
@@ -93,8 +80,16 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
         id: this.getUnitFieldId(),
         label: this.getUnitFieldLabel(),
         type: "text",
-        placeholder: "Enter segment title",
+        placeholder: "Enter chapter title",
         defaultValue: "",
+      },
+      {
+        id: this.getSectionFieldId(),
+        label: this.getSectionFieldLabel(),
+        type: "text",
+        placeholder: "Part or Major Section",
+        defaultValue: "",
+        optional: true,
       },
       {
         id: this.getCreatorFieldId(),
@@ -110,40 +105,87 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
     return text ? text.split(":")[0].trim() : "";
   }
 
+  /**
+   * Converts a chapter title from "Chapter N: Title" to "chNN: Title".
+   *
+   * Pads chapter numbers with leading zeros to ensure a minimum
+   * of two digits.
+   *
+   * @param {string} text - The original chapter title.
+   * @returns {string} The converted chapter title.
+   *
+   * @example
+   * convertChapter("Chapter 1: The Journey Ahead");
+   * // Returns: "ch01: The Journey Ahead"
+   *
+   * @example
+   * convertChapter("Chapter 14: Navigating Your Career");
+   * // Returns: "ch14: Navigating Your Career"
+   */
+  #convertChapter(text) {
+    const result = text.replace(
+      /^(?:Chapter\s+)?(\d+)(?:\.(\d+))?\s*:?\s*/,
+      (_, major, minor) =>
+        `ch${major.padStart(2, "0")}${minor ? "-" + minor.padStart(2, "0") : ""}: `,
+    );
+    return result;
+  }
+
   processValues(values) {
     const processed = super.processValues(values);
     const creatorId = this.getCreatorFieldId();
     const contentId = this.getContentFieldId();
+    const sectionId = this.getSectionFieldId();
+    const unitId = this.getUnitFieldId();
+    const contentOrganization = values[sectionId]
+      ? `- ${values[sectionId]} - ${values[unitId] || ""}`
+      : String(values[unitId] || "");
 
     const rawCreatorInput = values[creatorId] || "";
     const rawContentInput = values[contentId] || "";
+    const rawUnitInput = values[unitId] || "";
 
-    const singularCategory = toSingularCategory(this.getCategoryType());
+    const cleanContent = this.#removeAfterColon(rawContentInput);
 
-    const rawFilename = `${singularCategory} ${this.#removeAfterColon(rawContentInput)}`;
-    const generatedFilename = TextFormatter.slugify(rawFilename);
+    const formattedContent = TextFormatter.titleCase(cleanContent);
 
-    const generatedTitle = `${singularCategory} Analysis - ${rawContentInput}`;
+    const generatedFoldername = TextFormatter.slugify(cleanContent);
 
-    const incrementedFilename = IncrementedFilenameUtility.generate({
+    const fileIndex = FileCounterUtility.getCount({
       app,
-      folderPath: `analysis/${this.getCategoryType()}`,
+      folderPath: `analysis/${this.getCategoryType()}/${generatedFoldername}`,
       seriesName: values.series,
-      title: values.title,
     });
 
+    const generatedFilename = TextFormatter.slugify(
+      `${fileIndex} ${cleanContent} ${this.#convertChapter(rawUnitInput)}`,
+    );
+
+    const generatedTitle = TextFormatter.titleCase(
+      `Analysis of ${cleanContent} - ${rawUnitInput}`,
+    );
+
     const categories = this.appendToList({
-      list: values.categories,
       items: ["analysis", this.getCategoryType()],
+      list: values.categories,
     });
 
     return {
       ...processed,
+      aliases: `"${formattedContent} - ${rawUnitInput}"`,
       title: generatedTitle,
-      slug: generatedFilename,
+      slug: TextFormatter.slugify(
+        `${cleanContent} ${this.#convertChapter(rawUnitInput)}`,
+      ),
       type: `${this.getCategoryType()}`,
+      folder: generatedFoldername,
       filename: generatedFilename,
       categories,
+      [creatorId]: this.formatNameList(
+        rawCreatorInput,
+        `Unknown ${this.getCreatorFieldLabel()}`,
+      ),
+      contentReference: `[[00-${generatedFoldername}-synthesis|${cleanContent}]] ${contentOrganization}`,
     };
   }
 
