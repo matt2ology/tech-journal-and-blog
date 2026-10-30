@@ -85,16 +85,16 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
 
   processValues(values) {
     const processed = super.processValues(values);
-    const nameId = this.getCreatorFieldId();
+    const creatorId = this.getCreatorFieldId();
     const contentId = this.getContentFieldId();
 
-    const rawCreatorInput = values[nameId] || "";
+    const rawCreatorInput = values[creatorId] || "";
     const rawContentInput = values[contentId] || "";
 
     const singularCategory = toSingularCategory(this.getCategoryType());
 
-    const rawFilename = `${this.#removeAfterColon(rawContentInput)}`;
-    const generatedFilename = TextFormatter.slugify(rawFilename);
+    const rawFileName = `${this.#removeAfterColon(rawContentInput)}`;
+    const generatedFileName = TextFormatter.slugify(rawFileName);
 
     const generatedTitle = `${rawContentInput}`;
 
@@ -106,10 +106,10 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
     return {
       ...processed,
       title: generatedTitle,
-      slug: generatedFilename,
+      slug: generatedFileName,
       type: `${this.getCategoryType()}`,
-      filename: generatedFilename,
-      [nameId]: this.formatNameList(
+      filename: generatedFileName,
+      [creatorId]: this.formatNameList(
         rawCreatorInput,
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
@@ -119,11 +119,11 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
 
   buildExtraProperties({ values }) {
     const contentId = this.getContentFieldId();
-    const personId = this.getCreatorFieldId();
+    const creatorId = this.getCreatorFieldId();
 
     return [
       `${contentId}: "${values[contentId]}"`,
-      `${personId}: ${values[personId]}`,
+      `${creatorId}: ${values[creatorId]}`,
     ];
   }
 }
