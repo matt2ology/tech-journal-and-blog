@@ -101,103 +101,85 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
     ];
   }
 
-  #removeAfterColon(text) {
-    return text ? text.split(":")[0].trim() : "";
-  }
-
   /**
-   * Converts a chapter title from "Chapter N: Title" to "chNN: Title".
-   *
-   * Pads chapter numbers with leading zeros to ensure a minimum
-   * of two digits.
-   *
+   * Formats a chapter title from "Chapter N: Title" to "chNN: Title".
    * @param {string} text - The original chapter title.
-   * @returns {string} The converted chapter title.
-   *
-   * @example
-   * convertChapter("Chapter 1: The Journey Ahead");
-   * // Returns: "ch01: The Journey Ahead"
-   *
-   * @example
-   * convertChapter("Chapter 14: Navigating Your Career");
-   * // Returns: "ch14: Navigating Your Career"
+   * @returns {string} The formatted chapter string.
    */
-  #convertChapter(text) {
-    const result = text.replace(
+  #formatChapterNumbering(text) {
+    return text.replace(
       /^(?:Chapter\s+)?(\d+)(?:\.(\d+))?\s*:?\s*/,
       (_, major, minor) =>
         `ch${major.padStart(2, "0")}${minor ? "-" + minor.padStart(2, "0") : ""}: `,
     );
-    return result;
   }
 
   processValues(values) {
-    const processed = super.processValues(values);
-    const creatorId = this.getCreatorFieldId();
-    const contentId = this.getContentFieldId();
-    const sectionId = this.getSectionFieldId();
-    const unitId = this.getUnitFieldId();
-    const contentOrganization = values[sectionId]
-      ? `- ${values[sectionId]} - ${values[unitId] || ""}`
-      : String(values[unitId] || "");
+    const baseProcessedValues = super.processValues(values);
+    const creatorFieldId = this.getCreatorFieldId();
+    const contentFieldId = this.getContentFieldId();
+    const sectionFieldId = this.getSectionFieldId();
+    const unitFieldId = this.getUnitFieldId();
 
-    const rawCreatorInput = values[creatorId] || "";
-    const rawContentInput = values[contentId] || "";
-    const rawUnitInput = values[unitId] || "";
+    const sectionValue = values[sectionFieldId];
+    const unitValue = values[unitFieldId] || "";
+    const contentOrganization = sectionValue
+      ? `- ${sectionValue} - ${unitValue}`
+      : String(unitValue);
 
-    const cleanContent = this.#removeAfterColon(rawContentInput);
+    const rawCreatorInput = values[creatorFieldId] || "";
+    const rawContentInput = values[contentFieldId] || "";
 
-    const formattedContent = TextFormatter.titleCase(cleanContent);
-
-    const generatedFoldername = TextFormatter.slugify(cleanContent);
+    const cleanContentTitle = TextFormatter.extractBeforeColon(rawContentInput);
+    const formattedContentTitle = TextFormatter.titleCase(cleanContentTitle);
+    const generatedFolderName = TextFormatter.slugify(cleanContentTitle);
 
     const fileIndex = FileCounterUtility.getCount({
       app,
-      folderPath: `analysis/${this.getCategoryType()}/${generatedFoldername}`,
-      seriesName: values.series,
+      folderPath: `analysis/${this.getCategoryType()}/${generatedFolderName}`,
+      includeNext: true,
     });
 
+    const formattedChapter = this.#formatChapterNumbering(unitValue);
     const generatedFilename = TextFormatter.slugify(
-      `${fileIndex} ${cleanContent} ${this.#convertChapter(rawUnitInput)}`,
+      `${fileIndex} ${cleanContentTitle} ${formattedChapter}`,
     );
 
     const generatedTitle = TextFormatter.titleCase(
-      `Analysis of ${cleanContent} - ${rawUnitInput}`,
+      `Analysis of ${cleanContentTitle} - ${unitValue}`,
     );
 
-    const categories = this.appendToList({
+    const updatedCategories = this.appendToList({
       items: ["analysis", this.getCategoryType()],
       list: values.categories,
     });
 
     return {
-      ...processed,
-      aliases: `"${formattedContent} - ${rawUnitInput}"`,
+      ...baseProcessedValues,
+      aliases: `"${formattedContentTitle} - ${unitValue}"`,
       title: generatedTitle,
-      slug: TextFormatter.slugify(
-        `${cleanContent} ${this.#convertChapter(rawUnitInput)}`,
-      ),
+      slug: TextFormatter.slugify(`${cleanContentTitle} ${formattedChapter}`),
       type: `${this.getCategoryType()}`,
-      folder: generatedFoldername,
+      folder: generatedFolderName,
       filename: generatedFilename,
-      categories,
-      [creatorId]: this.formatNameList(
+      categories: updatedCategories,
+      [creatorFieldId]: this.formatNameList(
         rawCreatorInput,
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
-      contentReference: `[[00-${generatedFoldername}-synthesis|${cleanContent}]] ${contentOrganization}`,
+      contentReference: `[[00-${generatedFolderName}-synthesis|${cleanContentTitle}]] ${contentOrganization}`,
     };
   }
 
   buildExtraProperties({ values }) {
-    const creatorId = this.getCreatorFieldId();
-    const contentId = this.getContentFieldId();
-    const unitId = this.getUnitFieldId();
+    const creatorFieldId = this.getCreatorFieldId();
+    const contentFieldId = this.getContentFieldId();
+    const unitFieldId = this.getUnitFieldId();
 
     return [
-      `${creatorId}: ${values[creatorId]}`,
-      `${contentId}: "${values[contentId]}"`,
-      `${unitId}: "${values[unitId]}"`,
+      `${creatorFieldId}: ${values[creatorFieldId]}`,
+      `${contentFieldId}: "${values[contentFieldId]}"`,
+      `${unitFieldId}: "${values[unitFieldId]}"`,
     ];
   }
 }
