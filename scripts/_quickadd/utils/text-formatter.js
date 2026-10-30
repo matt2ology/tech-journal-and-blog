@@ -2,9 +2,6 @@
  * Pure text-formatting utilities wrapped in a static utility class.
  */
 class TextFormatter {
-  /**
-   * Set of minor words kept in lowercase during title casing unless positioned first or last.
-   */
   static MINOR_WORDS = new Set([
     "a",
     "an",
@@ -78,6 +75,15 @@ class TextFormatter {
     return TextFormatter.parseCommaSeparatedList(input).map(
       TextFormatter.slugify,
     );
+  }
+
+  /**
+   * Removes everything after the first colon in a string and trims the result.
+   * @param {string} [text=""] - The input text.
+   * @returns {string} The text before the colon, or empty string.
+   */
+  static extractBeforeColon(text = "") {
+    return typeof text === "string" && text ? text.split(":")[0].trim() : "";
   }
 
   /**
