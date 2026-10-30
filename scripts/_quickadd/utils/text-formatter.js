@@ -121,12 +121,16 @@ class TextFormatter {
   }
 
   /**
-   * Converts input text into title case, handling minor words and uppercase rules.
-   * @param {string} [inputText=""] - The text to convert.
-   * @returns {string} The title-cased text.
-   * @example
-   * TextFormatter.titleCase("lord of the rings");
-   * // Returns: "Lord of the Rings"
+   * Formats a word according to title case rules.
+   *
+   * Preserves words that are already all uppercase (e.g., acronyms),
+   * keeps minor words lowercase when they appear between other words,
+   * and capitalizes the first letter of all remaining words.
+   *
+   * @param {string} word - The word to format.
+   * @param {number} index - The word's zero-based position in the title.
+   * @param {number} lastIndex - The zero-based index of the last word in the title.
+   * @returns {string} The formatted word.
    */
   static titleCase(inputText = "") {
     const words = TextFormatter.#normalizeAndSplit(inputText);
@@ -234,7 +238,7 @@ class TextFormatter {
     );
   }
 
-/**
+  /**
    * Cleans an Obsidian-style wikilink wrapper (including optional quotes) and returns the display name or target.
    * @param {string} input - The wikilink string to clean.
    * @returns {string} The extracted plain text label or target, or the original input if it is not a string.
@@ -301,15 +305,15 @@ class TextFormatter {
    * @param {number} lastIndex - The index of the last word.
    * @returns {string} The formatted word.
    * @example
-   * TextFormatter.#formatWord("the", 1, 2);
-   * // Returns: "the"
+   * TextFormatter.#formatWord("the", 0, 2);
+   * // Returns: "The"
    */
   static #formatWord(word, index, lastIndex) {
     if (TextFormatter.#isAllUpperCase(word)) return word;
 
     const lowerWord = word.toLowerCase();
     const isInternalMinorWord =
-      index > 0 &&
+      index >= 1 &&
       index < lastIndex &&
       TextFormatter.MINOR_WORDS.has(lowerWord);
 
