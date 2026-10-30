@@ -70,12 +70,12 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
     throw new Error("Derived classes must implement getContentFieldLabel()");
   }
 
-  getUnitId() {
-    throw new Error("Derived classes must implement getUnitId()");
+  getUnitFieldId() {
+    throw new Error("Derived classes must implement getUnitFieldId()");
   }
 
-  getUnitLabel() {
-    throw new Error("Derived classes must implement getUnitLabel()");
+  getUnitFieldLabel() {
+    throw new Error("Derived classes must implement getUnitFieldLabel()");
   }
 
   // --- Shared Implementation ---
@@ -90,8 +90,8 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
         defaultValue: "",
       },
       {
-        id: this.getUnitId(),
-        label: this.getUnitLabel(),
+        id: this.getUnitFieldId(),
+        label: this.getUnitFieldLabel(),
         type: "text",
         placeholder: "Enter segment title",
         defaultValue: "",
@@ -148,12 +148,14 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
   }
 
   buildExtraProperties({ values }) {
+    const creatorId = this.getCreatorFieldId();
     const contentId = this.getContentFieldId();
-    const personId = this.getCreatorFieldId();
+    const unitId = this.getUnitFieldId();
 
     return [
+      `${creatorId}: ${values[creatorId]}`,
       `${contentId}: "${values[contentId]}"`,
-      `${personId}: ${values[personId]}`,
+      `${unitId}: "${values[unitId]}"`,
     ];
   }
 }
