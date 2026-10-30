@@ -35,6 +35,14 @@ class AnalysisBuilderBook extends AnalysisBuilderBase {
   getUnitFieldLabel() {
     return "Chapter title"
   }
+
+  getSectionFieldId() {
+    return "section"
+  }
+
+  getSectionFieldLabel() {
+    return "Section title"
+  }
 }
 
 module.exports = AnalysisBuilderBook;
