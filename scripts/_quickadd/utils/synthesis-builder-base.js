@@ -91,8 +91,6 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
     const rawCreatorInput = values[creatorId] || "";
     const rawContentInput = values[contentId] || "";
 
-    const singularCategory = toSingularCategory(this.getCategoryType());
-
     const rawFileName = `${this.#removeAfterColon(rawContentInput)}`;
     const generatedFileName = TextFormatter.slugify(rawFileName);
 
@@ -118,12 +116,12 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
   }
 
   buildExtraProperties({ values }) {
-    const contentId = this.getContentFieldId();
     const creatorId = this.getCreatorFieldId();
+    const contentId = this.getContentFieldId();
 
     return [
-      `${contentId}: "${values[contentId]}"`,
       `${creatorId}: ${values[creatorId]}`,
+      `${contentId}: "${values[contentId]}"`,
     ];
   }
 }
