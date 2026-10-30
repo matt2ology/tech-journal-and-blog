@@ -6,7 +6,7 @@ https://www.atlasworkspace.ai/blog/zettelkasten-method-guide
 
 Notes managed by Obsidian and transpiled to HTML via Hugo static site generator.
 
-# My Personal Knowledge Management (PKM) Workflow
+## My Personal Knowledge Management (PKM) Workflow
 
 This system adapts the **Zettelkasten method** to create a seamless pipeline from raw information intake to atomic, networked thinking. Rather than relying on rigid traditional terms, this workflow uses clear, functional stage names.
 
