@@ -24,15 +24,15 @@ class FrontmatterBuilderBase {
   #quickAddApi;
 
   constructor(quickAddApi) {
-    if (FrontmatterBuilderBase.#isInvalidQuickAddApi({ quickAddApi })) {
+    if (FrontmatterBuilderBase.#hasInvalidQuickAddApi({ quickAddApi })) {
       throw new TypeError(
-        "FrontmatterBuilderBase requires a QuickAdd API with requestInputs().",
+        "FrontmatterBuilderBase requires a QuickAdd API instance with requestInputs().",
       );
     }
     this.#quickAddApi = quickAddApi;
   }
 
-  static #isInvalidQuickAddApi({ quickAddApi }) {
+  static #hasInvalidQuickAddApi({ quickAddApi }) {
     return !Boolean(
       quickAddApi && typeof quickAddApi.requestInputs === "function",
     );
@@ -93,32 +93,10 @@ class FrontmatterBuilderBase {
   }
 
   /**
-   * Combines the existing list and new items into a set for zero duplicates.
+   * Appends items to an existing list without duplicates using ListUtils.
    */
   appendToList({ list = "", items = [] }) {
-    const existingItems = TextFormatter.parseCommaSeparatedList(list);
-
-    const newItemsInput = [items].flat(Infinity);
-    const cleanedNewItems = newItemsInput
-      .map((i) =>
-        typeof i === "string" ? i.trim().replace(/^and\s+/i, "") : i,
-      )
-      .filter((i) => i && String(i).toLowerCase() !== "and");
-
-    const uniqueSet = new Set([...existingItems, ...cleanedNewItems]);
-
-    return FrontmatterBuilderBase.#serializeSetToList({ uniqueSet });
-  }
-
-  /**
-   * Serializes the Set back into a clean string list format (contains exactly 1 if-statement).
-   */
-  static #serializeSetToList({ uniqueSet }) {
-    const items = [...uniqueSet];
-    if (items.length > 0) {
-      return items.join(", ");
-    }
-    return "";
+    return ListUtils.appendUniqueItems({ list, item: items });
   }
 
   static parseCommaSeparatedList(input = "") {
@@ -133,17 +111,28 @@ class FrontmatterBuilderBase {
     const requestedValues = await this.#quickAddApi.requestInputs(
       this.getFields(),
     );
-    const values = this.processValues(requestedValues);
-    const computed = this.#computeStandardValues(values);
+    const processedValues = this.processValues(requestedValues);
+    const computedValues = this.#computeStandardValues(processedValues);
 
     const properties = [
-      ...this.buildStandardProperties({ values, computed }),
-      ...this.buildExtraProperties({ values, computed }),
+      ...this.buildStandardProperties({
+        values: processedValues,
+        computed: computedValues,
+      }),
+      ...this.buildExtraProperties({
+        values: processedValues,
+        computed: computedValues,
+      }),
     ];
 
-    const frontmatter = serializeFrontmatter(properties);
-    this.#syncParamsVariables({ params, computed, frontmatter, values });
-    return frontmatter;
+    const frontmatterString = serializeFrontmatter(properties);
+    this.#syncExecutionVariables({
+      params,
+      computed: computedValues,
+      values: processedValues,
+      frontmatter: frontmatterString,
+    });
+    return frontmatterString;
   }
 
   #computeStandardValues(values) {
@@ -158,7 +147,7 @@ class FrontmatterBuilderBase {
     };
   }
 
-  #syncParamsVariables({ params, computed, frontmatter, values }) {
+  #syncExecutionVariables({ params, computed, frontmatter, values }) {
     if (!params?.variables) return;
     Object.assign(params.variables, computed, values, { frontmatter });
   }
