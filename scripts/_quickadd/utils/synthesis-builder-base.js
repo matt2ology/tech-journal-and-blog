@@ -76,7 +76,7 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
     const rawCreatorInput = values[creatorId] || "";
     const rawContentInput = values[contentId] || "";
 
-    const rawFileName = `${this.#removeAfterColon(rawContentInput)}-00-synthesis`;
+    const rawFileName = `00-${this.#removeAfterColon(rawContentInput)}-synthesis`;
     const generatedFileName = TextFormatter.slugify(rawFileName);
 
     const generatedTitle = `${rawContentInput} - Overview & Synthesis`;
