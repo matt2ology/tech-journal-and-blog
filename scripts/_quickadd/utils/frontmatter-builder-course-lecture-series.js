@@ -22,7 +22,7 @@ const IncrementedFilenameUtility = require(
     "scripts",
     "_quickadd",
     "utils",
-    "incremented-filename-utility",
+    "file-counter-utility",
   ),
 );
 
