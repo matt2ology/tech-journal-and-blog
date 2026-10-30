@@ -15,21 +15,6 @@ const TextFormatter = require(
 );
 
 /**
- * Converts a plural category string into its singular form.
- */
-function toSingularCategory(media) {
-  const singularMap = {
-    articles: "article",
-    books: "book",
-    courses: "course",
-    podcasts: "podcast",
-    talks: "talk",
-  };
-
-  return singularMap[(media || "").toLowerCase()] || media;
-}
-
-/**
  * Intermediate base class encapsulating shared workflow behavior for all synthesis domains.
  */
 class SynthesisBuilderBase extends FrontmatterBuilderBase {
