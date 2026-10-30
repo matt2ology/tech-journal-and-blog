@@ -443,6 +443,65 @@
       "icon": "lightbulb"
     },
     {
+      "id": "9fc4897e-7f03-44af-8f2d-d23968685992",
+      "name": "Analysis Note",
+      "type": "Macro",
+      "command": false,
+      "runOnStartup": false,
+      "macro": {
+        "name": "Analysis Note",
+        "id": "cade7503-e6f3-406b-b7ca-9f5170c838f6",
+        "commands": [
+          {
+            "name": "note-analysis",
+            "type": "UserScript",
+            "id": "2012459b-da84-47aa-b911-b1b6c9606572",
+            "path": "scripts/_quickadd/note-analysis.js",
+            "settings": {}
+          },
+          {
+            "name": "Analysis Template",
+            "type": "NestedChoice",
+            "id": "d05d95be-55f2-44f8-b676-6f5ab582ad94",
+            "choice": {
+              "id": "23fa3131-f6a8-437f-b7fa-254d0fed99df",
+              "name": "Analysis Template",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/analysis.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "{{VALUE:filename}}"
+              },
+              "discoverExistingNotesBeforeCreate": false,
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "analysis/{{VALUE:type}}/{{VALUE:folder}}"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "copyLinkToClipboard": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              }
+            }
+          }
+        ]
+      },
+      "icon": "lightbulb"
+    },
+    {
       "id": "ee9612b8-4424-47e9-9697-0070cdef9422",
       "name": "cumulative-marginalia",
       "type": "Macro",
