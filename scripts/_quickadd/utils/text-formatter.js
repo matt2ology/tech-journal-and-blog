@@ -42,6 +42,7 @@ class TextFormatter {
    * // Returns: "hello-world-2026"
    */
   static slugify(text = "") {
+    if (typeof text !== "string") return "";
     return text
       .normalize("NFKD")
       .replace(/[\u0300-\u036f]/g, "")
@@ -62,8 +63,7 @@ class TextFormatter {
    * // Returns: ["apple", "banana", "orange"]
    */
   static parseCommaSeparatedList(input = "") {
-    const rawItems = TextFormatter.#extractRawItems(input);
-    return [...new Set(rawItems)];
+    return [...new Set(TextFormatter.#extractRawItems(input))];
   }
 
   /**
@@ -75,8 +75,9 @@ class TextFormatter {
    * // Returns: ["hello-world", "foo-bar"]
    */
   static parseAndSlugifyCommaSeparatedList(input = "") {
-    const items = TextFormatter.parseCommaSeparatedList(input);
-    return items.map((item) => TextFormatter.slugify(item));
+    return TextFormatter.parseCommaSeparatedList(input).map(
+      TextFormatter.slugify,
+    );
   }
 
   /**
@@ -91,15 +92,13 @@ class TextFormatter {
     const names = TextFormatter.parseCommaSeparatedList(input);
     if (names.length === 0) return "Unknown";
 
-    const lastNames = names.map((name) => {
-      if (name.includes(",")) {
-        return name.split(",")[0].trim();
-      }
-      const parts = name.trim().split(/\s+/);
-      return parts[parts.length - 1];
-    });
-
-    return lastNames.join(", ");
+    return names
+      .map((name) => {
+        if (name.includes(",")) return name.split(",")[0].trim();
+        const parts = name.trim().split(/\s+/);
+        return parts[parts.length - 1];
+      })
+      .join(", ");
   }
 
   /**
@@ -118,7 +117,7 @@ class TextFormatter {
       : TextFormatter.parseCommaSeparatedList(input);
 
     if (items.length === 0) return " []";
-    return "\n  - " + items.join("\n  - ");
+    return `\n  - ${items.join("\n  - ")}`;
   }
 
   /**
@@ -148,7 +147,7 @@ class TextFormatter {
    * // Returns: "[[john-doe|John Doe]]"
    */
   static formatNameAsWikilink(input = "") {
-    if (!input || typeof input !== "string") return "";
+    if (typeof input !== "string") return "";
 
     let trimmedInput = input.trim().replace(/\s+/g, " ");
     if (!trimmedInput) return "";
@@ -162,9 +161,7 @@ class TextFormatter {
 
     const words = trimmedInput.split(" ");
     const processedWords = words.map((word, index) => {
-      const cleaned = word.replace(/[.,]/g, "");
       let targetWord = word;
-
       if (
         TextFormatter.#isAllUpperCase(trimmedInput) ||
         word === word.toLowerCase()
@@ -172,20 +169,22 @@ class TextFormatter {
         targetWord = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
       }
 
-      if (index > 0 && index < words.length - 1 && cleaned.length === 1) {
+      if (
+        index > 0 &&
+        index < words.length - 1 &&
+        word.replace(/[.,]/g, "").length === 1
+      ) {
         const capitalized = targetWord.replace(/^\b[a-z]/i, (c) =>
           c.toUpperCase(),
         );
-        return capitalized.endsWith(".") ? capitalized : capitalized + ".";
+        return capitalized.endsWith(".") ? capitalized : `${capitalized}.`;
       }
 
       return targetWord;
     });
 
     const displayName = processedWords.join(" ");
-    const slug = TextFormatter.slugify(displayName);
-
-    return `[[${slug}|${displayName}]]`;
+    return `[[${TextFormatter.slugify(displayName)}|${displayName}]]`;
   }
 
   /**
@@ -202,10 +201,8 @@ class TextFormatter {
     const items = TextFormatter.parseCommaSeparatedList(input);
     if (items.length === 0) return ` ${fallback}`;
 
-    const formattedItems = items.map((item) =>
-      TextFormatter.formatNameAsWikilink(item),
-    );
-    return '\n  - "' + formattedItems.join('"\n  - "') + '"';
+    const formattedItems = items.map(TextFormatter.formatNameAsWikilink);
+    return `\n  - "${formattedItems.join('"\n  - "')}"`;
   }
 
   /**
@@ -218,10 +215,9 @@ class TextFormatter {
    */
   static formatNaturalNameList(input) {
     const items = TextFormatter.parseCommaSeparatedList(input);
-    const processedItems = items.map((item) =>
-      TextFormatter.formatNameAsWikilink(item),
+    return TextFormatter.#joinNaturalList(
+      items.map(TextFormatter.formatNameAsWikilink),
     );
-    return TextFormatter.#joinNaturalList(processedItems);
   }
 
   /**
@@ -233,31 +229,30 @@ class TextFormatter {
    * // Returns: "Alice, Bob, and Charlie"
    */
   static formatPlainNaturalNameList(input) {
-    const items = TextFormatter.parseCommaSeparatedList(input);
-    return TextFormatter.#joinNaturalList(items);
+    return TextFormatter.#joinNaturalList(
+      TextFormatter.parseCommaSeparatedList(input),
+    );
   }
 
-  /**
-   * Cleans a wikilink wrapper and returns the display name or target.
-   * @param {string} opt - The wikilink string.
-   * @returns {string} The extracted plain text label or target.
+/**
+   * Cleans an Obsidian-style wikilink wrapper (including optional quotes) and returns the display name or target.
+   * @param {string} input - The wikilink string to clean.
+   * @returns {string} The extracted plain text label or target, or the original input if it is not a string.
    * @example
    * TextFormatter.cleanWikiLink("[[john-doe|John Doe]]");
    * // Returns: "John Doe"
    */
-  static cleanWikiLink(opt) {
-    if (typeof opt !== "string") return opt;
-    const cleaned = opt.replace(/^"?"?\[\[|\]\]"?"?$/g, "");
-    const parts = cleaned.split("|");
-    return parts.length > 1 ? parts[1] : parts[0];
+  static cleanWikiLink(input = "") {
+    if (typeof input !== "string") return input;
+    const parts = input.replace(/^"?"?\[\[|\]\]"?"?$/g, "").split("|");
+    return parts[1] ?? parts[0];
   }
-
   // ==========================================
   // PRIVATE HELPER METHODS
   // ==========================================
 
   /**
-   * Extracts and cleans raw items from input.
+   * Extracts, cleans, and filters raw items from input source.
    * @private
    * @param {string|string[]} input - The input source.
    * @returns {string[]} Array of cleaned items.
@@ -266,36 +261,13 @@ class TextFormatter {
    * // Returns: ["a", "b", "c"]
    */
   static #extractRawItems(input) {
-    const rawItems = TextFormatter.#toRawArray(input);
-    return TextFormatter.#cleanAndFilterItems(rawItems);
-  }
+    const rawArray = Array.isArray(input)
+      ? input
+      : typeof input === "string"
+        ? input.split(",")
+        : [];
 
-  /**
-   * Converts string or array input into a raw array.
-   * @private
-   * @param {string|string[]} input - The input data.
-   * @returns {any[]} Array representation.
-   * @example
-   * TextFormatter.#toRawArray("a,b,c");
-   * // Returns: ["a", "b", "c"]
-   */
-  static #toRawArray(input) {
-    if (Array.isArray(input)) return input;
-    if (typeof input === "string") return input.split(",");
-    return [];
-  }
-
-  /**
-   * Cleans and filters items, removing extraneous "and" elements.
-   * @private
-   * @param {any[]} items - Array of items to filter.
-   * @returns {any[]} Filtered items.
-   * @example
-   * TextFormatter.#cleanAndFilterItems(["apple", " and banana", "and"]);
-   * // Returns: ["apple", "banana"]
-   */
-  static #cleanAndFilterItems(items) {
-    return items
+    return rawArray
       .map((item) =>
         typeof item === "string" ? item.trim().replace(/^and\s+/i, "") : item,
       )
@@ -313,7 +285,6 @@ class TextFormatter {
    */
   static #normalizeAndSplit(inputText) {
     if (typeof inputText !== "string" || !inputText) return [];
-
     return inputText
       .normalize("NFC")
       .replace(/[_]+/g, " ")
@@ -337,9 +308,10 @@ class TextFormatter {
     if (TextFormatter.#isAllUpperCase(word)) return word;
 
     const lowerWord = word.toLowerCase();
-    const isBetweenBounds = index > 0 && index < lastIndex;
     const isInternalMinorWord =
-      isBetweenBounds && TextFormatter.MINOR_WORDS.has(lowerWord);
+      index > 0 &&
+      index < lastIndex &&
+      TextFormatter.MINOR_WORDS.has(lowerWord);
 
     return isInternalMinorWord
       ? lowerWord
