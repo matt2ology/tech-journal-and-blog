@@ -10,7 +10,7 @@ class FileCounterUtility {
    * @param {boolean} [params.includeNext=true] - Whether to increment the count for a new file index.
    * @returns {string} The zero-padded count (e.g., "01", "05").
    */
-  static getCount({ app, folderPath, includeNext = true}) {
+  static getCount({ app, folderPath, includeNext = true }) {
     if (!app || !folderPath) return "00";
 
     const fileCount = app.vault
