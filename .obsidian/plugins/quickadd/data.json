@@ -1,83 +1,181 @@
 {
   "choices": [
     {
-      "id": "87f00870-d0ec-4989-900f-1daf488ef75f",
-      "name": "capture-quote-kindle-app",
+      "id": "9fc4897e-7f03-44af-8f2d-d23968685992",
+      "name": "Analysis Note",
       "type": "Macro",
       "command": false,
       "runOnStartup": false,
       "macro": {
-        "name": "capture-quote-kindle-app",
-        "id": "d70f7b11-06b2-4205-8803-7aa5a53f9c59",
+        "name": "Analysis Note",
+        "id": "cade7503-e6f3-406b-b7ca-9f5170c838f6",
         "commands": [
           {
-            "name": "capture-quote-kindle-app",
+            "name": "create-analysis",
             "type": "UserScript",
-            "id": "bbf6060a-922b-44f5-9e98-d66ee905e2f2",
-            "path": "scripts/_quickadd/capture-quote-kindle-app.js",
+            "id": "bf176f60-cd12-453d-a5f9-e05fe9cccc4f",
+            "path": "_quickadd-scripts/create-analysis.js",
             "settings": {}
           },
           {
-            "name": "append",
+            "name": "Analysis Template",
             "type": "NestedChoice",
-            "id": "ae96c135-f2c2-490e-9589-9242dbaff5c3",
+            "id": "d05d95be-55f2-44f8-b676-6f5ab582ad94",
             "choice": {
-              "id": "b46c4be1-3fd8-4232-b08a-76d57b76d224",
-              "name": "append",
-              "type": "Capture",
+              "id": "23fa3131-f6a8-437f-b7fa-254d0fed99df",
+              "name": "Analysis Template",
+              "type": "Template",
               "command": false,
-              "appendLink": false,
-              "captureTo": "",
-              "captureToActiveFile": true,
-              "captureToCanvasNodeId": "",
-              "activeFileWritePosition": "cursor",
-              "createFileIfItDoesntExist": {
-                "enabled": false,
-                "createWithTemplate": false,
-                "template": ""
-              },
-              "format": {
+              "templatePath": "templates/analysis.md",
+              "fileNameFormat": {
                 "enabled": true,
-                "format": "---\n\n### id{{RANDOM:10}}\n{{VALUE:formattedQuote}}\n"
+                "format": "{{VALUE:filename}}"
               },
-              "insertAfter": {
-                "enabled": false,
-                "after": "",
-                "insertAtEnd": false,
-                "considerSubsections": false,
-                "createIfNotFound": false,
-                "createIfNotFoundLocation": "top",
-                "inline": false,
-                "replaceExisting": false,
-                "blankLineAfterMatchMode": "auto"
+              "discoverExistingNotesBeforeCreate": false,
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "analysis/{{VALUE:type}}/{{VALUE:folder}}"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
               },
-              "newLineCapture": {
-                "enabled": false,
-                "direction": "below"
-              },
-              "prepend": false,
-              "task": false,
-              "openFile": false,
+              "appendLink": false,
+              "copyLinkToClipboard": false,
+              "openFile": true,
               "fileOpening": {
                 "location": "tab",
                 "direction": "vertical",
                 "mode": "default",
                 "focus": true
               },
-              "templater": {
-                "afterCapture": "none"
-              },
-              "insertBefore": {
-                "enabled": false,
-                "before": "",
-                "createIfNotFound": false,
-                "createIfNotFoundLocation": "top"
+              "fileExistsBehavior": {
+                "kind": "prompt"
               }
             }
           }
         ]
       },
-      "icon": "quote"
+      "icon": "lightbulb"
+    },
+    {
+      "id": "44edd34c-88c1-4d45-a51b-4ec52a132637",
+      "name": "Synthesis Note",
+      "type": "Macro",
+      "command": false,
+      "runOnStartup": false,
+      "macro": {
+        "name": "Synthesis Note",
+        "id": "bf4aba3f-2a53-4457-943b-2aac60f8f37a",
+        "commands": [
+          {
+            "name": "create-synthesis",
+            "type": "UserScript",
+            "id": "90f49aee-1d8c-4b5c-9388-af83d9b1eca8",
+            "path": "_quickadd-scripts/create-synthesis.js",
+            "settings": {}
+          },
+          {
+            "name": "Synthesis Template",
+            "type": "NestedChoice",
+            "id": "175a46e4-3c91-4fdc-80c4-f4fbd532f470",
+            "choice": {
+              "id": "659a2fe1-e3b9-417d-bf31-af08c61c0a8a",
+              "name": "Synthesis Template",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/synthesis.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "{{VALUE:filename}}"
+              },
+              "discoverExistingNotesBeforeCreate": false,
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "synthesis/{{VALUE:type}}"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "copyLinkToClipboard": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              }
+            }
+          }
+        ]
+      },
+      "icon": "lightbulb"
+    },
+    {
+      "id": "7e908ad8-c3ce-46eb-b46c-ed51803de18b",
+      "name": "Recipe Log",
+      "type": "Macro",
+      "command": false,
+      "runOnStartup": false,
+      "macro": {
+        "name": "Recipe Log",
+        "id": "37127f75-9054-4ed8-8023-cded47d9d95e",
+        "commands": [
+          {
+            "name": "note-recipe",
+            "type": "UserScript",
+            "id": "7c817fcd-8f85-49e0-8242-fd00b892f96b",
+            "path": "scripts/_quickadd/note-recipe.js",
+            "settings": {}
+          },
+          {
+            "name": "Recipe Log Template",
+            "type": "NestedChoice",
+            "id": "fc38717c-8181-4043-928f-0352529f902d",
+            "choice": {
+              "id": "6f2f6b90-8aba-4aea-9acd-2e35ae51a552",
+              "name": "Recipe Log Template",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/recipe-log.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "index"
+              },
+              "discoverExistingNotesBeforeCreate": false,
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "cookbook/{{VALUE:slug}}"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "copyLinkToClipboard": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              }
+            }
+          }
+        ]
+      },
+      "icon": "cookie"
     },
     {
       "id": "2d7d916f-9fb9-4624-b760-aa69568770d0",
@@ -207,299 +305,83 @@
       "icon": "type"
     },
     {
-      "id": "b63cb8f5-40f6-4272-af76-2da3d7a24211",
-      "name": "Course Lecture Series",
+      "id": "87f00870-d0ec-4989-900f-1daf488ef75f",
+      "name": "capture-quote-kindle-app",
       "type": "Macro",
       "command": false,
       "runOnStartup": false,
       "macro": {
-        "name": "Course Lecture Series",
-        "id": "723f9401-91c1-49ca-b83e-f17167c1793d",
+        "name": "capture-quote-kindle-app",
+        "id": "d70f7b11-06b2-4205-8803-7aa5a53f9c59",
         "commands": [
           {
-            "name": "note-course-lecture",
+            "name": "capture-quote-kindle-app",
             "type": "UserScript",
-            "id": "547fd52a-8648-4ce9-b6a3-7497f0aea173",
-            "path": "scripts/_quickadd/note-course-lecture.js",
+            "id": "bbf6060a-922b-44f5-9e98-d66ee905e2f2",
+            "path": "scripts/_quickadd/capture-quote-kindle-app.js",
             "settings": {}
           },
           {
-            "name": "Course Lecture Template",
+            "name": "append",
             "type": "NestedChoice",
-            "id": "4554becd-3c31-4433-b3b1-ae3d5f3cf1a2",
+            "id": "ae96c135-f2c2-490e-9589-9242dbaff5c3",
             "choice": {
-              "id": "79e703ed-562e-4b07-a06c-28195cb367bd",
-              "name": "Course Lecture Template",
-              "type": "Template",
+              "id": "b46c4be1-3fd8-4232-b08a-76d57b76d224",
+              "name": "append",
+              "type": "Capture",
               "command": false,
-              "templatePath": "templates/course-lecture-series.md",
-              "fileNameFormat": {
-                "enabled": true,
-                "format": "{{VALUE:filename}}"
-              },
-              "discoverExistingNotesBeforeCreate": false,
-              "folder": {
-                "enabled": true,
-                "folders": [
-                  "course-lecture/{{VALUE:foldername}}"
-                ],
-                "chooseWhenCreatingNote": false,
-                "createInSameFolderAsActiveFile": false,
-                "chooseFromSubfolders": false
-              },
               "appendLink": false,
-              "copyLinkToClipboard": false,
-              "openFile": true,
+              "captureTo": "",
+              "captureToActiveFile": true,
+              "captureToCanvasNodeId": "",
+              "activeFileWritePosition": "cursor",
+              "createFileIfItDoesntExist": {
+                "enabled": false,
+                "createWithTemplate": false,
+                "template": ""
+              },
+              "format": {
+                "enabled": true,
+                "format": "---\n\n### id{{RANDOM:10}}\n{{VALUE:formattedQuote}}\n"
+              },
+              "insertAfter": {
+                "enabled": false,
+                "after": "",
+                "insertAtEnd": false,
+                "considerSubsections": false,
+                "createIfNotFound": false,
+                "createIfNotFoundLocation": "top",
+                "inline": false,
+                "replaceExisting": false,
+                "blankLineAfterMatchMode": "auto"
+              },
+              "newLineCapture": {
+                "enabled": false,
+                "direction": "below"
+              },
+              "prepend": false,
+              "task": false,
+              "openFile": false,
               "fileOpening": {
                 "location": "tab",
                 "direction": "vertical",
                 "mode": "default",
                 "focus": true
               },
-              "fileExistsBehavior": {
-                "kind": "prompt"
+              "templater": {
+                "afterCapture": "none"
+              },
+              "insertBefore": {
+                "enabled": false,
+                "before": "",
+                "createIfNotFound": false,
+                "createIfNotFoundLocation": "top"
               }
             }
           }
         ]
       },
-      "icon": "graduation-cap"
-    },
-    {
-      "id": "7e908ad8-c3ce-46eb-b46c-ed51803de18b",
-      "name": "Recipe Log",
-      "type": "Macro",
-      "command": false,
-      "runOnStartup": false,
-      "macro": {
-        "name": "Recipe Log",
-        "id": "37127f75-9054-4ed8-8023-cded47d9d95e",
-        "commands": [
-          {
-            "name": "note-recipe",
-            "type": "UserScript",
-            "id": "7c817fcd-8f85-49e0-8242-fd00b892f96b",
-            "path": "scripts/_quickadd/note-recipe.js",
-            "settings": {}
-          },
-          {
-            "name": "Recipe Log Template",
-            "type": "NestedChoice",
-            "id": "fc38717c-8181-4043-928f-0352529f902d",
-            "choice": {
-              "id": "6f2f6b90-8aba-4aea-9acd-2e35ae51a552",
-              "name": "Recipe Log Template",
-              "type": "Template",
-              "command": false,
-              "templatePath": "templates/recipe-log.md",
-              "fileNameFormat": {
-                "enabled": true,
-                "format": "index"
-              },
-              "discoverExistingNotesBeforeCreate": false,
-              "folder": {
-                "enabled": true,
-                "folders": [
-                  "cookbook/{{VALUE:slug}}"
-                ],
-                "chooseWhenCreatingNote": false,
-                "createInSameFolderAsActiveFile": false,
-                "chooseFromSubfolders": false
-              },
-              "appendLink": false,
-              "copyLinkToClipboard": false,
-              "openFile": true,
-              "fileOpening": {
-                "location": "tab",
-                "direction": "vertical",
-                "mode": "default",
-                "focus": true
-              },
-              "fileExistsBehavior": {
-                "kind": "prompt"
-              }
-            }
-          }
-        ]
-      },
-      "icon": "cookie"
-    },
-    {
-      "id": "830e84f4-9ac1-4efa-acb7-706cd5a0f477",
-      "name": "Book Chapter synthesis Note",
-      "type": "Macro",
-      "command": false,
-      "runOnStartup": false,
-      "macro": {
-        "name": "Book Chapter synthesis Note",
-        "id": "a0feb68b-3550-494f-afc5-9ac48ea47cae",
-        "commands": [
-          {
-            "name": "note-chapter",
-            "type": "UserScript",
-            "id": "79e256a9-c98b-4221-88e4-c2aa4408e5e3",
-            "path": "scripts/_quickadd/note-chapter.js",
-            "settings": {}
-          },
-          {
-            "name": "Book Chapter Synthesis Template",
-            "type": "NestedChoice",
-            "id": "5471be2b-c0bb-45c2-84bb-db45628359d1",
-            "choice": {
-              "id": "51494665-3880-4114-8bfe-d7e4a0723079",
-              "name": "Book Chapter Synthesis Template",
-              "type": "Template",
-              "command": false,
-              "templatePath": "templates/synthesis-book-chapter.md",
-              "fileNameFormat": {
-                "enabled": true,
-                "format": "{{VALUE:filename}}"
-              },
-              "discoverExistingNotesBeforeCreate": false,
-              "folder": {
-                "enabled": true,
-                "folders": [
-                  "synthesis/books/{{VALUE:foldername}}"
-                ],
-                "chooseWhenCreatingNote": false,
-                "createInSameFolderAsActiveFile": false,
-                "chooseFromSubfolders": false
-              },
-              "appendLink": false,
-              "copyLinkToClipboard": false,
-              "openFile": true,
-              "fileOpening": {
-                "location": "tab",
-                "direction": "vertical",
-                "mode": "default",
-                "focus": true
-              },
-              "fileExistsBehavior": {
-                "kind": "prompt"
-              }
-            }
-          }
-        ]
-      },
-      "icon": "book-open"
-    },
-    {
-      "id": "44edd34c-88c1-4d45-a51b-4ec52a132637",
-      "name": "synthesis Note",
-      "type": "Macro",
-      "command": false,
-      "runOnStartup": false,
-      "macro": {
-        "name": "synthesis Note",
-        "id": "bf4aba3f-2a53-4457-943b-2aac60f8f37a",
-        "commands": [
-          {
-            "name": "note-synthesis",
-            "type": "UserScript",
-            "id": "5e3f8a0d-1aa8-4d43-925b-3c000c9e67e1",
-            "path": "scripts/_quickadd/note-synthesis.js",
-            "settings": {}
-          },
-          {
-            "name": "Synthesis Template",
-            "type": "NestedChoice",
-            "id": "175a46e4-3c91-4fdc-80c4-f4fbd532f470",
-            "choice": {
-              "id": "659a2fe1-e3b9-417d-bf31-af08c61c0a8a",
-              "name": "Synthesis Template",
-              "type": "Template",
-              "command": false,
-              "templatePath": "templates/synthesis.md",
-              "fileNameFormat": {
-                "enabled": true,
-                "format": "{{VALUE:filename}}"
-              },
-              "discoverExistingNotesBeforeCreate": false,
-              "folder": {
-                "enabled": true,
-                "folders": [
-                  "synthesis/{{VALUE:type}}"
-                ],
-                "chooseWhenCreatingNote": false,
-                "createInSameFolderAsActiveFile": false,
-                "chooseFromSubfolders": false
-              },
-              "appendLink": false,
-              "copyLinkToClipboard": false,
-              "openFile": true,
-              "fileOpening": {
-                "location": "tab",
-                "direction": "vertical",
-                "mode": "default",
-                "focus": true
-              },
-              "fileExistsBehavior": {
-                "kind": "prompt"
-              }
-            }
-          }
-        ]
-      },
-      "icon": "lightbulb"
-    },
-    {
-      "id": "9fc4897e-7f03-44af-8f2d-d23968685992",
-      "name": "Analysis Note",
-      "type": "Macro",
-      "command": false,
-      "runOnStartup": false,
-      "macro": {
-        "name": "Analysis Note",
-        "id": "cade7503-e6f3-406b-b7ca-9f5170c838f6",
-        "commands": [
-          {
-            "name": "note-analysis",
-            "type": "UserScript",
-            "id": "2012459b-da84-47aa-b911-b1b6c9606572",
-            "path": "scripts/_quickadd/note-analysis.js",
-            "settings": {}
-          },
-          {
-            "name": "Analysis Template",
-            "type": "NestedChoice",
-            "id": "d05d95be-55f2-44f8-b676-6f5ab582ad94",
-            "choice": {
-              "id": "23fa3131-f6a8-437f-b7fa-254d0fed99df",
-              "name": "Analysis Template",
-              "type": "Template",
-              "command": false,
-              "templatePath": "templates/analysis.md",
-              "fileNameFormat": {
-                "enabled": true,
-                "format": "{{VALUE:filename}}"
-              },
-              "discoverExistingNotesBeforeCreate": false,
-              "folder": {
-                "enabled": true,
-                "folders": [
-                  "analysis/{{VALUE:type}}/{{VALUE:folder}}"
-                ],
-                "chooseWhenCreatingNote": false,
-                "createInSameFolderAsActiveFile": false,
-                "chooseFromSubfolders": false
-              },
-              "appendLink": false,
-              "copyLinkToClipboard": false,
-              "openFile": true,
-              "fileOpening": {
-                "location": "tab",
-                "direction": "vertical",
-                "mode": "default",
-                "focus": true
-              },
-              "fileExistsBehavior": {
-                "kind": "prompt"
-              }
-            }
-          }
-        ]
-      },
-      "icon": "lightbulb"
+      "icon": "quote"
     },
     {
       "id": "ee9612b8-4424-47e9-9697-0070cdef9422",
