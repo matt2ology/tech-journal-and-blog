@@ -129,6 +129,51 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
     );
   }
 
+  /**
+   * Resolves whether the content title matches an existing subfolder.
+   * Auto-fills creator from existing notes if blank.
+   *
+   * @param {Object} options - { formattedContent, creatorInput }
+   * @returns {Object} { creatorInput }
+   */
+  #resolveContentContext({ formattedContent, creatorInput }) {
+    const rootFolder = `analysis/${this.getCategoryType()}`;
+    const subfolders = VaultQueryService.getSubfolderNames({
+      app,
+      folderPath: rootFolder,
+    });
+
+    const matchedSubfolder = subfolders.find(
+      (sub) =>
+        TextFormatter.titleCase(sub) === formattedContent ||
+        sub.toLowerCase() === formattedContent.toLowerCase(),
+    );
+
+    if (!matchedSubfolder) {
+      return { creatorInput };
+    }
+
+    let resolvedCreator = creatorInput;
+    if (!resolvedCreator) {
+      const contentFolderPath = `${rootFolder}/${matchedSubfolder}`;
+      const existingCreators = VaultQueryService.getFieldValues({
+        app,
+        fieldName: this.getCreatorFieldId(),
+        folderPath: contentFolderPath,
+      });
+
+      if (existingCreators.length > 0) {
+        resolvedCreator = existingCreators
+          .map((creator) => TextFormatter.cleanWikiLink(creator))
+          .join(", ");
+      }
+    }
+
+    return {
+      creatorInput: resolvedCreator,
+    };
+  }
+
   processValues(values) {
     const baseProcessedValues = super.processValues(values);
     const creatorFieldId = this.getCreatorFieldId();
@@ -148,8 +193,16 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
     const cleanContentTitle = TextFormatter.extractBeforeColon(rawContentInput);
     const formattedContentTitle = TextFormatter.titleCase(cleanContentTitle);
     const generatedFolderName = TextFormatter.slugify(cleanContentTitle);
-
     const analysisFolderPath = `analysis/${this.getCategoryType()}/${generatedFolderName}`;
+
+    // Resolve context to auto-fill creator if matching existing folder
+    const context = this.#resolveContentContext({
+      formattedContent: formattedContentTitle,
+      creatorInput: rawCreatorInput,
+    });
+
+    const resolvedCreatorInput = context.creatorInput;
+
     const fileIndex = FileCounterUtility.getCount({
       app,
       folderPath: analysisFolderPath,
@@ -180,7 +233,7 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
       filename: generatedFilename,
       categories: updatedCategories,
       [creatorFieldId]: this.formatNameList(
-        rawCreatorInput,
+        resolvedCreatorInput,
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
       contentReference: `[[00-${generatedFolderName}-synthesis|${cleanContentTitle}]] ${contentOrganization}`,
