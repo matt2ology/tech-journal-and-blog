@@ -4,8 +4,7 @@ const vaultPath = app.vault.adapter.getBasePath();
 const FrontmatterBuilderRecipe = require(
   path.join(
     vaultPath,
-    "scripts",
-    "_quickadd",
+    "_quickadd-scripts",
     "utils",
     "frontmatter-builder-recipe",
   ),
