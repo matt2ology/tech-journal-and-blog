@@ -14,7 +14,7 @@ const TextFormatter = require(
   path.join(
     vaultPath,
     "scripts",
-    "_quickadd",
+   "_quickadd-scripts",
     "utils",
     "helpers",
     "text-formatter",
@@ -24,7 +24,7 @@ const VaultQueryService = require(
   path.join(
     vaultPath,
     "scripts",
-    "_quickadd",
+   "_quickadd-scripts",
     "utils",
     "services",
     "vault-query-service",
