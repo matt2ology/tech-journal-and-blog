@@ -29,19 +29,19 @@ class AnalysisBuilderBook extends AnalysisBuilderBase {
   }
 
   getUnitFieldId() {
-    return "chapter"
+    return "chapter";
   }
 
   getUnitFieldLabel() {
-    return "Chapter title"
+    return "Chapter title";
   }
 
   getSectionFieldId() {
-    return "section"
+    return "section";
   }
 
   getSectionFieldLabel() {
-    return "Section title"
+    return "Section title";
   }
 }
 
