@@ -2,17 +2,17 @@ const path = require("path");
 const vaultPath = app.vault.adapter.getBasePath();
 
 const TextFormatter = require(
-  path.join(vaultPath, "scripts", "_quickadd", "utils", "text-formatter"),
+  path.join(vaultPath, "scripts", "_quickadd", "utils", "helpers", "text-formatter"),
 );
 const ListUtils = require(
-  path.join(vaultPath, "scripts", "_quickadd", "utils", "list-utils"),
+  path.join(vaultPath, "scripts", "_quickadd", "utils", "helpers", "list-utils"),
 );
 const { serializeFrontmatter } = require(
   path.join(
     vaultPath,
-    "scripts",
-    "_quickadd",
+    "_quickadd-scripts",
     "utils",
+    "helpers",
     "frontmatter-serializer",
   ),
 );
