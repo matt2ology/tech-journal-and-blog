@@ -11,13 +11,34 @@ const FrontmatterBuilderBase = require(
   ),
 );
 const TextFormatter = require(
-  path.join(vaultPath, "scripts", "_quickadd", "utils", "helpers", "text-formatter"),
+  path.join(
+    vaultPath,
+    "scripts",
+    "_quickadd",
+    "utils",
+    "helpers",
+    "text-formatter",
+  ),
 );
 const VaultQueryService = require(
-  path.join(vaultPath, "scripts", "_quickadd", "utils", "services", "vault-query-service"),
+  path.join(
+    vaultPath,
+    "scripts",
+    "_quickadd",
+    "utils",
+    "services",
+    "vault-query-service",
+  ),
 );
 const FileCounterUtility = require(
-  path.join(vaultPath, "scripts", "_quickadd", "utils", "helpers", "file-counter-utility"),
+  path.join(
+    vaultPath,
+    "scripts",
+    "_quickadd",
+    "utils",
+    "helpers",
+    "file-counter-utility",
+  ),
 );
 
 /**
