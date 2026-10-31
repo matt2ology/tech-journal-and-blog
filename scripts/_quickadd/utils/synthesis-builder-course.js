@@ -1,7 +1,7 @@
 const path = require("path");
 const vaultPath = app.vault.adapter.getBasePath();
 
-const SynthesisBuilderBase = require("./synthesis-builder-base");
+const SynthesisBuilderBase = require("./base/synthesis-builder-base");
 
 /**
  * Handles frontmatter generation for course synthesis notes.
