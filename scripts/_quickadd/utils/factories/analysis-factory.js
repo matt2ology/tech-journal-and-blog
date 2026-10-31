@@ -1,4 +1,4 @@
-const AnalysisBuilderBook = require("../analysis-builder-chapter");
+const AnalysisBuilderBook = require("../domains/book-analysis-builder");
 
 /**
  * Main orchestrator and factory for analysis frontmatter generation.
