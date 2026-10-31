@@ -1,4 +1,4 @@
-const AnalysisBuilderBase = require("./analysis-builder-base");
+const AnalysisBuilderBase = require("./base/analysis-builder-base");
 
 /**
  * Handles frontmatter generation for book analysis notes.
