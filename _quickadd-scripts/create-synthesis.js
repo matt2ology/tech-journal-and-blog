@@ -4,8 +4,7 @@ const vaultPath = app.vault.adapter.getBasePath();
 const SynthesisFactory = require(
   path.join(
     vaultPath,
-    "scripts",
-    "_quickadd",
+    "_quickadd-scripts",
     "utils",
     "factories",
     "synthesis-factory",
