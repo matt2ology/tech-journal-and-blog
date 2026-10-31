@@ -13,9 +13,13 @@ const FrontmatterBuilderBase = require(
 const TextFormatter = require(
   path.join(vaultPath, "scripts", "_quickadd", "utils", "text-formatter"),
 );
+const VaultQueryService = require(
+  path.join(vaultPath, "scripts", "_quickadd", "utils", "vault-query-service"),
+);
 
 /**
- * Intermediate base class encapsulating shared workflow behavior for all synthesis domains.
+ * Base class encapsulating shared workflow behavior for all synthesis domains,
+ * automatically pulling creator values from corresponding analysis folders.
  */
 class SynthesisBuilderBase extends FrontmatterBuilderBase {
   constructor(quickAddApi) {
@@ -46,22 +50,83 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
   // --- Shared Implementation ---
 
   getFields() {
+    // Populate suggester options from existing analysis folders
+    const rawContentOptions = VaultQueryService.getSubfolderNames({
+      app,
+      folderPath: `analysis/${this.getCategoryType()}`,
+    });
+    const processedContentOptions = rawContentOptions.map((option) =>
+      TextFormatter.titleCase(option),
+    );
+
     return [
       {
         id: this.getContentFieldId(),
         label: this.getContentFieldLabel(),
-        type: "text",
-        placeholder: "Enter title",
+        type: "suggester",
+        options: processedContentOptions,
+        placeholder: "Enter title or select existing analysis folder",
         defaultValue: "",
+        suggesterConfig: {
+          displayValues: processedContentOptions,
+          allowCustomInput: true,
+          caseSensitive: false,
+          multiSelect: false,
+        },
       },
       {
         id: this.getCreatorFieldId(),
         label: this.getCreatorFieldLabel(),
         type: "text",
-        placeholder: "Enter name(s)",
+        placeholder: "Enter name(s) (auto-fills from analysis if blank)",
         defaultValue: "",
       },
     ];
+  }
+
+  /**
+   * Resolves whether the content title matches an existing analysis subfolder.
+   * Auto-fills creator from existing analysis notes if blank.
+   *
+   * @param {Object} options - { formattedContent, creatorInput }
+   * @returns {Object} { creatorInput }
+   */
+  #resolveContentContext({ formattedContent, creatorInput }) {
+    const rootFolder = `analysis/${this.getCategoryType()}`;
+    const subfolders = VaultQueryService.getSubfolderNames({
+      app,
+      folderPath: rootFolder,
+    });
+
+    const matchedSubfolder = subfolders.find(
+      (sub) =>
+        TextFormatter.titleCase(sub) === formattedContent ||
+        sub.toLowerCase() === formattedContent.toLowerCase(),
+    );
+
+    if (!matchedSubfolder) {
+      return { creatorInput };
+    }
+
+    let resolvedCreator = creatorInput;
+    if (!resolvedCreator) {
+      const contentFolderPath = `${rootFolder}/${matchedSubfolder}`;
+      const existingCreators = VaultQueryService.getFieldValues({
+        app,
+        fieldName: this.getCreatorFieldId(),
+        folderPath: contentFolderPath,
+      });
+
+      if (existingCreators.length > 0) {
+        resolvedCreator = existingCreators
+          .map((creator) => TextFormatter.cleanWikiLink(creator))
+          .join(", ");
+      }
+    }
+
+    return {
+      creatorInput: resolvedCreator,
+    };
   }
 
   processValues(values) {
@@ -72,11 +137,25 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
     const creatorInput = values[creatorFieldId] || "";
     const contentInput = values[contentFieldId] || "";
 
-    const extractedTitle = TextFormatter.extractBeforeColon(contentInput);
-    const generatedSlug = TextFormatter.slugify(
-      `00-${extractedTitle}-synthesis`,
+    const extractedTitle = TextFormatter.prescription?.extractBeforeColon
+      ? TextFormatter.extractBeforeColon(contentInput)
+      : contentInput.split(":")[0].trim();
+
+    const formattedContentTitle = TextFormatter.titleCase(extractedTitle);
+    const generatedFolderName = TextFormatter.slugify(extractedTitle);
+
+    // Resolve context to auto-fill creator from analysis folder if blank
+    const context = this.#resolveContentContext({
+      formattedContent: formattedContentTitle,
+      creatorInput,
+    });
+
+    const resolvedCreatorInput = context.creatorInput;
+
+    const generatedFilename = `00-${generatedFolderName}-synthesis`;
+    const generatedTitle = TextFormatter.titleCase(
+      `Synthesis of ${extractedTitle}`,
     );
-    const generatedTitle = `${contentInput} - Overview & Synthesis`;
 
     const updatedCategories = this.appendToList({
       list: values.categories,
@@ -85,15 +164,17 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
 
     return {
       ...baseProcessedValues,
+      aliases: `"${formattedContentTitle} Synthesis"`,
       title: generatedTitle,
-      slug: generatedSlug,
-      type: this.getCategoryType(),
-      filename: generatedSlug,
+      slug: generatedFolderName,
+      type: `${this.getCategoryType()}`,
+      folder: generatedFolderName,
+      filename: generatedFilename,
+      categories: updatedCategories,
       [creatorFieldId]: this.formatNameList(
-        creatorInput,
+        resolvedCreatorInput,
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
-      categories: updatedCategories,
     };
   }
 
