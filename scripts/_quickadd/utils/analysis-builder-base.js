@@ -184,7 +184,7 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
     const sectionValue = values[sectionFieldId];
     const unitValue = values[unitFieldId] || "";
     const contentOrganization = sectionValue
-      ? `- ${sectionValue} - ${unitValue}`
+      ? `${sectionValue} - ${unitValue}`
       : String(unitValue);
 
     const rawCreatorInput = values[creatorFieldId] || "";
@@ -236,7 +236,7 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
         resolvedCreatorInput,
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
-      contentReference: `[[00-${generatedFolderName}-synthesis|${cleanContentTitle}]] ${contentOrganization}`,
+      contentReference: `[[00-${generatedFolderName}-synthesis|${cleanContentTitle}]] - ${contentOrganization}`,
     };
   }
 
