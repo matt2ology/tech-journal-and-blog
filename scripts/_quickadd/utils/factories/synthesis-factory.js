@@ -1,17 +1,17 @@
-const SynthesisBuilderBook = require("./synthesis-builder-book");
-const SynthesisBuilderCourse = require("./synthesis-builder-course");
+const SynthesisBuilderBook = require("../synthesis-builder-book");
+const SynthesisBuilderCourse = require("../synthesis-builder-course");
 
 /**
  * Main orchestrator and factory for synthesis frontmatter generation.
  */
-class FrontmatterBuilderSynthesis {
+class SynthesisFactory {
   #quickAddApi;
   #builders;
 
   constructor(quickAddApi) {
     if (!quickAddApi || typeof quickAddApi.requestInputs !== "function") {
       throw new TypeError(
-        "FrontmatterBuilderSynthesis requires a QuickAdd API with requestInputs().",
+        "SynthesisFactory requires a QuickAdd API with requestInputs().",
       );
     }
     this.#quickAddApi = quickAddApi;
@@ -46,4 +46,4 @@ class FrontmatterBuilderSynthesis {
   }
 }
 
-module.exports = FrontmatterBuilderSynthesis;
+module.exports = SynthesisFactory;
