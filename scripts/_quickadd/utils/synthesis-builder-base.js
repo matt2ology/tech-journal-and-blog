@@ -69,14 +69,14 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
     const creatorFieldId = this.getCreatorFieldId();
     const contentFieldId = this.getContentFieldId();
 
-    const rawCreatorInput = values[creatorFieldId] || "";
-    const rawContentInput = values[contentFieldId] || "";
+    const creatorInput = values[creatorFieldId] || "";
+    const contentInput = values[contentFieldId] || "";
 
-    const cleanContentTitle = TextFormatter.extractBeforeColon(rawContentInput);
-    const generatedFileName = TextFormatter.slugify(
-      `00-${cleanContentTitle}-synthesis`,
+    const extractedTitle = TextFormatter.extractBeforeColon(contentInput);
+    const generatedSlug = TextFormatter.slugify(
+      `00-${extractedTitle}-synthesis`,
     );
-    const generatedTitle = `${rawContentInput} - Overview & Synthesis`;
+    const generatedTitle = `${contentInput} - Overview & Synthesis`;
 
     const updatedCategories = this.appendToList({
       list: values.categories,
@@ -86,11 +86,11 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
     return {
       ...baseProcessedValues,
       title: generatedTitle,
-      slug: generatedFileName,
-      type: `${this.getCategoryType()}`,
-      filename: generatedFileName,
+      slug: generatedSlug,
+      type: this.getCategoryType(),
+      filename: generatedSlug,
       [creatorFieldId]: this.formatNameList(
-        rawCreatorInput,
+        creatorInput,
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
       categories: updatedCategories,
