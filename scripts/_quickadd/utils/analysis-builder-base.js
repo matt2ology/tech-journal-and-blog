@@ -117,11 +117,11 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
   }
 
   /**
-   * Formats a chapter title from "Chapter N: Title" to "chNN: Title".
+   * Formats a chapter title identifier from "Chapter N: Title" to "chNN: Title".
    * @param {string} text - The original chapter title.
    * @returns {string} The formatted chapter string.
    */
-  #formatChapterNumbering(text) {
+  #formatChapterIdentifier(text) {
     return text.replace(
       /^(?:Chapter\s+)?(\d+)(?:\.(\d+))?\s*:?\s*/,
       (_, major, minor) =>
@@ -185,19 +185,20 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
     const unitValue = values[unitFieldId] || "";
     const contentOrganization = sectionValue
       ? `${sectionValue} - ${unitValue}`
-      : String(unitValue);
+      : `${unitValue}`;
 
-    const rawCreatorInput = values[creatorFieldId] || "";
-    const rawContentInput = values[contentFieldId] || "";
+    const creatorInput = values[creatorFieldId] || "";
+    const contentInput = values[contentFieldId] || "";
 
-    const cleanContentTitle = TextFormatter.extractBeforeColon(rawContentInput);
-    const formattedContentTitle = TextFormatter.titleCase(cleanContentTitle);
-    const generatedFolderName = TextFormatter.slugify(cleanContentTitle);
+    // Title: subtitle
+    const extractedTitle = TextFormatter.extractBeforeColon(contentInput);
+    const formattedContentTitle = TextFormatter.titleCase(extractedTitle);
+    const generatedFolderName = TextFormatter.slugify(extractedTitle);
 
     // Resolve context to auto-fill creator if matching existing folder
     const context = this.#resolveContentContext({
       formattedContent: formattedContentTitle,
-      creatorInput: rawCreatorInput,
+      creatorInput,
     });
 
     const resolvedCreatorInput = context.creatorInput;
@@ -209,26 +210,26 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
       includeNext: true,
     });
 
-    const formattedChapter = this.#formatChapterNumbering(unitValue);
+    const formattedChapter = this.#formatChapterIdentifier(unitValue);
     const generatedFilename = TextFormatter.slugify(
-      `${fileIndex} ${cleanContentTitle} ${formattedChapter}`,
+      `${fileIndex} ${extractedTitle} ${formattedChapter}`,
     );
 
     const generatedTitle = TextFormatter.titleCase(
-      `Analysis of ${cleanContentTitle} - ${unitValue}`,
+      `Analysis of ${extractedTitle} - ${unitValue}`,
     );
 
     const updatedCategories = this.appendToList({
-      items: ["analysis", this.getCategoryType()],
       list: values.categories,
+      items: ["analysis", this.getCategoryType()],
     });
 
     return {
       ...baseProcessedValues,
       aliases: `"${formattedContentTitle} - ${unitValue}"`,
       title: generatedTitle,
-      slug: TextFormatter.slugify(`${cleanContentTitle} ${formattedChapter}`),
-      type: `${this.getCategoryType()}`,
+      slug: TextFormatter.slugify(`${extractedTitle} - ${formattedChapter}`),
+      type: this.getCategoryType(),
       folder: generatedFolderName,
       filename: generatedFilename,
       categories: updatedCategories,
@@ -236,7 +237,7 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
         resolvedCreatorInput,
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
-      contentReference: `[[00-${generatedFolderName}-synthesis|${cleanContentTitle}]] - ${contentOrganization}`,
+      contentReference: `[[00-${generatedFolderName}-synthesis|${extractedTitle}]] ${contentOrganization}`,
     };
   }
 
