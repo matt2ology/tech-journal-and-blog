@@ -13,7 +13,6 @@ const FrontmatterBuilderBase = require(
 const TextFormatter = require(
   path.join(
     vaultPath,
-    "scripts",
    "_quickadd-scripts",
     "utils",
     "helpers",
@@ -23,7 +22,6 @@ const TextFormatter = require(
 const VaultQueryService = require(
   path.join(
     vaultPath,
-    "scripts",
    "_quickadd-scripts",
     "utils",
     "services",
@@ -33,7 +31,6 @@ const VaultQueryService = require(
 const FileCounterUtility = require(
   path.join(
     vaultPath,
-    "scripts",
    "_quickadd-scripts",
     "utils",
     "helpers",
