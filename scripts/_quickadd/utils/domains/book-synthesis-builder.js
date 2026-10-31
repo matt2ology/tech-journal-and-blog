@@ -1,4 +1,4 @@
-const SynthesisBuilderBase = require("./base/synthesis-builder-base");
+const SynthesisBuilderBase = require("../base/synthesis-builder-base");
 
 /**
  * Handles frontmatter generation for book synthesis notes.
