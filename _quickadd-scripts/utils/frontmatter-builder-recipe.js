@@ -2,19 +2,19 @@ const path = require("path");
 const vaultPath = app.vault.adapter.getBasePath();
 
 const TextFormatter = require(
-  path.join(vaultPath, "scripts", "_quickadd", "utils", "text-formatter"),
+  path.join(vaultPath, "scripts", "_quickadd", "utils", "helpers", "text-formatter"),
 );
 const FrontmatterBuilderBase = require(
   path.join(
     vaultPath,
-    "scripts",
-    "_quickadd",
+    "_quickadd-scripts",
     "utils",
+    "base",
     "frontmatter-builder-base",
   ),
 );
 const VaultQueryService = require(
-  path.join(vaultPath, "scripts", "_quickadd", "utils", "vault-query-service"),
+  path.join(vaultPath, "scripts", "_quickadd", "utils", "services", "vault-query-service"),
 );
 
 /**
