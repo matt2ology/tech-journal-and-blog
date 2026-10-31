@@ -1,16 +1,16 @@
-const AnalysisBuilderBook = require("./analysis-builder-chapter");
+const AnalysisBuilderBook = require("../analysis-builder-chapter");
 
 /**
  * Main orchestrator and factory for analysis frontmatter generation.
  */
-class FrontmatterBuilderAnalysis {
+class AnalysisFactory {
   #quickAddApi;
   #builders;
 
   constructor(quickAddApi) {
     if (!quickAddApi || typeof quickAddApi.requestInputs !== "function") {
       throw new TypeError(
-        "FrontmatterBuilderAnalysis requires a QuickAdd API with requestInputs().",
+        "AnalysisFactory requires a QuickAdd API with requestInputs().",
       );
     }
     this.#quickAddApi = quickAddApi;
@@ -44,4 +44,4 @@ class FrontmatterBuilderAnalysis {
   }
 }
 
-module.exports = FrontmatterBuilderAnalysis;
+module.exports = AnalysisFactory;
