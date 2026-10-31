@@ -1,5 +1,5 @@
-const SynthesisBuilderBook = require("../synthesis-builder-book");
-const SynthesisBuilderCourse = require("../synthesis-builder-course");
+const SynthesisBuilderBook = require("../domains/book-synthesis-builder");
+const SynthesisBuilderCourse = require("../domains/course-synthesis-builder");
 
 /**
  * Main orchestrator and factory for synthesis frontmatter generation.
