@@ -297,7 +297,7 @@ class TextFormatter {
     if (typeof inputText !== "string" || !inputText) return [];
     return inputText
       .normalize("NFC")
-      .replace(/[_]+/g, " ")
+      .replace(/[-_]+/g, " ")
       .replace(/\s+/g, " ")
       .trim()
       .split(" ");
