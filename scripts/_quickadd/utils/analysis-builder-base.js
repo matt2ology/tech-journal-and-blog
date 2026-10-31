@@ -68,13 +68,28 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
   // --- Shared Implementation ---
 
   getFields() {
+    const rawContentOptions = VaultQueryService.getSubfolderNames({
+      app,
+      folderPath: `analysis/${this.getCategoryType()}`,
+    });
+    const processedContentOptions = rawContentOptions.map((option) =>
+      TextFormatter.titleCase(option),
+    );
+
     return [
       {
         id: this.getContentFieldId(),
         label: this.getContentFieldLabel(),
-        type: "text",
-        placeholder: "Enter title",
+        type: "suggester",
+        options: processedContentOptions,
+        placeholder: "Enter title or select existing",
         defaultValue: "",
+        suggesterConfig: {
+          displayValues: processedContentOptions,
+          allowCustomInput: true,
+          caseSensitive: false,
+          multiSelect: false,
+        },
       },
       {
         id: this.getUnitFieldId(),
@@ -134,9 +149,10 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
     const formattedContentTitle = TextFormatter.titleCase(cleanContentTitle);
     const generatedFolderName = TextFormatter.slugify(cleanContentTitle);
 
+    const analysisFolderPath = `analysis/${this.getCategoryType()}/${generatedFolderName}`;
     const fileIndex = FileCounterUtility.getCount({
       app,
-      folderPath: `analysis/${this.getCategoryType()}/${generatedFolderName}`,
+      folderPath: analysisFolderPath,
       includeNext: true,
     });
 
