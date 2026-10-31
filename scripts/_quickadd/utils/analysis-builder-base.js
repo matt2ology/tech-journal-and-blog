@@ -193,7 +193,6 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
     const cleanContentTitle = TextFormatter.extractBeforeColon(rawContentInput);
     const formattedContentTitle = TextFormatter.titleCase(cleanContentTitle);
     const generatedFolderName = TextFormatter.slugify(cleanContentTitle);
-    const analysisFolderPath = `analysis/${this.getCategoryType()}/${generatedFolderName}`;
 
     // Resolve context to auto-fill creator if matching existing folder
     const context = this.#resolveContentContext({
@@ -203,6 +202,7 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
 
     const resolvedCreatorInput = context.creatorInput;
 
+    const analysisFolderPath = `analysis/${this.getCategoryType()}/${generatedFolderName}`;
     const fileIndex = FileCounterUtility.getCount({
       app,
       folderPath: analysisFolderPath,
