@@ -4,7 +4,6 @@ const vaultPath = app.vault.adapter.getBasePath();
 const TextFormatter = require(
   path.join(
     vaultPath,
-    "scripts",
    "_quickadd-scripts",
     "utils",
     "helpers",
@@ -14,7 +13,6 @@ const TextFormatter = require(
 const ListUtils = require(
   path.join(
     vaultPath,
-    "scripts",
    "_quickadd-scripts",
     "utils",
     "helpers",
