@@ -137,9 +137,10 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
     const creatorInput = values[creatorFieldId] || "";
     const contentInput = values[contentFieldId] || "";
 
-    const extractedTitle = TextFormatter.prescription?.extractBeforeColon
-      ? TextFormatter.extractBeforeColon(contentInput)
-      : contentInput.split(":")[0].trim();
+    const extractedTitle =
+      typeof TextFormatter.extractBeforeColon === "function"
+        ? TextFormatter.extractBeforeColon(contentInput)
+        : contentInput.split(":")[0].trim();
 
     const formattedContentTitle = TextFormatter.titleCase(extractedTitle);
     const generatedFolderName = TextFormatter.slugify(extractedTitle);
@@ -164,7 +165,7 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
 
     return {
       ...baseProcessedValues,
-      aliases: `"${formattedContentTitle} Synthesis"`,
+      aliases: `"${contentInput} Synthesis"`,
       title: generatedTitle,
       slug: generatedFolderName,
       type: `${this.getCategoryType()}`,
