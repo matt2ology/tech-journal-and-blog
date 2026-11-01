@@ -152,7 +152,7 @@ class FrontmatterBuilderBase {
       aliases: values.aliases || "",
       title: TextFormatter.titleCase(values.title) || "NoTitle",
       slug: values.slug ?? TextFormatter.slugify(values.title),
-      date: this.#quickAddApi.date.now("YYYY-MM-DD"),
+      date: this.#quickAddApi.date.now("YYYY-MM-DDTHH:mm:ssZ"),
       draft: true,
       categories: this.formatArray(values.categories),
       tags: this.formatArray(values.tags),
