@@ -155,9 +155,19 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
 
       let marginaliaBlock = "";
       if (highlight_note) {
-        marginaliaBlock = `**Marginalia / Reflection:**\n${highlight_note}`;
+        const noteLines = highlight_note
+          .split("\n")
+          .map((line) => `> ${line}`)
+          .join("\n");
+
+        marginaliaBlock = [`> [!note] Marginalia / Reflection`, noteLines].join(
+          "\n",
+        );
       } else {
-        marginaliaBlock = `**Marginalia / Reflection:**\n_I just liked the words_`;
+        marginaliaBlock = [
+          `> [!note] Marginalia / Reflection`,
+          `> _I just liked the words_`,
+        ].join("\n");
       }
 
       const quotedLines = highlight_text
