@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import FileCounterUtility from "../scripts/_quickadd/utils/file-counter-utility.js";
+import FileCounterUtility from "../_quickadd-scripts/utils/helpers/file-counter-utility.js";
 
 describe("FileCounterUtility", () => {
   test("returns zero-padded count with increment", () => {
