@@ -2,18 +2,18 @@
   "choices": [
     {
       "id": "85eec4ef-5540-4d9e-afb3-712c820834bf",
-      "name": "Capture Notes",
+      "name": "Notes",
       "type": "Macro",
       "command": false,
       "runOnStartup": false,
       "macro": {
-        "name": "Capture Notes",
+        "name": "Notes",
         "id": "e9db0d89-8b1b-423e-8a71-86ac7426d6e3",
         "commands": [
           {
             "name": "create-note",
             "type": "UserScript",
-            "id": "2ee0037e-cd4e-4f19-a46b-3d27f1d759d5",
+            "id": "984fb81b-6e61-47fb-b04d-df446cf9dcc3",
             "path": "_quickadd-scripts/create-note.js",
             "settings": {}
           },
