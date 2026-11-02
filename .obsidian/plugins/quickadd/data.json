@@ -247,10 +247,10 @@
         "id": "dffda720-9c52-4f1a-9e46-7b1e21ef131f",
         "commands": [
           {
-            "name": "create-new-blog-post",
+            "name": "create-blog",
             "type": "UserScript",
-            "id": "168613c2-c535-4028-87c9-4f24c0f35484",
-            "path": "scripts/_quickadd/create-new-blog-post.js",
+            "id": "b3c3037c-9a0e-4d78-b908-ac678f3d67b6",
+            "path": "_quickadd-scripts/create-blog.js",
             "settings": {}
           },
           {
