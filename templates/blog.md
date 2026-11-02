@@ -1,12 +1,3 @@
----
-title: "{{VALUE:formattedTitle}}"
-date: "{{date:YYYY-MM-DDTHH:mm:ssZ}}"
-description: "{{VALUE:description}}"
-draft: true
-slug: "{{VALUE:slug}}"
-tags:{{VALUE:tags}}
-categories:
-  - "blog"{{VALUE:categories}}
----
+{{VALUE:frontmatter}}
 
 <!-- A blog is about communicating outward (you → readers) --
