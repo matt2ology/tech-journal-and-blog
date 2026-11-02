@@ -1,21 +1,19 @@
 {
   "types": {
     "aliases": "aliases",
-    "cssclasses": "multitext",
-    "tags": "tags",
+    "author": "multitext",
     "authors": "multitext",
-    "toc": "checkbox",
-    "math": "checkbox",
-    "birthday": "date",
-    "date_met": "date",
-    "date": "datetime",
-    "title": "text",
-    "draft": "checkbox",
-    "description": "text",
-    "slug": "text",
+    "book": "text",
     "categories": "multitext",
     "chapter": "text",
-    "book": "text",
-    "author": "multitext"
+    "cssclasses": "multitext",
+    "date": "datetime",
+    "description": "text",
+    "draft": "checkbox",
+    "math": "checkbox",
+    "slug": "text",
+    "tags": "tags",
+    "title": "text",
+    "toc": "checkbox"
   }
 }
