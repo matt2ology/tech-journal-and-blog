@@ -9,6 +9,6 @@
 
 - [ ]
 
-## {{VALUE:section_header}}
+## {{VALUE:note_header}}
 
 -
