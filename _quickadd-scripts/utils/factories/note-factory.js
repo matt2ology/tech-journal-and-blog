@@ -1,25 +1,25 @@
-const BookCaptureBuilder = require("../domains/book-note-builder");
-const CourseCaptureBuilder = require("../domains/course-capture-builder");
+const BookNoteBuilder = require("../domains/book-note-builder");
+const CourseNoteBuilder = require("../domains/course-note-builder");
 
 /**
- * Main orchestrator and factory for capture frontmatter generation.
+ * Main orchestrator and factory for Note frontmatter generation.
  */
-class CaptureFactory {
+class NoteFactory {
   #quickAddApi;
   #builders;
 
   constructor(quickAddApi) {
     if (!quickAddApi || typeof quickAddApi.requestInputs !== "function") {
       throw new TypeError(
-        "CaptureFactory requires a QuickAdd API with requestInputs().",
+        "NoteFactory requires a QuickAdd API with requestInputs().",
       );
     }
     this.#quickAddApi = quickAddApi;
 
     // Register builder instances indexed by domain key
     this.#builders = {
-      book: new BookCaptureBuilder(quickAddApi),
-      course: new CourseCaptureBuilder(quickAddApi),
+      book: new BookNoteBuilder(quickAddApi),
+      course: new CourseNoteBuilder(quickAddApi),
     };
   }
 
@@ -38,7 +38,7 @@ class CaptureFactory {
     );
 
     if (!chosenDomainKey) {
-      throw new Error("Capture domain selection cancelled.");
+      throw new Error("Note domain selection cancelled.");
     }
 
     const selectedBuilder = this.#builders[chosenDomainKey];
@@ -46,4 +46,4 @@ class CaptureFactory {
   }
 }
 
-module.exports = CaptureFactory;
+module.exports = NoteFactory;
