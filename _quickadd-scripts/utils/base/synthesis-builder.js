@@ -1,39 +1,12 @@
-const path = require("path");
-const vaultPath = app.vault.adapter.getBasePath();
-
-const FrontmatterBuilderBase = require(
-  path.join(
-    vaultPath,
-    "_quickadd-scripts",
-    "utils",
-    "base",
-    "frontmatter-builder-base",
-  ),
-);
-const TextFormatter = require(
-  path.join(
-    vaultPath,
-   "_quickadd-scripts",
-    "utils",
-    "helpers",
-    "text-formatter",
-  ),
-);
-const VaultQueryService = require(
-  path.join(
-    vaultPath,
-   "_quickadd-scripts",
-    "utils",
-    "services",
-    "vault-query-service",
-  ),
-);
+const FrontmatterBuilderBase = require("../base/frontmatter-builder-base");
+const TextFormatter = require("../helpers/text-formatter");
+const VaultQueryService = require("../services/vault-query-service");
 
 /**
  * Base class encapsulating shared workflow behavior for all synthesis domains,
  * automatically pulling creator values from corresponding analysis folders.
  */
-class SynthesisBuilderBase extends FrontmatterBuilderBase {
+class SynthesisBuilder extends FrontmatterBuilderBase {
   constructor(quickAddApi) {
     super(quickAddApi);
   }
@@ -202,4 +175,4 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
   }
 }
 
-module.exports = SynthesisBuilderBase;
+module.exports = SynthesisBuilder;
