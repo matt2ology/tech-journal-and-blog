@@ -164,7 +164,7 @@ class NoteBuilderBase extends FrontmatterBuilderBase {
     const sectionFieldId = this.getSectionFieldId();
     const unitFieldId = this.getUnitFieldId();
 
-    const sectionValue = values[sectionFieldId];
+    const sectionValue = values[sectionFieldId] || "";
     const unitValue = values[unitFieldId] || "";
     const contentOrganization = sectionValue
       ? `${unitValue} - ${sectionValue}`
@@ -220,6 +220,7 @@ class NoteBuilderBase extends FrontmatterBuilderBase {
         resolvedCreatorInput,
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
+      section_header: sectionValue || "Notes & Key Points",
       reference_links: `${extractedTitle} - [[${generatedFilename}|${contentOrganization}]]`,
     };
   }
