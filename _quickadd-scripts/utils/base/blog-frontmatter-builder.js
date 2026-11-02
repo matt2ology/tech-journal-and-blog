@@ -3,7 +3,7 @@ const FrontmatterBuilderBase = require("./frontmatter-builder-base");
 /**
  * A simple derived class for building article or blog post frontmatter.
  */
-class ArticleFrontmatterBuilder extends FrontmatterBuilderBase {
+class BlogFrontmatterBuilder extends FrontmatterBuilderBase {
   constructor(quickAddApi) {
     super(quickAddApi);
   }
@@ -41,4 +41,4 @@ class ArticleFrontmatterBuilder extends FrontmatterBuilderBase {
   //   }
 }
 
-module.exports = ArticleFrontmatterBuilder;
+module.exports = BlogFrontmatterBuilder;
