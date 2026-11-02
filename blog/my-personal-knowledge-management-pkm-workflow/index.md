@@ -23,6 +23,27 @@ My system adapts the [**Zettelkasten method**](https://en.wikipedia.org/wiki/Zet
 
 ## 🔄 The 4-Stage Workflow
 
+```mermaid
+flowchart TD
+    A1[Media Highlights & Annotations]
+    A2[Live Class & Seminar Capture]
+    B1["Analysis Notes\n(Chapters / Lectures)"]
+    B2["Synthesis Notes\n(Books / Courses)"]
+    C["Atomic Concept Notes\n(Declarative Mental Models)"]
+    D1[Essays & Writing]
+    D2[Projects & Work]
+    D3[Problem Solving]
+
+    A1 -->|Import & Break Down| B1
+    A2 -->|Review & Structure| B1
+    B1 -->|Aggregate & Combine| B2
+    B1 -->|Extract Ideas| C
+    B2 -->|Extract Macro Models| C
+    C -->|Assemble| D1
+    C -->|Assemble| D2
+    C -->|Assemble| D3
+```
+
 ### Stage 1: Frictionless Capture
 
 - **Goal:** Collect insights in real time without interrupting flow or overthinking structure.
