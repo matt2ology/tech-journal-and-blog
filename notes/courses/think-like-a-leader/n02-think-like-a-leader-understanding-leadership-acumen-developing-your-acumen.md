@@ -8,7 +8,7 @@ categories:
   - notes
   - courses
 tags: []
-instructor: 
+instructor:
   - "[[doc-norton|Doc Norton]]"
 course: "Think Like a Leader"
 module: "Understanding Leadership Acumen"
