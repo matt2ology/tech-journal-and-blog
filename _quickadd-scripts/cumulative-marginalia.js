@@ -180,7 +180,6 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
           ``,
           `> [!tldr] Cumulative Summary`,
           `> ${this.cumulativeSummary}`,
-          ``,
         );
       }
 
