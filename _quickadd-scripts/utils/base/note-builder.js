@@ -1,8 +1,8 @@
-const ContentBuilderBase = require("../base/content-builder-base");
+const ContentBuilderBase = require("./content-builder-base");
 const FileCounterUtility = require("../helpers/file-counter-utility");
 const TextFormatter = require("../helpers/text-formatter");
 
-class NoteBuilderBase extends ContentBuilderBase {
+class NoteBuilder extends ContentBuilderBase {
   constructor(quickAddApi) {
     super(quickAddApi);
   }
@@ -85,4 +85,4 @@ class NoteBuilderBase extends ContentBuilderBase {
   }
 }
 
-module.exports = NoteBuilderBase;
+module.exports = NoteBuilder;
