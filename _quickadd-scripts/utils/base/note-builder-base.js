@@ -1,6 +1,3 @@
-const path = require("path");
-const vaultPath = app.vault.adapter.getBasePath();
-
 const FileCounterUtility = require("../helpers/file-counter-utility");
 const FrontmatterBuilderBase = require("../base/frontmatter-builder-base");
 const TextFormatter = require("../helpers/text-formatter");
@@ -81,14 +78,14 @@ class NoteBuilderBase extends FrontmatterBuilderBase {
         id: this.getUnitFieldId(),
         label: this.getUnitFieldLabel(),
         type: "text",
-        placeholder: "Enter chapter title",
+        placeholder: "Chapter, Module, Part title",
         defaultValue: "",
       },
       {
         id: this.getSectionFieldId(),
         label: this.getSectionFieldLabel(),
         type: "text",
-        placeholder: "Part or Major Section",
+        placeholder: "Lesson, Section, Subchapter",
         defaultValue: "",
         optional: true,
       },
