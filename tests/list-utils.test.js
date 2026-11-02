@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import ListUtils from "../scripts/_quickadd/utils/list-utils.js";
+import ListUtils from "../_quickadd-scripts/utils/helpers/list-utils.js";
 
 describe("ListUtils", () => {
   test("appends unique items without duplicates", () => {
