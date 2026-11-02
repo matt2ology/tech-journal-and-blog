@@ -15,35 +15,31 @@ My system adapts the [**Zettelkasten method**](https://en.wikipedia.org/wiki/Zet
 
 ```mermaid
 flowchart TD
-    subgraph s1["Stage 1: Raw Intake (High Source Dependency)"]
-        a1([Media Highlights & Annotations])
-        a2([Live Class & Seminar Capture])
-    end
+  subgraph client["👤 Client"]
+      A["User Device<br/>192.168.1.10"]
+  end
 
-    subgraph s2["Stage 2: Processing Hub"]
-        b1["Analysis Notes (Chapters / Lectures)"]
-        b2["Synthesis Notes (Books / Courses)"]
-    end
+  subgraph cloud["☁️ Cloud Gateway"]
+      B["Load Balancer<br/>(SSL Termination)"]
+  end
 
-    subgraph s3["Stage 3: Concept Network (Fully Decoupled)"]
-        c["Atomic Concept Notes (Declarative Mental Models)"]
-    end
+  subgraph server["🖥️ Application Server"]
+      C["API Gateway<br/>10.0.0.1"]
+      D["Auth Service<br/>10.0.0.2"]
+      E["Web Server<br/>10.0.0.3"]
+      F["Database<br/>10.0.0.4"]
+  end
 
-    subgraph s4["Stage 4: Creative Output"]
-        d1([Essays & Writing])
-        d2([Projects & Work])
-        d3([Problem Solving])
-    end
+  A -- "HTTPS Request" --> B
+  B -- "Forward<br/>(internal)" --> C
+  C -- "Authenticate" --> D
+  D -- "Token" --> C
+  C -- "Route" --> E
+  E --> F
 
-    a1 -->|Import & Break Down| b1
-    a2 -->|Review & Structure| b1
-    b1 -->|Aggregate & Combine| b2
-    b1 -->|Extract Ideas| c
-    b2 -->|Extract Macro Models| c
-
-    c -->|Assemble| d1
-    c -->|Assemble| d2
-    c -->|Assemble| d3
+  style client fill:#1a365d,stroke:#2c5282,color:#fff
+  style cloud fill:#f6ad55,stroke:#dd6b20,color:#000
+  style server fill:#276749,stroke:#22543d,color:#fff
 ```
 
 ## 🔄 The 4-Stage Workflow
