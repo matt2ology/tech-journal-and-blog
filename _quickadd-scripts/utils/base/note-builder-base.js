@@ -228,11 +228,13 @@ class NoteBuilderBase extends FrontmatterBuilderBase {
     const creatorFieldId = this.getCreatorFieldId();
     const contentFieldId = this.getContentFieldId();
     const unitFieldId = this.getUnitFieldId();
+    const sectionFieldId = this.getSectionFieldId();
 
     return [
       `${creatorFieldId}: ${values[creatorFieldId]}`,
       `${contentFieldId}: "${values[contentFieldId]}"`,
       `${unitFieldId}: "${values[unitFieldId]}"`,
+      `${sectionFieldId}: "${values[sectionFieldId]}"`,
     ];
   }
 }
