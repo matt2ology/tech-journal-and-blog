@@ -20,7 +20,7 @@ views:
       - formula.Recipe
       - chef
       - formula.Made on
-      - formula.posted
       - formula.recipe_status
+      - formula.posted
     image: note.image
     cardSize: 300
