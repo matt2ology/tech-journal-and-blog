@@ -163,7 +163,8 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
         marginaliaBlock = [`> [!note] Marginalia / Reflection`, noteLines].join(
           "\n",
         );
-      } else {
+      } else if (!this.cumulativeSummary) {
+        // Only apply default "I just liked the words" if there is NO cumulative summary
         marginaliaBlock = [
           `> [!note] Marginalia / Reflection`,
           `> _I just liked the words_`,
@@ -194,7 +195,12 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
         outputLines.push(``, `> [!tldr] Cumulative Summary`, summaryLines);
       }
 
-      outputLines.push(``, marginaliaBlock, ``, `> [!quote]`, quotedLines);
+      // Only push marginaliaBlock if it was generated (either note was filled, or no cumulative summary fallback applies)
+      if (marginaliaBlock) {
+        outputLines.push(``, marginaliaBlock);
+      }
+
+      outputLines.push(``, `> [!quote]`, quotedLines);
 
       if (locationLine) {
         outputLines.push(locationLine);
