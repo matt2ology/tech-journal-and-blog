@@ -35,7 +35,6 @@ flowchart TD
         d3([Problem Solving])
     end
 
-
     a1 -->|Import & Break Down| b1
     a2 -->|Review & Structure| b1
     b1 -->|Aggregate & Combine| b2
