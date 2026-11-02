@@ -29,19 +29,27 @@ class NoteBuilderCourse extends NoteBuilderBase {
   }
 
   getUnitFieldId() {
-    return "lecture";
+    return "module";
   }
 
   getUnitFieldLabel() {
-    return "Lecture title";
+    return "Module title";
   }
 
   getSectionFieldId() {
-    return "course";
+    return "lesson";
   }
 
   getSectionFieldLabel() {
-    throw new Error("Derived classes must implement getSectionFieldLabel()");
+    return "Lesson title";
+  }
+
+  formatUnitIdentifier(text) {
+    return text.replace(
+      /^(?:Module\s+)?(\d+)(?:\.(\d+))?\s*:?\s*/,
+      (_, major, minor) =>
+        `mod${major.padStart(2, "0")}${minor ? "-" + minor.padStart(2, "0") : ""}: `,
+    );
   }
 }
 
