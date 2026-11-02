@@ -1,9 +1,9 @@
-const AnalysisBuilderBase = require("../base/analysis-builder-base");
+const AnalysisBuilder = require("../base/analysis-builder");
 
 /**
  * Handles frontmatter generation for book analysis notes.
  */
-class AnalysisBuilderBook extends AnalysisBuilderBase {
+class AnalysisBuilderBook extends AnalysisBuilder {
   constructor(quickAddApi) {
     super(quickAddApi);
   }
