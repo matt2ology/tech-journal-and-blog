@@ -1,6 +1,65 @@
 {
   "choices": [
     {
+      "id": "85eec4ef-5540-4d9e-afb3-712c820834bf",
+      "name": "Capture Notes",
+      "type": "Macro",
+      "command": false,
+      "runOnStartup": false,
+      "macro": {
+        "name": "Capture Notes",
+        "id": "e9db0d89-8b1b-423e-8a71-86ac7426d6e3",
+        "commands": [
+          {
+            "name": "create-note",
+            "type": "UserScript",
+            "id": "2ee0037e-cd4e-4f19-a46b-3d27f1d759d5",
+            "path": "_quickadd-scripts/create-note.js",
+            "settings": {}
+          },
+          {
+            "name": "Note Template",
+            "type": "NestedChoice",
+            "id": "526f4435-b019-4de6-a178-f52b78e52e76",
+            "choice": {
+              "id": "100f22d8-9d33-4dc9-931b-a54d41791b3d",
+              "name": "Note Template",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/note.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "{{VALUE:filename}}"
+              },
+              "discoverExistingNotesBeforeCreate": false,
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "notes/{{VALUE:type}}/{{VALUE:folder}}"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "copyLinkToClipboard": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              }
+            }
+          }
+        ]
+      },
+      "icon": "arrow-right"
+    },
+    {
       "id": "9fc4897e-7f03-44af-8f2d-d23968685992",
       "name": "Analysis Note",
       "type": "Macro",
@@ -57,7 +116,7 @@
           }
         ]
       },
-      "icon": "lightbulb"
+      "icon": "glasses"
     },
     {
       "id": "44edd34c-88c1-4d45-a51b-4ec52a132637",
@@ -396,8 +455,8 @@
           {
             "name": "cumulative-marginalia",
             "type": "UserScript",
-            "id": "aeff1c7c-2b78-4b93-bfa9-7be3100e8975",
-            "path": "scripts/_quickadd/cumulative-marginalia.js",
+            "id": "a88bdec8-a576-413d-9431-9b876630d82b",
+            "path": "_quickadd-scripts/cumulative-marginalia.js",
             "settings": {}
           },
           {
