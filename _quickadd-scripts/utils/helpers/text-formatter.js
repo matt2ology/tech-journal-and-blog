@@ -262,26 +262,40 @@ class TextFormatter {
   // ==========================================
 
   /**
-   * Extracts, cleans, and filters raw items from input source.
+   * Extracts raw items from a string or an array of strings.
+   *
+   * Recursively processes nested arrays, normalizes "and" separators
+   * into commas, splits the input into individual items, and removes
+   * empty entries and standalone conjunctions.
+   *
    * @private
-   * @param {string|string[]} input - The input source.
-   * @returns {string[]} Array of cleaned items.
+   * @param {string|Array<string|Array>} input - A string or nested array of strings to process.
+   * @returns {string[]} An array of trimmed, non-empty raw items.
+   *
    * @example
-   * TextFormatter.#extractRawItems("a, and b, c");
-   * // Returns: ["a", "b", "c"]
+   * TextFormatter.#extractRawItems("Apple, Banana and Orange");
+   * // Returns: ["Apple", "Banana", "Orange"]
+   *
+   * @example
+   * TextFormatter.#extractRawItems(["Apple and Banana", "Orange"]);
+   * // Returns: ["Apple", "Banana", "Orange"]
    */
   static #extractRawItems(input) {
-    const rawArray = Array.isArray(input)
-      ? input
-      : typeof input === "string"
-        ? input.split(",")
-        : [];
+    if (Array.isArray(input)) {
+      return input.flatMap((item) => TextFormatter.#extractRawItems(item));
+    }
 
-    return rawArray
-      .map((item) =>
-        typeof item === "string" ? item.trim().replace(/^and\s+/i, "") : item,
-      )
-      .filter((item) => item && String(item).toLowerCase() !== "and");
+    if (typeof input !== "string" || !input.trim()) return [];
+
+    // Replace literal " and " or ", and " with a comma to unify separators
+    const normalizedInput = input
+      .replace(/\s+and\s+/gi, ", ")
+      .replace(/,\s*and\s+/gi, ", ");
+
+    return normalizedInput
+      .split(",")
+      .map((item) => item.trim().replace(/^and\s+/i, ""))
+      .filter((item) => item && item.toLowerCase() !== "and");
   }
 
   /**
