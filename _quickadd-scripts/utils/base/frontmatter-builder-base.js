@@ -1,33 +1,6 @@
-const path = require("path");
-const vaultPath = app.vault.adapter.getBasePath();
-
-const TextFormatter = require(
-  path.join(
-    vaultPath,
-   "_quickadd-scripts",
-    "utils",
-    "helpers",
-    "text-formatter",
-  ),
-);
-const ListUtils = require(
-  path.join(
-    vaultPath,
-   "_quickadd-scripts",
-    "utils",
-    "helpers",
-    "list-utils",
-  ),
-);
-const { serializeFrontmatter } = require(
-  path.join(
-    vaultPath,
-    "_quickadd-scripts",
-    "utils",
-    "helpers",
-    "frontmatter-serializer",
-  ),
-);
+const TextFormatter = require("../helpers/text-formatter");
+const ListUtils = require("../helpers/list-utils");
+const { serializeFrontmatter } = require("../helpers/frontmatter-serializer");
 
 /**
  * Coordinates the shared frontmatter workflow using OOP design principles.
