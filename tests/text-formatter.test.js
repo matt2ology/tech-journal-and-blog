@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import TextFormatter from "../scripts/_quickadd/utils/text-formatter.js";
+import TextFormatter from "../_quickadd-scripts/utils/helpers/text-formatter.js";
 
 describe("TextFormatter.titleCase()", () => {
   it("capitalizes a single lowercase word", () => {
