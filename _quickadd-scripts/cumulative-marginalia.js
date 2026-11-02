@@ -11,8 +11,6 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       this.rawText = "";
     }
 
-    // --- Public Methods (Verbs) ---
-
     async run() {
       const inputSuccessStatus = await this.#requestInputs();
       this.#checkInputSuccess(inputSuccessStatus);
@@ -191,7 +189,8 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
         locationMarkdownLine = `> \\- ${highlightLocation}`;
       }
 
-      const outputMarkdownLines = [];
+      // Collect blockquote/callout sections to safely insert HTML comments between them (MD028 fix)
+      const blockquoteSections = [];
 
       if (this.#evaluateCumulativeSummaryExists()) {
         const summaryTextLines = this.cumulativeSummary
@@ -199,24 +198,33 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
           .map((line) => `> ${line}`)
           .join("\n");
 
-        outputMarkdownLines.push(
-          ``,
-          `> [!tldr] Cumulative Summary`,
-          summaryTextLines,
+        blockquoteSections.push(
+          `> [!tldr] Cumulative Summary\n${summaryTextLines}`,
         );
       }
 
       if (this.#evaluateMarginaliaBlockExists(marginaliaContentBlock)) {
-        outputMarkdownLines.push(``, marginaliaContentBlock);
+        blockquoteSections.push(marginaliaContentBlock);
       }
 
-      outputMarkdownLines.push(``, `> [!quote]`, quotedTextLines);
-
+      let quoteAndLocationBlock = `> [!quote]\n${quotedTextLines}`;
       if (this.#evaluateLocationLineExists(locationMarkdownLine)) {
-        outputMarkdownLines.push(locationMarkdownLine);
+        quoteAndLocationBlock += `\n${locationMarkdownLine}`;
       }
+      blockquoteSections.push(quoteAndLocationBlock);
 
-      outputMarkdownLines.push(``, `---`, ``);
+      // Join sections with a blank line containing an HTML comment to satisfy [MD028](https://github.com/DavidAnson/markdownlint/blob/v0.41.1/doc/md028.md)
+      const combinedBlockquoteContent = blockquoteSections.join(
+        "\n\n<!-- separator -->\n\n",
+      );
+
+      const outputMarkdownLines = [
+        ``,
+        combinedBlockquoteContent,
+        ``,
+        `---`,
+        ``,
+      ];
 
       this.variables.cumulativeNotes = outputMarkdownLines.join("\n");
     }
