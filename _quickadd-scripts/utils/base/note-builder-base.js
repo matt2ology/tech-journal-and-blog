@@ -194,8 +194,8 @@ class NoteBuilderBase extends FrontmatterBuilderBase {
     });
 
     const formattedUnit = this.formatUnitIdentifier(unitValue);
-    const generatedFilename = TextFormatter.slugify(
-      `n${fileIndex} ${extractedTitle} ${formattedUnit}`,
+    const generatedFilename = TextFormatter.slugifyAdjacent(
+      `n${fileIndex} ${extractedTitle} ${formattedUnit} ${sectionValue}`,
     );
 
     const generatedTitle = unitValue
