@@ -11,51 +11,6 @@ tags: []
 
 My system adapts the [**Zettelkasten method**](https://en.wikipedia.org/wiki/Zettelkasten) to create a seamless pipeline from raw information intake to atomic, networked-linked thinking. Rather than relying on rigid traditional terms.
 
-## 🗺️ The Process at a Glance
-
-```mermaid
-flowchart TD
-    classDef stage1 fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,color:#01579b;
-    classDef stage2 fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#e65100;
-    classDef stage3 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#1b5e20;
-    classDef stage4 fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px,color:#4a148c;
-
-    subgraph S1 ["Stage 1: Raw Intake (High Source Dependency)"]
-        A1[Media Highlights & Annotations]
-        A2[Live Class & Seminar Capture]
-    end
-
-    subgraph S2 ["Stage 2: Processing Hub (Refinery)"]
-        B1["Analysis Notes<br/>(Chapters / Lectures)"]
-        B2["Synthesis Notes<br/>(Books / Courses)"]
-    end
-
-    subgraph S3 ["Stage 3: Concept Network (Fully Decoupled)"]
-        C["Atomic Concept Notes<br/>(Declarative Mental Models)"]
-    end
-
-    subgraph S4 ["Stage 4: Creative Output"]
-        D1[Essays & Writing]
-        D2[Projects & Work]
-        D3[Problem Solving]
-    end
-
-    A1 -->|Import & Break Down| B1
-    A2 -->|Review & Structure| B1
-    B1 -->|Aggregate & Combine| B2
-    B1 -->|Extract Ideas| C
-    B2 -->|Extract Macro Models| C
-
-    C -->|Assemble| D1
-    C -->|Assemble| D2
-    C -->|Assemble| D3
-
-    class A1,A2 stage1;
-    class B1,B2 stage2;
-    class C stage3;
-    class D1,D2,D3 stage4;
-```
-
 ## 🔄 The 4-Stage Workflow
 
 ### Stage 1: Frictionless Capture
