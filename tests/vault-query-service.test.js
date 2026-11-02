@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import VaultQueryService from "../scripts/_quickadd/utils/vault-query-service.js";
+import VaultQueryService from "../_quickadd-scripts/utils/services/vault-query-service.js";
 
 describe("VaultQueryService", () => {
   const mockApp = {
