@@ -31,16 +31,14 @@ class TextFormatter {
   // ==========================================
 
   /**
-   * Converts a text string into a URL-friendly slug.
-   * @param {string} [text=""] - The input text to slugify.
-   * @returns {string} The resulting slug.
-   * @example
-   * TextFormatter.slugify("Hello World! 2026.");
-   * // Returns: "hello-world-2026"
+   * Normalizes text and splits it into an array of slug words.
+   * @param {string} [text=""] The input text.
+   * @returns {string[]} Array of slug words.
    */
   static slugify(text = "") {
-    if (typeof text !== "string") return "";
-    return text
+    if (typeof text !== "string") return [];
+
+    const slug = text
       .normalize("NFKD")
       .replace(/[\u0300-\u036f]/g, "")
       .toLowerCase()
@@ -49,6 +47,38 @@ class TextFormatter {
       .replace(/[^a-z0-9_]+/g, "-")
       .replace(/-+/g, "-")
       .replace(/^-+|-+$/g, "");
+
+    return slug ? slug.split("-") : [];
+  }
+
+  /**
+   * Converts text into a slug and collapses adjacent repeating duplicate words.
+   * @param {string} [text=""] The input text to slugify.
+   * @returns {string} The resulting slug.
+   * @example
+   * TextFormatter.slugifyAdjacent("Hello Hello World! World! Hello.");
+   * // Returns: "hello-world-hello"
+   */
+  static slugifyAdjacent(text = "") {
+    const words = this.slugify(text);
+    const uniqueWords = words.filter(
+      (word, index) => word !== words[index - 1],
+    );
+    return uniqueWords.join("-");
+  }
+
+  /**
+   * Converts text into a slug and removes all duplicate words, keeping only the first occurrence.
+   * @param {string} [text=""] The input text to slugify.
+   * @returns {string} The resulting slug.
+   * @example
+   * TextFormatter.slugifyUnique("Hello World! Hello Again World.");
+   * // Returns: "hello-world-again"
+   */
+  static slugifyUnique(text = "") {
+    const words = this.slugify(text);
+    const uniqueWords = [...new Set(words)];
+    return uniqueWords.join("-");
   }
 
   /**
