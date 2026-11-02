@@ -1,160 +1,22 @@
+const ContentBuilderBase = require("./content-builder-base");
 const FileCounterUtility = require("../helpers/file-counter-utility");
-const FrontmatterBuilderBase = require("../base/frontmatter-builder-base");
 const TextFormatter = require("../helpers/text-formatter");
-const VaultQueryService = require("../services/vault-query-service");
 
-/**
- * Intermediate base class encapsulating shared workflow behavior for all analysis domains.
- */
-class AnalysisBuilderBase extends FrontmatterBuilderBase {
+class AnalysisBuilderBase extends ContentBuilderBase {
   constructor(quickAddApi) {
     super(quickAddApi);
   }
 
-  // --- Template Hooks to be implemented by derived classes ---
-  getCategoryType() {
-    throw new Error("Derived classes must implement getCategoryType()");
+  getRootFolderType() {
+    return "notes";
   }
 
-  getCreatorFieldId() {
-    throw new Error("Derived classes must implement getCreatorFieldId()");
-  }
-
-  getCreatorFieldLabel() {
-    throw new Error("Derived classes must implement getCreatorFieldLabel()");
-  }
-
-  getContentFieldId() {
-    throw new Error("Derived classes must implement getContentFieldId()");
-  }
-
-  getContentFieldLabel() {
-    throw new Error("Derived classes must implement getContentFieldLabel()");
-  }
-
-  getUnitFieldId() {
-    throw new Error("Derived classes must implement getUnitFieldId()");
-  }
-
-  getUnitFieldLabel() {
-    throw new Error("Derived classes must implement getUnitFieldLabel()");
-  }
-
-  getSectionFieldId() {
-    throw new Error("Derived classes must implement getSectionFieldId()");
-  }
-
-  getSectionFieldLabel() {
-    throw new Error("Derived classes must implement getSectionFieldLabel()");
-  }
-
-  // --- Shared Implementation ---
-
-  getFields() {
-    const rawContentOptions = VaultQueryService.getSubfolderNames({
-      app,
-      folderPath: `notes/${this.getCategoryType()}`,
-    });
-    const processedContentOptions = rawContentOptions.map((option) =>
-      TextFormatter.titleCase(option),
-    );
-
-    return [
-      {
-        id: this.getContentFieldId(),
-        label: this.getContentFieldLabel(),
-        type: "suggester",
-        options: processedContentOptions,
-        placeholder: "Enter title or select existing",
-        defaultValue: "",
-        suggesterConfig: {
-          displayValues: processedContentOptions,
-          allowCustomInput: true,
-          caseSensitive: false,
-          multiSelect: false,
-        },
-      },
-      {
-        id: this.getUnitFieldId(),
-        label: this.getUnitFieldLabel(),
-        type: "text",
-        placeholder: "Enter chapter title",
-        defaultValue: "",
-      },
-      {
-        id: this.getSectionFieldId(),
-        label: this.getSectionFieldLabel(),
-        type: "text",
-        placeholder: "Part or Major Section",
-        defaultValue: "",
-        optional: true,
-      },
-      {
-        id: this.getCreatorFieldId(),
-        label: this.getCreatorFieldLabel(),
-        type: "text",
-        placeholder: "Enter name(s) (auto-fills from existing notes if blank)",
-        defaultValue: "",
-      },
-    ];
-  }
-
-  /**
-   * Formats a chapter title identifier from "Chapter N: Title" to "chNN: Title".
-   * @param {string} text - The original chapter title.
-   * @returns {string} The formatted chapter string.
-   */
-  #formatChapterIdentifier(text) {
+  formatUnitIdentifier(text) {
     return text.replace(
       /^(?:Chapter\s+)?(\d+)(?:\.(\d+))?\s*:?\s*/,
       (_, major, minor) =>
         `ch${major.padStart(2, "0")}${minor ? "-" + minor.padStart(2, "0") : ""}: `,
     );
-  }
-
-  /**
-   * Resolves whether the content title matches an existing subfolder.
-   * Auto-fills creator from existing notes if blank.
-   *
-   * @param {Object} options - { formattedContent, creatorInput }
-   * @returns {Object} { creatorInput }
-   */
-  #resolveContentContext({ formattedContent, creatorInput }) {
-    const rootFolder = `notes/${this.getCategoryType()}`;
-    const subfolders = VaultQueryService.getSubfolderNames({
-      app,
-      folderPath: rootFolder,
-    });
-
-    const matchedSubfolder = subfolders.find(
-      (sub) =>
-        TextFormatter.titleCase(sub) === formattedContent ||
-        sub.toLowerCase() === formattedContent.toLowerCase(),
-    );
-
-    if (!matchedSubfolder) {
-      return { creatorInput };
-    }
-
-    let resolvedCreator = creatorInput;
-    if (!resolvedCreator) {
-      const contentFolderPath = `${rootFolder}/${matchedSubfolder}`;
-      const existingCreators = VaultQueryService.getFieldValues({
-        app,
-        fieldName: this.getCreatorFieldId(),
-        folderPath: contentFolderPath,
-      });
-
-      if (existingCreators.length > 0) {
-        resolvedCreator = existingCreators
-          .map((creator) => TextFormatter.cleanWikiLink(creator))
-          .join(", ");
-      }
-    }
-
-    return {
-      creatorInput: resolvedCreator,
-    };
   }
 
   processValues(values) {
@@ -173,19 +35,16 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
     const creatorInput = values[creatorFieldId] || "";
     const contentInput = values[contentFieldId] || "";
 
-    // Title: subtitle
     const extractedTitle = TextFormatter.extractBeforeColon(contentInput);
     const formattedContentTitle = TextFormatter.titleCase(extractedTitle);
     const generatedFolderName = TextFormatter.slugify(extractedTitle);
 
-    // Resolve context to auto-fill creator if matching existing folder
-    const context = this.#resolveContentContext({
+    const context = this.resolveContentContext({
       formattedContent: formattedContentTitle,
       creatorInput,
     });
 
-    const resolvedCreatorInput = context.creatorInput;
-
+    // FileCounterUtility is actively used here for the analysis folder path
     const analysisFolderPath = `analysis/${this.getCategoryType()}/${generatedFolderName}`;
     const fileIndex = FileCounterUtility.getCount({
       app,
@@ -193,15 +52,13 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
       includeNext: true,
     });
 
-    const formattedChapter = this.#formatChapterIdentifier(unitValue);
+    const formattedUnit = this.formatUnitIdentifier(unitValue);
     const generatedFilename = TextFormatter.slugify(
-      `${fileIndex} ${extractedTitle} ${formattedChapter}`,
+      `${fileIndex} ${extractedTitle} ${formattedUnit}`,
     );
-
     const generatedCaptureNoteFilename = TextFormatter.slugify(
-      `n${fileIndex} ${extractedTitle} ${formattedChapter}`,
+      `n${fileIndex} ${extractedTitle} ${formattedUnit} ${sectionValue}`,
     );
-
     const generatedTitle = TextFormatter.titleCase(
       `Analysis of ${extractedTitle} - ${unitValue}`,
     );
@@ -215,13 +72,13 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
       ...baseProcessedValues,
       aliases: `"${formattedContentTitle} - ${unitValue}"`,
       title: generatedTitle,
-      slug: TextFormatter.slugify(`${extractedTitle} - ${formattedChapter}`),
+      slug: TextFormatter.slugify(`${extractedTitle} - ${formattedUnit}`),
       type: this.getCategoryType(),
       folder: generatedFolderName,
       filename: generatedFilename,
       categories: updatedCategories,
       [creatorFieldId]: this.formatNameList(
-        resolvedCreatorInput,
+        context.creatorInput,
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
       reference_links: `[[00-${generatedFolderName}-synthesis|${extractedTitle}]] - [[${generatedCaptureNoteFilename}|${contentOrganization}]]`,
@@ -229,14 +86,10 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
   }
 
   buildExtraProperties({ values }) {
-    const creatorFieldId = this.getCreatorFieldId();
-    const contentFieldId = this.getContentFieldId();
-    const unitFieldId = this.getUnitFieldId();
-
     return [
-      `${creatorFieldId}: ${values[creatorFieldId]}`,
-      `${contentFieldId}: "${values[contentFieldId]}"`,
-      `${unitFieldId}: "${values[unitFieldId]}"`,
+      `${this.getCreatorFieldId()}: ${values[this.getCreatorFieldId()]}`,
+      `${this.getContentFieldId()}: "${values[this.getContentFieldId()]}"`,
+      `${this.getUnitFieldId()}: "${values[this.getUnitFieldId()]}"`,
     ];
   }
 }
