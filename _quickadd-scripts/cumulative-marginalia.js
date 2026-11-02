@@ -11,9 +11,11 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       this.rawText = "";
     }
 
+    // --- Public Methods (Verbs) ---
+
     async run() {
-      const isSuccess = await this.#requestInputs();
-      if (!isSuccess) return;
+      const inputSuccessStatus = await this.#requestInputs();
+      this.#checkInputSuccess(inputSuccessStatus);
 
       this.#resolveSourceTitle();
       this.#formatAndStoreOutput();
@@ -21,9 +23,11 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       return this.variables.cumulativeNotes;
     }
 
+    // --- Private Methods: Workflow & Formatting (Verbs) ---
+
     async #requestInputs() {
       try {
-        const values = await this.qa.requestInputs([
+        const inputValues = await this.qa.requestInputs([
           {
             id: "sourceTitle",
             label:
@@ -62,11 +66,11 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
           },
         ]);
 
-        this.sourceTitle = values.sourceTitle?.trim() || "";
-        this.pageOrCitation = values.pageOrCitation?.trim() || "";
-        this.cumulativeSummary = values.cumulativeSummary?.trim() || "";
-        this.marginaliaNote = values.marginaliaNote?.trim() || "";
-        this.rawText = values.rawText || "";
+        this.sourceTitle = inputValues.sourceTitle?.trim() || "";
+        this.pageOrCitation = inputValues.pageOrCitation?.trim() || "";
+        this.cumulativeSummary = inputValues.cumulativeSummary?.trim() || "";
+        this.marginaliaNote = inputValues.marginaliaNote?.trim() || "";
+        this.rawText = inputValues.rawText || "";
 
         return Boolean(this.rawText);
       } catch {
@@ -76,14 +80,14 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
     }
 
     #resolveSourceTitle() {
-      if (this.sourceTitle) return;
+      if (this.#evaluateExistingSourceTitle()) return;
 
-      const activeFile = app.workspace.getActiveFile();
-      if (activeFile) {
-        const metadata = app.metadataCache.getFileCache(activeFile);
-        const bookProp = metadata?.frontmatter?.book;
-        if (bookProp) {
-          this.sourceTitle = bookProp;
+      const activeMarkdownFile = app.workspace.getActiveFile();
+      if (this.#evaluateActiveFileExists(activeMarkdownFile)) {
+        const fileMetadata = app.metadataCache.getFileCache(activeMarkdownFile);
+        const bookProperty = fileMetadata?.frontmatter?.book;
+        if (this.#evaluateBookPropertyExists(bookProperty)) {
+          this.sourceTitle = bookProperty;
           return;
         }
       }
@@ -92,37 +96,35 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
     }
 
     #parseYouTube(url = "") {
-      const safeUrl = url.trim();
-      const patterns = [
+      const sanitizedUrl = url.trim();
+      const youtubePatterns = [
         /youtu\.be\/([a-zA-Z0-9_-]+).*?[?&]t=(\d+)/,
         /youtube\.com\/watch\?v=([a-zA-Z0-9_-]+).*?[?&]t=(\d+)/,
       ];
 
-      for (const pattern of patterns) {
-        const match = safeUrl.match(pattern);
-        if (match) {
-          const totalSeconds = parseInt(match[2], 10);
-          const hours = Math.floor(totalSeconds / 3600);
-          const minutes = Math.floor((totalSeconds % 3600) / 60);
-          const seconds = totalSeconds % 60;
+      for (const pattern of youtubePatterns) {
+        const regexMatch = sanitizedUrl.match(pattern);
+        if (this.#evaluateRegexMatchExists(regexMatch)) {
+          const totalTimeSeconds = parseInt(regexMatch[2], 10);
+          const timeHours = Math.floor(totalTimeSeconds / 3600);
+          const timeMinutes = Math.floor((totalTimeSeconds % 3600) / 60);
+          const timeSeconds = totalTimeSeconds % 60;
 
-          const readable =
-            hours > 0
-              ? `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
-              : `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+          const formattedTimestamp = this.#evaluateHoursExist(timeHours)
+            ? `${String(timeHours).padStart(2, "0")}:${String(timeMinutes).padStart(2, "0")}:${String(timeSeconds).padStart(2, "0")}`
+            : `${String(timeMinutes).padStart(2, "0")}:${String(timeSeconds).padStart(2, "0")}`;
 
           return {
-            location: readable,
-            url: `https://www.youtube.com/watch?v=${match[1]}&t=${totalSeconds}s`,
+            location: formattedTimestamp,
+            url: `https://www.youtube.com/watch?v=${regexMatch[1]}&t=${totalTimeSeconds}s`,
           };
         }
       }
 
-      // Check for generic YouTube URL without timestamp
-      if (/youtu(be\.com\/watch\?v=|\.be\/)[a-zA-Z0-9_-]+/.test(safeUrl)) {
+      if (this.#evaluateGenericYouTubePattern(sanitizedUrl)) {
         return {
           location: "View video",
-          url: safeUrl,
+          url: sanitizedUrl,
         };
       }
 
@@ -130,88 +132,176 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
     }
 
     #formatAndStoreOutput() {
-      let highlight_location = "";
-      let highlight_location_url = "";
+      let highlightLocation = "";
+      let highlightLocationUrl = "";
 
-      const inputVal = this.pageOrCitation;
-      if (inputVal) {
-        const ytParsed = this.#parseYouTube(inputVal);
-        if (ytParsed) {
-          highlight_location = ytParsed.location;
-          highlight_location_url = ytParsed.url;
-        } else if (/^https?:\/\//i.test(inputVal)) {
-          highlight_location = "Link";
-          highlight_location_url = inputVal;
+      const pageOrCitationInput = this.pageOrCitation;
+      if (this.#evaluatePageOrCitationInputExists(pageOrCitationInput)) {
+        const parsedYouTubeData = this.#parseYouTube(pageOrCitationInput);
+        if (this.#evaluateParsedYouTubeDataExists(parsedYouTubeData)) {
+          highlightLocation = parsedYouTubeData.location;
+          highlightLocationUrl = parsedYouTubeData.url;
+        } else if (this.#evaluateWebUrlPattern(pageOrCitationInput)) {
+          highlightLocation = "Link";
+          highlightLocationUrl = pageOrCitationInput;
         } else {
-          // Treated as page number or text citation
-          highlight_location = /^\d+$/.test(inputVal)
-            ? `p. ${inputVal}`
-            : inputVal;
+          highlightLocation = this.#evaluateNumericPagePattern(
+            pageOrCitationInput,
+          )
+            ? `p. ${pageOrCitationInput}`
+            : pageOrCitationInput;
         }
       }
 
-      const highlight_note = this.marginaliaNote;
-      const highlight_text = this.rawText;
+      const highlightNoteText = this.marginaliaNote;
+      const highlightRawText = this.rawText;
 
-      let marginaliaBlock = "";
-      if (highlight_note) {
-        const noteLines = highlight_note
+      let marginaliaContentBlock = "";
+      if (this.#evaluateHighlightNoteExists(highlightNoteText)) {
+        const noteTextLines = highlightNoteText
           .split("\n")
           .map((line) => `> ${line}`)
           .join("\n");
 
-        marginaliaBlock = [`> [!note] Marginalia / Reflection`, noteLines].join(
-          "\n",
-        );
-      } else if (!this.cumulativeSummary) {
-        // Only apply default "I just liked the words" if there is NO cumulative summary
-        marginaliaBlock = [
+        marginaliaContentBlock = [
+          `> [!note] Marginalia / Reflection`,
+          noteTextLines,
+        ].join("\n");
+      } else if (this.#evaluateCumulativeSummaryEmpty()) {
+        marginaliaContentBlock = [
           `> [!note] Marginalia / Reflection`,
           `> _I just liked the words_`,
         ].join("\n");
       }
 
-      const quotedLines = highlight_text
+      const quotedTextLines = highlightRawText
         .split("\n")
         .map((line) => `> ${line}`)
         .join("\n");
 
-      let locationLine = "";
-      if (highlight_location && highlight_location_url) {
-        locationLine = `> \\- [${highlight_location}](${highlight_location_url})`;
-      } else if (highlight_location) {
-        locationLine = `> \\- ${highlight_location}`;
+      let locationMarkdownLine = "";
+      if (
+        this.#evaluateLocationAndUrlExist(
+          highlightLocation,
+          highlightLocationUrl,
+        )
+      ) {
+        locationMarkdownLine = `> \\- [${highlightLocation}](${highlightLocationUrl})`;
+      } else if (this.#evaluateLocationOnlyExists(highlightLocation)) {
+        locationMarkdownLine = `> \\- ${highlightLocation}`;
       }
 
-      const outputLines = [];
+      const outputMarkdownLines = [];
 
-      // Conditionally include Cumulative Summary block with multi-line support
-      if (this.cumulativeSummary) {
-        const summaryLines = this.cumulativeSummary
+      if (this.#evaluateCumulativeSummaryExists()) {
+        const summaryTextLines = this.cumulativeSummary
           .split("\n")
           .map((line) => `> ${line}`)
           .join("\n");
 
-        outputLines.push(``, `> [!tldr] Cumulative Summary`, summaryLines);
+        outputMarkdownLines.push(
+          ``,
+          `> [!tldr] Cumulative Summary`,
+          summaryTextLines,
+        );
       }
 
-      // Only push marginaliaBlock if it was generated (either note was filled, or no cumulative summary fallback applies)
-      if (marginaliaBlock) {
-        outputLines.push(``, marginaliaBlock);
+      if (this.#evaluateMarginaliaBlockExists(marginaliaContentBlock)) {
+        outputMarkdownLines.push(``, marginaliaContentBlock);
       }
 
-      outputLines.push(``, `> [!quote]`, quotedLines);
+      outputMarkdownLines.push(``, `> [!quote]`, quotedTextLines);
 
-      if (locationLine) {
-        outputLines.push(locationLine);
+      if (this.#evaluateLocationLineExists(locationMarkdownLine)) {
+        outputMarkdownLines.push(locationMarkdownLine);
       }
 
-      outputLines.push(``, `---`, ``);
+      outputMarkdownLines.push(``, `---`, ``);
 
-      this.variables.cumulativeNotes = outputLines.join("\n");
+      this.variables.cumulativeNotes = outputMarkdownLines.join("\n");
+    }
+
+    // --- Private Methods: Condition Checkers (Verbs) ---
+
+    #checkInputSuccess(inputSuccessStatus) {
+      if (!inputSuccessStatus) return;
+    }
+
+    #evaluateExistingSourceTitle() {
+      return Boolean(this.sourceTitle);
+    }
+
+    #evaluateActiveFileExists(activeMarkdownFile) {
+      return Boolean(activeMarkdownFile);
+    }
+
+    #evaluateBookPropertyExists(bookProperty) {
+      return Boolean(bookProperty);
+    }
+
+    #evaluateRegexMatchExists(regexMatch) {
+      return Boolean(regexMatch);
+    }
+
+    #evaluateHoursExist(timeHours) {
+      return timeHours > 0;
+    }
+
+    #evaluateGenericYouTubePattern(sanitizedUrl) {
+      return /youtu(be\.com\/watch\?v=|\.be\/)[a-zA-Z0-9_-]+/.test(
+        sanitizedUrl,
+      );
+    }
+
+    #evaluatePageOrCitationInputExists(pageOrCitationInput) {
+      return Boolean(pageOrCitationInput);
+    }
+
+    #evaluateParsedYouTubeDataExists(parsedYouTubeData) {
+      return Boolean(parsedYouTubeData);
+    }
+
+    #evaluateWebUrlPattern(pageOrCitationInput) {
+      return /^https?:\/\//i.test(pageOrCitationInput);
+    }
+
+    #evaluateNumericPagePattern(pageOrCitationInput) {
+      return /^\d+$/.test(pageOrCitationInput);
+    }
+
+    #evaluateHighlightNoteExists(highlightNoteText) {
+      return Boolean(highlightNoteText);
+    }
+
+    #evaluateCumulativeSummaryEmpty() {
+      return !this.cumulativeSummary;
+    }
+
+    #evaluateLocationAndUrlExist(highlightLocation, highlightLocationUrl) {
+      return Boolean(highlightLocation && highlightLocationUrl);
+    }
+
+    #evaluateLocationOnlyExists(highlightLocation) {
+      return Boolean(highlightLocation);
+    }
+
+    #evaluateCumulativeSummaryExists() {
+      return Boolean(this.cumulativeSummary);
+    }
+
+    #evaluateMarginaliaBlockExists(marginaliaContentBlock) {
+      return Boolean(marginaliaContentBlock);
+    }
+
+    #evaluateLocationLineExists(locationMarkdownLine) {
+      return Boolean(locationMarkdownLine);
     }
   }
 
-  const processor = new CumulativeMarginaliaProcessor(qa, variables, abort);
-  return await processor.run();
+  const processorInstance = new CumulativeMarginaliaProcessor(
+    qa,
+    variables,
+    abort,
+  );
+  return await processorInstance.run();
 };
