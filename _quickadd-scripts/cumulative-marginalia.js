@@ -174,13 +174,14 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
 
       const outputLines = [];
 
-      // Conditionally include Cumulative Summary block only if input is provided
+      // Conditionally include Cumulative Summary block with multi-line support
       if (this.cumulativeSummary) {
-        outputLines.push(
-          ``,
-          `> [!tldr] Cumulative Summary`,
-          `> ${this.cumulativeSummary}`,
-        );
+        const summaryLines = this.cumulativeSummary
+          .split("\n")
+          .map((line) => `> ${line}`)
+          .join("\n");
+
+        outputLines.push(``, `> [!tldr] Cumulative Summary`, summaryLines);
       }
 
       outputLines.push(``, marginaliaBlock, ``, `> [!quote]`, quotedLines);
