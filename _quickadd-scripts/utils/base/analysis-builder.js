@@ -2,7 +2,7 @@ const ContentBuilderBase = require("./content-builder-base");
 const FileCounterUtility = require("../helpers/file-counter-utility");
 const TextFormatter = require("../helpers/text-formatter");
 
-class AnalysisBuilderBase extends ContentBuilderBase {
+class AnalysisBuilder extends ContentBuilderBase {
   constructor(quickAddApi) {
     super(quickAddApi);
   }
@@ -94,4 +94,4 @@ class AnalysisBuilderBase extends ContentBuilderBase {
   }
 }
 
-module.exports = AnalysisBuilderBase;
+module.exports = AnalysisBuilder;
