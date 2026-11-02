@@ -48,6 +48,10 @@ def is_inside_backticks(text: str, start_pos: int):
 
 
 def convert_image_wikilink(match, current_file: Path, text: str):
+    # If the file is not named "index", remove the image link entirely
+    if current_file.stem != "index":
+        return ""
+
     start, end = match.span()
 
     # Skip if inside backticks
@@ -99,17 +103,19 @@ def process_file(path: Path):
 
     if new_text != text:
         path.write_text(new_text, encoding="utf-8")
-        print(f"Converted images in: {path}")
+        if path.stem == "index":
+            print(f"Converted images in: {path}")
+        else:
+            print(f"Removed images in non-index file: {path}")
 
 
 def main():
     """
-    Convert Obsidian image wikilinks in all index.md files to standard Markdown,
-    only for real image files. Missing images are removed entirely.
-    Skips links inside inline code or code blocks.
-    URL-encodes filenames so spaces become %20.
+    Scans all markdown files in the vault. 
+    - In index.md files, converts valid Obsidian image wikilinks for Hugo.
+    - In all other markdown files, removes image wikilinks entirely.
     """
-    for path in Path(VAULT_DIR).rglob("index.md"):
+    for path in Path(VAULT_DIR).rglob("*.md"):
         process_file(path)
 
 
