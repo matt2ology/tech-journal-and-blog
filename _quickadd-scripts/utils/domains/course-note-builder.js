@@ -1,7 +1,7 @@
 const NoteBuilderBase = require("../base/note-builder-base");
 
 /**
- * Handles frontmatter generation for course capture notes.
+ * Handles frontmatter generation for course notes.
  */
 class NoteBuilderCourse extends NoteBuilderBase {
   constructor(quickAddApi) {
@@ -34,6 +34,14 @@ class NoteBuilderCourse extends NoteBuilderBase {
 
   getUnitFieldLabel() {
     return "Lecture title";
+  }
+
+  getSectionFieldId() {
+    return "course";
+  }
+
+  getSectionFieldLabel() {
+    throw new Error("Derived classes must implement getSectionFieldLabel()");
   }
 }
 
