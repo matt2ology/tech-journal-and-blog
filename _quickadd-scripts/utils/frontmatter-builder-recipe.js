@@ -1,33 +1,6 @@
-const path = require("path");
-const vaultPath = app.vault.adapter.getBasePath();
-
-const TextFormatter = require(
-  path.join(
-    vaultPath,
-   "_quickadd-scripts",
-    "utils",
-    "helpers",
-    "text-formatter",
-  ),
-);
-const FrontmatterBuilderBase = require(
-  path.join(
-    vaultPath,
-    "_quickadd-scripts",
-    "utils",
-    "base",
-    "frontmatter-builder-base",
-  ),
-);
-const VaultQueryService = require(
-  path.join(
-    vaultPath,
-   "_quickadd-scripts",
-    "utils",
-    "services",
-    "vault-query-service",
-  ),
-);
+const TextFormatter = require("./helpers/text-formatter");
+const FrontmatterBuilderBase = require("./base/frontmatter-builder-base");
+const VaultQueryService = require("./services/vault-query-service");
 
 /**
  * Recipe-specific frontmatter builder.
