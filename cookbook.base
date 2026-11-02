@@ -1,0 +1,26 @@
+formulas:
+  Recipe: link(file,dish)
+  Made on: date(date).format("YYYY-MM-DD")
+  posted: if(!draft.isTruthy(), "✅", "❌")
+  recipe_status: if(date.isTruthy(), "Cooked", "Queue")
+properties:
+  note.date:
+    displayName: Made on
+views:
+  - type: cards
+    name: View
+    filters:
+      and:
+        - file.inFolder("cookbook")
+        - file.ext == "md"
+    groupBy:
+      property: formula.recipe_status
+      direction: DESC
+    order:
+      - formula.Recipe
+      - chef
+      - formula.Made on
+      - formula.posted
+      - formula.recipe_status
+    image: note.image
+    cardSize: 300
