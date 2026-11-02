@@ -15,31 +15,24 @@ My system adapts the [**Zettelkasten method**](https://en.wikipedia.org/wiki/Zet
 
 ```mermaid
 flowchart TD
-  subgraph client["👤 Client"]
-      A["User Device<br/>192.168.1.10"]
-  end
+    A1([Media Highlights & Annotations])
+    A2([Live Class & Seminar Capture])
+    B1["Analysis Notes\n(Chapters / Lectures)"]
+    B2["Synthesis Notes\n(Books / Courses)"]
+    C["Atomic Concept Notes\n(Declarative Mental Models)"]
+    D1([Essays & Writing])
+    D2([Projects & Work])
+    D3([Problem Solving])
 
-  subgraph cloud["☁️ Cloud Gateway"]
-      B["Load Balancer<br/>(SSL Termination)"]
-  end
+    A1 -->|Import & Break Down| B1
+    A2 -->|Review & Structure| B1
+    B1 -->|Aggregate & Combine| B2
+    B1 -->|Extract Ideas| C
+    B2 -->|Extract Macro Models| C
 
-  subgraph server["🖥️ Application Server"]
-      C["API Gateway<br/>10.0.0.1"]
-      D["Auth Service<br/>10.0.0.2"]
-      E["Web Server<br/>10.0.0.3"]
-      F["Database<br/>10.0.0.4"]
-  end
-
-  A -- "HTTPS Request" --> B
-  B -- "Forward<br/>(internal)" --> C
-  C -- "Authenticate" --> D
-  D -- "Token" --> C
-  C -- "Route" --> E
-  E --> F
-
-  style client fill:#1a365d,stroke:#2c5282,color:#fff
-  style cloud fill:#f6ad55,stroke:#dd6b20,color:#000
-  style server fill:#276749,stroke:#22543d,color:#fff
+    C -->|Assemble| D1
+    C -->|Assemble| D2
+    C -->|Assemble| D3
 ```
 
 ## 🔄 The 4-Stage Workflow
