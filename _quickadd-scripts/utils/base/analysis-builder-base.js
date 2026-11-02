@@ -1,42 +1,7 @@
-const path = require("path");
-const vaultPath = app.vault.adapter.getBasePath();
-
-const FrontmatterBuilderBase = require(
-  path.join(
-    vaultPath,
-    "_quickadd-scripts",
-    "utils",
-    "base",
-    "frontmatter-builder-base",
-  ),
-);
-const TextFormatter = require(
-  path.join(
-    vaultPath,
-   "_quickadd-scripts",
-    "utils",
-    "helpers",
-    "text-formatter",
-  ),
-);
-const VaultQueryService = require(
-  path.join(
-    vaultPath,
-   "_quickadd-scripts",
-    "utils",
-    "services",
-    "vault-query-service",
-  ),
-);
-const FileCounterUtility = require(
-  path.join(
-    vaultPath,
-   "_quickadd-scripts",
-    "utils",
-    "helpers",
-    "file-counter-utility",
-  ),
-);
+const FileCounterUtility = require("../helpers/file-counter-utility");
+const FrontmatterBuilderBase = require("../base/frontmatter-builder-base");
+const TextFormatter = require("../helpers/text-formatter");
+const VaultQueryService = require("../services/vault-query-service");
 
 /**
  * Intermediate base class encapsulating shared workflow behavior for all analysis domains.
@@ -88,7 +53,7 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
   getFields() {
     const rawContentOptions = VaultQueryService.getSubfolderNames({
       app,
-      folderPath: `analysis/${this.getCategoryType()}`,
+      folderPath: `notes/${this.getCategoryType()}`,
     });
     const processedContentOptions = rawContentOptions.map((option) =>
       TextFormatter.titleCase(option),
@@ -128,7 +93,7 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
         id: this.getCreatorFieldId(),
         label: this.getCreatorFieldLabel(),
         type: "text",
-        placeholder: "Enter name(s)",
+        placeholder: "Enter name(s) (auto-fills from existing notes if blank)",
         defaultValue: "",
       },
     ];
@@ -155,7 +120,7 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
    * @returns {Object} { creatorInput }
    */
   #resolveContentContext({ formattedContent, creatorInput }) {
-    const rootFolder = `analysis/${this.getCategoryType()}`;
+    const rootFolder = `notes/${this.getCategoryType()}`;
     const subfolders = VaultQueryService.getSubfolderNames({
       app,
       folderPath: rootFolder,
@@ -233,6 +198,10 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
       `${fileIndex} ${extractedTitle} ${formattedChapter}`,
     );
 
+    const generatedCaptureNoteFilename = TextFormatter.slugify(
+      `n${fileIndex} ${extractedTitle} ${formattedChapter}`,
+    );
+
     const generatedTitle = TextFormatter.titleCase(
       `Analysis of ${extractedTitle} - ${unitValue}`,
     );
@@ -255,7 +224,7 @@ class AnalysisBuilderBase extends FrontmatterBuilderBase {
         resolvedCreatorInput,
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
-      contentReference: `[[00-${generatedFolderName}-synthesis|${extractedTitle}]] ${contentOrganization}`,
+      reference_links: `[[00-${generatedFolderName}-synthesis|${extractedTitle}]] - [[${generatedCaptureNoteFilename}|${contentOrganization}]]`,
     };
   }
 
