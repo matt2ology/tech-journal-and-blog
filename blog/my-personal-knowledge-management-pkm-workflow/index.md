@@ -26,12 +26,12 @@ flowchart TD
     end
 
     subgraph S2 ["Stage 2: Processing Hub (Refinery)"]
-        B1["Analysis Notes\n(Chapters / Lectures)"]
-        B2["Synthesis Notes\n(Books / Courses)"]
+        B1["Analysis Notes<br/>(Chapters / Lectures)"]
+        B2["Synthesis Notes<br/>(Books / Courses)"]
     end
 
     subgraph S3 ["Stage 3: Concept Network (Fully Decoupled)"]
-        C["Atomic Concept Notes\n(Declarative Mental Models)"]
+        C["Atomic Concept Notes<br/>(Declarative Mental Models)"]
     end
 
     subgraph S4 ["Stage 4: Creative Output"]
