@@ -1,6 +1,9 @@
 {{VALUE:frontmatter}}
 
-## TL;DR
+## TL;DR (too long; didn't read)
+
+> [!tldr]
+> Summary goes here.
 
 ## Questions
 
