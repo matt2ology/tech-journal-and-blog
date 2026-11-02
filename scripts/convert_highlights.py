@@ -50,7 +50,7 @@ def process_file(path: Path) -> None:
 
 
 def main() -> None:
-    """Convert Obsidian highlights to Hugo HTML across markdown files[cite: 1]."""
+    """Convert Obsidian highlights to Hugo HTML across markdown files."""
     for path in Path(VAULT_DIR).rglob("*.md"):
         process_file(path)
 
