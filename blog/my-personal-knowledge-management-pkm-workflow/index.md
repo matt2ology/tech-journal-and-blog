@@ -27,9 +27,9 @@ My system adapts the [**Zettelkasten method**](https://en.wikipedia.org/wiki/Zet
 flowchart TD
     A1[Media Highlights & Annotations]
     A2[Live Class & Seminar Capture]
-    B1["Analysis Notes\n(Chapters / Lectures)"]
-    B2["Synthesis Notes\n(Books / Courses)"]
-    C["Atomic Concept Notes\n(Declarative Mental Models)"]
+    B1[Analysis Notes\n(Chapters / Lectures)]
+    B2[Synthesis Notes\n(Books / Courses)]
+    C[Atomic Concept Notes\n(Declarative Mental Models)]
     D1[Essays & Writing]
     D2[Projects & Work]
     D3[Problem Solving]
