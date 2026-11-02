@@ -1,9 +1,9 @@
-const NoteBuilderBase = require("../base/note-builder-base");
+const NoteBuilder = require("../base/note-builder");
 
 /**
  * Handles frontmatter generation for book analysis notes.
  */
-class NoteBuilderBook extends NoteBuilderBase {
+class NoteBuilderBook extends NoteBuilder {
   constructor(quickAddApi) {
     super(quickAddApi);
   }
