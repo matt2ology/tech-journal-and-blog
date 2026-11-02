@@ -90,7 +90,7 @@ class SynthesisBuilderBase extends FrontmatterBuilderBase {
         id: this.getCreatorFieldId(),
         label: this.getCreatorFieldLabel(),
         type: "text",
-        placeholder: "Enter name(s) (auto-fills from analysis if blank)",
+        placeholder: "Enter name(s) (auto-fills from existing analysis if blank)",
         defaultValue: "",
       },
     ];
