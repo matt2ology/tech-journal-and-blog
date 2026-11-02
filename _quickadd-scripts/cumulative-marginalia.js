@@ -215,7 +215,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
 
       // Join sections with a blank line containing an HTML comment to satisfy [MD028](https://github.com/DavidAnson/markdownlint/blob/v0.41.1/doc/md028.md)
       const combinedBlockquoteContent = blockquoteSections.join(
-        "\n\n<!-- separator -->\n\n",
+        "\n\n<!-- blockquote separator -->\n\n",
       );
 
       const outputMarkdownLines = [
