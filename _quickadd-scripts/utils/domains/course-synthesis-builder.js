@@ -1,9 +1,9 @@
-const SynthesisBuilderBase = require("../base/synthesis-builder-base");
+const SynthesisBuilder = require("../base/synthesis-builder");
 
 /**
  * Handles frontmatter generation for course synthesis notes.
  */
-class SynthesisBuilderCourse extends SynthesisBuilderBase {
+class SynthesisBuilderCourse extends SynthesisBuilder {
   constructor(quickAddApi) {
     super(quickAddApi);
   }
