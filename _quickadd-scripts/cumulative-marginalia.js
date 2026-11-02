@@ -29,22 +29,6 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       try {
         const inputValues = await this.qa.requestInputs([
           {
-            id: "sourceTitle",
-            label:
-              "Source Title / Book Name (Leave blank to use YAML 'book' property)",
-            type: "text",
-            placeholder: "e.g., Intro to Economics (Bernanke)",
-            optional: true,
-          },
-          {
-            id: "pageOrCitation",
-            label: "Page Number, YouTube URL (with timestamp), or Web URL",
-            type: "text",
-            placeholder:
-              "e.g., 42, https://youtu.be/...&t=120s, or https://example.com",
-            optional: true,
-          },
-          {
             id: "rawText",
             label: "Paste Text Block to Quote",
             type: "textarea",
@@ -62,6 +46,22 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
             label: "Marginalia / Reflection",
             type: "textarea",
             placeholder: "Leave blank for default 'I just liked the words'...",
+            optional: true,
+          },
+          {
+            id: "sourceTitle",
+            label:
+              "Source Title / Book Name (Leave blank to use YAML 'book' property)",
+            type: "text",
+            placeholder: "e.g., Intro to Economics (Bernanke)",
+            optional: true,
+          },
+          {
+            id: "pageOrCitation",
+            label: "Page Number, YouTube URL (with timestamp), or Web URL",
+            type: "text",
+            placeholder:
+              "e.g., 42, https://youtu.be/...&t=120s, or https://example.com",
             optional: true,
           },
         ]);
