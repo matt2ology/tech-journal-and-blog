@@ -14,9 +14,37 @@ My system adapts the [**Zettelkasten method**](https://en.wikipedia.org/wiki/Zet
 ## 🗺️ The Process at a Glance
 
 ```mermaid
-graph TD
-    A[Start] --> B[Process]
-    B --> C[End]
+flowchart TD
+    subgraph s1["Stage 1: Raw Intake (High Source Dependency)"]
+        a1([Media Highlights & Annotations])
+        a2([Live Class & Seminar Capture])
+    end
+
+    subgraph s2["Stage 2: Processing Hub"]
+        b1["Analysis Notes (Chapters / Lectures)"]
+        b2["Synthesis Notes (Books / Courses)"]
+    end
+
+    subgraph s3["Stage 3: Concept Network (Fully Decoupled)"]
+        c["Atomic Concept Notes (Declarative Mental Models)"]
+    end
+
+    subgraph s4["Stage 4: Creative Output"]
+        d1([Essays & Writing])
+        d2([Projects & Work])
+        d3([Problem Solving])
+    end
+
+
+    a1 -->|Import & Break Down| b1
+    a2 -->|Review & Structure| b1
+    b1 -->|Aggregate & Combine| b2
+    b1 -->|Extract Ideas| c
+    b2 -->|Extract Macro Models| c
+
+    c -->|Assemble| d1
+    c -->|Assemble| d2
+    c -->|Assemble| d3
 ```
 
 ## 🔄 The 4-Stage Workflow
