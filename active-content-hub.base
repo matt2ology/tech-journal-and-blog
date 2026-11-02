@@ -1,0 +1,22 @@
+formulas:
+  posts: link(file.name,title)
+views:
+  - type: table
+    name: View
+    filters:
+      and:
+        - file.hasProperty("title")
+        - file.folder != "archives"
+        - file.folder != "search"
+    groupBy:
+      property: categories
+      direction: ASC
+    order:
+      - draft
+      - formula.posts
+    sort:
+      - property: date
+        direction: DESC
+    columnSize:
+      note.draft: 62
+      formula.posts: 546
