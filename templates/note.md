@@ -9,6 +9,6 @@
 
 - [ ]
 
-## Notes & Key Points
+## {{VALUE:section_header}}
 
 -
