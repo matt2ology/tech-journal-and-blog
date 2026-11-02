@@ -100,11 +100,11 @@ class NoteBuilderBase extends FrontmatterBuilderBase {
   }
 
   /**
-   * Formats a chapter title identifier from "Chapter N: Title" to "chNN: Title".
-   * @param {string} text - The original chapter title.
-   * @returns {string} The formatted chapter string.
+   * Formats a unit title identifier. Overridden by subclasses for specific prefixes (e.g., ch, mod).
+   * @param {string} text - The original unit title.
+   * @returns {string} The formatted unit string.
    */
-  #formatChapterIdentifier(text) {
+  formatUnitIdentifier(text) {
     return text.replace(
       /^(?:Chapter\s+)?(\d+)(?:\.(\d+))?\s*:?\s*/,
       (_, major, minor) =>
@@ -167,7 +167,7 @@ class NoteBuilderBase extends FrontmatterBuilderBase {
     const sectionValue = values[sectionFieldId];
     const unitValue = values[unitFieldId] || "";
     const contentOrganization = sectionValue
-      ? `${sectionValue} - ${unitValue}`
+      ? `${unitValue} - ${sectionValue}`
       : `${unitValue}`;
 
     const creatorInput = values[creatorFieldId] || "";
@@ -193,9 +193,9 @@ class NoteBuilderBase extends FrontmatterBuilderBase {
       includeNext: true,
     });
 
-    const formattedChapter = this.#formatChapterIdentifier(unitValue);
+    const formattedUnit = this.formatUnitIdentifier(unitValue);
     const generatedFilename = TextFormatter.slugify(
-      `n${fileIndex} ${extractedTitle} ${formattedChapter}`,
+      `n${fileIndex} ${extractedTitle} ${formattedUnit}`,
     );
 
     const generatedTitle = unitValue
@@ -211,7 +211,7 @@ class NoteBuilderBase extends FrontmatterBuilderBase {
       ...baseProcessedValues,
       aliases: `"${formattedContentTitle} - ${unitValue}"`,
       title: generatedTitle,
-      slug: TextFormatter.slugify(`${extractedTitle} - ${formattedChapter}`),
+      slug: TextFormatter.slugify(`${extractedTitle} - ${formattedUnit}`),
       type: this.getCategoryType(),
       folder: generatedFolderName,
       filename: generatedFilename,
