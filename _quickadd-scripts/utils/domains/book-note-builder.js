@@ -51,6 +51,14 @@ class NoteBuilderBook extends NoteBuilderBase {
   getSectionFieldLabel() {
     return "Section title";
   }
+
+  formatUnitIdentifier(text) {
+    return text.replace(
+      /^(?:Chapter\s+)?(\d+)(?:\.(\d+))?\s*:?\s*/,
+      (_, major, minor) =>
+        `ch${major.padStart(2, "0")}${minor ? "-" + minor.padStart(2, "0") : ""}: `,
+    );
+  }
 }
 
 module.exports = NoteBuilderBook;
