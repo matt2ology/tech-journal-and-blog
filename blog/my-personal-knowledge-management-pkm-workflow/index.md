@@ -20,7 +20,6 @@ My system adapts the [**Zettelkasten method**](https://en.wikipedia.org/wiki/Zet
 | **2b. Synthesis**          | **Book / Course**              | Combining parts into macro thesis & unified framework | 🟡 **Medium** (Linked to Analysis Notes) | `synthesis`              |
 | **3. Network**             | **Atomic Concept Notes**       | Reusable mental models & declarative ideas            | 🔴 **Fully Decoupled**                   | `concepts`               |
 | **4. Output** (_optional_) | **Projects & Writings**        | Essays, decision models, and deliverables             | 🔵 **Context-Specific**                  | `projects`               |
-|                            |                                |                                                       |                                          |                          |
 
 ## 🗺️ The Process at a Glance
 
