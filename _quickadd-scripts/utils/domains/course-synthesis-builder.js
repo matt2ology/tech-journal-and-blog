@@ -1,6 +1,3 @@
-const path = require("path");
-const vaultPath = app.vault.adapter.getBasePath();
-
 const SynthesisBuilderBase = require("../base/synthesis-builder-base");
 
 /**
