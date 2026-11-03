@@ -14,6 +14,7 @@
     "slug": "text",
     "tags": "tags",
     "title": "text",
-    "toc": "checkbox"
+    "toc": "checkbox",
+    "meal": "multitext"
   }
 }
