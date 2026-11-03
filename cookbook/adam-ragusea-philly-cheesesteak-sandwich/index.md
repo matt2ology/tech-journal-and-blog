@@ -10,8 +10,8 @@ dish: Philly Cheesesteak Sandwich
 chef:
   - "[[adam-ragusea|Adam Ragusea]]"
 meal:
-  - Lunch
-  - Dinner
+  - lunch
+  - dinner
 image: philly-cheesesteak-sandwich-20261026133420.png
 ---
 
