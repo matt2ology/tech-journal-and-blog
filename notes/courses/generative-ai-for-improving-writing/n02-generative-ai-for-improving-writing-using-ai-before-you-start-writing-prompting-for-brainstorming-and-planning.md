@@ -202,7 +202,7 @@ lesson: Prompting for Brainstorming and Planning
 
 > [!tldr] Cumulative Summary
 > LLMs requires strong, specific, contextual prompts, so that it can output better initial outputs; but, be mindful of the information you feed it as it opens a risk to your own or company intellectual property (IP), or have the information trained on and shared to the world.
-> 
+>
 > In the western world AI generated text, because it's been trained on the world's data, isn't enough to claim as copyright material - there has to be, not minuscule amount, of human authorship.
 
 <!-- blockquote separator -->
@@ -226,11 +226,11 @@ lesson: Prompting for Brainstorming and Planning
 
 > [!note] Marginalia / Reflection
 > This is where proper, professional, company alinged coaching would help.
-> 
+>
 > If one lack the ability to write well, or be productive in a manner that marits their position, when the power is out what value do they even bring?
-> 
+>
 > Prompts to help you brainstorm and plan:
-> 
+>
 > - Create a detailed audience persona for my project on "[topic]." Include:
 >   - Demographics
 >   - Motivations, goals
