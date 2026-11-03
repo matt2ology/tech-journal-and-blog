@@ -120,7 +120,7 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
     return [
       `dish: "${TextFormatter.titleCase(values.dish) || "NoNameDish"}"`,
       `chef: ${this.formatNameList(values.chef, "NoChefNamed")}`,
-      `meal: ${values.meal || "NoMealListed"}`,
+      `meal:${this.formatArray(values.meal, '"NoMealListed"')}`,
       `image: ""`,
     ];
   }
