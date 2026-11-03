@@ -1,17 +1,22 @@
-const TextFormatter = require("./helpers/text-formatter");
 const FrontmatterBuilderBase = require("./base/frontmatter-builder-base");
 const VaultQueryService = require("./services/vault-query-service");
+const TextFormatter = require("./helpers/text-formatter");
 
 /**
- * Recipe-specific frontmatter builder.
+ * Recipe-specific frontmatter builder extending FrontmatterBuilderBase.
  */
 class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
+  constructor(quickAddApi) {
+    super(quickAddApi);
+  }
+
   getFields() {
     const rawChefOptions = VaultQueryService.getFieldValues({
       app,
       fieldName: "chef",
       folderPath: "cookbook",
     });
+
     const processedChefOptions = rawChefOptions.map((chef) =>
       TextFormatter.cleanWikiLink(chef),
     );
@@ -63,28 +68,44 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
   }
 
   processValues(values) {
-    const formattedSource = FrontmatterBuilderRecipe.#formatSourceLink({
+    const baseProcessedValues = super.processValues(values);
+    const dish = values.dish || "";
+    const chef = values.chef || "";
+
+    const formattedSource = this.#formatSourceLink({
       source: values.source,
       sourceTitle: values.source_title,
-      dish: values.dish,
-      chef: values.chef,
+      dish,
+      chef,
+    });
+
+    const updatedCategories = this.appendToList({
+      list: values.categories,
+      items: ["cookbook"],
     });
 
     return {
-      ...values,
+      ...baseProcessedValues,
+      title: TextFormatter.titleCase(`${dish} by ${chef}`),
+      slug: TextFormatter.slugify(`${chef} ${dish}`),
+      categories: updatedCategories,
       source: formattedSource,
-      categories: this.appendToList({
-        list: values.categories,
-        items: ["cookbook"],
-      }),
-      slug: TextFormatter.slugify(`${values.chef} ${values.dish}`),
-      title: TextFormatter.titleCase(
-        `${values.dish} by ${TextFormatter.formatPlainNaturalNameList(values.chef)}`,
-      ),
     };
   }
 
-  static #formatSourceLink({ source, sourceTitle, dish, chef }) {
+  /**
+   * Overrides standard properties to clear the date field upon creation.
+   */
+  buildStandardProperties({ computed }) {
+    return super.buildStandardProperties({
+      computed: {
+        ...computed,
+        date: "",
+      },
+    });
+  }
+
+  #formatSourceLink({ source, sourceTitle, dish, chef }) {
     if (!source) return "";
 
     const trimmedSource = source.trim();
@@ -98,7 +119,7 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
   buildExtraProperties({ values }) {
     return [
       `dish: "${TextFormatter.titleCase(values.dish) || "NoNameDish"}"`,
-      `chef:${this.formatNameList(values.chef, '"NoChefNamed"')}`,
+      `chef: ${this.formatNameList(values.chef, "NoChefNamed")}`,
       `meal: ${values.meal || "NoMealListed"}`,
       `image: ""`,
     ];
