@@ -1,5 +1,11 @@
 # zettelkasten-obsidain-notes-to-hugo-template
 
+- [ ] Generative AI for Improving Writing | Pluralsight Skills Player
+- [ ] Getting Started on Prompt Engineering with Generative AI | Pluralsight Skills Player
+- [ ] Prompt Engineering for Business Professionals | Pluralsight Skills Player
+- [ ] Prompt Engineering for Data Professionals | Pluralsight Skills Player
+- [ ] Prompt Engineering for Human Resources | Pluralsight Skills Player
+
 [https://matt2ology.github.io/](https://matt2ology.github.io/)
 
 https://www.atlasworkspace.ai/blog/zettelkasten-method-guide
