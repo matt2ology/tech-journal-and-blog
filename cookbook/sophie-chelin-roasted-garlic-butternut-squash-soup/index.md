@@ -9,8 +9,8 @@ tags: []
 dish: Roasted Garlic Butternut Squash Soup
 chef: "[[sophie-chelin|Sophie Chelin]]"
 meal:
-  - Lunch
-  - Dinner
+  - lunch
+  - dinner
 image: roasted-garlic-butternut-squash-soup-20261021_194118.jpg
 ---
 
