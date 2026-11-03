@@ -11,7 +11,8 @@ tags: []
 dish: Chicken and Dumplings
 chef:
   - "[[adam-ragusea|Adam Ragusea]]"
-meal: Dinner
+meal:
+  - Dinner
 image: chicken-and-dumplings-20261029192248.jpg
 ---
 
