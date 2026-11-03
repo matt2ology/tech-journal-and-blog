@@ -61,6 +61,28 @@ class FrontmatterBuilderBase {
     return TextFormatter.formatYAMLNameList({ input, fallback });
   }
 
+  /**
+   * Builds and returns an array of standard frontmatter property strings
+   * using the provided computed values.
+   *
+   * @param {Object} options - The options object.
+   * @param {Object} options.computed - The computed standard values (e.g., title, date, draft, slug, etc.).
+   * @returns {string[]} An array of formatted frontmatter property lines.
+   *
+   * @example
+   * // Inside a derived class extending FrontmatterBuilderBase:
+   * buildStandardProperties({ values, computed }) {
+   *   // Call the base implementation to get standard properties
+   *   const standardProps = super.buildStandardProperties({ computed });
+   *
+   *   // Add or combine with custom properties
+   *   return [
+   *     ...standardProps,
+   *     `author: "${values.author || 'Anonymous'}"`,
+   *     `custom_field: true`
+   *   ];
+   * }
+   */
   buildStandardProperties({ computed }) {
     return [
       `aliases: ${computed.aliases}`,
