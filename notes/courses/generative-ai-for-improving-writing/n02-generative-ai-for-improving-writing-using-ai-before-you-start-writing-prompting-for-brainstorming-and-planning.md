@@ -15,12 +15,12 @@ module: Using AI before You Start Writing
 lesson: Prompting for Brainstorming and Planning
 ---
 
+[Pluralsight - Generative AI for Improving Writing by Heather Ackmann](https://www.pluralsight.com/courses/improving-writing-generative-ai)
+
 ## TL;DR (too long; didn't read)
 
 > [!tldr]
 > Summary goes here.
-
-[Pluralsight - Generative AI for Improving Writing by Heather Ackmann](https://www.pluralsight.com/courses/improving-writing-generative-ai)
 
 ## Prompting for Brainstorming and Planning
 
