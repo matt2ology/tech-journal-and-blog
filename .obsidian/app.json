@@ -9,13 +9,13 @@
   "vimMode": true,
   "useMarkdownLinks": false,
   "userIgnoreFilters": [
-    "templates/",
+    "archives/",
     "node_modules/",
     "readme",
-    "archives/",
+    "scripts/",
     "search/",
-    "tests/",
-    "scripts/"
+    "templates/",
+    "tests/"
   ],
   "showUnsupportedFiles": true
 }
