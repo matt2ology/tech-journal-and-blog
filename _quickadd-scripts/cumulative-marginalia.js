@@ -203,15 +203,15 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
         );
       }
 
-      if (this.#evaluateMarginaliaBlockExists(marginaliaContentBlock)) {
-        blockquoteSections.push(marginaliaContentBlock);
-      }
-
       let quoteAndLocationBlock = `> [!quote]\n${quotedTextLines}`;
       if (this.#evaluateLocationLineExists(locationMarkdownLine)) {
         quoteAndLocationBlock += `\n${locationMarkdownLine}`;
       }
       blockquoteSections.push(quoteAndLocationBlock);
+
+      if (this.#evaluateMarginaliaBlockExists(marginaliaContentBlock)) {
+        blockquoteSections.push(marginaliaContentBlock);
+      }
 
       // Join sections with a blank line containing an HTML comment to satisfy [MD028](https://github.com/DavidAnson/markdownlint/blob/v0.41.1/doc/md028.md)
       const combinedBlockquoteContent = blockquoteSections.join(
