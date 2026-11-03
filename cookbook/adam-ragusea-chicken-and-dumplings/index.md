@@ -2,8 +2,8 @@
 aliases:
   - Chicken and Dumplings by Adam Ragusea
 title: Chicken and Dumplings by Adam Ragusea
-date: 2026-10-28
-draft: true
+date: 2026-10-29T19:22:00
+draft: false
 slug: adam-ragusea-chicken-and-dumplings
 categories:
   - cookbook
@@ -12,7 +12,7 @@ dish: Chicken and Dumplings
 chef:
   - "[[adam-ragusea|Adam Ragusea]]"
 meal: Dinner
-image: ""
+image: chicken-and-dumplings-20261029192248.jpg
 ---
 
 **Source:** [Chicken and dumplings (biscuity, Southern-style)](https://youtu.be/JgPfKZovZhA?si=qIWRFfymn0HCXZyX)
