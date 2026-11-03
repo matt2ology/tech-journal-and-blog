@@ -11,8 +11,8 @@ dish: Goulash
 chef:
   - "[[adam-ragusea|Adam Ragusea]]"
 meal:
-  - Lunch
-  - Dinner
+  - lunch
+  - dinner
 image: LOGB-FOOD-goulash-2026.jpeg
 ---
 
