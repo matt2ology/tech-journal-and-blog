@@ -11,6 +11,7 @@ dish: "Sikhye: 식혜 Rice Punch"
 chef:
   - "[[brand-samjin-food|Brand: Samjin Food]]"
 meal:
+  - breakfast
   - lunch
   - dinner
 image: LOGB-FOOD-sikhye-rice-punch-samjin-food-2026.jpg
