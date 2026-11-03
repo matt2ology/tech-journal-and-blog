@@ -24,6 +24,8 @@ lesson: The Writing Process
 > - It is important to prioritize human creative control as it is a requirement for regional copyright laws
 > - GenAI can help one write and ideate faster by leveraging both "AI‑assisted" (i.e. modifying the text outputted from GenAI) and "AI‑generated writing" (i.e. copy-and-paste)
 
+[Pluralsight - Generative AI for Improving Writing by Heather Ackmann](https://www.pluralsight.com/courses/improving-writing-generative-ai)
+
 ## The Writing Process
 
 ### id0nrxBCwMZ0
