@@ -15,6 +15,8 @@ module: Using AI before You Start Writing
 lesson: The Writing Process
 ---
 
+[Pluralsight - Generative AI for Improving Writing by Heather Ackmann](https://www.pluralsight.com/courses/improving-writing-generative-ai)
+
 ## TL;DR (too long; didn't read)
 
 > [!tldr]
@@ -23,8 +25,6 @@ lesson: The Writing Process
 > - Ackermann claims using GenAi can accelerate the writing process without replacing your unique voice or style
 > - It is important to prioritize human creative control as it is a requirement for regional copyright laws
 > - GenAI can help one write and ideate faster by leveraging both "AI‑assisted" (i.e. modifying the text outputted from GenAI) and "AI‑generated writing" (i.e. copy-and-paste)
-
-[Pluralsight - Generative AI for Improving Writing by Heather Ackmann](https://www.pluralsight.com/courses/improving-writing-generative-ai)
 
 ## The Writing Process
 
