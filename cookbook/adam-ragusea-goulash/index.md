@@ -18,7 +18,7 @@ image: LOGB-FOOD-goulash-2026.jpeg
 
 **Source:** [Goulash: the reddest of all stews](https://youtu.be/qJJpkpdOup0?si=qjasRQYBSp_SRxS4)
 
-[[LOGB-FOOD-goulash-2026-recipe-note.pdf]]
+[LOGB-FOOD-goulash-2026-recipe-note.pdf](LOGB-FOOD-goulash-2026-recipe-note.pdf)
 
 ## 💡 Notes & Variations
 
