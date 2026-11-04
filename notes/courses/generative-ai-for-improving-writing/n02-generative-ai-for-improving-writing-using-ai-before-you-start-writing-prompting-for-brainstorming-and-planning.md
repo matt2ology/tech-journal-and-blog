@@ -83,7 +83,7 @@ lesson: Prompting for Brainstorming and Planning
 <!-- blockquote separator -->
 
 > [!note] Marginalia / Reflection
-> The Prewriting Process:
+> The Pre-writing Process:
 >
 > - Brainstorming and narrowing topics
 > - Outlining/mapping ideas
@@ -203,7 +203,7 @@ lesson: Prompting for Brainstorming and Planning
 <!-- blockquote separator -->
 
 > [!quote]
-> Just remember, before sharing any real‑world context in a prompt, avoid including confidential or proprietary details. Never paste internal documents, client data, private financials, or personally identifiable information into AI tools, unless your organization's policy explicitly allows it. Instead, you can use anonymized examples when you practice, such as Globomantics for your company, or a regional nonprofit for a client. This keeps your practice realistic while maintaining professional privacy and compliance standards.
+> Just remember, before sharing any real‑world context in a prompt, avoid including confidential or proprietary details. Never paste internal documents, client data, private financial, or personally identifiable information into AI tools, unless your organization's policy explicitly allows it. Instead, you can use anonymized examples when you practice, such as Globomantics for your company, or a regional nonprofit for a client. This keeps your practice realistic while maintaining professional privacy and compliance standards.
 
 <!-- blockquote separator -->
 
@@ -232,7 +232,7 @@ lesson: Prompting for Brainstorming and Planning
 <!-- blockquote separator -->
 
 > [!note] Marginalia / Reflection
-> Then to dispell all problems of what percent is original or what percent is AI generated - you might as well have started with your own idea and outline.
+> Then to dispel all problems of what percent is original or what percent is AI generated - you might as well have started with your own idea and outline.
 
 ---
 
@@ -244,9 +244,9 @@ lesson: Prompting for Brainstorming and Planning
 <!-- blockquote separator -->
 
 > [!note] Marginalia / Reflection
-> This is where proper, professional, company alinged coaching would help.
+> This is where proper, professional, company aligned coaching would help.
 >
-> If one lack the ability to write well, or be productive in a manner that marits their position, when the power is out what value do they even bring?
+> If one lack the ability to write well, or be productive in a manner that merits their position, when the power is out what value do they even bring?
 >
 > Prompts to help you brainstorm and plan:
 >
