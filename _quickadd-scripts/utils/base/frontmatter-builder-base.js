@@ -7,15 +7,11 @@ class FrontmatterBuilderBase {
   #fields;
 
   constructor(quickAddApi) {
-    const isValid = FrontmatterBuilderBase.#hasInvalidQuickAddApi({
-      quickAddApi,
-    });
-    isValid &&
-      (() => {
-        throw new TypeError(
-          "FrontmatterBuilderBase requires a QuickAdd API instance with requestInputs().",
-        );
-      })();
+    if (!quickAddApi || typeof quickAddApi.requestInputs !== "function") {
+      throw new TypeError(
+        "FrontmatterBuilderBase requires a QuickAdd API instance with requestInputs().",
+      );
+    }
     this.#quickAddApi = quickAddApi;
     this.#fields = Object.freeze([
       {
@@ -42,16 +38,8 @@ class FrontmatterBuilderBase {
     ]);
   }
 
-  static #hasInvalidQuickAddApi({ quickAddApi }) {
-    const isInvalid = !Boolean(
-      quickAddApi && typeof quickAddApi.requestInputs === "function",
-    );
-    return isInvalid;
-  }
-
   getFields() {
-    const fieldsCopy = [...this.#fields];
-    return fieldsCopy;
+    return [...this.#fields];
   }
 
   addField(fieldDefinition) {
@@ -59,22 +47,19 @@ class FrontmatterBuilderBase {
   }
 
   processValues(values) {
-    const processed = values;
-    return processed;
+    return values;
   }
 
   formatArray(input) {
-    const formatted = TextFormatter.formatYAMLArray({ input });
-    return formatted;
+    return TextFormatter.formatYAMLArray({ input });
   }
 
   formatNameList(input, fallback) {
-    const formatted = TextFormatter.formatYAMLNameList({ input, fallback });
-    return formatted;
+    return TextFormatter.formatYAMLNameList({ input, fallback });
   }
 
   buildStandardProperties({ computed }) {
-    const props = [
+    return [
       `aliases: ${computed.aliases}`,
       `title: "${computed.title}"`,
       `date: "${computed.date}"`,
@@ -83,17 +68,14 @@ class FrontmatterBuilderBase {
       `categories:${computed.categories}`,
       `tags:${computed.tags}`,
     ];
-    return props;
   }
 
   buildExtraProperties() {
-    const emptyProps = [];
-    return emptyProps;
+    return [];
   }
 
   appendToList({ list = "", items = [] }) {
-    const updated = ListUtils.appendUniqueItems({ list, item: items });
-    return updated;
+    return ListUtils.appendUniqueItems({ list, item: items });
   }
 
   async run(params) {
@@ -125,7 +107,7 @@ class FrontmatterBuilderBase {
   }
 
   #computeStandardValues(values) {
-    const computed = {
+    return {
       aliases: values.aliases || "",
       title: TextFormatter.titleCase(values.title) || "NoTitle",
       slug: values.slug ?? TextFormatter.slugify(values.title),
@@ -134,12 +116,10 @@ class FrontmatterBuilderBase {
       categories: this.formatArray(values.categories),
       tags: this.formatArray(values.tags),
     };
-    return computed;
   }
 
   #syncExecutionVariables({ params, computed, frontmatter, values }) {
-    const hasVariables = Boolean(params?.variables);
-    hasVariables &&
+    params?.variables &&
       Object.assign(params.variables, computed, values, { frontmatter });
   }
 }
