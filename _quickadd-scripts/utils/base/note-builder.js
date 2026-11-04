@@ -11,6 +11,30 @@ class NoteBuilder extends ContentBuilderBase {
     return "notes";
   }
 
+  // Extract Method: Standardized organization string construction
+  #buildContentOrganization(unitValue, sectionValue) {
+    if (sectionValue) {
+      return `${unitValue} - ${sectionValue}`;
+    }
+    return `${unitValue}`;
+  }
+
+  // Extract Method / Decompose Conditional: Note header fallback
+  #resolveNoteHeader(sectionValue, unitValue) {
+    if (sectionValue) {
+      return sectionValue;
+    }
+    return unitValue || "Notes & Key Points";
+  }
+
+  // Extract Method / Decompose Conditional: Title construction logic
+  #buildGeneratedTitle(contentMainTitle, contentOrganization, hasUnit) {
+    if (hasUnit) {
+      return `${contentMainTitle} - ${contentOrganization}`;
+    }
+    return `${contentMainTitle}`;
+  }
+
   processValues(values) {
     const baseProcessedValues = super.processValues(values);
     const creatorFieldId = this.getCreatorFieldId();
@@ -20,13 +44,13 @@ class NoteBuilder extends ContentBuilderBase {
 
     const unitValue = values[unitFieldId] || "";
     const sectionValue = values[sectionFieldId] || "";
-    const contentOrganization = sectionValue
-      ? `${unitValue} - ${sectionValue}`
-      : `${unitValue}`;
-
     const creatorInput = values[creatorFieldId] || "";
     const contentInput = values[contentFieldId] || "";
 
+    const contentOrganization = this.#buildContentOrganization(
+      unitValue,
+      sectionValue,
+    );
     const contentMainTitle = TextFormatter.extractBeforeColon(contentInput);
     const generatedFolderName = TextFormatter.slugify(contentMainTitle);
 
@@ -35,10 +59,9 @@ class NoteBuilder extends ContentBuilderBase {
       creatorInput,
     });
 
-    const notesFolderPath = `notes/${this.getCategoryType()}/${generatedFolderName}`;
     const fileIndex = FileCounterUtility.getCount({
       app,
-      folderPath: notesFolderPath,
+      folderPath: `notes/${this.getCategoryType()}/${generatedFolderName}`,
       includeNext: true,
     });
 
@@ -46,15 +69,11 @@ class NoteBuilder extends ContentBuilderBase {
     const generatedFilename = TextFormatter.slugifyAdjacent(
       `n${fileIndex} ${contentMainTitle} ${formattedUnit} ${sectionValue}`,
     );
-
-    const generatedTitle = unitValue
-      ? `${contentMainTitle} - ${contentOrganization}`
-      : `${contentMainTitle}`;
-
-    const updatedCategories = this.appendToList({
-      list: values.categories,
-      items: ["notes", this.getCategoryType()],
-    });
+    const generatedTitle = this.#buildGeneratedTitle(
+      contentMainTitle,
+      contentOrganization,
+      Boolean(unitValue),
+    );
 
     return {
       ...baseProcessedValues,
@@ -68,18 +87,23 @@ class NoteBuilder extends ContentBuilderBase {
       type: this.getCategoryType(),
       folder: generatedFolderName,
       filename: generatedFilename,
-      categories: updatedCategories,
+      categories: this.appendToList({
+        list: values.categories,
+        items: ["notes", this.getCategoryType()],
+      }),
       [creatorFieldId]: this.formatNameList(
         context.creatorInput,
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
-      note_header: sectionValue || unitValue || "Notes & Key Points",
+      note_header: this.#resolveNoteHeader(sectionValue, unitValue),
       reference_links: `${contentMainTitle} - [[${generatedFilename}|${contentOrganization}]]`,
     };
   }
 
   buildExtraProperties({ values }) {
     return [
+      `note_type: ${this.getRootFolderType()}`,
+      `domain: ${this.getCategoryType()}`,
       `${this.getCreatorFieldId()}: ${values[this.getCreatorFieldId()]}`,
       `${this.getContentFieldId()}: "${values[this.getContentFieldId()]}"`,
       `${this.getUnitFieldId()}: "${values[this.getUnitFieldId()]}"`,

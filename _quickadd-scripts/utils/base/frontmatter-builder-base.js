@@ -2,11 +2,9 @@ const TextFormatter = require("../helpers/text-formatter");
 const ListUtils = require("../helpers/list-utils");
 const { serializeFrontmatter } = require("../helpers/frontmatter-serializer");
 
-/**
- * Coordinates the shared frontmatter workflow using OOP design principles.
- */
 class FrontmatterBuilderBase {
   #quickAddApi;
+  #fields;
 
   constructor(quickAddApi) {
     if (FrontmatterBuilderBase.#hasInvalidQuickAddApi({ quickAddApi })) {
@@ -15,16 +13,7 @@ class FrontmatterBuilderBase {
       );
     }
     this.#quickAddApi = quickAddApi;
-  }
-
-  static #hasInvalidQuickAddApi({ quickAddApi }) {
-    return !Boolean(
-      quickAddApi && typeof quickAddApi.requestInputs === "function",
-    );
-  }
-
-  getFields() {
-    return [
+    this.#fields = Object.freeze([
       {
         id: "title",
         label: "Title",
@@ -46,7 +35,23 @@ class FrontmatterBuilderBase {
         placeholder: "tag1, tag2",
         defaultValue: "",
       },
-    ];
+    ]);
+  }
+
+  static #hasInvalidQuickAddApi({ quickAddApi }) {
+    return !Boolean(
+      quickAddApi && typeof quickAddApi.requestInputs === "function",
+    );
+  }
+
+  // Encapsulate Collection: Return a frozen/read-only copy of fields
+  getFields() {
+    return [...this.#fields];
+  }
+
+  addField(fieldDefinition) {
+    // Encapsulate collection mutation
+    this.#fields = Object.freeze([...this.#fields, fieldDefinition]);
   }
 
   processValues(values) {
@@ -61,35 +66,13 @@ class FrontmatterBuilderBase {
     return TextFormatter.formatYAMLNameList({ input, fallback });
   }
 
-  /**
-   * Builds and returns an array of standard frontmatter property strings
-   * using the provided computed values.
-   *
-   * @param {Object} options - The options object.
-   * @param {Object} options.computed - The computed standard values (e.g., title, date, draft, slug, etc.).
-   * @returns {string[]} An array of formatted frontmatter property lines.
-   *
-   * @example
-   * // Inside a derived class extending FrontmatterBuilderBase:
-   * buildStandardProperties({ values, computed }) {
-   *   // Call the base implementation to get standard properties
-   *   const standardProps = super.buildStandardProperties({ computed });
-   *
-   *   // Add or combine with custom properties
-   *   return [
-   *     ...standardProps,
-   *     `author: "${values.author || 'Anonymous'}"`,
-   *     `custom_field: true`
-   *   ];
-   * }
-   */
   buildStandardProperties({ computed }) {
     return [
       `aliases: ${computed.aliases}`,
       `title: "${computed.title}"`,
       `date: "${computed.date}"`,
       `draft: ${computed.draft}`,
-      `slug: "${computed.slug}"`,
+      `slug: ${computed.slug}`,
       `categories:${computed.categories}`,
       `tags:${computed.tags}`,
     ];
@@ -99,19 +82,8 @@ class FrontmatterBuilderBase {
     return [];
   }
 
-  /**
-   * Appends items to an existing list without duplicates using ListUtils.
-   */
   appendToList({ list = "", items = [] }) {
     return ListUtils.appendUniqueItems({ list, item: items });
-  }
-
-  static parseCommaSeparatedList(input = "") {
-    return TextFormatter.parseCommaSeparatedList(input);
-  }
-
-  static parseAndSlugifyCommaSeparatedList(input = "") {
-    return TextFormatter.parseAndSlugifyCommaSeparatedList(input);
   }
 
   async run(params) {

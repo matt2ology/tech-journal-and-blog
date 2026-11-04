@@ -11,12 +11,27 @@ class AnalysisBuilder extends ContentBuilderBase {
     return "notes";
   }
 
+  // Decompose Conditional / Extract Method: Unit identifier string formatting
   formatUnitIdentifier(text) {
-    return text.replace(
-      /^(?:Chapter\s+)?(\d+)(?:\.(\d+))?\s*:?\s*/,
-      (_, major, minor) =>
-        `ch${major.padStart(2, "0")}${minor ? "-" + minor.padStart(2, "0") : ""}: `,
+    const chapterRegex = /^(?:Chapter\s+)?(\d+)(?:\.(\d+))?\s*:?\s*/;
+    return text.replace(chapterRegex, (_, major, minor) =>
+      this.#formatChapterPrefix(major, minor),
     );
+  }
+
+  #formatChapterPrefix(major, minor) {
+    if (minor) {
+      return `ch${major.padStart(2, "0")}-${minor.padStart(2, "0")}: `;
+    }
+    return `ch${major.padStart(2, "0")}: `;
+  }
+
+  // Extract Method: Standardized organization structure
+  #buildContentOrganization(sectionValue, unitValue) {
+    if (sectionValue) {
+      return `${sectionValue} - ${unitValue}`;
+    }
+    return `${unitValue}`;
   }
 
   processValues(values) {
@@ -26,15 +41,15 @@ class AnalysisBuilder extends ContentBuilderBase {
     const sectionFieldId = this.getSectionFieldId();
     const unitFieldId = this.getUnitFieldId();
 
-    const sectionValue = values[sectionFieldId];
+    const sectionValue = values[sectionFieldId] || "";
     const unitValue = values[unitFieldId] || "";
-    const contentOrganization = sectionValue
-      ? `${sectionValue} - ${unitValue}`
-      : `${unitValue}`;
-
     const creatorInput = values[creatorFieldId] || "";
     const contentInput = values[contentFieldId] || "";
 
+    const contentOrganization = this.#buildContentOrganization(
+      sectionValue,
+      unitValue,
+    );
     const extractedTitle = TextFormatter.extractBeforeColon(contentInput);
     const formattedContentTitle = TextFormatter.titleCase(extractedTitle);
     const generatedFolderName = TextFormatter.slugify(extractedTitle);
@@ -44,11 +59,9 @@ class AnalysisBuilder extends ContentBuilderBase {
       creatorInput,
     });
 
-    // FileCounterUtility is actively used here for the analysis folder path
-    const analysisFolderPath = `analysis/${this.getCategoryType()}/${generatedFolderName}`;
     const fileIndex = FileCounterUtility.getCount({
       app,
-      folderPath: analysisFolderPath,
+      folderPath: `analysis/${this.getCategoryType()}/${generatedFolderName}`,
       includeNext: true,
     });
 
@@ -59,24 +72,21 @@ class AnalysisBuilder extends ContentBuilderBase {
     const generatedCaptureNoteFilename = TextFormatter.slugify(
       `n${fileIndex} ${extractedTitle} ${formattedUnit} ${sectionValue}`,
     );
-    const generatedTitle = TextFormatter.titleCase(
-      `Analysis of ${extractedTitle} - ${unitValue}`,
-    );
-
-    const updatedCategories = this.appendToList({
-      list: values.categories,
-      items: ["analysis", this.getCategoryType()],
-    });
 
     return {
       ...baseProcessedValues,
       aliases: `"${formattedContentTitle} - ${unitValue}"`,
-      title: generatedTitle,
+      title: TextFormatter.titleCase(
+        `Analysis of ${extractedTitle} - ${unitValue}`,
+      ),
       slug: TextFormatter.slugify(`${extractedTitle} - ${formattedUnit}`),
       type: this.getCategoryType(),
       folder: generatedFolderName,
       filename: generatedFilename,
-      categories: updatedCategories,
+      categories: this.appendToList({
+        list: values.categories,
+        items: ["analysis", this.getCategoryType()],
+      }),
       [creatorFieldId]: this.formatNameList(
         context.creatorInput,
         `Unknown ${this.getCreatorFieldLabel()}`,
@@ -87,6 +97,8 @@ class AnalysisBuilder extends ContentBuilderBase {
 
   buildExtraProperties({ values }) {
     return [
+      `note_type: ${this.getRootFolderType()}`,
+      `domain: ${this.getCategoryType()}`,
       `${this.getCreatorFieldId()}: ${values[this.getCreatorFieldId()]}`,
       `${this.getContentFieldId()}: "${values[this.getContentFieldId()]}"`,
       `${this.getUnitFieldId()}: "${values[this.getUnitFieldId()]}"`,

@@ -33,12 +33,12 @@ class BlogFrontmatterBuilder extends FrontmatterBuilderBase {
   /**
    * Appends custom extra properties specific to articles.
    */
-  //   buildExtraProperties({ values, computed }) {
-  //     return [
-  //       `author: "${values.author || "Unknown"}"`,
-  //       `readingTime: ${values.readingTime || 5}`,
-  //     ];
-  //   }
+  buildExtraProperties({ values, computed }) {
+    return [
+      `note_type: ${this.getRootFolderType()}`,
+      `domain: ${this.getCategoryType()}`,
+    ];
+  }
 }
 
 module.exports = BlogFrontmatterBuilder;
