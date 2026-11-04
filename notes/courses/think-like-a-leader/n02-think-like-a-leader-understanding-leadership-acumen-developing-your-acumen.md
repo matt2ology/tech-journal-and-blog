@@ -6,7 +6,6 @@ draft: true
 slug: "think-like-a-leader-understanding-leadership-acumen"
 categories:
   - notes
-  - courses
 tags: []
 type: notes
 domain: courses
