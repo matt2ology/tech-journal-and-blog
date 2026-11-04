@@ -35,7 +35,7 @@ class BlogFrontmatterBuilder extends FrontmatterBuilderBase {
    */
   buildExtraProperties({ values, computed }) {
     return [
-      `note_type: ${this.getRootFolderType()}`,
+      `type: ${this.getRootFolderType()}`,
       `domain: ${this.getCategoryType()}`,
     ];
   }
