@@ -1,13 +1,15 @@
 ---
 aliases:
-title: "Poached Salmon by Restro Vivaldi"
+  - Poached Salmon by Restro Vivaldi
+  - Poached Salmon
+title: Poached Salmon by Restro Vivaldi
 date: ""
 draft: true
-slug: "restro-vivaldi-poached-salmon"
+slug: restro-vivaldi-poached-salmon
 categories:
   - cookbook
 tags: []
-dish: "Poached Salmon"
+dish: Poached Salmon
 chef:
   - "[[restro-vivaldi|Restro Vivaldi]]"
 meal:
