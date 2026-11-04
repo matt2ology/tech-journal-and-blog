@@ -8,8 +8,7 @@ class NoteBuilder extends ContentBuilderBase {
   }
 
   getRootFolderType() {
-    const type = "notes";
-    return type;
+    return "notes";
   }
 
   #buildContentOrganization(unitValue, sectionValue) {
@@ -85,7 +84,7 @@ class NoteBuilder extends ContentBuilderBase {
       filename: generatedFilename,
       categories: this.appendToList({
         list: values.categories,
-        items: ["notes", this.getCategoryType()],
+        items: [this.getRootFolderType()],
       }),
       [creatorFieldId]: this.formatNameList(
         context.creatorInput,
@@ -99,7 +98,7 @@ class NoteBuilder extends ContentBuilderBase {
 
   buildExtraProperties({ values }) {
     const props = [
-      `note_type: ${this.getRootFolderType()}`,
+      `type: ${this.getRootFolderType()}`,
       `domain: ${this.getCategoryType()}`,
       `${this.getCreatorFieldId()}: ${values[this.getCreatorFieldId()]}`,
       `${this.getContentFieldId()}: "${values[this.getContentFieldId()]}"`,
