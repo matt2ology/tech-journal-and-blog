@@ -5,7 +5,7 @@ authors: matt2ology
 categories:
   - concept
 date: 2026-04-15T20:55:00-07:00
-draft: false
+draft: true
 slug: summary-chloe-shih-3-networking-tips-if-you-hate-networking
 tags:
 title: Summary of Chloe Shih - 3 Networking Tips if you Hate Networking
