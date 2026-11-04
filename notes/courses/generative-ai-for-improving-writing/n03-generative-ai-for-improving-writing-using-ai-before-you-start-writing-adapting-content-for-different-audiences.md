@@ -99,5 +99,7 @@ lesson: "Adapting Content for Different Audiences"
 > You're asking AI to help you with something specific (to the agency/company, requires domain knowledge, know key individuals and people of interest), but instructed prompt with generics?
 >
 > Wasn't [[n02-generative-ai-for-improving-writing-using-ai-before-you-start-writing-prompting-for-brainstorming-and-planning#idlqAv5ktAxx|the whole point of prompting is to be specific, so that you have better starts]]. Be generic and fictional so AI can aid you in writing for specific work in real life.
+>
+> Why do I have to sacrifice privacy to gain arguably marginal benefits. If an employee does not have the skill to write: 1. Why were they hired? 2. Why are they not supported by way of mentors, peers, or resources in the effort?
 
 ---
