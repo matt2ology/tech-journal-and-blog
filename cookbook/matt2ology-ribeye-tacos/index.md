@@ -56,10 +56,17 @@ Optional Additions / Variations:
 - [ ] Garlic
 - [ ] Spices (e.g., ground cumin)
 
-1. **Mash the Avocados:** Use a molcajete or fork 2. Halve and pit the avocados 3. Scoop the flesh into a molcajete (or mixing bowl) and mash to your preferred consistency chunkier or smoother depending on taste
-2. **Prep & Add Produce:** Dice evenly for uniform distribution 5. Dice the tomatoes, jalapeño (optional), onion, and cilantro 6. Add them directly to the mashed avocado base
-3. **Season and Lime:** Adjust acidity and salt to taste 8. Squeeze fresh lime juice over the mixture and sprinkle with salt to enhance the flavor
-4. **Mix and Serve:** Combine all ingredients thoroughly and serve immediately 10. Stir everything together until well combined 11. Taste and adjust salt or lime juice if needed
+1. **Mash the Avocados:** Use a molcajete or fork
+2. Halve and pit the avocados
+3. Scoop the flesh into a molcajete (or mixing bowl) and mash to your preferred consistency chunkier or smoother depending on taste
+4. **Prep & Add Produce:** Dice evenly for uniform distribution
+5. Dice the tomatoes, jalapeño (optional), onion, and cilantro
+6. Add them directly to the mashed avocado base
+7. **Season and Lime:** Adjust acidity and salt to taste
+8. Squeeze fresh lime juice over the mixture and sprinkle with salt to enhance the flavor
+9. **Mix and Serve:** Combine all ingredients thoroughly and serve immediately
+10. Stir everything together until well combined
+11. Taste and adjust salt or lime juice if needed
 
 ## 👩‍🍳 Instructions (Steps)
 
