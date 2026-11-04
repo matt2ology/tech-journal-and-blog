@@ -9,6 +9,8 @@ categories:
   - notes
   - courses
 tags: []
+type: notes
+domain: courses
 instructor:
   - "[[doc-norton|Doc Norton]]"
 course: Think Like a Leader
