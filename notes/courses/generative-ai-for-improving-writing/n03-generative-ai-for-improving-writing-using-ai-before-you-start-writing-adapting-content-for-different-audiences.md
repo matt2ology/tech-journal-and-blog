@@ -103,3 +103,36 @@ lesson: "Adapting Content for Different Audiences"
 > Why do I have to sacrifice privacy to gain arguably marginal benefits. If an employee does not have the skill to write: 1. Why were they hired? 2. Why are they not supported by way of mentors, peers, or resources in the effort?
 
 ---
+
+### idC0nEcaBp2t
+
+> [!tldr] Cumulative Summary
+> Be mindful of exposing specifics and information to the AI tool; especially, when using AI to draft outlines for different target audences.
+> 
+> Knowing that executives information fast, at a high-level of detail, and articulates how it will help the business - AI can aid in drafting the outline.
+
+<!-- blockquote separator -->
+
+> [!quote]
+> So let's revise our outlines for a very specific audience: executives. They want things fast, they want the high‑level details, and how it will help the business.
+
+<!-- blockquote separator -->
+
+> [!note] Marginalia / Reflection
+> If you already identifed the audience, you even know how it should be communicated (i.e. fast, high-level, and how it will help the business), you know the outline, do some meaningful work, instead of playing around with a text bot.
+> 
+> Run the logic of what you want to present:
+> 
+>    1. Is what I'm going to share quick enough to go though with leadership?
+>    2. Does my presentation have so much detail where it can't be understood within 3 to 5 minutes?
+>    3. Does my topic, document, or presentation help articulate how it will help the business?
+> 
+> If at any point the answer is "no" then you have some idea and expectation to write towards.
+> 
+> Problems are easy to solve - keep breaking down the problem to its most basic actionable component. Repeat until the problem is solved.
+> 
+> On the other hand, delemas are more difficult and require a team, leadership, and culture to justify and effort to resolving.
+
+---
+
+
