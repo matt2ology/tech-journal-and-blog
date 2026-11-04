@@ -1,38 +1,19 @@
-const FrontmatterBuilderBase = require("../base/frontmatter-builder-base");
+const ContentBuilderBase = require("./content-builder-base");
 const TextFormatter = require("../helpers/text-formatter");
 const VaultQueryService = require("../services/vault-query-service");
 
-class SynthesisBuilder extends FrontmatterBuilderBase {
-  constructor(quickAddApi) {
-    super(quickAddApi);
-  }
-
-  getCategoryType() {
-    throw new Error("Derived classes must implement getCategoryType()");
-  }
-  getCreatorFieldId() {
-    throw new Error("Derived classes must implement getCreatorFieldId()");
-  }
-  getCreatorFieldLabel() {
-    throw new Error("Derived classes must implement getCreatorFieldLabel()");
-  }
-  getContentFieldId() {
-    throw new Error("Derived classes must implement getContentFieldId()");
-  }
-  getContentFieldLabel() {
-    throw new Error("Derived classes must implement getContentFieldLabel()");
-  }
-
+class SynthesisBuilder extends ContentBuilderBase {
   getFields() {
+    const rootFolder = `analysis/${this.getCategoryType()}`;
     const rawContentOptions = VaultQueryService.getSubfolderNames({
       app,
-      folderPath: `analysis/${this.getCategoryType()}`,
+      folderPath: rootFolder,
     });
     const processedContentOptions = rawContentOptions.map((option) =>
       TextFormatter.titleCase(option),
     );
 
-    const fields = [
+    return [
       {
         id: this.getContentFieldId(),
         label: this.getContentFieldLabel(),
@@ -56,55 +37,6 @@ class SynthesisBuilder extends FrontmatterBuilderBase {
         defaultValue: "",
       },
     ];
-    return fields;
-  }
-
-  #matchesSubfolder(sub, formattedContent) {
-    const isMatch =
-      TextFormatter.titleCase(sub) === formattedContent ||
-      sub.toLowerCase() === formattedContent.toLowerCase();
-    return isMatch;
-  }
-
-  #resolveCreatorInput({ rootFolder, matchedSubfolder, creatorInput }) {
-    const contentFolderPath = `${rootFolder}/${matchedSubfolder}`;
-    const existingCreators = VaultQueryService.getFieldValues({
-      app,
-      fieldName: this.getCreatorFieldId(),
-      folderPath: contentFolderPath,
-    });
-
-    const hasExisting = existingCreators.length > 0;
-    const resolved =
-      creatorInput ||
-      (hasExisting
-        ? existingCreators
-            .map((creator) => TextFormatter.cleanWikiLink(creator))
-            .join(", ")
-        : "");
-    return resolved;
-  }
-
-  #resolveContentContext({ formattedContent, creatorInput }) {
-    const rootFolder = `analysis/${this.getCategoryType()}`;
-    const subfolders = VaultQueryService.getSubfolderNames({
-      app,
-      folderPath: rootFolder,
-    });
-    const matchedSubfolder = subfolders.find((sub) =>
-      this.#matchesSubfolder(sub, formattedContent),
-    );
-
-    const resolvedCreator = matchedSubfolder
-      ? this.#resolveCreatorInput({
-          rootFolder,
-          matchedSubfolder,
-          creatorInput,
-        })
-      : creatorInput;
-
-    const context = { creatorInput: resolvedCreator };
-    return context;
   }
 
   processValues(values) {
@@ -122,12 +54,14 @@ class SynthesisBuilder extends FrontmatterBuilderBase {
 
     const formattedContentTitle = TextFormatter.titleCase(extractedTitle);
     const generatedFolderName = TextFormatter.slugify(extractedTitle);
-    const context = this.#resolveContentContext({
+
+    const context = this.resolveContentContext({
       formattedContent: formattedContentTitle,
       creatorInput,
+      customRootFolder: `analysis/${this.getCategoryType()}`,
     });
 
-    const result = {
+    return {
       ...baseProcessedValues,
       aliases: `"${contentInput} Synthesis"`,
       title: TextFormatter.titleCase(`Synthesis of ${extractedTitle}`),
@@ -144,19 +78,17 @@ class SynthesisBuilder extends FrontmatterBuilderBase {
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
     };
-    return result;
   }
 
   buildExtraProperties({ values }) {
     const creatorFieldId = this.getCreatorFieldId();
     const contentFieldId = this.getContentFieldId();
-    const props = [
+    return [
       `type: ${this.getRootFolderType()}`,
       `domain: ${this.getCategoryType()}`,
       `${creatorFieldId}: ${values[creatorFieldId]}`,
       `${contentFieldId}: "${values[contentFieldId]}"`,
     ];
-    return props;
   }
 }
 
