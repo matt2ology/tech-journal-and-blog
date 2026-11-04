@@ -73,9 +73,10 @@ lesson: The Writing Process
 >
 > AI sycophancy (sik-uh-fuhn-see), the tendency of LLMs to tailor their answers to one's bias and self-validation, does not provide true critique nor scrutiny one would need to draft strong arguments or well written pros.
 >
-> AI, by way of Large Language Models (LLM), are as good as what it has been trained on, and by volume, will often output more text than what is required to be quickly understood.
+> AI, by way of Large Language Models (LLMs), are as good as what it has been trained on, and by volume, will often output more text than what is required to be quickly understood.
 >
-> In addition, because LLMs are trained on such volume of text the LLMs will output the average; and, so your "unique voice" and "style" will be edited and revised to be average - void of your own unique life experiences, memories, lessons, friendships made, mistakes, etc.
+> In addition, because LLMs are trained on such volume of text the LLMs will output the average; and, so your "unique voice" and "style" will be edited and revised to be average - void of your own unique life experiences, memories, lessons, friendships made, mistakes, etc. - all things people care about in key figures, characters, and loved ones.
+
 
 <!-- blockquote separator -->
 
