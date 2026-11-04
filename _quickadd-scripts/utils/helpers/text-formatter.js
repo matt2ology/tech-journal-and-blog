@@ -26,6 +26,11 @@ class TextFormatter {
     "with",
   ]);
 
+  /**
+   * Set of standard acronyms that should always be fully capitalized.
+   */
+  static ACRONYMS = new Set(["ai", "nasa", "faq"]);
+
   // ==========================================
   // PUBLIC API METHODS
   // ==========================================
@@ -46,6 +51,28 @@ class TextFormatter {
       .replace(/[^a-z0-9_]+/g, "-")
       .replace(/-+/g, "-")
       .replace(/^-+|-+$/g, "");
+    return result;
+  }
+
+  /**
+   * Converts a slugified or standard input text, restoring known acronyms to uppercase.
+   * @param {string} [text=""] The input text.
+   * @returns {string} The formatted text with acronyms capitalized.
+   */
+  static formatAcronyms(text = "") {
+    const validText = typeof text === "string" ? text : "";
+    const words = validText.split(/[-_\s]+/);
+    const processedWords = words.map((word) =>
+      TextFormatter.ACRONYMS.has(word.toLowerCase())
+        ? word.toUpperCase()
+        : word,
+    );
+    const separator = validText.includes("-")
+      ? "-"
+      : validText.includes("_")
+        ? "_"
+        : " ";
+    const result = processedWords.join(separator);
     return result;
   }
 
@@ -279,21 +306,24 @@ class TextFormatter {
   }
 
   /**
-   * Formats an individual word for title casing based on position and minor words.
+   * Formats an individual word for title casing or acronym preservation based on position and rules.
    * @private
    */
   static #formatWord(word, index, lastIndex) {
     const lowerWord = word.toLowerCase();
+    const isAcronym = TextFormatter.ACRONYMS.has(lowerWord);
     const isInternalMinorWord =
       index >= 1 &&
       index < lastIndex &&
       TextFormatter.MINOR_WORDS.has(lowerWord);
 
-    const formattedWord = TextFormatter.#isAllUpperCase(word)
-      ? word
-      : isInternalMinorWord
-        ? lowerWord
-        : lowerWord.charAt(0).toUpperCase() + lowerWord.slice(1);
+    const formattedWord = isAcronym
+      ? word.toUpperCase()
+      : TextFormatter.#isAllUpperCase(word)
+        ? word
+        : isInternalMinorWord
+          ? lowerWord
+          : lowerWord.charAt(0).toUpperCase() + lowerWord.slice(1);
     return formattedWord;
   }
 
@@ -360,14 +390,18 @@ class TextFormatter {
     const subWords = part.split("-");
     const formattedSub = subWords
       .map((sub, subIdx) => {
-        const isSubSpecial = !sub || TextFormatter.#isAllUpperCase(sub);
         const lowerSub = sub ? sub.toLowerCase() : "";
+        const isSubSpecial = !sub || TextFormatter.#isAllUpperCase(sub);
+        const isAcronym = TextFormatter.ACRONYMS.has(lowerSub);
         const isMinor = subIdx > 0 && TextFormatter.MINOR_WORDS.has(lowerSub);
-        const subResult = isSubSpecial
-          ? sub
-          : isMinor
-            ? lowerSub
-            : lowerSub.charAt(0).toUpperCase() + lowerSub.slice(1);
+
+        const subResult = isAcronym
+          ? sub.toUpperCase()
+          : isSubSpecial
+            ? sub
+            : isMinor
+              ? lowerSub
+              : lowerSub.charAt(0).toUpperCase() + lowerSub.slice(1);
         return subResult;
       })
       .join("-");
@@ -393,12 +427,18 @@ class TextFormatter {
    * @private
    */
   static #processWikilinkWord(word, index, totalWords, isAllUpper) {
+    const lowerWord = word.toLowerCase();
+    const isAcronym = TextFormatter.ACRONYMS.has(lowerWord);
     const shouldCapitalize = isAllUpper || word === word.toLowerCase();
-    const targetWord = shouldCapitalize
-      ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-      : word;
+
+    const targetWord = isAcronym
+      ? word.toUpperCase()
+      : shouldCapitalize
+        ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        : word;
 
     const isMiddleInitial =
+      !isAcronym &&
       index > 0 &&
       index < totalWords - 1 &&
       word.replace(/[.,]/g, "").length === 1;
