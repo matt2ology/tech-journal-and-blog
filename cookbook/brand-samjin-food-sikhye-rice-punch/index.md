@@ -1,5 +1,8 @@
 ---
 aliases:
+  - Sikhye
+  - Rice Punch
+  - "Sikhye: 식혜 Rice Punch by Brand: Samjin Food"
 title: "Sikhye: 식혜 Rice Punch by Brand: Samjin Food"
 date: 2026-09-25T10:00:00
 draft: false
