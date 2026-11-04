@@ -1,8 +1,8 @@
 ---
 aliases:
 title: "Sikhye: 식혜 Rice Punch by Brand: Samjin Food"
-date: ""
-draft: true
+date: 2026-09-25T10:00:00
+draft: false
 slug: brand-samjin-food-sikhye-rice-punch
 categories:
   - cookbook
