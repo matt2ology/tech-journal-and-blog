@@ -1,6 +1,6 @@
 ---
-aliases: Generative Ai for Improving Writing - Using AI before You Start Writing
-title: Notes on Generative Ai for Improving Writing Using AI Before You Start Writing
+aliases: Generative AI for Improving Writing - Using AI before You Start Writing
+title: Notes on Generative AI for Improving Writing - Using AI Before You Start Writing - Prompting for Brainstorming and Planning
 date: 2026-11-02T20:34:50-08:00
 draft: false
 slug: generative-ai-for-improving-writing-using-ai-before-you-start-writing
@@ -10,7 +10,7 @@ categories:
 tags: []
 instructor:
   - "[[heather-ackmann|Heather Ackmann]]"
-course: Generative Ai for Improving Writing
+course: Generative AI for Improving Writing
 module: Using AI before You Start Writing
 lesson: Prompting for Brainstorming and Planning
 ---
