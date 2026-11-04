@@ -32,7 +32,7 @@ class SynthesisBuilder extends FrontmatterBuilderBase {
       TextFormatter.titleCase(option),
     );
 
-    return [
+    const fields = [
       {
         id: this.getContentFieldId(),
         label: this.getContentFieldLabel(),
@@ -56,20 +56,17 @@ class SynthesisBuilder extends FrontmatterBuilderBase {
         defaultValue: "",
       },
     ];
+    return fields;
   }
 
-  // Decompose Conditionals: separate condition, then, and else logic
   #matchesSubfolder(sub, formattedContent) {
-    return (
+    const isMatch =
       TextFormatter.titleCase(sub) === formattedContent ||
-      sub.toLowerCase() === formattedContent.toLowerCase()
-    );
+      sub.toLowerCase() === formattedContent.toLowerCase();
+    return isMatch;
   }
 
   #resolveCreatorInput({ rootFolder, matchedSubfolder, creatorInput }) {
-    if (creatorInput) {
-      return creatorInput;
-    }
     const contentFolderPath = `${rootFolder}/${matchedSubfolder}`;
     const existingCreators = VaultQueryService.getFieldValues({
       app,
@@ -77,12 +74,15 @@ class SynthesisBuilder extends FrontmatterBuilderBase {
       folderPath: contentFolderPath,
     });
 
-    if (existingCreators.length > 0) {
-      return existingCreators
-        .map((creator) => TextFormatter.cleanWikiLink(creator))
-        .join(", ");
-    }
-    return "";
+    const hasExisting = existingCreators.length > 0;
+    const resolved =
+      creatorInput ||
+      (hasExisting
+        ? existingCreators
+            .map((creator) => TextFormatter.cleanWikiLink(creator))
+            .join(", ")
+        : "");
+    return resolved;
   }
 
   #resolveContentContext({ formattedContent, creatorInput }) {
@@ -95,17 +95,16 @@ class SynthesisBuilder extends FrontmatterBuilderBase {
       this.#matchesSubfolder(sub, formattedContent),
     );
 
-    if (!matchedSubfolder) {
-      return { creatorInput };
-    }
+    const resolvedCreator = matchedSubfolder
+      ? this.#resolveCreatorInput({
+          rootFolder,
+          matchedSubfolder,
+          creatorInput,
+        })
+      : creatorInput;
 
-    return {
-      creatorInput: this.#resolveCreatorInput({
-        rootFolder,
-        matchedSubfolder,
-        creatorInput,
-      }),
-    };
+    const context = { creatorInput: resolvedCreator };
+    return context;
   }
 
   processValues(values) {
@@ -128,7 +127,7 @@ class SynthesisBuilder extends FrontmatterBuilderBase {
       creatorInput,
     });
 
-    return {
+    const result = {
       ...baseProcessedValues,
       aliases: `"${contentInput} Synthesis"`,
       title: TextFormatter.titleCase(`Synthesis of ${extractedTitle}`),
@@ -145,17 +144,19 @@ class SynthesisBuilder extends FrontmatterBuilderBase {
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
     };
+    return result;
   }
 
   buildExtraProperties({ values }) {
     const creatorFieldId = this.getCreatorFieldId();
     const contentFieldId = this.getContentFieldId();
-    return [
+    const props = [
       `note_type: ${this.getRootFolderType()}`,
       `domain: ${this.getCategoryType()}`,
       `${creatorFieldId}: ${values[creatorFieldId]}`,
       `${contentFieldId}: "${values[contentFieldId]}"`,
     ];
+    return props;
   }
 }
 
