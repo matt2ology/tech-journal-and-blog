@@ -144,9 +144,9 @@ lesson: Prompting for Brainstorming and Planning
 > And for this one, I'm just going to start a new chat. And now type in this prompt,
 >
 > > "Act as a business proposal coach."
-> We're giving the AI a role to perform.
+> > We're giving the AI a role to perform.
 > > "Help me brainstorm ideas for a proposal to improve cross‑department communication."
-> I don't want it to write the thing, I want it to help me brainstorm ideas.
+> > I don't want it to write the thing, I want it to help me brainstorm ideas.
 > > "Suggest three possible proposal directions, key points to include for each, and questions to research. Format the output as a short outline."
 
 <!-- blockquote separator -->
