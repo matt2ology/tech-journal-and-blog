@@ -3,7 +3,7 @@ authors: matt2ology
 categories:
   - concept
 date: 2025-10-20
-draft: false
+draft: true
 tags:
 title: Summary of UnityCoin - Clean Code - Uncle Bob / Lesson 6 - Agile
 ---
