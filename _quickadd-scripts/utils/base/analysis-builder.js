@@ -97,7 +97,7 @@ class AnalysisBuilder extends ContentBuilderBase {
 
   buildExtraProperties({ values }) {
     const props = [
-      `note_type: ${this.getRootFolderType()}`,
+      `type: ${this.getRootFolderType()}`,
       `domain: ${this.getCategoryType()}`,
       `${this.getCreatorFieldId()}: ${values[this.getCreatorFieldId()]}`,
       `${this.getContentFieldId()}: "${values[this.getContentFieldId()]}"`,
