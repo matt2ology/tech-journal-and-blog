@@ -8,31 +8,27 @@ class NoteBuilder extends ContentBuilderBase {
   }
 
   getRootFolderType() {
-    return "notes";
+    const type = "notes";
+    return type;
   }
 
-  // Extract Method: Standardized organization string construction
   #buildContentOrganization(unitValue, sectionValue) {
-    if (sectionValue) {
-      return `${unitValue} - ${sectionValue}`;
-    }
-    return `${unitValue}`;
+    const organization = sectionValue
+      ? `${unitValue} - ${sectionValue}`
+      : `${unitValue}`;
+    return organization;
   }
 
-  // Extract Method / Decompose Conditional: Note header fallback
   #resolveNoteHeader(sectionValue, unitValue) {
-    if (sectionValue) {
-      return sectionValue;
-    }
-    return unitValue || "Notes & Key Points";
+    const header = sectionValue || unitValue || "Notes & Key Points";
+    return header;
   }
 
-  // Extract Method / Decompose Conditional: Title construction logic
   #buildGeneratedTitle(contentMainTitle, contentOrganization, hasUnit) {
-    if (hasUnit) {
-      return `${contentMainTitle} - ${contentOrganization}`;
-    }
-    return `${contentMainTitle}`;
+    const title = hasUnit
+      ? `${contentMainTitle} - ${contentOrganization}`
+      : `${contentMainTitle}`;
+    return title;
   }
 
   processValues(values) {
@@ -75,7 +71,7 @@ class NoteBuilder extends ContentBuilderBase {
       Boolean(unitValue),
     );
 
-    return {
+    const result = {
       ...baseProcessedValues,
       aliases: TextFormatter.titleCase(
         `${contentMainTitle} - ${contentOrganization}`,
@@ -98,10 +94,11 @@ class NoteBuilder extends ContentBuilderBase {
       note_header: this.#resolveNoteHeader(sectionValue, unitValue),
       reference_links: `${contentMainTitle} - [[${generatedFilename}|${contentOrganization}]]`,
     };
+    return result;
   }
 
   buildExtraProperties({ values }) {
-    return [
+    const props = [
       `note_type: ${this.getRootFolderType()}`,
       `domain: ${this.getCategoryType()}`,
       `${this.getCreatorFieldId()}: ${values[this.getCreatorFieldId()]}`,
@@ -109,6 +106,7 @@ class NoteBuilder extends ContentBuilderBase {
       `${this.getUnitFieldId()}: "${values[this.getUnitFieldId()]}"`,
       `${this.getSectionFieldId()}: "${values[this.getSectionFieldId()]}"`,
     ];
+    return props;
   }
 }
 
