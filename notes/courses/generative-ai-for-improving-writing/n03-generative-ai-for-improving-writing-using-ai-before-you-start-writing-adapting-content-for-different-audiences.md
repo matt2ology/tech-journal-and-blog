@@ -8,7 +8,7 @@ categories:
   - notes
   - courses
 tags: []
-instructor: 
+instructor:
   - "[[heather-ackmann|Heather Ackmann]]"
 course: "Generative AI for Improving Writing"
 module: "Using AI before You Start Writing"
