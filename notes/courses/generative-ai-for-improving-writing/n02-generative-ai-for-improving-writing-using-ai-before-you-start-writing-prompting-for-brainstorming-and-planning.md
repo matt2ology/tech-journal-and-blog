@@ -8,6 +8,8 @@ categories:
   - notes
   - courses
 tags: []
+note_type: notes
+domain: courses
 instructor:
   - "[[heather-ackmann|Heather Ackmann]]"
 course: Generative AI for Improving Writing
