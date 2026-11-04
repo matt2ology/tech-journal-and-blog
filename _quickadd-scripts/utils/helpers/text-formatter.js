@@ -67,11 +67,15 @@ class TextFormatter {
         ? word.toUpperCase()
         : word,
     );
-    const separator = validText.includes("-")
-      ? "-"
-      : validText.includes("_")
-        ? "_"
-        : " ";
+
+    // Refactored from nested ternary to clean if/else
+    let separator = " ";
+    if (validText.includes("-")) {
+      separator = "-";
+    } else if (validText.includes("_")) {
+      separator = "_";
+    }
+
     const result = processedWords.join(separator);
     return result;
   }
@@ -317,13 +321,18 @@ class TextFormatter {
       index < lastIndex &&
       TextFormatter.MINOR_WORDS.has(lowerWord);
 
-    const formattedWord = isAcronym
-      ? word.toUpperCase()
-      : TextFormatter.#isAllUpperCase(word)
-        ? word
-        : isInternalMinorWord
-          ? lowerWord
-          : lowerWord.charAt(0).toUpperCase() + lowerWord.slice(1);
+    // Refactored from nested ternary to clean if/else statement
+    let formattedWord;
+    if (isAcronym) {
+      formattedWord = word.toUpperCase();
+    } else if (TextFormatter.#isAllUpperCase(word)) {
+      formattedWord = word;
+    } else if (isInternalMinorWord) {
+      formattedWord = lowerWord;
+    } else {
+      formattedWord = lowerWord.charAt(0).toUpperCase() + lowerWord.slice(1);
+    }
+
     return formattedWord;
   }
 
@@ -374,11 +383,17 @@ class TextFormatter {
   static #formatPhrasePart(part, index, lastIndex) {
     const isSpecial =
       part === "-" || part === "—" || TextFormatter.#isAllUpperCase(part);
-    const formattedPart = isSpecial
-      ? part
-      : part.includes("-")
-        ? TextFormatter.#formatHyphenatedPart(part)
-        : TextFormatter.#formatWord(part, index, lastIndex);
+
+    // Refactored from nested ternary to clean if/else statement
+    let formattedPart;
+    if (isSpecial) {
+      formattedPart = part;
+    } else if (part.includes("-")) {
+      formattedPart = TextFormatter.#formatHyphenatedPart(part);
+    } else {
+      formattedPart = TextFormatter.#formatWord(part, index, lastIndex);
+    }
+
     return formattedPart;
   }
 
@@ -395,13 +410,18 @@ class TextFormatter {
         const isAcronym = TextFormatter.ACRONYMS.has(lowerSub);
         const isMinor = subIdx > 0 && TextFormatter.MINOR_WORDS.has(lowerSub);
 
-        const subResult = isAcronym
-          ? sub.toUpperCase()
-          : isSubSpecial
-            ? sub
-            : isMinor
-              ? lowerSub
-              : lowerSub.charAt(0).toUpperCase() + lowerSub.slice(1);
+        // Refactored from nested ternary to clean if/else statement
+        let subResult;
+        if (isAcronym) {
+          subResult = sub.toUpperCase();
+        } else if (isSubSpecial) {
+          subResult = sub;
+        } else if (isMinor) {
+          subResult = lowerSub;
+        } else {
+          subResult = lowerSub.charAt(0).toUpperCase() + lowerSub.slice(1);
+        }
+
         return subResult;
       })
       .join("-");
@@ -431,11 +451,15 @@ class TextFormatter {
     const isAcronym = TextFormatter.ACRONYMS.has(lowerWord);
     const shouldCapitalize = isAllUpper || word === word.toLowerCase();
 
-    const targetWord = isAcronym
-      ? word.toUpperCase()
-      : shouldCapitalize
-        ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-        : word;
+    // Refactored from nested ternary to clean if/else statement
+    let targetWord;
+    if (isAcronym) {
+      targetWord = word.toUpperCase();
+    } else if (shouldCapitalize) {
+      targetWord = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    } else {
+      targetWord = word;
+    }
 
     const isMiddleInitial =
       !isAcronym &&
@@ -468,14 +492,19 @@ class TextFormatter {
    */
   static #joinNaturalList(items) {
     const len = items.length;
-    const result =
-      len === 0
-        ? "NoNameProvided"
-        : len === 1
-          ? items[0]
-          : len === 2
-            ? `${items[0]} and ${items[1]}`
-            : `${items.slice(0, -1).join(", ")}, and ${items[len - 1]}`;
+
+    // Refactored from chained ternary to clean if/else statement
+    let result;
+    if (len === 0) {
+      result = "NoNameProvided";
+    } else if (len === 1) {
+      result = items[0];
+    } else if (len === 2) {
+      result = `${items[0]} and ${items[1]}`;
+    } else {
+      result = `${items.slice(0, -1).join(", ")}, and ${items[len - 1]}`;
+    }
+
     return result;
   }
 
