@@ -32,7 +32,7 @@ lesson: Prompting for Brainstorming and Planning
 >   - Vague prompting will yield "weak", vague, generalized, outputs
 >   - Ackmann proclaims by writing with the 5 components in mind will yeid stronger prompts and hopefully stronger starts
 > - Ackmann reminds one to protect confidential information
->   - Even when the setting is configured, to set not to use one's inputs to train the model, there is no guarantee that the companies will uphold that promise
+>   - Even when the setting is configured, not to use one's inputs to train the model, there is no guarantee that the companies will uphold that promise
 >   - Never paste internal documents, client data, private financials, or personally identifiable information into AI tools
 > - Ackmann suggests that one should use anonymized examples when prompting the AI tool when describing the proposed 5 components that makes a stronger prompt and by extension a stronger start
 > - When writing be mindful, as it was in school, copyrightability requires human authorship, so you can't simply copy-and-paste words and claim it as your own work
