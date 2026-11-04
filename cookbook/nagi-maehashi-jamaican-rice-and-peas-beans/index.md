@@ -1,13 +1,15 @@
 ---
 aliases:
-title: "Jamaican Rice and Peas (beans) by Nagi Maehashi"
+  - Jamaican Rice and Peas (beans) by Nagi Maehashi
+  - Jamaican Rice and Peas (beans)
+title: Jamaican Rice and Peas (beans) by Nagi Maehashi
 date: ""
 draft: true
-slug: "nagi-maehashi-jamaican-rice-and-peas-beans"
+slug: nagi-maehashi-jamaican-rice-and-peas-beans
 categories:
   - cookbook
 tags: []
-dish: "Jamaican Rice and Peas (beans)"
+dish: Jamaican Rice and Peas (beans)
 chef:
   - "[[nagi-maehashi|Nagi Maehashi]]"
 meal:
