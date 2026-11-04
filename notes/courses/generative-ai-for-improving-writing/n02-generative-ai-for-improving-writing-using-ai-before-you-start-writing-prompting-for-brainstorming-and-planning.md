@@ -180,7 +180,7 @@ lesson: Prompting for Brainstorming and Planning
 > [!note] Marginalia / Reflection
 > Ackmann is a snake oil saleswoman claiming that with better prompting makes AI "less of a text generator and more of a thinking partner"
 >
-> 1. LLMs are text, predictor, generator - it does not "think"
+> 1. LLMs are text generators - it does not "think"
 > 2. When prompting, you too, are being prompted back as you engage and are guided by what the AI outputs; as a result, you lose your own unique voice and style
 >
 > **Strong Prompts \=\= Strong Starts**, so remember:
