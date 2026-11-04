@@ -1,5 +1,7 @@
 ---
 aliases:
+  - Goulash by Adam Ragusea
+  - Goulash
 title: Goulash by Adam Ragusea
 date: 2026-09-09T18:00:00
 draft: false
