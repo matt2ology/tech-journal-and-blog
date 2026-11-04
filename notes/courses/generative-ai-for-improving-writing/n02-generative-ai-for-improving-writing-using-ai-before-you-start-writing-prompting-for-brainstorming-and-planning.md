@@ -2,7 +2,7 @@
 aliases: Generative Ai for Improving Writing - Using AI before You Start Writing
 title: Notes on Generative Ai for Improving Writing Using AI Before You Start Writing
 date: 2026-11-02T20:34:50-08:00
-draft: true
+draft: false
 slug: generative-ai-for-improving-writing-using-ai-before-you-start-writing
 categories:
   - notes
@@ -20,7 +20,22 @@ lesson: Prompting for Brainstorming and Planning
 ## TL;DR (too long; didn't read)
 
 > [!tldr]
-> Summary goes here.
+>
+> - Covers starting from blank page to an outline using AI by starting with a strong prompt
+> - Heather Ackmann propose that there are 5 components to making a strong prompt
+>   - **Role:** **w**ho the AI should act as (defines expertise / voice)
+>   - **Task:** **w**hat you want it to do (the main output)
+>   - **Context - why it matters:** background information the **w**ho, **w**hat, **w**hen, **w**hy
+>   - **Structure:** ho**w** you want the output formatted or organized
+>   - **Tone / audience - the output:** **w**ho the audience is and what tone / style you want
+> - Using AI to help with outlining (i.e. the pre-writing process) will **require** one to **prompt with specific tasks and objectives**
+>   - Vague prompting will yield "weak", vague, generalized, outputs
+>   - Ackmann proclaims by writing with the 5 components in mind will yeid stronger prompts and hopefully stronger starts
+> - Ackmann reminds one to protect confidential information
+>   - Even when the setting is configured, to set not to use one's inputs to train the model, there is no guarantee that the companies will uphold that promise
+>   - Never paste internal documents, client data, private financials, or personally identifiable information into AI tools
+> - Ackmann suggests that one should use anonymized examples when prompting the AI tool when describing the proposed 5 components that makes a stronger prompt and by extension a stronger start
+> - When writing be mindful, as it was in school, copyrightability requires human authorship, so you can't simply copy-and-paste words and claim it as your own work
 
 ## Prompting for Brainstorming and Planning
 
@@ -37,6 +52,7 @@ lesson: Prompting for Brainstorming and Planning
 <!-- blockquote separator -->
 
 > [!note] Marginalia / Reflection
+>
 > The Anatomy of a Solid Prompt:
 >
 > - **Role:** Who the AI should act as (defines expertise/voice)
@@ -44,6 +60,12 @@ lesson: Prompting for Brainstorming and Planning
 > - **Context:** Background info: "who, what, why, when"
 > - **Structure:** How you want the output formatted or organized
 > - **Tone/audience:** Who the audience is and what tone/style you want
+>
+> How does one know if they provided the right context or the right amount of context for the AI to merit you a weaker or stronger feedback?
+>
+> In the time spent you already know the whole stack of who are involved, what the output is, all of the context, the expected structure, and the tone set for the respective audience.
+>
+> What is AI really helping you? By default you're prolong the writing process by trying to copy-and-paste your brain by typing away endlessly in hopes that you can always communicate clearly the first time.
 
 ---
 
@@ -240,5 +262,5 @@ lesson: Prompting for Brainstorming and Planning
 >   - Then, based on the analysis, write one short recommendation explaining which option seems strongest and why.
 > - Act as a business strategy consultant.
 >   - Create a SWOT analysis for [describe company/project/product/idea].
-> - Create a mind map (in text format) showing how subtopics, examples, and supporting details connect to my main topic "[insert topic]."
+> - Create a mind map (in text format) showing how subtopics, examples, and supporting details connect to my main topic "\[insert topic\]."
 >   - Group ideas logically.
