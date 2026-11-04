@@ -1,4 +1,7 @@
 ---
+aliases:
+  - Roasted Garlic Butternut Squash Soup by Sophie Chelin
+  - Roasted Garlic Butternut Squash Soup
 title: Roasted Garlic Butternut Squash Soup by Sophie Chelin
 date: 2026-10-21T19:38:00
 draft: false
