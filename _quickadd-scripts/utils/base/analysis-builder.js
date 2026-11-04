@@ -3,34 +3,13 @@ const FileCounterUtility = require("../helpers/file-counter-utility");
 const TextFormatter = require("../helpers/text-formatter");
 
 class AnalysisBuilder extends ContentBuilderBase {
-  constructor(quickAddApi) {
-    super(quickAddApi);
-  }
-
-  getRootFolderType() {
-    return "notes";
-  }
-
   formatUnitIdentifier(text) {
     const chapterRegex = /^(?:Chapter\s+)?(\d+)(?:\.(\d+))?\s*:?\s*/;
-    const formatted = text.replace(chapterRegex, (_, major, minor) =>
-      this.#formatChapterPrefix(major, minor),
+    return text.replace(chapterRegex, (_, major, minor) =>
+      minor
+        ? `ch${major.padStart(2, "0")}-${minor.padStart(2, "0")}: `
+        : `ch${major.padStart(2, "0")}: `,
     );
-    return formatted;
-  }
-
-  #formatChapterPrefix(major, minor) {
-    const prefix = minor
-      ? `ch${major.padStart(2, "0")}-${minor.padStart(2, "0")}: `
-      : `ch${major.padStart(2, "0")}: `;
-    return prefix;
-  }
-
-  #buildContentOrganization(sectionValue, unitValue) {
-    const org = sectionValue
-      ? `${sectionValue} - ${unitValue}`
-      : `${unitValue}`;
-    return org;
   }
 
   processValues(values) {
@@ -45,10 +24,9 @@ class AnalysisBuilder extends ContentBuilderBase {
     const creatorInput = values[creatorFieldId] || "";
     const contentInput = values[contentFieldId] || "";
 
-    const contentOrganization = this.#buildContentOrganization(
-      sectionValue,
-      unitValue,
-    );
+    const contentOrganization = sectionValue
+      ? `${sectionValue} - ${unitValue}`
+      : unitValue;
     const extractedTitle = TextFormatter.extractBeforeColon(contentInput);
     const formattedContentTitle = TextFormatter.titleCase(extractedTitle);
     const generatedFolderName = TextFormatter.slugify(extractedTitle);
@@ -72,7 +50,7 @@ class AnalysisBuilder extends ContentBuilderBase {
       `n${fileIndex} ${extractedTitle} ${formattedUnit} ${sectionValue}`,
     );
 
-    const result = {
+    return {
       ...baseProcessedValues,
       aliases: `"${formattedContentTitle} - ${unitValue}"`,
       title: TextFormatter.titleCase(
@@ -92,18 +70,16 @@ class AnalysisBuilder extends ContentBuilderBase {
       ),
       reference_links: `[[00-${generatedFolderName}-synthesis|${extractedTitle}]] - [[${generatedCaptureNoteFilename}|${contentOrganization}]]`,
     };
-    return result;
   }
 
   buildExtraProperties({ values }) {
-    const props = [
+    return [
       `type: ${this.getRootFolderType()}`,
       `domain: ${this.getCategoryType()}`,
       `${this.getCreatorFieldId()}: ${values[this.getCreatorFieldId()]}`,
       `${this.getContentFieldId()}: "${values[this.getContentFieldId()]}"`,
       `${this.getUnitFieldId()}: "${values[this.getUnitFieldId()]}"`,
     ];
-    return props;
   }
 }
 
