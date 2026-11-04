@@ -1,5 +1,7 @@
 ---
 aliases:
+  - Ribeye Tacos
+  - Ribeye Tacos by Matt2ology
 title: Ribeye Tacos by Matt2ology
 date: 2026-09-25T18:00:00
 draft: false
