@@ -2,15 +2,7 @@ const FrontmatterBuilderBase = require("../base/frontmatter-builder-base");
 const TextFormatter = require("../helpers/text-formatter");
 const VaultQueryService = require("../services/vault-query-service");
 
-/**
- * Intermediate base class encapsulating shared workflow behavior for content domains (analysis, notes, etc.).
- */
 class ContentBuilderBase extends FrontmatterBuilderBase {
-  constructor(quickAddApi) {
-    super(quickAddApi);
-  }
-
-  // --- Template Hooks to be implemented by derived classes ---
   getCategoryType() {
     throw new Error("Derived classes must implement getCategoryType()");
   }
@@ -40,22 +32,20 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
   }
 
   getRootFolderType() {
-    return "notes"; // Override in analysis to point to "analysis"
+    return "notes";
   }
-
   formatUnitIdentifier(text) {
     return text;
   }
 
-  // --- Shared Implementation ---
-
   getFields() {
-    const rawContentOptions = VaultQueryService.getSubfolderNames({
+    const rootFolder = `${this.getRootFolderType()}/${this.getCategoryType()}`;
+    const rawOptions = VaultQueryService.getSubfolderNames({
       app,
-      folderPath: `${this.getRootFolderType()}/${this.getCategoryType()}`,
+      folderPath: rootFolder,
     });
-    const processedContentOptions = rawContentOptions.map((option) =>
-      TextFormatter.titleCase(option),
+    const processedOptions = rawOptions.map((opt) =>
+      TextFormatter.titleCase(opt),
     );
 
     return [
@@ -63,11 +53,11 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
         id: this.getContentFieldId(),
         label: this.getContentFieldLabel(),
         type: "suggester",
-        options: processedContentOptions,
+        options: processedOptions,
         placeholder: "Enter title or select existing",
         defaultValue: "",
         suggesterConfig: {
-          displayValues: processedContentOptions,
+          displayValues: processedOptions,
           allowCustomInput: true,
           caseSensitive: false,
           multiSelect: false,
@@ -98,28 +88,29 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
     ];
   }
 
-  resolveContentContext({ formattedContent, creatorInput }) {
-    const rootFolder = `${this.getRootFolderType()}/${this.getCategoryType()}`;
+  resolveContentContext({ formattedContent, creatorInput, customRootFolder }) {
+    if (creatorInput) return { creatorInput };
+
+    const rootFolder =
+      customRootFolder ||
+      `${this.getRootFolderType()}/${this.getCategoryType()}`;
     const subfolders = VaultQueryService.getSubfolderNames({
       app,
       folderPath: rootFolder,
     });
 
-    const matchedSubfolder = subfolders.find(
+    const matched = subfolders.find(
       (sub) =>
         TextFormatter.titleCase(sub) === formattedContent ||
         sub.toLowerCase() === formattedContent.toLowerCase(),
     );
 
-    if (!matchedSubfolder || creatorInput) {
-      return { creatorInput };
-    }
+    if (!matched) return { creatorInput };
 
-    const contentFolderPath = `${rootFolder}/${matchedSubfolder}`;
     const existingCreators = VaultQueryService.getFieldValues({
       app,
       fieldName: this.getCreatorFieldId(),
-      folderPath: contentFolderPath,
+      folderPath: `${rootFolder}/${matched}`,
     });
 
     const resolvedCreator =
