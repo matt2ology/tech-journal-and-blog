@@ -77,7 +77,6 @@ lesson: The Writing Process
 >
 > In addition, because LLMs are trained on such volume of text the LLMs will output the average; and, so your "unique voice" and "style" will be edited and revised to be average - void of your own unique life experiences, memories, lessons, friendships made, mistakes, etc. - all things people care about in key figures, characters, and loved ones.
 
-
 <!-- blockquote separator -->
 
 > [!quote]
