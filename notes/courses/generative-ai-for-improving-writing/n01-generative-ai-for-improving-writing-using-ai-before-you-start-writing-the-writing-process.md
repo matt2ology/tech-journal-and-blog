@@ -6,7 +6,6 @@ draft: false
 slug: generative-ai-for-improving-writing-using-ai-before-you-start-writing
 categories:
   - notes
-  - courses
 tags: []
 type: notes
 domain: courses
