@@ -8,7 +8,7 @@ categories:
   - notes
   - courses
 tags: []
-note_type: notes
+type: notes
 domain: courses
 instructor:
   - "[[heather-ackmann|Heather Ackmann]]"
