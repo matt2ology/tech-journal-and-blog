@@ -1,6 +1,7 @@
 ---
 aliases:
   - Chicken and Dumplings by Adam Ragusea
+  - Chicken and Dumplings
 title: Chicken and Dumplings by Adam Ragusea
 date: 2026-10-29T19:22:00
 draft: false
