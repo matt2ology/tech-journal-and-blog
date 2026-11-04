@@ -1,4 +1,7 @@
 ---
+aliases:
+  - Philly Cheesesteak Sandwich by Adam Ragusea
+  - Philly Cheesesteak Sandwich
 title: Philly Cheesesteak Sandwich by Adam Ragusea
 date: 2026-10-26
 draft: false
