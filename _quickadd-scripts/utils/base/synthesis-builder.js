@@ -151,7 +151,7 @@ class SynthesisBuilder extends FrontmatterBuilderBase {
     const creatorFieldId = this.getCreatorFieldId();
     const contentFieldId = this.getContentFieldId();
     const props = [
-      `note_type: ${this.getRootFolderType()}`,
+      `type: ${this.getRootFolderType()}`,
       `domain: ${this.getCategoryType()}`,
       `${creatorFieldId}: ${values[creatorFieldId]}`,
       `${contentFieldId}: "${values[contentFieldId]}"`,
