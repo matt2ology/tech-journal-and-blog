@@ -7,11 +7,15 @@ class FrontmatterBuilderBase {
   #fields;
 
   constructor(quickAddApi) {
-    if (FrontmatterBuilderBase.#hasInvalidQuickAddApi({ quickAddApi })) {
-      throw new TypeError(
-        "FrontmatterBuilderBase requires a QuickAdd API instance with requestInputs().",
-      );
-    }
+    const isValid = FrontmatterBuilderBase.#hasInvalidQuickAddApi({
+      quickAddApi,
+    });
+    isValid &&
+      (() => {
+        throw new TypeError(
+          "FrontmatterBuilderBase requires a QuickAdd API instance with requestInputs().",
+        );
+      })();
     this.#quickAddApi = quickAddApi;
     this.#fields = Object.freeze([
       {
@@ -39,35 +43,38 @@ class FrontmatterBuilderBase {
   }
 
   static #hasInvalidQuickAddApi({ quickAddApi }) {
-    return !Boolean(
+    const isInvalid = !Boolean(
       quickAddApi && typeof quickAddApi.requestInputs === "function",
     );
+    return isInvalid;
   }
 
-  // Encapsulate Collection: Return a frozen/read-only copy of fields
   getFields() {
-    return [...this.#fields];
+    const fieldsCopy = [...this.#fields];
+    return fieldsCopy;
   }
 
   addField(fieldDefinition) {
-    // Encapsulate collection mutation
     this.#fields = Object.freeze([...this.#fields, fieldDefinition]);
   }
 
   processValues(values) {
-    return values;
+    const processed = values;
+    return processed;
   }
 
   formatArray(input) {
-    return TextFormatter.formatYAMLArray({ input });
+    const formatted = TextFormatter.formatYAMLArray({ input });
+    return formatted;
   }
 
   formatNameList(input, fallback) {
-    return TextFormatter.formatYAMLNameList({ input, fallback });
+    const formatted = TextFormatter.formatYAMLNameList({ input, fallback });
+    return formatted;
   }
 
   buildStandardProperties({ computed }) {
-    return [
+    const props = [
       `aliases: ${computed.aliases}`,
       `title: "${computed.title}"`,
       `date: "${computed.date}"`,
@@ -76,14 +83,17 @@ class FrontmatterBuilderBase {
       `categories:${computed.categories}`,
       `tags:${computed.tags}`,
     ];
+    return props;
   }
 
   buildExtraProperties() {
-    return [];
+    const emptyProps = [];
+    return emptyProps;
   }
 
   appendToList({ list = "", items = [] }) {
-    return ListUtils.appendUniqueItems({ list, item: items });
+    const updated = ListUtils.appendUniqueItems({ list, item: items });
+    return updated;
   }
 
   async run(params) {
@@ -115,7 +125,7 @@ class FrontmatterBuilderBase {
   }
 
   #computeStandardValues(values) {
-    return {
+    const computed = {
       aliases: values.aliases || "",
       title: TextFormatter.titleCase(values.title) || "NoTitle",
       slug: values.slug ?? TextFormatter.slugify(values.title),
@@ -124,11 +134,13 @@ class FrontmatterBuilderBase {
       categories: this.formatArray(values.categories),
       tags: this.formatArray(values.tags),
     };
+    return computed;
   }
 
   #syncExecutionVariables({ params, computed, frontmatter, values }) {
-    if (!params?.variables) return;
-    Object.assign(params.variables, computed, values, { frontmatter });
+    const hasVariables = Boolean(params?.variables);
+    hasVariables &&
+      Object.assign(params.variables, computed, values, { frontmatter });
   }
 }
 
