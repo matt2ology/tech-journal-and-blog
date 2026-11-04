@@ -49,7 +49,7 @@ class NoteBuilder extends ContentBuilderBase {
     );
 
     const generatedTitle = unitValue
-      ? TextFormatter.titleCase(`Notes on ${extractedTitle} - ${unitValue}`)
+      ? TextFormatter.titleCase(`Notes on ${extractedTitle} - ${contentOrganization}`)
       : TextFormatter.titleCase(`Notes on ${extractedTitle}`);
 
     const updatedCategories = this.appendToList({
@@ -59,9 +59,9 @@ class NoteBuilder extends ContentBuilderBase {
 
     return {
       ...baseProcessedValues,
-      aliases: `"${formattedContentTitle} - ${unitValue}"`,
+      aliases: `"${formattedContentTitle} - ${contentOrganization}"`,
       title: generatedTitle,
-      slug: TextFormatter.slugify(`${extractedTitle} - ${formattedUnit}`),
+      slug: TextFormatter.slugify(`${extractedTitle} - ${contentOrganization}`),
       type: this.getCategoryType(),
       folder: generatedFolderName,
       filename: generatedFilename,
