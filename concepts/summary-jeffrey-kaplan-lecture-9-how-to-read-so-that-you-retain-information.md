@@ -5,7 +5,7 @@ authors: matt2ology
 categories:
   - concept
 date: 2026-04-01T00:03:40-07:00
-draft: false
+draft: true
 slug: summary-jeffrey-kaplan-lecture-9-how-to-read-so-that-you-retain-information
 tags:
 title: "Summary of Jeffrey Kaplan - Lecture #9: How to Read so that you Retain Information"
