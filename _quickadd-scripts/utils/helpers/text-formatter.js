@@ -36,9 +36,8 @@ class TextFormatter {
    * @returns {string} The resulting slug.
    */
   static slugify(text = "") {
-    if (typeof text !== "string") return "";
-
-    return text
+    const validText = typeof text === "string" ? text : "";
+    const result = validText
       .normalize("NFKD")
       .replace(/[\u0300-\u036f]/g, "")
       .toLowerCase()
@@ -47,68 +46,53 @@ class TextFormatter {
       .replace(/[^a-z0-9_]+/g, "-")
       .replace(/-+/g, "-")
       .replace(/^-+|-+$/g, "");
+    return result;
   }
 
   /**
    * Converts text into a slug and collapses adjacent repeating duplicate words.
    * @param {string} [text=""] The input text to slugify.
    * @returns {string} The resulting slug.
-   * @example
-   * TextFormatter.slugifyAdjacent("Hello Hello World! World! Hello.");
-   * // Returns: "hello-world-hello"
    */
   static slugifyAdjacent(text = "") {
-    const slug = this.slugify(text);
-    if (!slug) return "";
-
-    const words = slug.split("-");
-    const uniqueWords = words.filter(
-      (word, index) => word !== words[index - 1],
+    const result = TextFormatter.#processSlugWords(text, (words) =>
+      words.filter((word, index) => word !== words[index - 1]),
     );
-    return uniqueWords.join("-");
+    return result;
   }
 
   /**
    * Converts text into a slug and removes all duplicate words, keeping only the first occurrence.
    * @param {string} [text=""] The input text to slugify.
    * @returns {string} The resulting slug.
-   * @example
-   * TextFormatter.slugifyUnique("Hello World! Hello Again World.");
-   * // Returns: "hello-world-again"
    */
   static slugifyUnique(text = "") {
-    const slug = this.slugify(text);
-    if (!slug) return "";
-
-    const words = slug.split("-");
-    const uniqueWords = [...new Set(words)];
-    return uniqueWords.join("-");
+    const result = TextFormatter.#processSlugWords(text, (words) => [
+      ...new Set(words),
+    ]);
+    return result;
   }
 
   /**
    * Parses a comma-separated list or array into a unique list of trimmed items.
    * @param {string|string[]} [input=""] - The input string or array to parse.
    * @returns {string[]} An array of unique, cleaned items.
-   * @example
-   * TextFormatter.parseCommaSeparatedList("apple, banana, apple, orange");
-   * // Returns: ["apple", "banana", "orange"]
    */
   static parseCommaSeparatedList(input = "") {
-    return [...new Set(TextFormatter.#extractRawItems(input))];
+    const result = [...new Set(TextFormatter.#extractRawItems(input))];
+    return result;
   }
 
   /**
    * Parses a comma-separated list and converts each item into a slug.
    * @param {string|string[]} [input=""] - The input string or array to parse and slugify.
    * @returns {string[]} An array of unique slugs.
-   * @example
-   * TextFormatter.parseAndSlugifyCommaSeparatedList("Hello World, Foo Bar!");
-   * // Returns: ["hello-world", "foo-bar"]
    */
   static parseAndSlugifyCommaSeparatedList(input = "") {
-    return TextFormatter.parseCommaSeparatedList(input).map(
+    const result = TextFormatter.parseCommaSeparatedList(input).map(
       TextFormatter.slugify,
     );
+    return result;
   }
 
   /**
@@ -117,28 +101,28 @@ class TextFormatter {
    * @returns {string} The text before the colon, or empty string.
    */
   static extractBeforeColon(text = "") {
-    return typeof text === "string" && text ? text.split(":")[0].trim() : "";
+    const result =
+      typeof text === "string" && text ? text.split(":")[0].trim() : "";
+    return result;
   }
 
   /**
    * Extracts last names from a comma-separated list of full names.
    * @param {string} [input=""] - A comma-separated list of names.
    * @returns {string} A comma-separated string of last names, or "Unknown".
-   * @example
-   * TextFormatter.extractLastNames("Michael Teske, Matt Lloyd Davies");
-   * // Returns: "Teske, Davies"
    */
   static extractLastNames(input = "") {
     const names = TextFormatter.parseCommaSeparatedList(input);
-    if (names.length === 0) return "Unknown";
-
-    return names
+    const validNames = names.length > 0 ? names : ["Unknown"];
+    const result = validNames
       .map((name) => {
-        if (name.includes(",")) return name.split(",")[0].trim();
-        const parts = name.trim().split(/\s+/);
+        const parts = name.includes(",")
+          ? [name.split(",")[0].trim()]
+          : name.trim().split(/\s+/);
         return parts[parts.length - 1];
       })
       .join(", ");
+    return result;
   }
 
   /**
@@ -147,130 +131,38 @@ class TextFormatter {
    * @param {string|string[]} [options.input=""] - The input items.
    * @param {boolean} [options.shouldSlugify=true] - Whether to slugify items.
    * @returns {string} Formatted YAML array string.
-   * @example
-   * TextFormatter.formatYAMLArray({ input: "apple, banana", shouldSlugify: true });
-   * // Returns: "\n  - apple\n  - banana"
    */
   static formatYAMLArray({ input = "", shouldSlugify = true }) {
     const items = shouldSlugify
       ? TextFormatter.parseAndSlugifyCommaSeparatedList(input)
       : TextFormatter.parseCommaSeparatedList(input);
 
-    if (items.length === 0) return " []";
-    return `\n  - ${items.join("\n  - ")}`;
+    const result = items.length === 0 ? " []" : `\n  - ${items.join("\n  - ")}`;
+    return result;
   }
 
   /**
    * Formats a text string into title case.
-   * Retains hyphens for spaced phrases and compound words (e.g., "thank-you", "yes - why"),
-   * but treats hyphens as word separators for pure slugs (e.g., "hello-world").
-   * Preserves capitalization for any acronyms.
-   *
    * @param {string} [inputText=""] - The input text.
    * @returns {string} The title-cased string.
    */
   static titleCase(inputText = "") {
-    if (typeof inputText !== "string" || !inputText.trim()) return "";
-
-    const trimmed = inputText.trim();
-    const hasSpaces = /\s/.test(trimmed);
-
-    // Helper to check if a word is an acronym (all alphabetic letters are uppercase)
-    const isAcronym = (w) => {
-      const letters = w.replace(/[^a-zA-Z]/g, "");
-      return letters.length > 0 && letters === letters.toUpperCase();
-    };
-
-    // 1. Pure slug case: No spaces, hyphens act as word separators
-    if (!hasSpaces) {
-      const words = trimmed.split("-");
-      const lastIndex = words.length - 1;
-      return words
-        .map((word, index) => {
-          if (isAcronym(word)) return word;
-          return TextFormatter.#formatWord(word, index, lastIndex);
-        })
-        .join(" ");
-    }
-
-    // 2. Phrase case: Contains spaces, preserve hyphens and format sub-words
-    const parts = trimmed.split(/\s+/);
-    const lastIndex = parts.length - 1;
-
-    return parts
-      .map((part, index) => {
-        if (part === "-" || part === "—") return part;
-        if (isAcronym(part)) return part;
-
-        if (part.includes("-")) {
-          const subWords = part.split("-");
-          return subWords
-            .map((sub, subIdx) => {
-              if (!sub) return "";
-              if (isAcronym(sub)) return sub;
-
-              const lowerSub = sub.toLowerCase();
-              // Keep minor words lowercase if they appear after the first part of a compound word
-              if (subIdx > 0 && TextFormatter.MINOR_WORDS.has(lowerSub)) {
-                return lowerSub;
-              }
-              return lowerSub.charAt(0).toUpperCase() + lowerSub.slice(1);
-            })
-            .join("-");
-        }
-
-        return TextFormatter.#formatWord(part, index, lastIndex);
-      })
-      .join(" ");
+    const trimmed = typeof inputText === "string" ? inputText.trim() : "";
+    const result = trimmed ? TextFormatter.#computeTitleCase(trimmed) : "";
+    return result;
   }
 
   /**
    * Formats a name string into an Obsidian-style wikilink.
    * @param {string} [input=""] - The name to format.
-   * @returns {string} Formatted wikilink string (e.g., `[[slug|Display Name]]`).
-   * @example
-   * TextFormatter.formatNameAsWikilink("John Doe");
-   * // Returns: "[[john-doe|John Doe]]"
+   * @returns {string} Formatted wikilink string.
    */
   static formatNameAsWikilink(input = "") {
-    if (typeof input !== "string") return "";
-
-    let trimmedInput = input.trim().replace(/\s+/g, " ");
-    if (!trimmedInput) return "";
-
-    if (trimmedInput.includes(",")) {
-      const parts = trimmedInput.split(",").map((p) => p.trim());
-      if (parts.length >= 2 && parts[0] && parts[1]) {
-        trimmedInput = `${parts.slice(1).join(" ")} ${parts[0]}`;
-      }
-    }
-
-    const words = trimmedInput.split(" ");
-    const processedWords = words.map((word, index) => {
-      let targetWord = word;
-      if (
-        TextFormatter.#isAllUpperCase(trimmedInput) ||
-        word === word.toLowerCase()
-      ) {
-        targetWord = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-      }
-
-      if (
-        index > 0 &&
-        index < words.length - 1 &&
-        word.replace(/[.,]/g, "").length === 1
-      ) {
-        const capitalized = targetWord.replace(/^\b[a-z]/i, (c) =>
-          c.toUpperCase(),
-        );
-        return capitalized.endsWith(".") ? capitalized : `${capitalized}.`;
-      }
-
-      return targetWord;
-    });
-
-    const displayName = processedWords.join(" ");
-    return `[[${TextFormatter.slugify(displayName)}|${displayName}]]`;
+    const normalizedInput = TextFormatter.#normalizeNameInput(input);
+    const result = normalizedInput
+      ? TextFormatter.#computeWikilink(normalizedInput)
+      : "";
+    return result;
   }
 
   /**
@@ -279,177 +171,284 @@ class TextFormatter {
    * @param {string|string[]} options.input - The input names.
    * @param {string} [options.fallback='"NoName"'] - Fallback string if empty.
    * @returns {string} Formatted YAML list of wikilinks or fallback.
-   * @example
-   * TextFormatter.formatYAMLNameList({ input: "Alice Smith" });
-   * // Returns: '\n  - "[[alice-smith|Alice Smith]]"'
    */
   static formatYAMLNameList({ input, fallback = '"NoName"' }) {
     const items = TextFormatter.parseCommaSeparatedList(input);
-    if (items.length === 0) return ` ${fallback}`;
-
     const formattedItems = items.map(TextFormatter.formatNameAsWikilink);
-    return `\n  - "${formattedItems.join('"\n  - "')}"`;
+    const result =
+      items.length === 0
+        ? ` ${fallback}`
+        : `\n  - "${formattedItems.join('"\n  - "')}"`;
+    return result;
   }
 
   /**
    * Formats a list of names into a natural language sentence using wikilinks.
    * @param {string|string[]} input - The input names.
-   * @returns {string} Natural language list (e.g., "A, B, and C").
-   * @example
-   * TextFormatter.formatNaturalNameList("Alice, Bob, Charlie");
-   * // Returns: "[[alice|Alice]], [[bob|Bob]], and [[charlie|Charlie]]"
+   * @returns {string} Natural language list.
    */
   static formatNaturalNameList(input) {
     const items = TextFormatter.parseCommaSeparatedList(input);
-    return TextFormatter.#joinNaturalList(
+    const result = TextFormatter.#joinNaturalList(
       items.map(TextFormatter.formatNameAsWikilink),
     );
+    return result;
   }
 
   /**
    * Formats a list of names into a plain text natural language sentence.
    * @param {string|string[]} input - The input names.
    * @returns {string} Plain text natural language list.
-   * @example
-   * TextFormatter.formatPlainNaturalNameList("Alice, Bob, Charlie");
-   * // Returns: "Alice, Bob, and Charlie"
    */
   static formatPlainNaturalNameList(input) {
-    return TextFormatter.#joinNaturalList(
-      TextFormatter.parseCommaSeparatedList(input),
-    );
+    const items = TextFormatter.parseCommaSeparatedList(input);
+    const result = TextFormatter.#joinNaturalList(items);
+    return result;
   }
 
   /**
-   * Cleans an Obsidian-style wikilink wrapper (including optional quotes) and returns the display name or target.
+   * Cleans an Obsidian-style wikilink wrapper.
    * @param {string} input - The wikilink string to clean.
-   * @returns {string} The extracted plain text label or target, or the original input if it is not a string.
-   * @example
-   * TextFormatter.cleanWikiLink("[[john-doe|John Doe]]");
-   * // Returns: "John Doe"
+   * @returns {string} The extracted plain text label or target.
    */
   static cleanWikiLink(input = "") {
-    if (typeof input !== "string") return input;
-    const parts = input.replace(/^"?"?\[\[|\]\]"?"?$/g, "").split("|");
-    return parts[1] ?? parts[0];
+    const isValidString = typeof input === "string";
+    const cleanInput = isValidString ? input : "";
+    const parts = cleanInput.replace(/^"?"?\[\[|\]\]"?"?$/g, "").split("|");
+    const result = isValidString ? (parts[1] ?? parts[0]) : input;
+    return result;
   }
+
   // ==========================================
   // PRIVATE HELPER METHODS
   // ==========================================
 
   /**
-   * Extracts raw items from a string or an array of strings.
-   *
-   * Recursively processes nested arrays, normalizes "and" separators
-   * into commas, splits the input into individual items, and removes
-   * empty entries and standalone conjunctions.
-   *
+   * Processes slug words using a transformation function (DRY helper for adjacent/unique slugs).
    * @private
-   * @param {string|Array<string|Array>} input - A string or nested array of strings to process.
-   * @returns {string[]} An array of trimmed, non-empty raw items.
-   *
-   * @example
-   * TextFormatter.#extractRawItems("Apple, Banana and Orange");
-   * // Returns: ["Apple", "Banana", "Orange"]
-   *
-   * @example
-   * TextFormatter.#extractRawItems(["Apple and Banana", "Orange"]);
-   * // Returns: ["Apple", "Banana", "Orange"]
    */
-  static #extractRawItems(input) {
-    if (Array.isArray(input)) {
-      return input.flatMap((item) => TextFormatter.#extractRawItems(item));
-    }
-
-    if (typeof input !== "string" || !input.trim()) return [];
-
-    // Replace literal " and " or ", and " with a comma to unify separators
-    const normalizedInput = input
-      .replace(/\s+and\s+/gi, ", ")
-      .replace(/,\s*and\s+/gi, ", ");
-
-    return normalizedInput
-      .split(",")
-      .map((item) => item.trim().replace(/^and\s+/i, ""))
-      .filter((item) => item && item.toLowerCase() !== "and");
+  static #processSlugWords(text, transformFn) {
+    const slug = this.slugify(text);
+    const result = slug ? transformFn(slug.split("-")).join("-") : "";
+    return result;
   }
 
   /**
-   * Normalizes unicode and splits input text into words.
+   * Normalizes and cleans raw name inputs, handling comma-reversals (e.g., "Doe, John" -> "John Doe").
    * @private
-   * @param {string} inputText - The text to normalize and split.
-   * @returns {string[]} Array of words.
-   * @example
-   * TextFormatter.#normalizeAndSplit("hello_world  test");
-   * // Returns: ["hello", "world", "test"]
    */
-  static #normalizeAndSplit(inputText) {
-    if (typeof inputText !== "string" || !inputText) return [];
-    // Normalize unicode, handle underscores as spaces,
-    // but normalize surrounding spaces around hyphens to keep them cleanly separated
-    return inputText
-      .normalize("NFC")
-      .replace(/_/g, " ")
-      .replace(/\s*-\s*/g, " - ")
-      .replace(/\s+/g, " ")
-      .trim()
-      .split(" ");
+  static #normalizeNameInput(input) {
+    const isValidString = typeof input === "string";
+    const rawTrimmed = isValidString ? input.trim().replace(/\s+/g, " ") : "";
+    const parts = rawTrimmed.includes(",")
+      ? rawTrimmed.split(",").map((p) => p.trim())
+      : [];
+    const hasCommaParts =
+      parts.length >= 2 && Boolean(parts[0]) && Boolean(parts[1]);
+    const normalizedComma = hasCommaParts
+      ? `${parts.slice(1).join(" ")} ${parts[0]}`
+      : rawTrimmed;
+    const result = rawTrimmed ? normalizedComma : "";
+    return result;
+  }
+
+  /**
+   * Extracts raw items from a string or an array of strings.
+   * @private
+   */
+  static #extractRawItems(input) {
+    const isArr = Array.isArray(input);
+    const isStr = typeof input === "string";
+    const trimmedStr = isStr ? input.trim() : "";
+
+    const arrayResult = isArr
+      ? input.flatMap((item) => TextFormatter.#extractRawItems(item))
+      : [];
+    const stringResult =
+      isStr && trimmedStr
+        ? input
+            .replace(/\s+and\s+/gi, ", ")
+            .replace(/,\s*and\s+/gi, ", ")
+            .split(",")
+            .map((item) => item.trim().replace(/^and\s+/i, ""))
+            .filter((item) => Boolean(item) && item.toLowerCase() !== "and")
+        : [];
+
+    const result = isArr ? arrayResult : stringResult;
+    return result;
   }
 
   /**
    * Formats an individual word for title casing based on position and minor words.
    * @private
-   * @param {string} word - The word to format.
-   * @param {number} index - The index of the word in the sequence.
-   * @param {number} lastIndex - The index of the last word.
-   * @returns {string} The formatted word.
-   * @example
-   * TextFormatter.#formatWord("the", 0, 2);
-   * // Returns: "The"
    */
   static #formatWord(word, index, lastIndex) {
-    if (TextFormatter.#isAllUpperCase(word)) return word;
-
     const lowerWord = word.toLowerCase();
     const isInternalMinorWord =
       index >= 1 &&
       index < lastIndex &&
       TextFormatter.MINOR_WORDS.has(lowerWord);
 
-    return isInternalMinorWord
-      ? lowerWord
-      : lowerWord.charAt(0).toUpperCase() + lowerWord.slice(1);
+    const formattedWord = TextFormatter.#isAllUpperCase(word)
+      ? word
+      : isInternalMinorWord
+        ? lowerWord
+        : lowerWord.charAt(0).toUpperCase() + lowerWord.slice(1);
+    return formattedWord;
+  }
+
+  /**
+   * Computes title case based on presence of whitespace.
+   * @private
+   */
+  static #computeTitleCase(trimmed) {
+    const hasSpaces = /\s/.test(trimmed);
+    const result = hasSpaces
+      ? TextFormatter.#formatPhraseCase(trimmed)
+      : TextFormatter.#formatSlugCase(trimmed);
+    return result;
+  }
+
+  /**
+   * Formats slug-style strings without spaces.
+   * @private
+   */
+  static #formatSlugCase(trimmed) {
+    const words = trimmed.split("-");
+    const lastIndex = words.length - 1;
+    const formatted = words
+      .map((word, index) => TextFormatter.#formatWord(word, index, lastIndex))
+      .join(" ");
+    return formatted;
+  }
+
+  /**
+   * Formats phrase-style strings containing spaces.
+   * @private
+   */
+  static #formatPhraseCase(trimmed) {
+    const parts = trimmed.split(/\s+/);
+    const lastIndex = parts.length - 1;
+    const formatted = parts
+      .map((part, index) =>
+        TextFormatter.#formatPhrasePart(part, index, lastIndex),
+      )
+      .join(" ");
+    return formatted;
+  }
+
+  /**
+   * Formats an individual phrase part (handling hyphens and special tokens).
+   * @private
+   */
+  static #formatPhrasePart(part, index, lastIndex) {
+    const isSpecial =
+      part === "-" || part === "—" || TextFormatter.#isAllUpperCase(part);
+    const formattedPart = isSpecial
+      ? part
+      : part.includes("-")
+        ? TextFormatter.#formatHyphenatedPart(part)
+        : TextFormatter.#formatWord(part, index, lastIndex);
+    return formattedPart;
+  }
+
+  /**
+   * Formats sub-words within a hyphenated phrase part.
+   * @private
+   */
+  static #formatHyphenatedPart(part) {
+    const subWords = part.split("-");
+    const formattedSub = subWords
+      .map((sub, subIdx) => {
+        const isSubSpecial = !sub || TextFormatter.#isAllUpperCase(sub);
+        const lowerSub = sub ? sub.toLowerCase() : "";
+        const isMinor = subIdx > 0 && TextFormatter.MINOR_WORDS.has(lowerSub);
+        const subResult = isSubSpecial
+          ? sub
+          : isMinor
+            ? lowerSub
+            : lowerSub.charAt(0).toUpperCase() + lowerSub.slice(1);
+        return subResult;
+      })
+      .join("-");
+    return formattedSub;
+  }
+
+  /**
+   * Computes Obsidian wikilink representation for a normalized name.
+   * @private
+   */
+  static #computeWikilink(normalizedInput) {
+    const words = normalizedInput.split(" ");
+    const isAllUpper = TextFormatter.#isAllUpperCase(normalizedInput);
+    const processedWords = words.map((word, index) =>
+      TextFormatter.#processWikilinkWord(word, index, words.length, isAllUpper),
+    );
+    const displayName = processedWords.join(" ");
+    return `[[${TextFormatter.slugify(displayName)}|${displayName}]]`;
+  }
+
+  /**
+   * Processes individual words for wikilinks (handling capitalization and initials).
+   * @private
+   */
+  static #processWikilinkWord(word, index, totalWords, isAllUpper) {
+    const shouldCapitalize = isAllUpper || word === word.toLowerCase();
+    const targetWord = shouldCapitalize
+      ? word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      : word;
+
+    const isMiddleInitial =
+      index > 0 &&
+      index < totalWords - 1 &&
+      word.replace(/[.,]/g, "").length === 1;
+
+    const finalWord = isMiddleInitial
+      ? TextFormatter.#formatMiddleInitial(targetWord)
+      : targetWord;
+
+    return finalWord;
+  }
+
+  /**
+   * Formats middle initials properly with trailing periods.
+   * @private
+   */
+  static #formatMiddleInitial(targetWord) {
+    const capitalized = targetWord.replace(/^\b[a-z]/i, (c) => c.toUpperCase());
+    const formattedInitial = capitalized.endsWith(".")
+      ? capitalized
+      : `${capitalized}.`;
+    return formattedInitial;
   }
 
   /**
    * Joins an array of strings into a natural language list with commas and "and".
    * @private
-   * @param {string[]} items - The items to join.
-   * @returns {string} The joined natural language list string.
-   * @example
-   * TextFormatter.#joinNaturalList(["Alice", "Bob", "Charlie"]);
-   * // Returns: "Alice, Bob, and Charlie"
    */
   static #joinNaturalList(items) {
-    if (items.length === 0) return "NoNameProvided";
-    if (items.length === 1) return items[0];
-    if (items.length === 2) return `${items[0]} and ${items[1]}`;
-    return `${items.slice(0, -1).join(", ")}, and ${items[items.length - 1]}`;
+    const len = items.length;
+    const result =
+      len === 0
+        ? "NoNameProvided"
+        : len === 1
+          ? items[0]
+          : len === 2
+            ? `${items[0]} and ${items[1]}`
+            : `${items.slice(0, -1).join(", ")}, and ${items[len - 1]}`;
+    return result;
   }
 
   /**
    * Checks if a text string consists entirely of uppercase letters.
    * @private
-   * @param {string} text - The text to check.
-   * @returns {boolean} True if all letters are uppercase.
-   * @example
-   * TextFormatter.#isAllUpperCase("NASA");
-   * // Returns: true
    */
   static #isAllUpperCase(text) {
-    if (typeof text !== "string") return false;
-    const letters = text.replace(/[^a-zA-Z]/g, "");
-    return letters.length > 0 && letters === letters.toUpperCase();
+    const isValid = typeof text === "string";
+    const letters = isValid ? text.replace(/[^a-zA-Z]/g, "") : "";
+    const result =
+      isValid && letters.length > 0 && letters === letters.toUpperCase();
+    return result;
   }
 }
 
