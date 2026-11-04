@@ -1,6 +1,6 @@
 ---
-aliases: Generative AI for Improving Writing - Using AI before You Start Writing
-title: Notes on Generative AI for Improving Writing Using AI Before You Start Writing
+aliases: Notes on Generative AI for Improving Writing - Using AI Before You Start the Writing Process
+title: Notes on Generative AI for Improving Writing - Using AI Before You Start the Writing Process
 date: 2026-11-02T13:23:31-08:00
 draft: false
 slug: generative-ai-for-improving-writing-using-ai-before-you-start-writing
