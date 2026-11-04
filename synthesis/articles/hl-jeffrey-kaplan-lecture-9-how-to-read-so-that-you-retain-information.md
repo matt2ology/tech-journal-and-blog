@@ -5,7 +5,7 @@ categories:
   - literature
   - articles
 date: 2026-04-01
-draft: false
+draft: true
 media: articles
 source: reader
 tags:
