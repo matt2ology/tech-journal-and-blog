@@ -27,12 +27,11 @@ class NoteBuilder extends ContentBuilderBase {
     const creatorInput = values[creatorFieldId] || "";
     const contentInput = values[contentFieldId] || "";
 
-    const extractedTitle = TextFormatter.extractBeforeColon(contentInput);
-    const formattedContentTitle = TextFormatter.titleCase(extractedTitle);
-    const generatedFolderName = TextFormatter.slugify(extractedTitle);
+    const contentMainTitle = TextFormatter.extractBeforeColon(contentInput);
+    const generatedFolderName = TextFormatter.slugify(contentMainTitle);
 
     const context = this.resolveContentContext({
-      formattedContent: formattedContentTitle,
+      formattedContent: contentMainTitle,
       creatorInput,
     });
 
@@ -45,12 +44,12 @@ class NoteBuilder extends ContentBuilderBase {
 
     const formattedUnit = this.formatUnitIdentifier(unitValue);
     const generatedFilename = TextFormatter.slugifyAdjacent(
-      `n${fileIndex} ${extractedTitle} ${formattedUnit} ${sectionValue}`,
+      `n${fileIndex} ${contentMainTitle} ${formattedUnit} ${sectionValue}`,
     );
 
     const generatedTitle = unitValue
-      ? TextFormatter.titleCase(`Notes on ${extractedTitle} - ${contentOrganization}`)
-      : TextFormatter.titleCase(`Notes on ${extractedTitle}`);
+      ? `${contentMainTitle} - ${contentOrganization}`
+      : `${contentMainTitle}`;
 
     const updatedCategories = this.appendToList({
       list: values.categories,
@@ -59,9 +58,13 @@ class NoteBuilder extends ContentBuilderBase {
 
     return {
       ...baseProcessedValues,
-      aliases: `"${formattedContentTitle} - ${contentOrganization}"`,
-      title: generatedTitle,
-      slug: TextFormatter.slugify(`${extractedTitle} - ${contentOrganization}`),
+      aliases: TextFormatter.titleCase(
+        `${contentMainTitle} - ${contentOrganization}`,
+      ),
+      title: TextFormatter.titleCase(`Notes on ${generatedTitle}`),
+      slug: TextFormatter.slugify(
+        `${contentMainTitle} - ${contentOrganization}`,
+      ),
       type: this.getCategoryType(),
       folder: generatedFolderName,
       filename: generatedFilename,
@@ -71,7 +74,7 @@ class NoteBuilder extends ContentBuilderBase {
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
       note_header: sectionValue || unitValue || "Notes & Key Points",
-      reference_links: `${extractedTitle} - [[${generatedFilename}|${contentOrganization}]]`,
+      reference_links: `${contentMainTitle} - [[${generatedFilename}|${contentOrganization}]]`,
     };
   }
 
