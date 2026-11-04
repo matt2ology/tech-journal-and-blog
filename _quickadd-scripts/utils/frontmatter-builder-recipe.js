@@ -2,14 +2,7 @@ const FrontmatterBuilderBase = require("./base/frontmatter-builder-base");
 const VaultQueryService = require("./services/vault-query-service");
 const TextFormatter = require("./helpers/text-formatter");
 
-/**
- * Recipe-specific frontmatter builder extending FrontmatterBuilderBase.
- */
 class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
-  constructor(quickAddApi) {
-    super(quickAddApi);
-  }
-
   getFields() {
     const rawChefOptions = VaultQueryService.getFieldValues({
       app,
@@ -72,48 +65,35 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
     const dish = values.dish || "";
     const chef = values.chef || "";
 
-    const formattedSource = this.#formatSourceLink({
-      source: values.source,
-      sourceTitle: values.source_title,
-      dish,
-      chef,
-    });
-
-    const updatedCategories = this.appendToList({
-      list: values.categories,
-      items: ["cookbook"],
-    });
-
     return {
       ...baseProcessedValues,
       title: TextFormatter.titleCase(`${dish} by ${chef}`),
       slug: TextFormatter.slugify(`${chef} ${dish}`),
-      categories: updatedCategories,
-      source: formattedSource,
+      categories: this.appendToList({
+        list: values.categories,
+        items: ["cookbook"],
+      }),
+      source: this.#formatSourceLink({
+        source: values.source,
+        sourceTitle: values.source_title,
+        dish,
+        chef,
+      }),
     };
   }
 
-  /**
-   * Overrides standard properties to clear the date field upon creation.
-   */
   buildStandardProperties({ computed }) {
     return super.buildStandardProperties({
-      computed: {
-        ...computed,
-        date: "",
-      },
+      computed: { ...computed, date: "" },
     });
   }
 
   #formatSourceLink({ source, sourceTitle, dish, chef }) {
     if (!source) return "";
-
-    const trimmedSource = source.trim();
-    const dishTitle = TextFormatter.titleCase(dish) || "Recipe";
-    const chefTitle = TextFormatter.titleCase(chef) || "Chef";
-    const linkTitle = sourceTitle?.trim() || `${dishTitle} by ${chefTitle}`;
-
-    return `\n**Source:** [${linkTitle}](${trimmedSource})`;
+    const linkTitle =
+      sourceTitle?.trim() ||
+      `${TextFormatter.titleCase(dish) || "Recipe"} by ${TextFormatter.titleCase(chef) || "Chef"}`;
+    return `\n**Source:** [${linkTitle}](${source.trim()})`;
   }
 
   buildExtraProperties({ values }) {
