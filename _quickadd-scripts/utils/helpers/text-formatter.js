@@ -161,24 +161,66 @@ class TextFormatter {
   }
 
   /**
-   * Formats a word according to title case rules.
+   * Formats a text string into title case.
+   * Retains hyphens for spaced phrases and compound words (e.g., "thank-you", "yes - why"),
+   * but treats hyphens as word separators for pure slugs (e.g., "hello-world").
+   * Preserves capitalization for any acronyms.
    *
-   * Preserves words that are already all uppercase (e.g., acronyms),
-   * keeps minor words lowercase when they appear between other words,
-   * and capitalizes the first letter of all remaining words.
-   *
-   * @param {string} word - The word to format.
-   * @param {number} index - The word's zero-based position in the title.
-   * @param {number} lastIndex - The zero-based index of the last word in the title.
-   * @returns {string} The formatted word.
+   * @param {string} [inputText=""] - The input text.
+   * @returns {string} The title-cased string.
    */
   static titleCase(inputText = "") {
-    const words = TextFormatter.#normalizeAndSplit(inputText);
-    if (words.length === 0) return "";
+    if (typeof inputText !== "string" || !inputText.trim()) return "";
 
-    const lastIndex = words.length - 1;
-    return words
-      .map((word, index) => TextFormatter.#formatWord(word, index, lastIndex))
+    const trimmed = inputText.trim();
+    const hasSpaces = /\s/.test(trimmed);
+
+    // Helper to check if a word is an acronym (all alphabetic letters are uppercase)
+    const isAcronym = (w) => {
+      const letters = w.replace(/[^a-zA-Z]/g, "");
+      return letters.length > 0 && letters === letters.toUpperCase();
+    };
+
+    // 1. Pure slug case: No spaces, hyphens act as word separators
+    if (!hasSpaces) {
+      const words = trimmed.split("-");
+      const lastIndex = words.length - 1;
+      return words
+        .map((word, index) => {
+          if (isAcronym(word)) return word;
+          return TextFormatter.#formatWord(word, index, lastIndex);
+        })
+        .join(" ");
+    }
+
+    // 2. Phrase case: Contains spaces, preserve hyphens and format sub-words
+    const parts = trimmed.split(/\s+/);
+    const lastIndex = parts.length - 1;
+
+    return parts
+      .map((part, index) => {
+        if (part === "-" || part === "—") return part;
+        if (isAcronym(part)) return part;
+
+        if (part.includes("-")) {
+          const subWords = part.split("-");
+          return subWords
+            .map((sub, subIdx) => {
+              if (!sub) return "";
+              if (isAcronym(sub)) return sub;
+
+              const lowerSub = sub.toLowerCase();
+              // Keep minor words lowercase if they appear after the first part of a compound word
+              if (subIdx > 0 && TextFormatter.MINOR_WORDS.has(lowerSub)) {
+                return lowerSub;
+              }
+              return lowerSub.charAt(0).toUpperCase() + lowerSub.slice(1);
+            })
+            .join("-");
+        }
+
+        return TextFormatter.#formatWord(part, index, lastIndex);
+      })
       .join(" ");
   }
 
@@ -343,9 +385,12 @@ class TextFormatter {
    */
   static #normalizeAndSplit(inputText) {
     if (typeof inputText !== "string" || !inputText) return [];
+    // Normalize unicode, handle underscores as spaces,
+    // but normalize surrounding spaces around hyphens to keep them cleanly separated
     return inputText
       .normalize("NFC")
-      .replace(/[-_]+/g, " ")
+      .replace(/_/g, " ")
+      .replace(/\s*-\s*/g, " - ")
       .replace(/\s+/g, " ")
       .trim()
       .split(" ");
