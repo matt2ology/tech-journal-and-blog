@@ -1,13 +1,15 @@
 ---
 aliases:
-title: "Oxtail and Butter Beans by Millie Peartree"
+  - Oxtail and Butter Beans by Millie Peartree
+  - Oxtail and Butter Beans
+title: Oxtail and Butter Beans by Millie Peartree
 date: ""
 draft: true
-slug: "millie-peartree-oxtail-and-butter-beans"
+slug: millie-peartree-oxtail-and-butter-beans
 categories:
   - cookbook
 tags: []
-dish: "Oxtail and Butter Beans"
+dish: Oxtail and Butter Beans
 chef:
   - "[[millie-peartree|Millie Peartree]]"
 meal:
