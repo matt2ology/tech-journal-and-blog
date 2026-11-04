@@ -11,27 +11,26 @@ class AnalysisBuilder extends ContentBuilderBase {
     return "notes";
   }
 
-  // Decompose Conditional / Extract Method: Unit identifier string formatting
   formatUnitIdentifier(text) {
     const chapterRegex = /^(?:Chapter\s+)?(\d+)(?:\.(\d+))?\s*:?\s*/;
-    return text.replace(chapterRegex, (_, major, minor) =>
+    const formatted = text.replace(chapterRegex, (_, major, minor) =>
       this.#formatChapterPrefix(major, minor),
     );
+    return formatted;
   }
 
   #formatChapterPrefix(major, minor) {
-    if (minor) {
-      return `ch${major.padStart(2, "0")}-${minor.padStart(2, "0")}: `;
-    }
-    return `ch${major.padStart(2, "0")}: `;
+    const prefix = minor
+      ? `ch${major.padStart(2, "0")}-${minor.padStart(2, "0")}: `
+      : `ch${major.padStart(2, "0")}: `;
+    return prefix;
   }
 
-  // Extract Method: Standardized organization structure
   #buildContentOrganization(sectionValue, unitValue) {
-    if (sectionValue) {
-      return `${sectionValue} - ${unitValue}`;
-    }
-    return `${unitValue}`;
+    const org = sectionValue
+      ? `${sectionValue} - ${unitValue}`
+      : `${unitValue}`;
+    return org;
   }
 
   processValues(values) {
@@ -73,7 +72,7 @@ class AnalysisBuilder extends ContentBuilderBase {
       `n${fileIndex} ${extractedTitle} ${formattedUnit} ${sectionValue}`,
     );
 
-    return {
+    const result = {
       ...baseProcessedValues,
       aliases: `"${formattedContentTitle} - ${unitValue}"`,
       title: TextFormatter.titleCase(
@@ -93,16 +92,18 @@ class AnalysisBuilder extends ContentBuilderBase {
       ),
       reference_links: `[[00-${generatedFolderName}-synthesis|${extractedTitle}]] - [[${generatedCaptureNoteFilename}|${contentOrganization}]]`,
     };
+    return result;
   }
 
   buildExtraProperties({ values }) {
-    return [
+    const props = [
       `note_type: ${this.getRootFolderType()}`,
       `domain: ${this.getCategoryType()}`,
       `${this.getCreatorFieldId()}: ${values[this.getCreatorFieldId()]}`,
       `${this.getContentFieldId()}: "${values[this.getContentFieldId()]}"`,
       `${this.getUnitFieldId()}: "${values[this.getUnitFieldId()]}"`,
     ];
+    return props;
   }
 }
 
