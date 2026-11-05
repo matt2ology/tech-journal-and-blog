@@ -7,7 +7,7 @@ const FrontmatterBuilderRecipe = require(
     "_quickadd-scripts",
     "utils",
     "base",
-    "blog-frontmatter-builder",
+    "blog-builder",
   ),
 );
 
