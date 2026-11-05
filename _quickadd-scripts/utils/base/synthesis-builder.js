@@ -3,6 +3,10 @@ const TextFormatter = require("../helpers/text-formatter");
 const VaultQueryService = require("../services/vault-query-service");
 
 class SynthesisBuilder extends ContentBuilderBase {
+  getContentType() {
+    return "synthesis";
+  }
+
   getFields() {
     const rootFolder = `analysis/${this.getCategoryType()}`;
     const rawContentOptions = VaultQueryService.getSubfolderNames({
@@ -66,7 +70,7 @@ class SynthesisBuilder extends ContentBuilderBase {
       aliases: `"${contentInput} Synthesis"`,
       title: TextFormatter.titleCase(`Synthesis of ${extractedTitle}`),
       slug: generatedFolderName,
-      type: `${this.getCategoryType()}`,
+      type: this.getContentType(),
       folder: generatedFolderName,
       filename: `00-${generatedFolderName}-synthesis`,
       categories: this.appendToList({
@@ -84,7 +88,7 @@ class SynthesisBuilder extends ContentBuilderBase {
     const creatorFieldId = this.getCreatorFieldId();
     const contentFieldId = this.getContentFieldId();
     return [
-      `type: ${this.getRootFolderType()}`,
+      `type: ${this.getContentType()}`,
       `domain: ${this.getCategoryType()}`,
       `${creatorFieldId}: ${values[creatorFieldId]}`,
       `${contentFieldId}: "${values[contentFieldId]}"`,
