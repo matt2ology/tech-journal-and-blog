@@ -62,7 +62,7 @@ class AnalysisBuilder extends ContentBuilderBase {
       title: TextFormatter.titleCase(
         `Analysis of ${extractedTitle} - ${unitValue}`,
       ),
-      slug: TextFormatter.slugify(`${extractedTitle} - ${formattedUnit}`),
+      slug: TextFormatter.slugifyWithAbbreviations(`${extractedTitle} - ${formattedUnit}`),
       type: this.getContentType(),
       folder: generatedFolderName,
       filename: generatedFilename,
