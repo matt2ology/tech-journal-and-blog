@@ -1,35 +1,22 @@
+const MINOR_WORDS = require("./config/minor-words.js");
+const ACRONYMS = require("./config/acronyms.js");
+const COMMON_ABBREVIATIONS = require("./config/common-abbreviations.js");
+
 /**
  * Pure text-formatting utilities wrapped in a static utility class.
  */
 class TextFormatter {
-  static MINOR_WORDS = new Set([
-    "a",
-    "an",
-    "and",
-    "as",
-    "at",
-    "but",
-    "by",
-    "for",
-    "from",
-    "in",
-    "into",
-    "near",
-    "nor",
-    "of",
-    "on",
-    "onto",
-    "or",
-    "the",
-    "to",
-    "via",
-    "with",
-  ]);
+  static MINOR_WORDS = MINOR_WORDS;
 
   /**
    * Set of standard acronyms that should always be fully capitalized.
    */
-  static ACRONYMS = new Set(["ai", "nasa", "faq"]);
+  static ACRONYMS = ACRONYMS;
+
+  /**
+   * Dictionary of common abbreviations and their clean slug equivalents.
+   */
+  static COMMON_ABBREVIATIONS = COMMON_ABBREVIATIONS;
 
   // ==========================================
   // PUBLIC API METHODS
@@ -52,6 +39,26 @@ class TextFormatter {
       .replace(/-+/g, "-")
       .replace(/^-+|-+$/g, "");
     return result;
+  }
+
+  /**
+   * Converts a text string into a URL-friendly slug, handling common abbreviations cleanly.
+   * @param {string} [text=""] The input text.
+   * @returns {string} The resulting slug.
+   */
+  static slugifyWithAbbreviations(text = "") {
+    const validText = typeof text === "string" ? text : "";
+
+    let processedText = validText;
+    for (const [abbr, replacement] of Object.entries(
+      TextFormatter.COMMON_ABBREVIATIONS,
+    )) {
+      const baseAbbr = abbr.replace(/\.$/, "");
+      const regex = new RegExp(`\\b${baseAbbr}\\.?\\b`, "gi");
+      processedText = processedText.replace(regex, replacement);
+    }
+
+    return TextFormatter.slugify(processedText);
   }
 
   /**
