@@ -123,9 +123,9 @@ lesson: "Adapting Content for Different Audiences"
 >
 > Run the logic of what you want to present:
 >
-> 1.  Is what I'm going to share quick enough to go though with leadership?
-> 2.  Does my presentation have so much detail where it can't be understood within 3 to 5 minutes?
-> 3.  Does my topic, document, or presentation help articulate how it will help the business?
+> 1. Is what I'm going to share quick enough to go though with leadership?
+> 2. Does my presentation have so much detail where it can't be understood within 3 to 5 minutes?
+> 3. Does my topic, document, or presentation help articulate how it will help the business?
 >
 > If at any point the answer is "no" then you have some idea and expectation to write towards.
 >
