@@ -3,6 +3,9 @@ const TextFormatter = require("../helpers/text-formatter");
 const VaultQueryService = require("../services/vault-query-service");
 
 class ContentBuilderBase extends FrontmatterBuilderBase {
+  getContentType() {
+    throw new Error("Derived classes must implement getContentType()");
+  }
   getCategoryType() {
     throw new Error("Derived classes must implement getCategoryType()");
   }
@@ -30,16 +33,12 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
   getSectionFieldLabel() {
     throw new Error("Derived classes must implement getSectionFieldLabel()");
   }
-
-  getRootFolderType() {
-    return "notes";
-  }
   formatUnitIdentifier(text) {
     return text;
   }
 
   getFields() {
-    const rootFolder = `${this.getRootFolderType()}/${this.getCategoryType()}`;
+    const rootFolder = `${this.getContentType()}/${this.getCategoryType()}`;
     const rawOptions = VaultQueryService.getSubfolderNames({
       app,
       folderPath: rootFolder,
@@ -93,7 +92,7 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
 
     const rootFolder =
       customRootFolder ||
-      `${this.getRootFolderType()}/${this.getCategoryType()}`;
+      `${this.getContentType()}/${this.getCategoryType()}`;
     const subfolders = VaultQueryService.getSubfolderNames({
       app,
       folderPath: rootFolder,
