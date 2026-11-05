@@ -63,14 +63,18 @@ class TextFormatter {
    * // Returns: ""
    */
   static slugifyWithAbbreviations(text = "") {
-    const validText = typeof text === "string" ? text : "";
+    const validText = typeof text === "string" ? text.toLowerCase() : "";
 
     let processedText = validText;
+
     for (const [abbr, replacement] of Object.entries(
       TextFormatter.COMMON_ABBREVIATIONS,
     )) {
-      const baseAbbr = abbr.replace(/\.$/, "");
+      const normalizedAbbr = abbr.toLowerCase();
+      const baseAbbr = normalizedAbbr.replace(/\.$/, "");
+
       const regex = new RegExp(`\\b${baseAbbr}\\.?\\b`, "gi");
+
       processedText = processedText.replace(regex, replacement);
     }
 
