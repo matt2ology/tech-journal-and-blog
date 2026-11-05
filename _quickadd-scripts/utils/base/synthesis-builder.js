@@ -67,7 +67,7 @@ class SynthesisBuilder extends ContentBuilderBase {
 
     return {
       ...baseProcessedValues,
-      aliases: `"${contentInput} Synthesis"`,
+      aliases: TextFormatter.titleCase(`${contentInput} Synthesis`),
       title: TextFormatter.titleCase(`Synthesis of ${extractedTitle}`),
       slug: generatedFolderName,
       type: this.getContentType(),
