@@ -66,7 +66,10 @@ class SynthesisBuilder extends ContentBuilderBase {
 
     return {
       ...baseProcessedValues,
-      aliases: TextFormatter.titleCase(`${contentInput} Synthesis`),
+      aliases: [
+        TextFormatter.titleCase(`${contentInput} Synthesis`),
+        TextFormatter.titleCase(`Synthesis of ${baseTitle}`),
+      ],
       title: TextFormatter.titleCase(`Synthesis of ${baseTitle}`),
       slug: TextFormatter.slugifyWithAbbreviations(baseTitle),
       type: this.getContentType(),
