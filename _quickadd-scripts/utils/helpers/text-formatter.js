@@ -43,8 +43,24 @@ class TextFormatter {
 
   /**
    * Converts a text string into a URL-friendly slug, handling common abbreviations cleanly.
-   * @param {string} [text=""] The input text.
-   * @returns {string} The resulting slug.
+   *
+   * @param {string} [text=""] - The input text to be slugified.
+   * @returns {string} The resulting URL-friendly slug with abbreviations expanded and normalized.
+   *
+   * @example
+   * // Basic usage with standard text
+   * TextFormatter.slugifyWithAbbreviations("Hello World!");
+   * // Returns: "hello-world"
+   *
+   * @example
+   * // Handling abbreviations with periods and case-insensitivity
+   * TextFormatter.slugifyWithAbbreviations("U.S.A. Flagship Store");
+   * // Returns: "usa-flagship-store" (assuming "U.S.A." maps to "USA")
+   *
+   * @example
+   * // Handling empty or non-string inputs gracefully
+   * TextFormatter.slugifyWithAbbreviations(null);
+   * // Returns: ""
    */
   static slugifyWithAbbreviations(text = "") {
     const validText = typeof text === "string" ? text : "";
