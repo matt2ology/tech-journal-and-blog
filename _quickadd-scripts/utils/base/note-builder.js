@@ -46,9 +46,7 @@ class NoteBuilder extends ContentBuilderBase {
 
     return {
       ...baseProcessedValues,
-      aliases: TextFormatter.titleCase(
-        `${contentMainTitle} - ${contentOrganization}`,
-      ),
+      aliases: TextFormatter.titleCase(`Notes on ${generatedTitle}`),
       title: TextFormatter.titleCase(`Notes on ${generatedTitle}`),
       slug: TextFormatter.slugifyWithAbbreviations(
         `${contentMainTitle} - ${contentOrganization}`,
