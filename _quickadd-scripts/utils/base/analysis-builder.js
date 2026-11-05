@@ -3,6 +3,10 @@ const FileCounterUtility = require("../helpers/file-counter-utility");
 const TextFormatter = require("../helpers/text-formatter");
 
 class AnalysisBuilder extends ContentBuilderBase {
+  getContentType() {
+    return "analysis";
+  }
+
   formatUnitIdentifier(text) {
     const chapterRegex = /^(?:Chapter\s+)?(\d+)(?:\.(\d+))?\s*:?\s*/;
     return text.replace(chapterRegex, (_, major, minor) =>
@@ -57,7 +61,7 @@ class AnalysisBuilder extends ContentBuilderBase {
         `Analysis of ${extractedTitle} - ${unitValue}`,
       ),
       slug: TextFormatter.slugify(`${extractedTitle} - ${formattedUnit}`),
-      type: this.getCategoryType(),
+      type: this.getContentType(),
       folder: generatedFolderName,
       filename: generatedFilename,
       categories: this.appendToList({
@@ -74,7 +78,7 @@ class AnalysisBuilder extends ContentBuilderBase {
 
   buildExtraProperties({ values }) {
     return [
-      `type: ${this.getRootFolderType()}`,
+      `type: ${this.getContentType()}`,
       `domain: ${this.getCategoryType()}`,
       `${this.getCreatorFieldId()}: ${values[this.getCreatorFieldId()]}`,
       `${this.getContentFieldId()}: "${values[this.getContentFieldId()]}"`,
