@@ -51,16 +51,15 @@ class SynthesisBuilder extends ContentBuilderBase {
     const creatorInput = values[creatorFieldId] || "";
     const contentInput = values[contentFieldId] || "";
 
-    const extractedTitle =
+    const baseTitle =
       typeof TextFormatter.extractBeforeColon === "function"
         ? TextFormatter.extractBeforeColon(contentInput)
         : contentInput.split(":")[0].trim();
 
-    const formattedContentTitle = TextFormatter.titleCase(extractedTitle);
-    const generatedFolderName = TextFormatter.slugify(extractedTitle);
+    const formattedBaseTitle = TextFormatter.titleCase(baseTitle);
 
     const context = this.resolveContentContext({
-      formattedContent: formattedContentTitle,
+      formattedContent: formattedBaseTitle,
       creatorInput,
       customRootFolder: `analysis/${this.getCategoryType()}`,
     });
@@ -68,11 +67,13 @@ class SynthesisBuilder extends ContentBuilderBase {
     return {
       ...baseProcessedValues,
       aliases: TextFormatter.titleCase(`${contentInput} Synthesis`),
-      title: TextFormatter.titleCase(`Synthesis of ${extractedTitle}`),
-      slug: generatedFolderName,
+      title: TextFormatter.titleCase(`Synthesis of ${baseTitle}`),
+      slug: TextFormatter.slugifyWithAbbreviations(baseTitle),
       type: this.getContentType(),
-      folder: generatedFolderName,
-      filename: `00-${generatedFolderName}-synthesis`,
+      folder: TextFormatter.slugify(baseTitle),
+      filename: TextFormatter.slugifyWithAbbreviations(
+        `00-${baseTitle}-synthesis`,
+      ),
       categories: this.appendToList({
         list: values.categories,
         items: ["synthesis", this.getCategoryType()],
