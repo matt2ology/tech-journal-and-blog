@@ -50,7 +50,7 @@ class NoteBuilder extends ContentBuilderBase {
         `${contentMainTitle} - ${contentOrganization}`,
       ),
       title: TextFormatter.titleCase(`Notes on ${generatedTitle}`),
-      slug: TextFormatter.slugify(
+      slug: TextFormatter.slugifyWithAbbreviations(
         `${contentMainTitle} - ${contentOrganization}`,
       ),
       type: this.getContentType(),
