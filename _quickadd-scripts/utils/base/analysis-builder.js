@@ -57,7 +57,7 @@ class AnalysisBuilder extends ContentBuilderBase {
     return {
       ...baseProcessedValues,
       aliases: TextFormatter.titleCase(
-        `${formattedContentTitle} - ${unitValue}`,
+        `Analysis of ${extractedTitle} - ${unitValue}`,
       ),
       title: TextFormatter.titleCase(
         `Analysis of ${extractedTitle} - ${unitValue}`,
