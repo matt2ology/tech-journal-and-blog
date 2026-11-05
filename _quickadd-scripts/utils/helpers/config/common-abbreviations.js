@@ -2,13 +2,23 @@
  * Dictionary of common abbreviations and their clean slug equivalents.
  */
 const abbreviations = {
-  "approx.": "approx",
-  "e.g.": "eg",
-  "etc.": "etc",
-  "fig.": "fig",
-  "i.e.": "ie",
-  "no.": "no",
-  "vs.": "vs",
+  "A.M.": "am",
+  "Artificial Intelligence": "ai",
+  "Augmented Reality": "ar",
+  "Big Data": "bigdata",
+  "Cloud Computing": "cloud",
+  "Computer Vision": "cv",
+  "Cryptocurrency": "crypto",
+  "Data Science": "ds",
+  "Deep Learning": "dl",
+  "Internet of Things": "iot",
+  "Machine Learning": "ml",
+  "Natural Language Processing": "nlp",
+  "P.M.": "pm",
+  "Quantum Computing": "quantum",
+  "Virtual Reality": "vr",
+  "Generative": "gen",
+  "Leadership": "ldrshp",
 };
 
 // Safeguard check: Ensure no duplicate values or key collisions occur
