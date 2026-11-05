@@ -3,6 +3,10 @@ const FileCounterUtility = require("../helpers/file-counter-utility");
 const TextFormatter = require("../helpers/text-formatter");
 
 class NoteBuilder extends ContentBuilderBase {
+  getContentType() {
+    return "notes";
+  }
+
   processValues(values) {
     const baseProcessedValues = super.processValues(values);
     const creatorFieldId = this.getCreatorFieldId();
@@ -49,12 +53,12 @@ class NoteBuilder extends ContentBuilderBase {
       slug: TextFormatter.slugify(
         `${contentMainTitle} - ${contentOrganization}`,
       ),
-      type: this.getCategoryType(),
+      type: this.getContentType(),
       folder: generatedFolderName,
       filename: generatedFilename,
       categories: this.appendToList({
         list: values.categories,
-        items: [this.getRootFolderType()],
+        items: [this.getContentType()],
       }),
       [creatorFieldId]: this.formatNameList(
         context.creatorInput,
@@ -67,7 +71,7 @@ class NoteBuilder extends ContentBuilderBase {
 
   buildExtraProperties({ values }) {
     return [
-      `type: ${this.getRootFolderType()}`,
+      `type: ${this.getContentType()}`,
       `domain: ${this.getCategoryType()}`,
       `${this.getCreatorFieldId()}: ${values[this.getCreatorFieldId()]}`,
       `${this.getContentFieldId()}: "${values[this.getContentFieldId()]}"`,
