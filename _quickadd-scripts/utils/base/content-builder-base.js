@@ -3,17 +3,8 @@ const TextFormatter = require("../helpers/text-formatter");
 const VaultQueryService = require("../services/vault-query-service");
 
 class ContentBuilderBase extends FrontmatterBuilderBase {
-  getContentType() {
-    throw new Error("Derived classes must implement getContentType()");
-  }
   getCategoryType() {
     throw new Error("Derived classes must implement getCategoryType()");
-  }
-  getCreatorFieldId() {
-    throw new Error("Derived classes must implement getCreatorFieldId()");
-  }
-  getCreatorFieldLabel() {
-    throw new Error("Derived classes must implement getCreatorFieldLabel()");
   }
   getContentFieldId() {
     throw new Error("Derived classes must implement getContentFieldId()");
@@ -21,17 +12,26 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
   getContentFieldLabel() {
     throw new Error("Derived classes must implement getContentFieldLabel()");
   }
-  getUnitFieldId() {
-    throw new Error("Derived classes must implement getUnitFieldId()");
+  getContentType() {
+    throw new Error("Derived classes must implement getContentType()");
   }
-  getUnitFieldLabel() {
-    throw new Error("Derived classes must implement getUnitFieldLabel()");
+  getCreatorFieldId() {
+    throw new Error("Derived classes must implement getCreatorFieldId()");
+  }
+  getCreatorFieldLabel() {
+    throw new Error("Derived classes must implement getCreatorFieldLabel()");
   }
   getSectionFieldId() {
     throw new Error("Derived classes must implement getSectionFieldId()");
   }
   getSectionFieldLabel() {
     throw new Error("Derived classes must implement getSectionFieldLabel()");
+  }
+  getUnitFieldId() {
+    throw new Error("Derived classes must implement getUnitFieldId()");
+  }
+  getUnitFieldLabel() {
+    throw new Error("Derived classes must implement getUnitFieldLabel()");
   }
   formatUnitIdentifier(text) {
     return text;
