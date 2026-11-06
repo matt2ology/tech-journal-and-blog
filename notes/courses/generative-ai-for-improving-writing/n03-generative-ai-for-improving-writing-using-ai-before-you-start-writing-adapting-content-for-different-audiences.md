@@ -29,7 +29,7 @@ lesson: "Adapting Content for Different Audiences"
 
 ### idTwLFqv046o
 
-> [!tldr] Cumulative Summary
+> [!summary] Cumulative Summary
 > Depending on the reader an idea can be interpreted differently, so Ackmann will specify how to use AI to shape the message for different readers.
 
 <!-- blockquote separator -->
@@ -52,7 +52,7 @@ lesson: "Adapting Content for Different Audiences"
 
 ### idd3LFLkKLKr
 
-> [!tldr] Cumulative Summary
+> [!summary] Cumulative Summary
 > AI can aid by tailoring outlines for specific target audiences.
 
 <!-- blockquote separator -->
@@ -82,7 +82,7 @@ lesson: "Adapting Content for Different Audiences"
 
 ### idZUPSnInaH8
 
-> [!tldr] Cumulative Summary
+> [!summary] Cumulative Summary
 >
 > One's message can be interpreted differently from different readers, so one can leverage AI to suggest different outlines for specific target audiences.
 >
@@ -106,7 +106,7 @@ lesson: "Adapting Content for Different Audiences"
 
 ### idC0nEcaBp2t
 
-> [!tldr] Cumulative Summary
+> [!summary] Cumulative Summary
 > Be mindful of exposing specifics and information to the AI tool; especially, when using AI to draft outlines for different target audiences.
 >
 > Knowing that executives information fast, at a high-level of detail, and articulates how it will help the business - AI can aid in drafting the outline.
