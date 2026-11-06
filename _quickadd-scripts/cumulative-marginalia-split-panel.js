@@ -210,7 +210,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       // Toggle click handler
       toggleBtn.onclick = () => {
         showFirstLineOnly = !showFirstLineOnly;
-        oggleBtn.textContent = showFirstLineOnly
+        toggleBtn.textContent = showFirstLineOnly
           ? "Show Full Summaries"
           : "Show First Line Only";
         toggleBtn.style.color = showFirstLineOnly
