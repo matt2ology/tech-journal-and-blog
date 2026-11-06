@@ -44,7 +44,6 @@ class SynthesisBuilder extends ContentBuilderBase {
   }
 
   processValues(values) {
-    const baseProcessedValues = super.processValues(values);
     const { creatorFieldId, creatorInput, contentInput } =
       this.extractContentFields(values);
 
@@ -59,6 +58,13 @@ class SynthesisBuilder extends ContentBuilderBase {
       customRootFolder: `analysis/${this.getDomainType()}`,
     });
 
+    const generatedFolderPath = `${this.getKnowledgeResourceType()}/${this.getDomainType()}/${TextFormatter.slugify(baseTitle)}`;
+
+    const baseProcessedValues = super.processValues({
+      ...values,
+      folderPath: generatedFolderPath,
+    });
+
     return {
       ...baseProcessedValues,
       aliases: [
@@ -68,7 +74,6 @@ class SynthesisBuilder extends ContentBuilderBase {
       title: TextFormatter.titleCase(`Synthesis of ${baseTitle}`),
       slug: TextFormatter.slugifyWithAbbreviations(baseTitle),
       type: this.getKnowledgeResourceType(),
-      folder: TextFormatter.slugify(baseTitle),
       filename: TextFormatter.slugifyWithAbbreviations(
         `00-${baseTitle}-synthesis`,
       ),
