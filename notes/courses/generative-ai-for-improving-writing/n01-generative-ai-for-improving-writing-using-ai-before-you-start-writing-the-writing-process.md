@@ -61,7 +61,7 @@ lesson: The Writing Process
 
 ### idfs0yPyKO2Q
 
-> [!tldr] Cumulative Summary
+> [!summary] Cumulative Summary
 > GenAI can help one at every every stage of the writing process: outlining, writing, and reviewing.
 >
 > The instructor, Heather Ackmann, sells the promise that GenAI can help one think though ideas and enables one to write better without replacing one's unique voice or style.
@@ -86,7 +86,7 @@ lesson: The Writing Process
 
 ### idFxQsRxYZxd
 
-> [!tldr] Cumulative Summary
+> [!summary] Cumulative Summary
 > With AI-assisted and AI-generated writing, GenAI can help one at every every stage of the writing process (outlining, writing, and reviewing) without sacrificing human creative control (a requirement for copyright laws).
 >
 > It is important to prioritize human creative control as it is a requirement for copyright laws using GenAI assisted writing implemented by "AI‑assisted" and "AI‑generated writing".
@@ -123,7 +123,7 @@ lesson: The Writing Process
 
 ### id5QZpH5Gscf
 
-> [!tldr] Cumulative Summary
+> [!summary] Cumulative Summary
 > It is important to prioritize human creative control as it is a requirement for copyright laws; especially, when using "AI-assisted" and "AI-generated writing" to accelerate the outlining stage (brainstorming, organizing, and planning) in the writing process.
 >
 > AI can expedite the outlining phase of the writing process by getting started faster by suggesting key points and topics for one to start with.
@@ -161,7 +161,7 @@ lesson: The Writing Process
 
 ### idUHbF4V2Yiv
 
-> [!tldr] Cumulative Summary
+> [!summary] Cumulative Summary
 > To use GenAI tools to help expedite the writing process is to balance human creative control for copyright laws and protecting one's self, and intellectual property, from the very companies that create the tools for use.
 >
 > Even though, though the settings, there is no promise or guarantee that the data and inputs fed will not be private between you and the Large Language Model (LLM).
