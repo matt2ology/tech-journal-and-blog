@@ -453,6 +453,13 @@
         "id": "7251b3ba-24c3-49b3-a58e-a671b211d69e",
         "commands": [
           {
+            "name": "cumulative-marginalia-split-panel",
+            "type": "UserScript",
+            "id": "fe6ad151-22bd-4766-bd86-57d29928cb1f",
+            "path": "_quickadd-scripts/cumulative-marginalia-split-panel.js",
+            "settings": {}
+          },
+          {
             "name": "cumulative-marginalia",
             "type": "UserScript",
             "id": "a88bdec8-a576-413d-9431-9b876630d82b",
