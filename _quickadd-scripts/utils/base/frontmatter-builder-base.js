@@ -4,7 +4,7 @@ const { serializeFrontmatter } = require("../helpers/frontmatter-serializer");
 
 class FrontmatterBuilderBase {
   #quickAddApi;
-  #fields;
+  #fieldDefinitions;
 
   constructor(quickAddApi) {
     if (!quickAddApi || typeof quickAddApi.requestInputs !== "function") {
@@ -13,7 +13,7 @@ class FrontmatterBuilderBase {
       );
     }
     this.#quickAddApi = quickAddApi;
-    this.#fields = Object.freeze([
+    this.#fieldDefinitions = Object.freeze([
       {
         id: "title",
         label: "Title",
@@ -39,34 +39,37 @@ class FrontmatterBuilderBase {
   }
 
   getFields() {
-    return [...this.#fields];
+    return [...this.#fieldDefinitions];
   }
 
   addField(fieldDefinition) {
-    this.#fields = Object.freeze([...this.#fields, fieldDefinition]);
+    this.#fieldDefinitions = Object.freeze([
+      ...this.#fieldDefinitions,
+      fieldDefinition,
+    ]);
   }
 
   processValues(values) {
     return values;
   }
 
-  formatArray(input) {
+  formatArrayInput(input) {
     return TextFormatter.formatYAMLArray({ input });
   }
 
-  formatNameList(input, fallback) {
+  formatNameListInput(input, fallback) {
     return TextFormatter.formatYAMLNameList({ input, fallback });
   }
 
-  buildStandardProperties({ computed }) {
+  buildStandardProperties({ computedValues }) {
     return [
-      `aliases: ${computed.aliases}`,
-      `title: "${computed.title}"`,
-      `date: "${computed.date}"`,
-      `draft: ${computed.draft}`,
-      `slug: ${computed.slug}`,
-      `categories:${computed.categories}`,
-      `tags:${computed.tags}`,
+      `aliases: ${computedValues.aliases}`,
+      `title: "${computedValues.title}"`,
+      `date: "${computedValues.date}"`,
+      `draft: ${computedValues.draft}`,
+      `slug: ${computedValues.slug}`,
+      `categories:${computedValues.categories}`,
+      `tags:${computedValues.tags}`,
     ];
   }
 
@@ -78,31 +81,29 @@ class FrontmatterBuilderBase {
     return ListUtils.appendUniqueItems({ list, item: items });
   }
 
-  async run(params) {
-    const requestedValues = await this.#quickAddApi.requestInputs(
+  async run(executionParams) {
+    const rawInputValues = await this.#quickAddApi.requestInputs(
       this.getFields(),
     );
-    const processedValues = this.processValues(requestedValues);
+    const processedValues = this.processValues(rawInputValues);
     const computedValues = this.#computeStandardValues(processedValues);
 
     const properties = [
       ...this.buildStandardProperties({
         values: processedValues,
-        computed: computedValues,
+        computedValues,
       }),
-      ...this.buildExtraProperties({
-        values: processedValues,
-        computed: computedValues,
-      }),
+      ...this.buildExtraProperties({ values: processedValues, computedValues }),
     ];
 
     const frontmatterString = serializeFrontmatter(properties);
     this.#syncExecutionVariables({
-      params,
-      computed: computedValues,
-      values: processedValues,
-      frontmatter: frontmatterString,
+      executionParams,
+      computedValues,
+      processedValues,
+      frontmatterString,
     });
+
     return frontmatterString;
   }
 
@@ -113,14 +114,25 @@ class FrontmatterBuilderBase {
       slug: values.slug ?? TextFormatter.slugify(values.title),
       date: this.#quickAddApi.date.now("YYYY-MM-DDTHH:mm:ssZ"),
       draft: true,
-      categories: this.formatArray(values.categories),
-      tags: this.formatArray(values.tags),
+      categories: this.formatArrayInput(values.categories),
+      tags: this.formatArrayInput(values.tags),
     };
   }
 
-  #syncExecutionVariables({ params, computed, frontmatter, values }) {
-    params?.variables &&
-      Object.assign(params.variables, computed, values, { frontmatter });
+  #syncExecutionVariables({
+    executionParams,
+    computedValues,
+    frontmatterString,
+    processedValues,
+  }) {
+    if (executionParams?.variables) {
+      Object.assign(
+        executionParams.variables,
+        computedValues,
+        processedValues,
+        { frontmatter: frontmatterString },
+      );
+    }
   }
 }
 

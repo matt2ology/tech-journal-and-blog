@@ -8,7 +8,7 @@ class SynthesisBuilderBook extends SynthesisBuilder {
     super(quickAddApi);
   }
 
-  getCategoryType() {
+  getDomainType() {
     return "books";
   }
 

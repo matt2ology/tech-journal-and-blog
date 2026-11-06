@@ -3,11 +3,11 @@ const TextFormatter = require("../helpers/text-formatter");
 const VaultQueryService = require("../services/vault-query-service");
 
 class ContentBuilderBase extends FrontmatterBuilderBase {
-  getCategoryType() {
-    throw new Error("Derived classes must implement getCategoryType()");
+  getDomainType() {
+    throw new Error("Derived classes must implement getDomainType()");
   }
-  getContentType() {
-    throw new Error("Derived classes must implement getContentType()");
+  getKnowledgeResourceType() {
+    throw new Error("Derived classes must implement getKnowledgeResourceType()");
   }
   getContentFieldId() {
     throw new Error("Derived classes must implement getContentFieldId()");
@@ -33,12 +33,26 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
   getUnitFieldLabel() {
     throw new Error("Derived classes must implement getUnitFieldLabel()");
   }
+
   formatUnitIdentifier(text) {
     return text;
   }
 
+  extractContentFields(values) {
+    return {
+      creatorFieldId: this.getCreatorFieldId(),
+      contentFieldId: this.getContentFieldId(),
+      sectionFieldId: this.getSectionFieldId(),
+      unitFieldId: this.getUnitFieldId(),
+      creatorInput: values[this.getCreatorFieldId()] || "",
+      contentInput: values[this.getContentFieldId()] || "",
+      sectionValue: values[this.getSectionFieldId()] || "",
+      unitValue: values[this.getUnitFieldId()] || "",
+    };
+  }
+
   getFields() {
-    const rootFolder = `${this.getContentType()}/${this.getCategoryType()}`;
+    const rootFolder = `${this.getKnowledgeResourceType()}/${this.getDomainType()}`;
     const rawOptions = VaultQueryService.getSubfolderNames({
       app,
       folderPath: rootFolder,
@@ -87,48 +101,28 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
     ];
   }
 
-  /**
-   * Resolves the creator input using an existing content folder when a matching
-   * folder is found under the specified root folder.
-   *
-   * If creatorInput is provided, it takes precedence and is returned unchanged.
-   * Otherwise, attempts to match formattedContent against an existing subfolder
-   * name. If a match is found, retrieves the existing creator field values from
-   * that folder, cleans and combines them, and uses them as the resolved creator.
-   *
-   * Falls back to creatorInput when no matching folder or existing creator values
-   * are found.
-   *
-   * @param {Object} params
-   * @param {string} params.formattedContent - Formatted content title used to locate
-   *   an existing subfolder.
-   * @param {string} params.creatorInput - Explicit creator input and fallback value.
-   * @param {string} [params.customRootFolder] - Optional root folder to search.
-   *   Defaults to the content type and category type folder.
-   * @returns {{ creatorInput: string }} The resolved creator input.
-   */
   resolveContentContext({ formattedContent, creatorInput, customRootFolder }) {
     if (creatorInput) return { creatorInput };
 
     const rootFolder =
-      customRootFolder || `${this.getContentType()}/${this.getCategoryType()}`;
+      customRootFolder || `${this.getKnowledgeResourceType()}/${this.getDomainType()}`;
     const subfolders = VaultQueryService.getSubfolderNames({
       app,
       folderPath: rootFolder,
     });
 
-    const matched = subfolders.find(
+    const matchedFolder = subfolders.find(
       (sub) =>
         TextFormatter.titleCase(sub) === formattedContent ||
         sub.toLowerCase() === formattedContent.toLowerCase(),
     );
 
-    if (!matched) return { creatorInput };
+    if (!matchedFolder) return { creatorInput };
 
     const existingCreators = VaultQueryService.getFieldValues({
       app,
       fieldName: this.getCreatorFieldId(),
-      folderPath: `${rootFolder}/${matched}`,
+      folderPath: `${rootFolder}/${matchedFolder}`,
     });
 
     const resolvedCreator =

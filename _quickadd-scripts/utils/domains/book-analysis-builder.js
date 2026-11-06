@@ -8,7 +8,7 @@ class AnalysisBuilderBook extends AnalysisBuilder {
     super(quickAddApi);
   }
 
-  getCategoryType() {
+  getDomainType() {
     return "books";
   }
 

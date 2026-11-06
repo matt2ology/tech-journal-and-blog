@@ -3,36 +3,34 @@ const FileCounterUtility = require("../helpers/file-counter-utility");
 const TextFormatter = require("../helpers/text-formatter");
 
 class NoteBuilder extends ContentBuilderBase {
-  getContentType() {
+  getKnowledgeResourceType() {
     return "notes";
   }
 
   processValues(values) {
     const baseProcessedValues = super.processValues(values);
-    const creatorFieldId = this.getCreatorFieldId();
-    const contentFieldId = this.getContentFieldId();
-    const sectionFieldId = this.getSectionFieldId();
-    const unitFieldId = this.getUnitFieldId();
+    const {
+      creatorFieldId,
+      creatorInput,
+      contentInput,
+      sectionValue,
+      unitValue,
+    } = this.extractContentFields(values);
 
-    const unitValue = values[unitFieldId] || "";
-    const sectionValue = values[sectionFieldId] || "";
-    const creatorInput = values[creatorFieldId] || "";
-    const contentInput = values[contentFieldId] || "";
-
+    const contentMainTitle = TextFormatter.extractBeforeColon(contentInput);
+    const generatedFolderName = `${this.getKnowledgeResourceType()}/${this.getDomainType()}/${contentMainTitle}`;
     const contentOrganization = sectionValue
       ? `${unitValue} - ${sectionValue}`
       : unitValue;
-    const contentMainTitle = TextFormatter.extractBeforeColon(contentInput);
-    const generatedFolderName = TextFormatter.slugify(contentMainTitle);
 
-    const context = this.resolveContentContext({
+    const { creatorInput: resolvedCreator } = this.resolveContentContext({
       formattedContent: TextFormatter.titleCase(contentMainTitle),
       creatorInput,
     });
 
     const fileIndex = FileCounterUtility.getCount({
       app,
-      folderPath: `notes/${this.getCategoryType()}/${generatedFolderName}`,
+      folderPath: `${this.getKnowledgeResourceType()}/${this.getDomainType()}/${generatedFolderName}`,
       includeNext: true,
     });
 
@@ -51,15 +49,15 @@ class NoteBuilder extends ContentBuilderBase {
       slug: TextFormatter.slugifyWithAbbreviations(
         `${contentMainTitle} - ${contentOrganization}`,
       ),
-      type: this.getContentType(),
+      type: this.getKnowledgeResourceType(),
       folder: generatedFolderName,
       filename: generatedFilename,
       categories: this.appendToList({
         list: values.categories,
-        items: [this.getContentType()],
+        items: [this.getKnowledgeResourceType()],
       }),
-      [creatorFieldId]: this.formatNameList(
-        context.creatorInput,
+      [creatorFieldId]: this.formatNameListInput(
+        resolvedCreator,
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
       note_header: sectionValue || unitValue || "Notes & Key Points",
@@ -69,8 +67,8 @@ class NoteBuilder extends ContentBuilderBase {
 
   buildExtraProperties({ values }) {
     return [
-      `type: ${this.getContentType()}`,
-      `domain: ${this.getCategoryType()}`,
+      `type: ${this.getKnowledgeResourceType()}`,
+      `domain: ${this.getDomainType()}`,
       `${this.getCreatorFieldId()}: ${values[this.getCreatorFieldId()]}`,
       `${this.getContentFieldId()}: "${values[this.getContentFieldId()]}"`,
       `${this.getUnitFieldId()}: "${values[this.getUnitFieldId()]}"`,

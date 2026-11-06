@@ -8,7 +8,7 @@ class SynthesisBuilderCourse extends SynthesisBuilder {
     super(quickAddApi);
   }
 
-  getCategoryType() {
+  getDomainType() {
     return "courses";
   }
 

@@ -3,12 +3,12 @@ const TextFormatter = require("../helpers/text-formatter");
 const VaultQueryService = require("../services/vault-query-service");
 
 class SynthesisBuilder extends ContentBuilderBase {
-  getContentType() {
+  getKnowledgeResourceType() {
     return "synthesis";
   }
 
   getFields() {
-    const rootFolder = `analysis/${this.getCategoryType()}`;
+    const rootFolder = `analysis/${this.getDomainType()}`;
     const rawContentOptions = VaultQueryService.getSubfolderNames({
       app,
       folderPath: rootFolder,
@@ -45,23 +45,18 @@ class SynthesisBuilder extends ContentBuilderBase {
 
   processValues(values) {
     const baseProcessedValues = super.processValues(values);
-    const creatorFieldId = this.getCreatorFieldId();
-    const contentFieldId = this.getContentFieldId();
+    const { creatorFieldId, creatorInput, contentInput } =
+      this.extractContentFields(values);
 
-    const creatorInput = values[creatorFieldId] || "";
-    const contentInput = values[contentFieldId] || "";
-
-    const baseTitle =
-      typeof TextFormatter.extractBeforeColon === "function"
-        ? TextFormatter.extractBeforeColon(contentInput)
-        : contentInput.split(":")[0].trim();
-
+    const baseTitle = TextFormatter.extractBeforeColon
+      ? TextFormatter.extractBeforeColon(contentInput)
+      : contentInput.split(":")[0].trim();
     const formattedBaseTitle = TextFormatter.titleCase(baseTitle);
 
-    const context = this.resolveContentContext({
+    const { creatorInput: resolvedCreator } = this.resolveContentContext({
       formattedContent: formattedBaseTitle,
       creatorInput,
-      customRootFolder: `analysis/${this.getCategoryType()}`,
+      customRootFolder: `analysis/${this.getDomainType()}`,
     });
 
     return {
@@ -72,17 +67,17 @@ class SynthesisBuilder extends ContentBuilderBase {
       ],
       title: TextFormatter.titleCase(`Synthesis of ${baseTitle}`),
       slug: TextFormatter.slugifyWithAbbreviations(baseTitle),
-      type: this.getContentType(),
+      type: this.getKnowledgeResourceType(),
       folder: TextFormatter.slugify(baseTitle),
       filename: TextFormatter.slugifyWithAbbreviations(
         `00-${baseTitle}-synthesis`,
       ),
       categories: this.appendToList({
         list: values.categories,
-        items: ["synthesis", this.getCategoryType()],
+        items: ["synthesis", this.getDomainType()],
       }),
-      [creatorFieldId]: this.formatNameList(
-        context.creatorInput,
+      [creatorFieldId]: this.formatNameListInput(
+        resolvedCreator,
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
     };
@@ -92,8 +87,8 @@ class SynthesisBuilder extends ContentBuilderBase {
     const creatorFieldId = this.getCreatorFieldId();
     const contentFieldId = this.getContentFieldId();
     return [
-      `type: ${this.getContentType()}`,
-      `domain: ${this.getCategoryType()}`,
+      `type: ${this.getKnowledgeResourceType()}`,
+      `domain: ${this.getDomainType()}`,
       `${creatorFieldId}: ${values[creatorFieldId]}`,
       `${contentFieldId}: "${values[contentFieldId]}"`,
     ];

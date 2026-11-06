@@ -8,7 +8,7 @@ class NoteBuilderCourse extends NoteBuilder {
     super(quickAddApi);
   }
 
-  getCategoryType() {
+  getDomainType() {
     return "courses";
   }
 

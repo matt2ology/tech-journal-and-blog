@@ -35,7 +35,7 @@
               "folder": {
                 "enabled": true,
                 "folders": [
-                  "notes/{{VALUE:type}}/{{VALUE:folder}}"
+                  "{{VALUE:type}}/{{VALUE:folder}}"
                 ],
                 "chooseWhenCreatingNote": false,
                 "createInSameFolderAsActiveFile": false,

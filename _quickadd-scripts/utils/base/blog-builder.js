@@ -1,24 +1,24 @@
 const FrontmatterBuilderBase = require("./frontmatter-builder-base");
 
 class BlogFrontmatterBuilder extends FrontmatterBuilderBase {
-  getContentType() {
+  getKnowledgeResourceType() {
     return "blog";
   }
 
   processValues(values) {
     const processed = super.processValues(values);
-    processed.type = this.getContentType();
+    processed.type = this.getKnowledgeResourceType();
     processed.categories = this.appendToList({
       list: values.categories,
-      items: [this.getContentType()],
+      items: [this.getKnowledgeResourceType()],
     });
     return processed;
   }
 
   buildExtraProperties() {
     return [
-      `type: ${this.getContentType()}`,
-      `domain: ${this.getCategoryType()}`,
+      `type: ${this.getKnowledgeResourceType()}`,
+      `domain: ${this.getDomainType()}`,
     ];
   }
 }

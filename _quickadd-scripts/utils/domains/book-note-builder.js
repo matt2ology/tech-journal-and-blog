@@ -8,7 +8,7 @@ class NoteBuilderBook extends NoteBuilder {
     super(quickAddApi);
   }
 
-  getCategoryType() {
+  getDomainType() {
     return "books";
   }
 
