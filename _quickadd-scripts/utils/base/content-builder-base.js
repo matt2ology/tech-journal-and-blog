@@ -87,6 +87,26 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
     ];
   }
 
+  /**
+   * Resolves the creator input using an existing content folder when a matching
+   * folder is found under the specified root folder.
+   *
+   * If creatorInput is provided, it takes precedence and is returned unchanged.
+   * Otherwise, attempts to match formattedContent against an existing subfolder
+   * name. If a match is found, retrieves the existing creator field values from
+   * that folder, cleans and combines them, and uses them as the resolved creator.
+   *
+   * Falls back to creatorInput when no matching folder or existing creator values
+   * are found.
+   *
+   * @param {Object} params
+   * @param {string} params.formattedContent - Formatted content title used to locate
+   *   an existing subfolder.
+   * @param {string} params.creatorInput - Explicit creator input and fallback value.
+   * @param {string} [params.customRootFolder] - Optional root folder to search.
+   *   Defaults to the content type and category type folder.
+   * @returns {{ creatorInput: string }} The resolved creator input.
+   */
   resolveContentContext({ formattedContent, creatorInput, customRootFolder }) {
     if (creatorInput) return { creatorInput };
 
