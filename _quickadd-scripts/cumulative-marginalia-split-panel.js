@@ -38,7 +38,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   }
 
   /**
-   * Responsible solely for UI presentation in a non-overlapping floating window.
+   * Responsible solely for UI presentation in a non-overlapping floating window with a display toggle.
    */
   class PanelPresenter {
     async presentInFloatingWindow(title, summaries, sourcePath) {
@@ -119,6 +119,23 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       titleEl.textContent = `Summaries: ${title}`;
       headerEl.appendChild(titleEl);
 
+      const buttonContainer = document.createElement("div");
+      buttonContainer.style.display = "flex";
+      buttonContainer.style.gap = "8px";
+      buttonContainer.style.alignItems = "center";
+
+      // Toggle Button State & Element
+      let showFirstLineOnly = false;
+      const toggleBtn = document.createElement("button");
+      toggleBtn.textContent = "Show First Line Only";
+      toggleBtn.style.padding = "4px 8px";
+      toggleBtn.style.background = "var(--background-secondary)";
+      toggleBtn.style.border = "1px solid var(--background-modifier-border)";
+      toggleBtn.style.borderRadius = "4px";
+      toggleBtn.style.cursor = "pointer";
+      toggleBtn.style.fontSize = "0.75rem";
+      toggleBtn.style.color = "var(--text-muted)";
+
       const closeBtn = document.createElement("button");
       closeBtn.textContent = "✕ Close";
       closeBtn.style.padding = "4px 10px";
@@ -132,44 +149,78 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
         popoutLeaf.detach();
         app.cumulativeSummaryWindowLeaf = null;
       };
-      headerEl.appendChild(closeBtn);
 
+      buttonContainer.appendChild(toggleBtn);
+      buttonContainer.appendChild(closeBtn);
+      headerEl.appendChild(buttonContainer);
       containerEl.appendChild(headerEl);
 
       // Scrollable Cards Container
       const scrollContainer = document.createElement("div");
       scrollContainer.style.overflowY = "auto";
       scrollContainer.style.flex = "1";
-
-      summaries.forEach((summary, index) => {
-        const card = document.createElement("div");
-        card.style.marginBottom = "15px";
-        card.style.padding = "15px";
-        card.style.borderRadius = "8px";
-        card.style.border = "1px solid var(--background-modifier-border)";
-        card.style.backgroundColor = "var(--background-secondary)";
-
-        const cardHeader = document.createElement("div");
-        cardHeader.style.fontWeight = "bold";
-        cardHeader.style.marginBottom = "8px";
-        cardHeader.style.color = "var(--text-accent)";
-        cardHeader.textContent = `Summary ${index + 1} of ${summaries.length}`;
-        card.appendChild(cardHeader);
-
-        const cardBody = document.createElement("div");
-        cardBody.style.whiteSpace = "pre-line";
-        if (typeof MarkdownRenderer !== "undefined") {
-          MarkdownRenderer.render(app, summary, cardBody, sourcePath, {
-            addChild: () => {},
-          });
-        } else {
-          cardBody.textContent = summary;
-        }
-        card.appendChild(cardBody);
-        scrollContainer.appendChild(card);
-      });
-
       containerEl.appendChild(scrollContainer);
+
+      const renderCards = () => {
+        scrollContainer.empty();
+
+        summaries.forEach((summary, index) => {
+          const card = document.createElement("div");
+          card.style.marginBottom = "15px";
+          card.style.padding = "15px";
+          card.style.borderRadius = "8px";
+          card.style.border = "1px solid var(--background-modifier-border)";
+          card.style.backgroundColor = "var(--background-secondary)";
+
+          const cardHeader = document.createElement("div");
+          cardHeader.style.fontWeight = "bold";
+          cardHeader.style.marginBottom = "8px";
+          cardHeader.style.color = "var(--text-accent)";
+          cardHeader.textContent = `Summary ${index + 1} of ${summaries.length}`;
+          card.appendChild(cardHeader);
+
+          const cardBody = document.createElement("div");
+          cardBody.style.whiteSpace = "pre-line";
+
+          // Choose content based on toggle state
+          let contentToRender = summary;
+          if (showFirstLineOnly) {
+            const lines = summary.split(/\r?\n/);
+            contentToRender = lines[0] || "";
+          }
+
+          if (typeof MarkdownRenderer !== "undefined") {
+            MarkdownRenderer.render(
+              app,
+              contentToRender,
+              cardBody,
+              sourcePath,
+              {
+                addChild: () => {},
+              },
+            );
+          } else {
+            cardBody.textContent = contentToRender;
+          }
+          card.appendChild(cardBody);
+          scrollContainer.appendChild(card);
+        });
+      };
+
+      // Toggle click handler
+      toggleBtn.onclick = () => {
+        showFirstLineOnly = !showFirstLineOnly;
+        oggleBtn.textContent = showFirstLineOnly
+          ? "Show Full Summaries"
+          : "Show First Line Only";
+        toggleBtn.style.color = showFirstLineOnly
+          ? "var(--text-accent)"
+          : "var(--text-muted)";
+        renderCards();
+      };
+
+      // Initial render
+      renderCards();
     }
   }
 
