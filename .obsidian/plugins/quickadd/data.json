@@ -35,7 +35,7 @@
               "folder": {
                 "enabled": true,
                 "folders": [
-                  "{{VALUE:type}}/{{VALUE:folder}}"
+                  "{{VALUE:folderPath}}"
                 ],
                 "chooseWhenCreatingNote": false,
                 "createInSameFolderAsActiveFile": false,
@@ -94,7 +94,7 @@
               "folder": {
                 "enabled": true,
                 "folders": [
-                  "analysis/{{VALUE:type}}/{{VALUE:folder}}"
+                  "{{VALUE:folderPath}}"
                 ],
                 "chooseWhenCreatingNote": false,
                 "createInSameFolderAsActiveFile": false,
@@ -153,7 +153,7 @@
               "folder": {
                 "enabled": true,
                 "folders": [
-                  "synthesis/{{VALUE:type}}"
+                  "{{VALUE:folderPath}}"
                 ],
                 "chooseWhenCreatingNote": false,
                 "createInSameFolderAsActiveFile": false,
