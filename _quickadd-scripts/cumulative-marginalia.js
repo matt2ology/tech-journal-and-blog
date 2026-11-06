@@ -12,13 +12,26 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
     }
 
     async run() {
-      const inputSuccessStatus = await this.#requestInputs();
-      this.#checkInputSuccess(inputSuccessStatus);
+      try {
+        const inputSuccessStatus = await this.#requestInputs();
+        this.#checkInputSuccess(inputSuccessStatus);
 
-      this.#resolveSourceTitle();
-      this.#formatAndStoreOutput();
+        this.#resolveSourceTitle();
+        this.#formatAndStoreOutput();
 
-      return this.variables.cumulativeNotes;
+        return this.variables.cumulativeNotes;
+      } finally {
+        this.#closeSummaryWindow();
+      }
+    }
+
+    #closeSummaryWindow() {
+      if (app.cumulativeSummaryWindowLeaf) {
+        try {
+          app.cumulativeSummaryWindowLeaf.detach();
+        } catch {}
+        app.cumulativeSummaryWindowLeaf = null;
+      }
     }
 
     // --- Private Methods: Workflow & Formatting (Verbs) ---
