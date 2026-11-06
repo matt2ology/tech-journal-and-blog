@@ -38,18 +38,62 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
   }
 
   /**
-   * Responsible solely for UI presentation and opening content in a separate side panel.
+   * Responsible solely for UI presentation in a non-overlapping floating window.
    */
   class PanelPresenter {
-    presentInSplitPanel(title, summaries, sourcePath) {
-      // Split the active workspace leaf to create a new separate panel/pane
-      const newLeaf = app.workspace.splitActiveLeaf("vertical");
-      if (!newLeaf) {
-        new Notice("Could not open a new panel.");
+    async presentInFloatingWindow(title, summaries, sourcePath) {
+      // Close previous summary floating window if currently open
+      if (app.cumulativeSummaryWindowLeaf) {
+        try {
+          app.cumulativeSummaryWindowLeaf.detach();
+        } catch {}
+        app.cumulativeSummaryWindowLeaf = null;
+      }
+
+      const width = 480;
+      const height = 1080;
+
+      // Calculate position to the right of the main application window to prevent overlap
+      const dualScreenLeft =
+        window.screenLeft !== undefined ? window.screenLeft : window.screenX;
+      const dualScreenTop =
+        window.screenTop !== undefined ? window.screenTop : window.screenY;
+      const mainWidth = window.innerWidth
+        ? window.innerWidth
+        : document.documentElement.clientWidth
+          ? document.documentElement.clientWidth
+          : screen.width;
+
+      const left = dualScreenLeft + mainWidth - width - 50;
+      const top = dualScreenTop + 80;
+
+      // Open a floating popout window leaf
+      const popoutLeaf = app.workspace.openPopoutLeaf({
+        size: { width: width, height: height },
+      });
+
+      if (!popoutLeaf) {
+        new Notice("Could not open floating summary window.");
         return;
       }
 
-      const containerEl = newLeaf.view.containerEl;
+      app.cumulativeSummaryWindowLeaf = popoutLeaf;
+
+      // Position the popup window safely off to the side so it doesn't overlay input modals
+      setTimeout(() => {
+        try {
+          const win =
+            popoutLeaf.view.containerEl.win ||
+            popoutLeaf.view.containerEl.ownerDocument.defaultView;
+          if (win && typeof win.moveTo === "function") {
+            win.moveTo(Math.max(0, left), Math.max(0, top));
+          }
+        } catch (e) {
+          // Fallback if window moving is restricted by environment security
+        }
+      }, 50);
+
+      const containerEl = popoutLeaf.view.containerEl;
       containerEl.empty();
       containerEl.style.backgroundColor = "var(--background-primary)";
       containerEl.style.color = "var(--text-normal)";
@@ -58,7 +102,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       containerEl.style.display = "flex";
       containerEl.style.flexDirection = "column";
 
-      // Panel Header
+      // Floating Window Header
       const headerEl = document.createElement("div");
       headerEl.style.display = "flex";
       headerEl.style.justifyContent = "space-between";
@@ -70,13 +114,13 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
 
       const titleEl = document.createElement("h2");
       titleEl.style.margin = "0";
-      titleEl.style.fontSize = "1.3rem";
+      titleEl.style.fontSize = "1.1rem";
       titleEl.style.color = "var(--text-normal)";
-      titleEl.textContent = `Cumulative Summaries: ${title}`;
+      titleEl.textContent = `Summaries: ${title}`;
       headerEl.appendChild(titleEl);
 
       const closeBtn = document.createElement("button");
-      closeBtn.textContent = "✕ Close Panel";
+      closeBtn.textContent = "✕ Close";
       closeBtn.style.padding = "4px 10px";
       closeBtn.style.background = "var(--background-secondary)";
       closeBtn.style.border = "1px solid var(--background-modifier-border)";
@@ -84,7 +128,10 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       closeBtn.style.cursor = "pointer";
       closeBtn.style.fontSize = "0.85rem";
       closeBtn.style.color = "var(--text-muted)";
-      closeBtn.onclick = () => newLeaf.detach();
+      closeBtn.onclick = () => {
+        popoutLeaf.detach();
+        app.cumulativeSummaryWindowLeaf = null;
+      };
       headerEl.appendChild(closeBtn);
 
       containerEl.appendChild(headerEl);
@@ -96,7 +143,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
 
       summaries.forEach((summary, index) => {
         const card = document.createElement("div");
-        card.style.marginBottom = "20px";
+        card.style.marginBottom = "15px";
         card.style.padding = "15px";
         card.style.borderRadius = "8px";
         card.style.border = "1px solid var(--background-modifier-border)";
@@ -123,14 +170,11 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       });
 
       containerEl.appendChild(scrollContainer);
-
-      // Focus the new leaf panel
-      app.workspace.setActiveLeaf(newLeaf);
     }
   }
 
   /**
-   * Main orchestrator coordinating extraction and separate-panel presentation.
+   * Main orchestrator coordinating extraction and floating panel presentation.
    */
   class SummaryReaderOrchestrator {
     constructor() {
@@ -142,7 +186,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       const extractedData = await this.extractor.extractFromActiveFile();
       if (!extractedData) return;
 
-      this.presenter.presentInSplitPanel(
+      await this.presenter.presentInFloatingWindow(
         extractedData.fileName,
         extractedData.summaries,
         extractedData.filePath,
