@@ -1,10 +1,18 @@
-const ContentBuilderBase = require("./content-builder-base");
+const HierarchicalContentBuilderBase = require("./hierarchical-content-builder-base");
 const FileCounterUtility = require("../helpers/file-counter-utility");
 const TextFormatter = require("../helpers/text-formatter");
 
-class NoteBuilder extends ContentBuilderBase {
+class NoteBuilder extends HierarchicalContentBuilderBase {
   getKnowledgeResourceType() {
     return "notes";
+  }
+
+  getSectionFieldId() {
+    return "section";
+  }
+
+  getUnitFieldId() {
+    return "unit";
   }
 
   processValues(values) {
@@ -18,7 +26,6 @@ class NoteBuilder extends ContentBuilderBase {
     } = this.extractContentFields(values);
 
     const contentMainTitle = TextFormatter.extractBeforeColon(contentInput);
-    const generatedFolderName = `${this.getKnowledgeResourceType()}/${this.getDomainType()}/${contentMainTitle}`;
     const contentOrganization = sectionValue
       ? `${unitValue} - ${sectionValue}`
       : unitValue;
@@ -30,7 +37,7 @@ class NoteBuilder extends ContentBuilderBase {
 
     const fileIndex = FileCounterUtility.getCount({
       app,
-      folderPath: `${this.getKnowledgeResourceType()}/${this.getDomainType()}/${generatedFolderName}`,
+      folderPath: baseProcessedValues.folderPath,
       includeNext: true,
     });
 
@@ -50,7 +57,6 @@ class NoteBuilder extends ContentBuilderBase {
         `${contentMainTitle} - ${contentOrganization}`,
       ),
       type: this.getKnowledgeResourceType(),
-      folder: generatedFolderName,
       filename: generatedFilename,
       categories: this.appendToList({
         list: values.categories,
