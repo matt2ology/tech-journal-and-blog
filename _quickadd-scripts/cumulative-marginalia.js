@@ -34,7 +34,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
           },
           {
             id: "cumulativeSummary",
-            label: "Cumulative Summary (> [!tldr])",
+            label: "Cumulative Summary",
             type: "textarea",
             placeholder: "Enter cumulative summary (optional)...",
             optional: true,
@@ -199,7 +199,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
           .join("\n");
 
         blockquoteSections.push(
-          `> [!tldr] Cumulative Summary\n${summaryTextLines}`,
+          `> [!summary] Cumulative Summary\n${summaryTextLines}`,
         );
       }
 
