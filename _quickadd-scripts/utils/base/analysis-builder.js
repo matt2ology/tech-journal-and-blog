@@ -1,10 +1,18 @@
-const ContentBuilderBase = require("./content-builder-base");
+const HierarchicalContentBuilderBase = require("./hierarchical-content-builder-base");
 const FileCounterUtility = require("../helpers/file-counter-utility");
 const TextFormatter = require("../helpers/text-formatter");
 
-class AnalysisBuilder extends ContentBuilderBase {
+class AnalysisBuilder extends HierarchicalContentBuilderBase {
   getKnowledgeResourceType() {
     return "analysis";
+  }
+
+  getSectionFieldId() {
+    return "section";
+  }
+
+  getUnitFieldId() {
+    return "unit";
   }
 
   formatUnitIdentifier(text) {
@@ -40,7 +48,7 @@ class AnalysisBuilder extends ContentBuilderBase {
 
     const fileIndex = FileCounterUtility.getCount({
       app,
-      folderPath: `analysis/${this.getDomainType()}/${generatedFolderName}`,
+      folderPath: baseProcessedValues.folderPath,
       includeNext: true,
     });
 
@@ -64,11 +72,10 @@ class AnalysisBuilder extends ContentBuilderBase {
         `${extractedTitle} - ${formattedUnit}`,
       ),
       type: this.getKnowledgeResourceType(),
-      folder: generatedFolderName,
       filename: generatedFilename,
       categories: this.appendToList({
         list: values.categories,
-        items: ["analysis", this.getDomainType()],
+        items: ["analysis"],
       }),
       [creatorFieldId]: this.formatNameListInput(
         resolvedCreator,
