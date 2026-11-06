@@ -53,7 +53,7 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
         label: this.getContentFieldLabel(),
         type: "suggester",
         options: processedOptions,
-        placeholder: "Enter title or select existing",
+        placeholder: "Enter content title (Article/Book/Course/Video)",
         defaultValue: "",
         suggesterConfig: {
           displayValues: processedOptions,
@@ -66,14 +66,14 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
         id: this.getUnitFieldId(),
         label: this.getUnitFieldLabel(),
         type: "text",
-        placeholder: "Enter title/chapter/module",
+        placeholder: "Enter unit (Title/Chapter/Module)",
         defaultValue: "",
       },
       {
         id: this.getSectionFieldId(),
         label: this.getSectionFieldLabel(),
         type: "text",
-        placeholder: "Part, Section, or Lesson",
+        placeholder: "Enter section (Part/Section/Lesson)",
         defaultValue: "",
         optional: true,
       },
@@ -91,8 +91,7 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
     if (creatorInput) return { creatorInput };
 
     const rootFolder =
-      customRootFolder ||
-      `${this.getContentType()}/${this.getCategoryType()}`;
+      customRootFolder || `${this.getContentType()}/${this.getCategoryType()}`;
     const subfolders = VaultQueryService.getSubfolderNames({
       app,
       folderPath: rootFolder,
