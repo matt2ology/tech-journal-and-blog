@@ -7,7 +7,9 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
     throw new Error("Derived classes must implement getDomainType()");
   }
   getKnowledgeResourceType() {
-    throw new Error("Derived classes must implement getKnowledgeResourceType()");
+    throw new Error(
+      "Derived classes must implement getKnowledgeResourceType()",
+    );
   }
   getContentFieldId() {
     throw new Error("Derived classes must implement getContentFieldId()");
@@ -21,33 +23,36 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
   getCreatorFieldLabel() {
     throw new Error("Derived classes must implement getCreatorFieldLabel()");
   }
-  getSectionFieldId() {
-    throw new Error("Derived classes must implement getSectionFieldId()");
-  }
-  getSectionFieldLabel() {
-    throw new Error("Derived classes must implement getSectionFieldLabel()");
-  }
-  getUnitFieldId() {
-    throw new Error("Derived classes must implement getUnitFieldId()");
-  }
-  getUnitFieldLabel() {
-    throw new Error("Derived classes must implement getUnitFieldLabel()");
-  }
-
-  formatUnitIdentifier(text) {
-    return text;
-  }
 
   extractContentFields(values) {
     return {
       creatorFieldId: this.getCreatorFieldId(),
       contentFieldId: this.getContentFieldId(),
-      sectionFieldId: this.getSectionFieldId(),
-      unitFieldId: this.getUnitFieldId(),
       creatorInput: values[this.getCreatorFieldId()] || "",
       contentInput: values[this.getContentFieldId()] || "",
-      sectionValue: values[this.getSectionFieldId()] || "",
-      unitValue: values[this.getUnitFieldId()] || "",
+    };
+  }
+
+  /**
+   * Generates the uniform folder path: getKnowledgeResourceType() / getDomainType() / slugified(extractedTitle)
+   */
+  getGeneratedFolderPath(contentInput) {
+    const extractedTitle = TextFormatter.extractBeforeColon
+      ? TextFormatter.extractBeforeColon(contentInput)
+      : contentInput.split(":")[0].trim();
+    const slugifiedTitle = TextFormatter.slugify(extractedTitle);
+    return `${this.getKnowledgeResourceType()}/${this.getDomainType()}/${slugifiedTitle}`;
+  }
+
+  processValues(values) {
+    const { contentInput } = this.extractContentFields(values);
+    const folderPath = contentInput
+      ? this.getGeneratedFolderPath(contentInput)
+      : "";
+
+    return {
+      ...values,
+      folderPath: folderPath,
     };
   }
 
@@ -77,21 +82,6 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
         },
       },
       {
-        id: this.getUnitFieldId(),
-        label: this.getUnitFieldLabel(),
-        type: "text",
-        placeholder: "Enter unit (Title/Chapter/Module)",
-        defaultValue: "",
-      },
-      {
-        id: this.getSectionFieldId(),
-        label: this.getSectionFieldLabel(),
-        type: "text",
-        placeholder: "Enter section (Part/Section/Lesson)",
-        defaultValue: "",
-        optional: true,
-      },
-      {
         id: this.getCreatorFieldId(),
         label: this.getCreatorFieldLabel(),
         type: "text",
@@ -105,7 +95,8 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
     if (creatorInput) return { creatorInput };
 
     const rootFolder =
-      customRootFolder || `${this.getKnowledgeResourceType()}/${this.getDomainType()}`;
+      customRootFolder ||
+      `${this.getKnowledgeResourceType()}/${this.getDomainType()}`;
     const subfolders = VaultQueryService.getSubfolderNames({
       app,
       folderPath: rootFolder,
