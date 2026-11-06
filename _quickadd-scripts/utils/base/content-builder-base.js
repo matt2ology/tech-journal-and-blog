@@ -6,14 +6,14 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
   getCategoryType() {
     throw new Error("Derived classes must implement getCategoryType()");
   }
+  getContentType() {
+    throw new Error("Derived classes must implement getContentType()");
+  }
   getContentFieldId() {
     throw new Error("Derived classes must implement getContentFieldId()");
   }
   getContentFieldLabel() {
     throw new Error("Derived classes must implement getContentFieldLabel()");
-  }
-  getContentType() {
-    throw new Error("Derived classes must implement getContentType()");
   }
   getCreatorFieldId() {
     throw new Error("Derived classes must implement getCreatorFieldId()");
