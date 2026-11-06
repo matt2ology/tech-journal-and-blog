@@ -42,7 +42,7 @@ lesson: Prompting for Brainstorming and Planning
 
 ### idkHAXhDWSem
 
-> [!tldr] Cumulative Summary
+> [!summary] Cumulative Summary
 > Ackmann argues that a strong prompt has 5 components (i.e. role, task, context, structure, and tone/audience) to orient the LLM to provide text is closer aligned to the situation and goal.
 
 <!-- blockquote separator -->
@@ -72,7 +72,7 @@ lesson: Prompting for Brainstorming and Planning
 
 ### idH7py2kW6oc
 
-> [!tldr] Cumulative Summary
+> [!summary] Cumulative Summary
 > To enable AI to help in the pre-writing process one would need to ask, by "prompting", the Gen AI tool with specific tasks.
 
 <!-- blockquote separator -->
@@ -114,7 +114,7 @@ lesson: Prompting for Brainstorming and Planning
 
 ### idgs7YUDVLJq
 
-> [!tldr] Cumulative Summary
+> [!summary] Cumulative Summary
 > LLMs requires "strong" and specific prompts (i.e. provide the role, task, context, structure, and tone/audience) to help orient and align its output to closely match the situation and communication goal.
 >
 > Writing a vague, not specific, prompt yields a general output that may or may not provide useful insight, direction, nor means for effective communication and writing.
@@ -165,7 +165,7 @@ lesson: Prompting for Brainstorming and Planning
 
 ### idlqAv5ktAxx
 
-> [!tldr] Cumulative Summary
+> [!summary] Cumulative Summary
 > LLMs requires strong, specific, contextual prompts, so that it can output better initial outputs.
 >
 > By providing good context, Ackmann claims, that AI is less of a text generator and more of a "thinking partner".
@@ -195,7 +195,7 @@ lesson: Prompting for Brainstorming and Planning
 
 ### id0w2E4geojK
 
-> [!tldr] Cumulative Summary
+> [!summary] Cumulative Summary
 > LLMs requires strong, specific, contextual prompts, so that it can output better initial outputs; however, be cautious as your information can be exposed and be used as training material for the LLM company/vender.
 >
 > Use unidentifiable stand-ins to provide a similar contextual scenario and goal you desire the AI to help in brainstorming and drafting.
@@ -219,7 +219,7 @@ lesson: Prompting for Brainstorming and Planning
 
 ### idPJryPzQK60
 
-> [!tldr] Cumulative Summary
+> [!summary] Cumulative Summary
 > LLMs requires strong, specific, contextual prompts, so that it can output better initial outputs; but, be mindful of the information you feed it as it opens a risk to your own or company intellectual property (IP), or have the information trained on and shared to the world.
 >
 > In the western world AI generated text, because it's been trained on the world's data, isn't enough to claim as copyright material - there has to be, not minuscule amount, of human authorship.
