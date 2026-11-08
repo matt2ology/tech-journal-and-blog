@@ -13,6 +13,8 @@ const abbreviations = {
   "Deep Learning": "dl",
   "Generative": "gen",
   "Internet of Things": "iot",
+  "Large Language Model": "llm",
+  "Large Language Models": "llms",
   "Leadership": "ldrshp",
   "Machine Learning": "ml",
   "Natural Language Processing": "nlp",
