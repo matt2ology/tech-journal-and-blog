@@ -11,14 +11,15 @@ const abbreviations = {
   "Cryptocurrency": "crypto",
   "Data Science": "ds",
   "Deep Learning": "dl",
+  "Generative": "gen",
   "Internet of Things": "iot",
+  "Leadership": "ldrshp",
   "Machine Learning": "ml",
   "Natural Language Processing": "nlp",
   "P.M.": "pm",
   "Quantum Computing": "quantum",
+  "Retrieval-Augmented Generation": "rag",
   "Virtual Reality": "vr",
-  "Generative": "gen",
-  "Leadership": "ldrshp",
 };
 
 // Safeguard check: Ensure no duplicate values or key collisions occur
