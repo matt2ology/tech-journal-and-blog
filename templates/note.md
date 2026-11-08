@@ -4,7 +4,7 @@
 
 ## TL;DR (too long; didn't read)
 
-> [!tldr]
+> [!tldr] Section Summary
 > Summary goes here.
 
 ## Questions
