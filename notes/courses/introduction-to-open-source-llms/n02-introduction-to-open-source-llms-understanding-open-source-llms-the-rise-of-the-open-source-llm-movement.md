@@ -32,17 +32,17 @@ lesson: The Rise of the Open-source LLM Movement
 ### The History of Large Language Models (LLMs)
 
 - **2017:** Google published the transformer architecture in their paper ["Attention Is All You Need"](https://arxiv.org/abs/1706.03762)
-    - First LLM Bidirectional Encoder Representations from Transformers (BERT) used by Google
-        - 340 million parameters, weights and biases, the model uses during training to predict human text patterns
-        - Used to interpret complex search queries
--  **2018:** OpenAI released GPT-1
--  **2019:** OpenAI released GPT-2 - caught the public's attention
--  **2020:** OpenAI released, a 175-billion parameter model, GPT-3
--  **2022:** OpenAI released ChatGPT
--  **2022:** Open-source LLMs "BLOOM" released by BigScience Responsible AI License (RAIL) and "Llama" by Meta
-    - Not considered truly open source as their license do not meet the criteria defined by the open‑source initiative in its open‑source definition.
-        - Discriminates against certain groups and fields
-        - License provisioning maxed at 700 million users
+  - First LLM Bidirectional Encoder Representations from Transformers (BERT) used by Google
+    - 340 million parameters, weights and biases, the model uses during training to predict human text patterns
+    - Used to interpret complex search queries
+- **2018:** OpenAI released GPT-1
+- **2019:** OpenAI released GPT-2 - caught the public's attention
+- **2020:** OpenAI released, a 175-billion parameter model, GPT-3
+- **2022:** OpenAI released ChatGPT
+- **2022:** Open-source LLMs "BLOOM" released by BigScience Responsible AI License (RAIL) and "Llama" by Meta
+  - Not considered truly open source as their license do not meet the criteria defined by the open‑source initiative in its open‑source definition.
+    - Discriminates against certain groups and fields
+    - License provisioning maxed at 700 million users
 
 ---
 
@@ -84,6 +84,7 @@ lesson: The Rise of the Open-source LLM Movement
 
 > [!note] Marginalia / Reflection
 > [Gemma-3](https://deepmind.google/models/gemma/) is:
+>
 > - **Mutimodal:** text and image generation tasks
 > - Supports 140 languages
 > - Large context windows up to 128K
@@ -100,7 +101,7 @@ lesson: The Rise of the Open-source LLM Movement
 
 > [!note] Marginalia / Reflection
 > [Qwuen](https://www.alibabacloud.com/en/solutions/generative-ai/qwen?_p_lc=1)
-> 
+>
 > - **Mixture-of-experts architecture:** uses only a subset of the model's parameters for any given prompt
 > - Fast interface
 > - Reduced memory usage
@@ -118,7 +119,7 @@ lesson: The Rise of the Open-source LLM Movement
 
 > [!note] Marginalia / Reflection
 > [DeepSeek](https://www.deepseek.com/en/):
-> 
+>
 > - **Mixture-of-Experts architecture:** activate only the most relevant parameters for each task (e.g. 37 billion out of 671 billion); as a result is far more efficient than traditional models that use every parameter at every step
 > - Good at coding and reasoning
 > - MIT license
