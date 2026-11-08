@@ -15,6 +15,14 @@ class AnalysisBuilder extends HierarchicalContentBuilderBase {
     return "unit";
   }
 
+  /**
+   * Formats a unit identifier string by normalizing chapter and sub-chapter prefixes.
+   * Matches patterns like "Chapter 1", "1.2", or "Chapter 3:" at the beginning of the text
+   * and converts them into a standardized, zero-padded format (e.g., "ch01: " or "ch01-02: ").
+   *
+   * @param {string} text - The input string containing the chapter or unit prefix.
+   * @returns {string} The text with the formatted and normalized unit identifier.
+   */
   formatUnitIdentifier(text) {
     const chapterRegex = /^(?:Chapter\s+)?(\d+)(?:\.(\d+))?\s*:?\s*/;
     return text.replace(chapterRegex, (_, major, minor) =>
@@ -34,45 +42,42 @@ class AnalysisBuilder extends HierarchicalContentBuilderBase {
       unitValue,
     } = this.extractContentFields(values);
 
-    const extractedTitle = TextFormatter.extractBeforeColon(contentInput);
-    const formattedContentTitle = TextFormatter.titleCase(extractedTitle);
-    const generatedFolderName = TextFormatter.slugify(extractedTitle);
-    const contentOrganization = sectionValue
-      ? `${sectionValue} - ${unitValue}`
-      : unitValue;
-
-    const { creatorInput: resolvedCreator } = this.resolveContentContext({
-      formattedContent: formattedContentTitle,
-      creatorInput,
-    });
-
     const fileIndex = FileCounterUtility.getCount({
       app,
       folderPath: baseProcessedValues.folderPath,
       includeNext: true,
     });
 
+    const contentMainTitle = TextFormatter.extractBeforeColon(contentInput);
+    const contentOrganization = [unitValue, sectionValue]
+      .filter(Boolean)
+      .join(" - ");
+
     const formattedUnit = this.formatUnitIdentifier(unitValue);
-    const generatedFilename = TextFormatter.slugify(
-      `${fileIndex} ${extractedTitle} ${formattedUnit}`,
+    const analysisFileName = TextFormatter.slugifyAdjacent(
+      [`${fileIndex}`, contentMainTitle, formattedUnit]
+        .filter(Boolean)
+        .join(" "),
     );
-    const captureNoteFilename = TextFormatter.slugify(
-      `n${fileIndex} ${extractedTitle} ${formattedUnit} ${sectionValue}`,
-    );
+
+    const generatedTitle = [contentMainTitle, contentOrganization]
+      .filter(Boolean)
+      .join(" - ");
+
+    const { creatorInput: resolvedCreator } = this.resolveContentContext({
+      formattedContent: contentMainTitle,
+      creatorInput,
+    });
 
     return {
       ...baseProcessedValues,
-      aliases: TextFormatter.titleCase(
-        `Analysis of ${extractedTitle} - ${unitValue}`,
-      ),
-      title: TextFormatter.titleCase(
-        `Analysis of ${extractedTitle} - ${unitValue}`,
-      ),
+      aliases: TextFormatter.titleCase(`Analysis of ${generatedTitle}`),
+      title: TextFormatter.titleCase(`Analysis of ${generatedTitle}`),
       slug: TextFormatter.slugifyWithAbbreviations(
-        `${extractedTitle} - ${formattedUnit}`,
+        `${contentMainTitle} - ${formattedUnit}`,
       ),
       type: this.getKnowledgeResourceType(),
-      filename: generatedFilename,
+      filename: analysisFileName,
       categories: this.appendToList({
         list: values.categories,
         items: ["analysis"],
@@ -81,7 +86,7 @@ class AnalysisBuilder extends HierarchicalContentBuilderBase {
         resolvedCreator,
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
-      reference_links: `[[00-${generatedFolderName}-synthesis|${extractedTitle}]] - [[${captureNoteFilename}|${contentOrganization}]]`,
+      information_processing: `[[00-${TextFormatter.slugify(contentMainTitle)}-synthesis|${contentMainTitle}]]`,
     };
   }
 
