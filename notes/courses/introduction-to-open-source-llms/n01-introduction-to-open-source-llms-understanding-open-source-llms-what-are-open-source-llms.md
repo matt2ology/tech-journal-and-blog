@@ -22,6 +22,13 @@ lesson: What Are Open-source LLMs?
 ## TL;DR (too long; didn't read)
 
 > [!tldr] Section Summary
+>
+> The course covers:
+>
+> - What are open-source Large Language Models (LLMs)
+> - How to customize and deploy LLMs
+> - How to pick the best LLM to suit needs
+>
 > **Open‑source** large language models (LLMs) enables those with the proper resources and skillsets to view, modify, expand on, or redistribute both the algorithm and code; in contrast, **closed-sourced** LLMs is treated as a black-box, one isn't allowed to see what is under the hood, and often behind a pay wall are limited to often APIs or web interfaces.
 
 ## What Are Open-source LLMs?
