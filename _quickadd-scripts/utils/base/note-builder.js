@@ -21,19 +21,9 @@ class NoteBuilder extends HierarchicalContentBuilderBase {
       creatorFieldId,
       creatorInput,
       contentInput,
-      sectionValue,
       unitValue,
+      sectionValue,
     } = this.extractContentFields(values);
-
-    const contentMainTitle = TextFormatter.extractBeforeColon(contentInput);
-    const contentOrganization = sectionValue
-      ? `${unitValue} - ${sectionValue}`
-      : unitValue;
-
-    const { creatorInput: resolvedCreator } = this.resolveContentContext({
-      formattedContent: TextFormatter.titleCase(contentMainTitle),
-      creatorInput,
-    });
 
     const fileIndex = FileCounterUtility.getCount({
       app,
@@ -41,23 +31,54 @@ class NoteBuilder extends HierarchicalContentBuilderBase {
       includeNext: true,
     });
 
-    const formattedUnit = this.formatUnitIdentifier(unitValue);
-    const generatedFilename = TextFormatter.slugifyAdjacent(
-      `n${fileIndex} ${contentMainTitle} ${formattedUnit} ${sectionValue}`,
+    const contentMainTitle = TextFormatter.extractBeforeColon(contentInput);
+    const contentUnitTitleCase = TextFormatter.titleCase(unitValue);
+    const contentUnitFormatted = this.formatUnitIdentifier(unitValue);
+    const contentSectionFormatted = this.formatUnitIdentifier(sectionValue);
+    const analysisFileName = TextFormatter.slugifyAdjacent(
+      [`${fileIndex}`, contentMainTitle, contentUnitFormatted]
+        .filter(Boolean)
+        .join(" "),
     );
-    const generatedTitle = unitValue
-      ? `${contentMainTitle} - ${contentOrganization}`
-      : contentMainTitle;
+
+    const analysisNoteTitle = [
+      TextFormatter.titleCase(contentInput),
+      TextFormatter.titleCase(contentUnitTitleCase),
+    ]
+      .filter(Boolean)
+      .join(" - ");
+
+    const captureNoteFilename = TextFormatter.slugifyAdjacent(
+      [
+        `n${fileIndex}`,
+        contentMainTitle,
+        contentUnitFormatted,
+        contentSectionFormatted,
+      ]
+        .filter(Boolean)
+        .join(" "),
+    );
+
+    const captureNoteTitle = [
+      contentMainTitle,
+      contentUnitTitleCase,
+      sectionValue,
+    ]
+      .filter(Boolean)
+      .join(" - ");
+
+    const { creatorInput: resolvedCreator } = this.resolveContentContext({
+      formattedContent: TextFormatter.titleCase(contentMainTitle),
+      creatorInput,
+    });
 
     return {
       ...baseProcessedValues,
-      aliases: TextFormatter.titleCase(`Notes on ${generatedTitle}`),
-      title: TextFormatter.titleCase(`Notes on ${generatedTitle}`),
-      slug: TextFormatter.slugifyWithAbbreviations(
-        `${contentMainTitle} - ${contentOrganization}`,
-      ),
+      aliases: TextFormatter.titleCase(`Notes on ${captureNoteTitle}`),
+      title: TextFormatter.titleCase(`Notes on ${captureNoteTitle}`),
+      slug: TextFormatter.slugifyWithAbbreviations(`${captureNoteTitle}`),
       type: this.getKnowledgeResourceType(),
-      filename: generatedFilename,
+      filename: captureNoteFilename,
       categories: this.appendToList({
         list: values.categories,
         items: [this.getKnowledgeResourceType()],
@@ -67,7 +88,7 @@ class NoteBuilder extends HierarchicalContentBuilderBase {
         `Unknown ${this.getCreatorFieldLabel()}`,
       ),
       note_header: sectionValue || unitValue || "Notes & Key Points",
-      reference_links: `${contentMainTitle} - [[${generatedFilename}|${contentOrganization}]]`,
+      information_processing: `[[${analysisFileName}|${analysisNoteTitle}]]`,
     };
   }
 
