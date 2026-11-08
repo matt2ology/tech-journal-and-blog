@@ -1,6 +1,6 @@
 {{VALUE:frontmatter}}
 
-{{VALUE:reference_links}}
+**Synthesis:** {{VALUE:information_processing}}
 
 <!-- Purpose: Transmute source materials (books, articles, podcasts, lecture notes) into active comprehension and extract candidate concepts. -->
 
