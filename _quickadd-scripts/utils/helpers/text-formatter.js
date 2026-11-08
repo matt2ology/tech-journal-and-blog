@@ -95,7 +95,6 @@ class TextFormatter {
         : word,
     );
 
-    // Refactored from nested ternary to clean if/else
     let separator = " ";
     if (validText.includes("-")) {
       separator = "-";
@@ -348,12 +347,9 @@ class TextFormatter {
       index < lastIndex &&
       TextFormatter.MINOR_WORDS.has(lowerWord);
 
-    // Refactored from nested ternary to clean if/else statement
     let formattedWord;
     if (isAcronym) {
       formattedWord = word.toUpperCase();
-    } else if (TextFormatter.#isAllUpperCase(word)) {
-      formattedWord = word;
     } else if (isInternalMinorWord) {
       formattedWord = lowerWord;
     } else {
@@ -411,7 +407,6 @@ class TextFormatter {
     const isSpecial =
       part === "-" || part === "—" || TextFormatter.#isAllUpperCase(part);
 
-    // Refactored from nested ternary to clean if/else statement
     let formattedPart;
     if (isSpecial) {
       formattedPart = part;
@@ -437,7 +432,6 @@ class TextFormatter {
         const isAcronym = TextFormatter.ACRONYMS.has(lowerSub);
         const isMinor = subIdx > 0 && TextFormatter.MINOR_WORDS.has(lowerSub);
 
-        // Refactored from nested ternary to clean if/else statement
         let subResult;
         if (isAcronym) {
           subResult = sub.toUpperCase();
@@ -478,7 +472,6 @@ class TextFormatter {
     const isAcronym = TextFormatter.ACRONYMS.has(lowerWord);
     const shouldCapitalize = isAllUpper || word === word.toLowerCase();
 
-    // Refactored from nested ternary to clean if/else statement
     let targetWord;
     if (isAcronym) {
       targetWord = word.toUpperCase();
@@ -520,7 +513,6 @@ class TextFormatter {
   static #joinNaturalList(items) {
     const len = items.length;
 
-    // Refactored from chained ternary to clean if/else statement
     let result;
     if (len === 0) {
       result = "NoNameProvided";
