@@ -24,6 +24,15 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
     throw new Error("Derived classes must implement getCreatorFieldLabel()");
   }
 
+  /**
+   * Extracts content and creator field IDs along with their respective input values.
+   * @param {Object} values - The raw input values object from QuickAdd.
+   * @returns {Object} An object containing the field IDs and their extracted string values.
+   * @property {string} creatorFieldId - The ID of the creator field.
+   * @property {string} contentFieldId - The ID of the content field.
+   * @property {string} creatorInput - The value entered for the creator field.
+   * @property {string} contentInput - The value entered for the content field.
+   */
   extractContentFields(values) {
     return {
       creatorFieldId: this.getCreatorFieldId(),
@@ -44,6 +53,11 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
     return `${this.getKnowledgeResourceType()}/${this.getDomainType()}/${slugifiedTitle}`;
   }
 
+  /**
+   * Processes raw input values by extracting content details and generating a target folder path.
+   * @param {Object} values - The raw input values object.
+   * @returns {Object} A new object containing all original values plus the computed `folderPath`.
+   */
   processValues(values) {
     const { contentInput } = this.extractContentFields(values);
     const folderPath = contentInput
@@ -91,6 +105,14 @@ class ContentBuilderBase extends FrontmatterBuilderBase {
     ];
   }
 
+  /**
+   * Resolves the creator context for a formatted content item.
+   * @param {Object} options - The content context options.
+   * @param {string} options.formattedContent - The formatted content title.
+   * @param {string} options.creatorInput - The creator input value.
+   * @param {string} [options.customRootFolder] - The custom root folder path.
+   * @returns {Object} An object containing the resolved creator input.
+   */
   resolveContentContext({ formattedContent, creatorInput, customRootFolder }) {
     if (creatorInput) return { creatorInput };
 
