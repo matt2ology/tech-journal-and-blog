@@ -265,13 +265,13 @@
               "templatePath": "templates/blog.md",
               "fileNameFormat": {
                 "enabled": true,
-                "format": "{{VALUE:slug}}/index"
+                "format": "{{VALUE:filename}}"
               },
               "discoverExistingNotesBeforeCreate": false,
               "folder": {
                 "enabled": true,
                 "folders": [
-                  "blog"
+                  "{{VALUE:folderPath}}"
                 ],
                 "chooseWhenCreatingNote": false,
                 "createInSameFolderAsActiveFile": false,
