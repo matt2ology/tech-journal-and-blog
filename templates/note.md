@@ -4,8 +4,9 @@
 
 ## TL;DR (too long; didn't read)
 
-> [!tldr] Section Summary
-> Summary goes here.
+> [!tldr] {{VALUE:note_header}} Summary
+>
+> 1.
 
 ## Questions
 
