@@ -16,7 +16,7 @@ module: Understanding Open-source LLMs
 lesson: Benefits for Businesses and Developers
 ---
 
-**Analysis:** [[04-introduction-to-open-source-llms-understanding-open-source-llms|Introduction to Open Source Llms - Understanding Open-Source Llms]]
+**Analysis:** [[01-introduction-to-open-source-llms-understanding-open-source-llms|Introduction to Open-Source LLMs - Understanding Open-Source LLMs]]
 
 ## TL;DR (too long; didn't read)
 
