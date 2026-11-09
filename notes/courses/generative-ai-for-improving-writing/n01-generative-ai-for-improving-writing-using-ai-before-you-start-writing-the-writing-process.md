@@ -18,6 +18,8 @@ lesson: The Writing Process
 
 [Pluralsight - Generative AI for Improving Writing by Heather Ackmann](https://www.pluralsight.com/courses/improving-writing-generative-ai)
 
+**Analysis:** [[../../../analysis/courses/generative-ai-for-improving-writing/01-generative-ai-for-improving-writing-using-ai-before-you-start-writing|01-generative-ai-for-improving-writing-using-ai-before-you-start-writing]]
+
 ## TL;DR (too long; didn't read)
 
 > [!tldr]
