@@ -1,7 +1,7 @@
 ---
 aliases:
   - 2026-11-08 Bought Cookbooks from Half Price Books
-title: "November 8, 2026 (SUN): Bought Cookbooks from Half Price Books"
+title: "2026-11-08 Bought Cookbooks from Half Price Books"
 date: 2026-11-08T16:32:00
 draft: false
 slug: 2026-11-08-bought-cookbooks-from-half-price-books
