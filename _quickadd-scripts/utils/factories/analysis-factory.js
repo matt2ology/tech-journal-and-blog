@@ -1,4 +1,5 @@
 const AnalysisBuilderBook = require("../domains/book-analysis-builder");
+const AnalysisBuilderCourse = require("../domains/course-analysis-builder");
 
 /**
  * Main orchestrator and factory for analysis frontmatter generation.
@@ -18,6 +19,7 @@ class AnalysisFactory {
     // Register builder instances indexed by domain key
     this.#builders = {
       books: new AnalysisBuilderBook(quickAddApi),
+      courses: new AnalysisBuilderCourse(quickAddApi),
     };
   }
 
