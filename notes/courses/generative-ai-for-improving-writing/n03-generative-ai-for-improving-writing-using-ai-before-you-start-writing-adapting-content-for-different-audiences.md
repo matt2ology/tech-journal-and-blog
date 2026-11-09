@@ -16,6 +16,8 @@ module: Using AI before You Start Writing
 lesson: Adapting Content for Different Audiences
 ---
 
+**Analysis:** [[../../../analysis/courses/generative-ai-for-improving-writing/01-generative-ai-for-improving-writing-using-ai-before-you-start-writing|01-generative-ai-for-improving-writing-using-ai-before-you-start-writing]]
+
 ## TL;DR (too long; didn't read)
 
 > [!tldr]
