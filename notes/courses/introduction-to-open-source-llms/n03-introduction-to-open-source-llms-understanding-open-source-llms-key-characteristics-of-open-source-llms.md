@@ -1,18 +1,18 @@
 ---
-aliases: "Notes on Introduction to Open-Source Llms - Understanding Open-Source Llms - Key Characteristics of Open-Source Llms"
-title: "Notes on Introduction to Open-Source Llms - Understanding Open-Source Llms - Key Characteristics of Open-Source Llms"
+aliases: Notes on Introduction to Open-Source Llms - Understanding Open-Source Llms - Key Characteristics of Open-Source Llms
+title: Notes on Introduction to Open-Source Llms - Understanding Open-Source Llms - Key Characteristics of Open-Source Llms
 date: 2026-11-08T09:56:53-08:00
-draft: true
+draft: false
 slug: introduction-to-open-source-llms-understanding-open-source-llms-key-characteristics-of-open-source-llms
 categories:
   - notes
 tags: []
 type: notes
 domain: courses
-instructor: Unknown Instructor(s) (comma separated)
-course: "Introduction to Open-source LLMs"
-module: "Understanding Open-source LLMs"
-lesson: "Key Characteristics of Open-source LLMs"
+instructor: "[[laurentiu-raducu|Laurentiu Raducu]]"
+course: Introduction to Open-source LLMs
+module: Understanding Open-source LLMs
+lesson: Key Characteristics of Open-source LLMs
 ---
 
 **Analysis:** [[03-introduction-to-open-source-llms-understanding-open-source-llms|Introduction to Open-Source Llms - Understanding Open-Source Llms]]
@@ -20,15 +20,17 @@ lesson: "Key Characteristics of Open-source LLMs"
 ## TL;DR (too long; didn't read)
 
 > [!tldr] Section Summary
+>
+> - Free available weights
+> - Modifiable architectures
+> - Reproducible and collaborative
+>
 > Characteristics of Open-source Large Language Models (LLMs)
 >
 > - Freely available model weights
 > - Modifiable architectures and training approaches
 > - Transparent documentation and reproducibility
-
-## Questions
-
-- [ ]
+> - Community-driven improvements
 
 ## Key Characteristics of Open-source LLMs
 
@@ -95,12 +97,14 @@ lesson: "Key Characteristics of Open-source LLMs"
 > [!summary] Cumulative Summary
 > **Open-source** grants both transparency and usage freedom; in contrast, **closed-source** often comes with a pricing model, and lots of terms-and-conditions.
 >
-> **Open-source** models allows the public to modify and iterate with experimental or new aproaches, and apply and target the model to specific hardware or domain specific data.
+> **Open-source** models allows the public to modify and iterate with experimental or new approaches, and apply and target the model to specific hardware or domain specific data.
 
 <!-- blockquote separator -->
 
 > [!quote]
 > Another major trait of open‑source LLMs is the ability to modify the architecture and retrain or fine‑tune the model. Developers can adjust configurations to better suit their hardware, retrain models with industry‑specific data, or experiment with new algorithms and techniques.
+
+<!-- blockquote separator -->
 
 > [!note] Marginalia / Reflection
 > [[n02-introduction-to-open-source-llms-understanding-open-source-llms-the-rise-of-the-open-source-llm-movement#ida4Kgzk0ef1|Reference DeepSeek]]
@@ -121,4 +125,33 @@ lesson: "Key Characteristics of Open-source LLMs"
 
 ---
 
-@1:54
+### id4vIfHImlEe
+
+> [!summary] Cumulative Summary
+> Open-source enables the advancement of its own industry, as does in other fields of science, when experiments and observations can be repeated open-source can be iterated on to make conclusions and be made better with each iteration.
+>
+> Transparency builds trust, so when trust is built communities can build on all previous work of others with trust that the algorithm does not betray or hides key privacy and regulatory requirements.
+
+<!-- blockquote separator -->
+
+> [!quote]
+> When the community can follow the entire process from training to deployment, it builds trust and accelerates learning. This level of clarity also allows organizations to meet privacy and regulatory requirements more easily than if they used opaque closed systems.
+
+<!-- blockquote separator -->
+
+> [!note] Marginalia / Reflection
+> Companies don't have to promise to keep you or your data private, nor will they regulate themselves as doctors and lawyers have done if it means making a profit.
+>
+> No longer do we have captains of industry... Just a bunch of robber barons and cheats.
+
+---
+
+### id7oIdbHN9wi
+
+> [!quote]
+> One of the most powerful aspects of open‑source LLMs is their community‑driven nature. Improvements, bug fixes, and new features often come from global collaboration. As a result, open models evolve rapidly, sometimes outpacing proprietary competitors.
+
+<!-- blockquote separator -->
+
+> [!note] Marginalia / Reflection
+> _I just liked the words_
