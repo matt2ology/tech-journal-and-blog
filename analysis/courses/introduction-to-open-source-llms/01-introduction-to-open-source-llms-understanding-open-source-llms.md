@@ -9,7 +9,7 @@ categories:
 tags: []
 type: analysis
 domain: courses
-instructor: 
+instructor:
   - "[[laurentiu-raducu|Laurentiu Raducu]]"
 course: "Introduction to Open-source LLMs"
 module: "Understanding Open-source LLMs"
