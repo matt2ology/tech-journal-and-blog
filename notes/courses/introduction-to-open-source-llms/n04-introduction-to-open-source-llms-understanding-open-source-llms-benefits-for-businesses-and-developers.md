@@ -1,6 +1,6 @@
 ---
-aliases: Notes on Introduction to Open Source Llms - Understanding Open-Source Llms - Benefits for Businesses and Developers
-title: Notes on Introduction to Open Source Llms - Understanding Open-Source Llms - Benefits for Businesses and Developers
+aliases: Notes on Introduction to Open Source LLMs - Understanding Open-Source LLMs - Benefits for Businesses and Developers
+title: Notes on Introduction to Open Source LLMs - Understanding Open-Source LLMs - Benefits for Businesses and Developers
 date: 2026-11-08T22:45:30-08:00
 draft: false
 slug: introduction-to-open-source-llms-understanding-open-source-llms-benefits-for-businesses-and-developers
@@ -11,7 +11,7 @@ type: notes
 domain: courses
 instructor:
   - "[[laurentiu-raducu|Laurentiu Raducu]]"
-course: Introduction to Open Source Llms
+course: Introduction to Open Source LLMs
 module: Understanding Open-source LLMs
 lesson: Benefits for Businesses and Developers
 ---

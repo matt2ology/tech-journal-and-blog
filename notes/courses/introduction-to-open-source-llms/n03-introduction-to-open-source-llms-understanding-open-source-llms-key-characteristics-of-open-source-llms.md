@@ -1,6 +1,6 @@
 ---
-aliases: Notes on Introduction to Open-Source Llms - Understanding Open-Source Llms - Key Characteristics of Open-Source Llms
-title: Notes on Introduction to Open-Source Llms - Understanding Open-Source Llms - Key Characteristics of Open-Source Llms
+aliases: Notes on Introduction to Open-Source LLMs - Understanding Open-Source LLMs - Key Characteristics of Open-Source LLMs
+title: Notes on Introduction to Open-Source LLMs - Understanding Open-Source LLMs - Key Characteristics of Open-Source LLMs
 date: 2026-11-08T09:56:53-08:00
 draft: false
 slug: introduction-to-open-source-llms-understanding-open-source-llms-key-characteristics-of-open-source-llms
