@@ -16,7 +16,7 @@ module: Understanding Open-source LLMs
 lesson: The Rise of the Open-source LLM Movement
 ---
 
-**Analysis:** [[02-introduction-to-open-source-llms-understanding-open-source-llms|Introduction to Open Source LLMs - Understanding Open-Source LLMs]]
+**Analysis:** [[01-introduction-to-open-source-llms-understanding-open-source-llms|Introduction to Open-Source LLMs - Understanding Open-Source LLMs]]
 
 ## TL;DR (too long; didn't read)
 
