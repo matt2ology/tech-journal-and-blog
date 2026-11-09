@@ -1,8 +1,8 @@
 ---
 aliases: Generative AI for Improving Writing - Using AI Before You Start Writing - Adapting Content for Different Audiences
-title: "Notes on Generative AI for Improving Writing - Using AI Before You Start Writing - Adapting Content for Different Audiences"
-date: "2026-11-04T11:10:27-08:00"
-draft: true
+title: Notes on Generative AI for Improving Writing - Using AI Before You Start Writing - Adapting Content for Different Audiences
+date: 2026-11-04T11:10:27-08:00
+draft: false
 slug: generative-ai-for-improving-writing-using-ai-before-you-start-writing-adapting-content-for-different-audiences
 categories:
   - notes
@@ -11,19 +11,19 @@ type: notes
 domain: courses
 instructor:
   - "[[heather-ackmann|Heather Ackmann]]"
-course: "Generative AI for Improving Writing"
-module: "Using AI before You Start Writing"
-lesson: "Adapting Content for Different Audiences"
+course: Generative AI for Improving Writing
+module: Using AI before You Start Writing
+lesson: Adapting Content for Different Audiences
 ---
 
 ## TL;DR (too long; didn't read)
 
 > [!tldr]
-> Summary goes here.
-
-## Questions
-
-- [ ]
+> Ackmann proposes a method to [[n03-generative-ai-for-improving-writing-using-ai-before-you-start-writing-adapting-content-for-different-audiences#idTwLFqv046o|writing for different audiences]] by way of her prescribed role, task, context, structure, tone / audience [[n03-generative-ai-for-improving-writing-using-ai-before-you-start-writing-adapting-content-for-different-audiences#idd3LFLkKLKr|prompting template to produce outlines for different audiences either written or slide deck communication]].
+>
+> She reminds that [[n03-generative-ai-for-improving-writing-using-ai-before-you-start-writing-adapting-content-for-different-audiences#idZUPSnInaH8|to keep privacy and upkeep data security that one must prompt generically]]. As a result Ackmann [[n03-generative-ai-for-improving-writing-using-ai-before-you-start-writing-adapting-content-for-different-audiences#id08EfSEFGxt|contradicts herself as she instructs to have stronger starts - one must be specific in their prompting]], and by doing so they must describe, generically, the specific context and scenario to an AI model that doesn't know your historical context and unique situation.
+>
+> Ackmann is disingenuous, [[n03-generative-ai-for-improving-writing-using-ai-before-you-start-writing-adapting-content-for-different-audiences#idp4QiJcJc2g|promising that writing with AI won't rob one of their own unique voice or style]], as she instructs one to prompt with a role that potentially the author does not hold and so imposes on to and robs the author of their own voice and style by way of an authoritative outline.
 
 ## Adapting Content for Different Audiences
 
@@ -100,7 +100,10 @@ lesson: "Adapting Content for Different Audiences"
 >
 > Wasn't [[n02-generative-ai-for-improving-writing-using-ai-before-you-start-writing-prompting-for-brainstorming-and-planning#idlqAv5ktAxx|the whole point of prompting is to be specific, so that you have better starts]]. Be generic and fictional so AI can aid you in writing for specific work in real life.
 >
-> Why do I have to sacrifice privacy to gain arguably marginal benefits. If an employee does not have the skill to write: 1. Why were they hired? 2. Why are they not supported by way of mentors, peers, or resources in the effort?
+> Why do I have to sacrifice privacy to gain arguably marginal benefits. If an employee does not have the skill to write:
+>
+> 1. Why were they hired?
+> 2. Why are they not supported by way of mentors, peers, or resources in the effort?
 
 ---
 
@@ -147,7 +150,7 @@ lesson: "Adapting Content for Different Audiences"
 >
 > Do you lack the ability to be believed as you can advise anyone or business leadership?
 >
-> It's not imposter syndrome if you were never considered to be of rank or title. You're not even putting the effort, nor the hard work, to ascertain or build out the foundational skills and abilities to be respected. A cheat who claims work of others, and outputs not of their own, to only highlight your own selfish dreams, hopes, and aspirations: a loser.
+> It's not imposter syndrome if you were never considered to be of rank, title, nor possess the base skill set and ability. You're not even putting the effort, nor the hard work, to ascertain or build out the foundational skills and abilities to be respected or deserving of praise. A cheat who claims work of others, and efforts not of their own, to only highlight their own selfish dreams, hopes, and aspirations: a loser.
 
 ---
 
