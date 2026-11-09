@@ -4,11 +4,6 @@
 
 <!-- Purpose: Transmute source materials (books, articles, podcasts, lecture notes) into active comprehension and extract candidate concepts. -->
 
-<!--
-Personal Reflection & Critical Commentary
-What do you agree/disagree with? How does this connect to what you already know?
--->
-
 ## Key Takeaways & Core Concepts
 
 <!-- A 2-3 sentence summary of the main argument or purpose in your own words. -->
@@ -20,6 +15,11 @@ What do you agree/disagree with? How does this connect to what you already know?
 > 3.
 
 ---
+
+<!--
+Personal Reflection & Critical Commentary
+What do you agree/disagree with? How does this connect to what you already know?
+-->
 
 ## SQ3R Method (Survey, Question, Read, Recite, Review)
 
