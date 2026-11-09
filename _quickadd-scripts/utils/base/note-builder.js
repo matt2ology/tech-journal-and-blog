@@ -35,8 +35,13 @@ class NoteBuilder extends HierarchicalContentBuilderBase {
     const contentUnitTitleCase = TextFormatter.titleCase(unitValue);
     const contentUnitFormatted = this.formatUnitIdentifier(unitValue);
     const contentSectionFormatted = this.formatUnitIdentifier(sectionValue);
+    const fileIndexAnalysis = FileCounterUtility.getCount({
+      app,
+      folderPath: `analysis/${this.getDomainType()}/${TextFormatter.slugify(contentMainTitle)}`,
+      includeNext: true,
+    });
     const analysisFileName = TextFormatter.slugifyAdjacent(
-      [`${fileIndex}`, contentMainTitle, contentUnitFormatted]
+      [`${fileIndexAnalysis}`, contentMainTitle, contentUnitFormatted]
         .filter(Boolean)
         .join(" "),
     );
