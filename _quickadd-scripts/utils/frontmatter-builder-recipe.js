@@ -64,10 +64,12 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
     const baseProcessedValues = super.processValues(values);
     const dish = values.dish || "";
     const chef = values.chef || "";
+    const formattedTitle = TextFormatter.titleCase(`${dish} by ${chef}`);
 
     return {
       ...baseProcessedValues,
-      title: TextFormatter.titleCase(`${dish} by ${chef}`),
+      title: formattedTitle,
+      aliases: formattedTitle,
       slug: TextFormatter.slugify(`${chef} ${dish}`),
       categories: this.appendToList({
         list: values.categories,
