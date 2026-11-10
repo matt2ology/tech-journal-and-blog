@@ -82,9 +82,9 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
     };
   }
 
-  buildStandardProperties({ computed }) {
+  buildStandardProperties({ computedValues }) {
     return super.buildStandardProperties({
-      computed: { ...computed, date: "" },
+      computedValues: { ...computedValues, date: "" },
     });
   }
 
@@ -99,8 +99,8 @@ class FrontmatterBuilderRecipe extends FrontmatterBuilderBase {
   buildExtraProperties({ values }) {
     return [
       `dish: "${TextFormatter.titleCase(values.dish) || "NoNameDish"}"`,
-      `chef: ${this.formatNameList(values.chef, "NoChefNamed")}`,
-      `meal:${this.formatArray(values.meal, '"NoMealListed"')}`,
+      `chef: ${this.formatNameListInput(values.chef, "NoChefNamed")}`,
+      `meal:${this.formatArrayInput(values.meal, '"NoMealListed"')}`,
       `image: ""`,
     ];
   }
