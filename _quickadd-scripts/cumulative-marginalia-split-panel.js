@@ -17,11 +17,16 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       const regexMatches = [...fileContent.matchAll(summaryRegex)];
       const extractedSummaries = regexMatches.map((match) => {
         const blockContent = match[1];
-        return blockContent
+        // Keep lines as an array of individual text rows so we can address them explicitly
+        const lines = blockContent
           .split("\n")
-          .map((line) => line.replace(/^>\s?/, ""))
-          .join("  \n")
-          .trim();
+          .map((line) => line.replace(/^>\s?/, "").trim());
+
+        return {
+          // Join with double newlines (\n\n) to preserve block/paragraph spacing for full summaries
+          fullText: lines.filter(Boolean).join("\n\n"),
+          lines: lines,
+        };
       });
 
       if (extractedSummaries.length === 0) {
@@ -125,9 +130,9 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       buttonContainer.style.alignItems = "center";
 
       // Toggle Button State & Element
-      let showFirstLineOnly = false;
+      let showSecondLineOnly = false;
       const toggleBtn = document.createElement("button");
-      toggleBtn.textContent = "Show First Line Only";
+      toggleBtn.textContent = "Show Second Line Only";
       toggleBtn.style.padding = "4px 8px";
       toggleBtn.style.background = "var(--background-secondary)";
       toggleBtn.style.border = "1px solid var(--background-modifier-border)";
@@ -164,7 +169,7 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       const renderCards = () => {
         scrollContainer.empty();
 
-        summaries.forEach((summary, index) => {
+        summaries.forEach((summaryObj, index) => {
           const card = document.createElement("div");
           card.style.marginBottom = "15px";
           card.style.padding = "15px";
@@ -183,10 +188,12 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
           cardBody.style.whiteSpace = "pre-line";
 
           // Choose content based on toggle state
-          let contentToRender = summary;
-          if (showFirstLineOnly) {
-            const lines = summary.split(/\r?\n/);
-            contentToRender = lines[0] || "";
+          let contentToRender = summaryObj.fullText;
+          if (showSecondLineOnly) {
+            // Filter out empty lines to find non-empty content items sequentially
+            const nonEmptyLines = summaryObj.lines.filter(Boolean);
+            // Index 1 represents your expected second line of content
+            contentToRender = nonEmptyLines[1] || nonEmptyLines[0] || "";
           }
 
           if (typeof MarkdownRenderer !== "undefined") {
@@ -209,11 +216,11 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
 
       // Toggle click handler
       toggleBtn.onclick = () => {
-        showFirstLineOnly = !showFirstLineOnly;
-        toggleBtn.textContent = showFirstLineOnly
+        showSecondLineOnly = !showSecondLineOnly;
+        toggleBtn.textContent = showSecondLineOnly
           ? "Show Full Summaries"
-          : "Show First Line Only";
-        toggleBtn.style.color = showFirstLineOnly
+          : "Show Second Line Only";
+        toggleBtn.style.color = showSecondLineOnly
           ? "var(--text-accent)"
           : "var(--text-muted)";
         renderCards();
