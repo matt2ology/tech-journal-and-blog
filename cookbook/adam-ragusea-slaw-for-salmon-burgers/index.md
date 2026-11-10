@@ -47,5 +47,5 @@ image: ""
 2. Stir in a big pinch of sugar and add:
    1. A small pinch of salt
    2. Some celery seeds (if using)
-   3. A splash of soy sauce + chopped cilantro (if using), and taste
-3. Taste and adjust the seasoning
+   3. A splash of soy sauce + chopped cilantro (if using)
+4. Taste and adjust the seasoning
