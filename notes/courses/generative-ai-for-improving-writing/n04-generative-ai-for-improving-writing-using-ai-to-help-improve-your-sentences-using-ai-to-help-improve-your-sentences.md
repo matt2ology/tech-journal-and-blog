@@ -1,8 +1,8 @@
 ---
-aliases: "Notes on Generative AI for Improving Writing - Using AI to Help Improve Your Sentences - Using AI to Help Improve Your Sentences"
-title: "Notes on Generative AI for Improving Writing - Using AI to Help Improve Your Sentences - Using AI to Help Improve Your Sentences"
+aliases: Notes on Generative AI for Improving Writing - Using AI to Help Improve Your Sentences - Using AI to Help Improve Your Sentences
+title: Notes on Generative AI for Improving Writing - Using AI to Help Improve Your Sentences - Using AI to Help Improve Your Sentences
 date: 2026-11-09T15:10:58-08:00
-draft: true
+draft: false
 slug: gen-ai-for-improving-writing-using-ai-to-help-improve-your-sentences-using-ai-to-help-improve-your-sentences
 categories:
   - notes
@@ -11,9 +11,9 @@ type: notes
 domain: courses
 instructor:
   - "[[heather-ackmann|Heather Ackmann]]"
-course: "Generative AI for Improving Writing"
-module: "Using AI to Help Improve Your Sentences"
-lesson: "Using AI to Help Improve Your Sentences"
+course: Generative AI for Improving Writing
+module: Using AI to Help Improve Your Sentences
+lesson: Using AI to Help Improve Your Sentences
 ---
 
 **Analysis:** [[02-generative-ai-for-improving-writing-using-ai-to-help-improve-your-sentences|Generative AI for Improving Writing - Using AI to Help Improve Your Sentences]]
@@ -22,7 +22,8 @@ lesson: "Using AI to Help Improve Your Sentences"
 
 > [!tldr] Using AI to Help Improve Your Sentences Summary
 >
-> 1.
+> 1. Ackmann focuses on the micro-level of writing, that GenAI can be used to manipulate and iterate on your draft sentences, she suggests that one should use action verbs (e.g. clarify, tighten, soften) when prompting to orient AI's output.
+> 2. Ackmann reminds to generalize and remove sensitive data when prompting, and that one should not copy-and-paste AI outputs to be copyright complient one should review and revise AI outputs.
 
 ## Using AI to Help Improve Your Sentences
 
