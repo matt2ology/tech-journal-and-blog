@@ -129,17 +129,17 @@ module.exports = async ({ quickAddApi: qa, variables, abort }) => {
       buttonContainer.style.gap = "8px";
       buttonContainer.style.alignItems = "center";
 
-      // Toggle Button State & Element
-      let showSecondLineOnly = false;
+      // Toggle Button State & Element - Default to showing second line only
+      let showSecondLineOnly = true;
       const toggleBtn = document.createElement("button");
-      toggleBtn.textContent = "Show Second Line Only";
+      toggleBtn.textContent = "Show Full Summaries";
       toggleBtn.style.padding = "4px 8px";
       toggleBtn.style.background = "var(--background-secondary)";
       toggleBtn.style.border = "1px solid var(--background-modifier-border)";
       toggleBtn.style.borderRadius = "4px";
       toggleBtn.style.cursor = "pointer";
       toggleBtn.style.fontSize = "0.75rem";
-      toggleBtn.style.color = "var(--text-muted)";
+      toggleBtn.style.color = "var(--text-accent)";
 
       const closeBtn = document.createElement("button");
       closeBtn.textContent = "✕ Close";
