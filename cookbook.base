@@ -22,5 +22,8 @@ views:
       - formula.Made on
       - formula.recipe_status
       - formula.posted
+    sort:
+      - property: date
+        direction: DESC
     image: note.image
     cardSize: 300
