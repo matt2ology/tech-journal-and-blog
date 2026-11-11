@@ -23,8 +23,8 @@ image: adam-ragusea-salmon-burgers-western-version.jpg
 
 - [[../adam-ragusea-slaw-for-salmon-burgers/index|Slaw for Salmon Burgers]]
 - Added
-    - Cooked mushrroms
-    - Avocado slices
+  - Cooked mushrroms
+  - Avocado slices
 
 ## 🛒 Ingredients
 
