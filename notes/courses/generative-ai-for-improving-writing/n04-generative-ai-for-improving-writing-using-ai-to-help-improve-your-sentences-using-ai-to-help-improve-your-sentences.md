@@ -23,7 +23,7 @@ lesson: Using AI to Help Improve Your Sentences
 > [!tldr] Using AI to Help Improve Your Sentences Summary
 >
 > 1. Ackmann focuses on the micro-level of writing, that GenAI can be used to manipulate and iterate on your draft sentences, she suggests that one should use action verbs (e.g. clarify, tighten, soften) when prompting to orient AI's output.
-> 2. Ackmann reminds to generalize and remove sensitive data when prompting, and that one should not copy-and-paste AI outputs to be copyright complient one should review and revise AI outputs.
+> 2. Ackmann reminds to generalize and remove sensitive data when prompting, and that one should not copy-and-paste AI outputs to be copyright compliant one should review and revise AI outputs.
 
 ## Using AI to Help Improve Your Sentences
 
