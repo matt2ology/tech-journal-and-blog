@@ -1,26 +1,26 @@
 ---
-aliases: "Slaw for Salmon Burgers by Adam Ragusea"
-title: "Slaw for Salmon Burgers by Adam Ragusea"
-date:
+aliases: Slaw for Salmon Burgers by Adam Ragusea
+title: Slaw for Salmon Burgers by Adam Ragusea
+date: 2026-11-10T19:00:00
 draft: true
 slug: adam-ragusea-slaw-for-salmon-burgers
 categories:
   - cookbook
 tags: []
-dish: "Slaw for Salmon Burgers"
+dish: Slaw for Salmon Burgers
 chef:
   - "[[adam-ragusea|Adam Ragusea]]"
 meal:
   - lunch
   - dinner
-image: ""
+image: adam-ragusea-slaw-for-salmon-burgers.jpg
 ---
 
 **Source:** [Slaw for Salmon burgers](https://youtu.be/BNs86wK0Y9E?si=0REjDtNROP3I61jq&t=276)
 
 ## 💡 Notes & Variations
 
-- This is a condiment for a burger, so it should taste too strong on its own
+- This is a condiment for a [[../adam-ragusea-salmon-burgers-western-version/index|Salmon Burger]], so it should taste too strong on its own
 - Ideally let it sit in the fridge for a few hours (or overnight) before using
 
 ## 🛒 Ingredients

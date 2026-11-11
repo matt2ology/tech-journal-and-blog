@@ -2,8 +2,8 @@
 aliases:
   - Salmon Burgers Western Version by Adam Ragusea
 title: Salmon Burgers Western Version by Adam Ragusea
-date:
-draft: true
+date: 2026-11-10T19:19:00
+draft: false
 slug: adam-ragusea-salmon-burgers-western-version
 categories:
   - cookbook
@@ -14,7 +14,7 @@ chef:
 meal:
   - lunch
   - dinner
-image: ""
+image: adam-ragusea-salmon-burgers-western-version.jpg
 ---
 
 **Source:** [Salmon burgers eastern & western version](https://youtu.be/BNs86wK0Y9E?si=y8donJ_HI707v7OK)
