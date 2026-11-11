@@ -158,7 +158,7 @@ This means on a fresh export, the section is simply titled "Highlights," but on 
 Each highlight is formatted with location info or ID:
 
 ```markdown
----
+***
 
 {% if highlight_location == "View Highlight" %}### id{{ highlight_id }}{% elif highlight_location == "View Tweet" %}### id{{ highlight_id }}{% else %}### {{highlight_location}}{% endif %}
 {% if highlight_tags %}**Tags:** {{ highlight_tags|join(', ') }} {% endif %}
