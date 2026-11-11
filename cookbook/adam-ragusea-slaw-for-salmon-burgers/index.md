@@ -2,7 +2,7 @@
 aliases: Slaw for Salmon Burgers by Adam Ragusea
 title: Slaw for Salmon Burgers by Adam Ragusea
 date: 2026-11-10T19:00:00
-draft: true
+draft: false
 slug: adam-ragusea-slaw-for-salmon-burgers
 categories:
   - cookbook
