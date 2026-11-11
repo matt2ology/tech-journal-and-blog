@@ -18,6 +18,8 @@ I bought a couple cookbooks from [Half Price Books](https://www.hpb.com/) today.
 
 ### Slow Cooker Recipes
 
+Bought for: $8.49
+
 Favorite Brand Name Recipes
 
 - **Publisher:** Publications International Ltd.
@@ -28,6 +30,8 @@ Favorite Brand Name Recipes
 ---
 
 ### Easy Comfort Food
+
+Bought for: $7.99
 
 Over 100 delicious recipes for feel-good favourites
 
