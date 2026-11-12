@@ -67,19 +67,19 @@ The chicken is browned first, then simmered and cooking juices reduced slightly 
 ## 👩‍🍳 Instructions (Steps)
 
 1. Shallow sauté pan with a lid - heat the extra virgin olive oil
-    - Large enough pan to hold the chicken in a single layer
+   - Large enough pan to hold the chicken in a single layer
 2. Lay the chicken thighs single layer in the pan
 3. Brown the chicken thighs all over (3 to 5 minutes a side)
-    - Work in batches if necessary - when can't fit all the chicken thighs in a single layer
+   - Work in batches if necessary - when can't fit all the chicken thighs in a single layer
 4. Transfer the browned chicken to a plate
-    - Season well with salt
+   - Season well with salt
 5. Add the carrots and leeks to the pan
-    - Cook over high heat for 2 to 3 minutes
+   - Cook over high heat for 2 to 3 minutes
 6. Add the garlic and some salt
 7. While stirring, cook for 1 to 2 minutes
-    - Do not let the garlic burn
+   - Do not let the garlic burn
 8. Add the white wine and stir
-    - Scrape up any bits that stick to the pan
+   - Scrape up any bits that stick to the pan
 9. Return the chicken to the pan
 10. Bury the chicken under the vegetables
 11. Add parsley
