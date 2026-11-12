@@ -2,8 +2,8 @@
 aliases:
   - Chicken Saute with Carrots, Leeks, and Mustard & Cream by Ryland Peters & Small
 title: Chicken Saute with Carrots, Leeks, and Mustard & Cream by Ryland Peters & Small
-date:
-draft: true
+date: 2026-11-11T22:00:00
+draft: false
 slug: ryland-peters-small-chicken-saute-with-carrots-leeks-and-mustard-cream
 categories:
   - cookbook
@@ -14,7 +14,7 @@ chef:
 cookbook: "Easy Comfort Food: Over 100 Delicious Recipes for Feel-Good Favourites"
 meal:
   - dinner
-image: ""
+image: ryland-peters-small-chicken-saute-with-carrots-leeks-and-mustard-cream.jpg
 ---
 
 **Source:** [Easy Comfort Food: over 100 delicious recipes for feel-good favourites](https://a.co/d/00qsTaNs)
