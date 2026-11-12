@@ -21,7 +21,7 @@ image: ""
 
 ## 💡 Notes & Variations
 
--
+- Added baby spinach
 
 ## 🛒 Ingredients
 
@@ -46,6 +46,8 @@ image: ""
 
 ## TL;DR
 
+The chicken is browned first, then simmered and cooking juices reduced slightly just before serving.
+
 1. **Brown chicken:** Heat olive oil and brown chicken thighs for 3–5 minutes per side.
    - Remove and season with salt.
 2. **Cook vegetables:** Sauté carrots and leeks for 2–3 minutes.
@@ -65,25 +67,25 @@ image: ""
 ## 👩‍🍳 Instructions (Steps)
 
 1. Shallow sauté pan with a lid - heat the extra virgin olive oil
-   1. Large enough pan to hold the chicken in a single layer
+    - Large enough pan to hold the chicken in a single layer
 2. Lay the chicken thighs single layer in the pan
 3. Brown the chicken thighs all over (3 to 5 minutes a side)
-   1. Work in batches if necessary - when can't fit all the chicken thighs in a single layer
+    - Work in batches if necessary - when can't fit all the chicken thighs in a single layer
 4. Transfer the browned chicken to a plate
-   1. Season well with salt
+    - Season well with salt
 5. Add the carrots and leeks to the pan
-   1. Cook over high heat for 2 to 3 minutes
+    - Cook over high heat for 2 to 3 minutes
 6. Add the garlic and some salt
 7. While stirring, cook for 1 to 2 minutes
-   1. Do not let the garlic burn
+    - Do not let the garlic burn
 8. Add the white wine and stir
-   1. Scrape up any bits that stick to the pan
+    - Scrape up any bits that stick to the pan
 9. Return the chicken to the pan
 10. Bury the chicken under the vegetables
 11. Add parsley
-12. Cover and simmer gently for 20 minutes
-13. Remove the chicken with tongs
-14. For 8 - 10 minutes: raise the heat and cook the sauce to reduce slightly
-15. Stir in the cream and mustard, with salt and pepper to taste
-16. Arrange the pieces on the plate and spoon the sauce over the top of the chicken
-    1. If serving from the pan - return the chicken to the pan and serve
+    - Cover and simmer gently for 20 minutes
+12. Remove the chicken with tongs
+13. For 8 - 10 minutes: raise the heat and cook the sauce to reduce slightly
+14. Stir in the cream and mustard, with salt and pepper to taste
+15. Arrange the pieces on the plate and spoon the sauce over the top of the chicken
+    - Serving from the pan - return the chicken to the pan and serve
