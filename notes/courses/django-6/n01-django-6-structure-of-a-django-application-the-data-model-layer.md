@@ -33,7 +33,7 @@ Each class defines a database table.
 
 Example in `travel_blog\trip\models.py`, the instructor, Ekker for his travel blog website defines that a destination has a **name** and a **country**.
 
-```py
+```python
 class Destination(models.Model):
     name = models.CharField(max_lenght=100)
     country = models.CharField(max_lenght=100)
@@ -41,7 +41,7 @@ class Destination(models.Model):
 
 Another data model for the example blog website:
 
-```py
+```python
 class Picture(models.Model):
     image = models.ImageField(blank=True)
     name = models.CharField(max_lenght=100)
@@ -52,7 +52,7 @@ In the `db.sqlite3` navigation you'll find a tables for both "**destination**" a
 
 A trip can be defined with a bunch of fields and foreign keys (links to other tables).
 
-```py
+```python
 Class Trip(models.Model):
     author = models.ForeignKey(setting.AUTH_USER_MODEL, on_delete=models.PROTECT)
     destination = models.ForeignKey(Destination, on_delete=models.PROTECT)
@@ -69,7 +69,7 @@ where `main_picture` is linked to a specific row in the picture table.
 
 The Django model layer is helpful, it can allow one to define ordering (using the minus sign `-`) with regards to the date started.
 
-```py
+```python
 class Meta:
     get_latest_by = ["to_date", "from_date"]
     ordering = ["-from_date", "-to_date"]
