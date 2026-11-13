@@ -1,19 +1,19 @@
 ---
-aliases: "Notes on Django 6 - Structure of a Django Application - Folder Structure of a Django Project"
-title: "Notes on Django 6 - Structure of a Django Application - Folder Structure of a Django Project"
+aliases: Notes on Django 6 - Structure of a Django Application - Folder Structure of a Django Project
+title: Notes on Django 6 - Structure of a Django Application - Folder Structure of a Django Project
 date: 2026-11-13T10:58:10-08:00
-draft: true
+draft: false
 slug: django-6-structure-of-a-django-application-folder-structure-of-a-django-project
 categories:
   - notes
 tags: []
 type: notes
 domain: courses
-instructor: 
+instructor:
   - "[[reindert-jan-ekker|Reindert-Jan Ekker]]"
-course: "Django 6"
-module: "Structure of a Django Application"
-lesson: "Folder Structure of a Django Project"
+course: Django 6
+module: Structure of a Django Application
+lesson: Folder Structure of a Django Project
 ---
 
 **Analysis:** [[03-django-6-structure-of-a-django-application|Django 6 - Structure of a Django Application]]
