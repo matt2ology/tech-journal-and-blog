@@ -48,4 +48,3 @@ Variable `urlpatterns` holds a list of paths
   1. Start with `trips/`
   2. **`int:pk`:** expects a number
   3. View function, `detail_page`, is then called, but this time it takes the number form the URL as an argument
-  4.
