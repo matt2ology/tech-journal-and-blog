@@ -22,7 +22,8 @@ lesson: The Data Model Layer
 
 > [!tldr] The Data Model Layer Summary
 >
-> The structure of the database tables reflects the structure of the Python classes
+> How data is defined in the database.
+> The structure of the database tables reflects the structure of the Python classes.
 
 ## The Data Model Layer
 
