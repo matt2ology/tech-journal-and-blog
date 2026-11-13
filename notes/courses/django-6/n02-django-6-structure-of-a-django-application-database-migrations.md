@@ -24,7 +24,7 @@ lesson: Database Migrations
 >
 > 1. Update the corresponding data model class
 > 2. Run both **`python manage.py makemigrations`** and **`python manage.py migrate`**
->     - Detect the changes and make the changes to the database
+>    - Detect the changes and make the changes to the database
 
 ## Database Migrations
 
