@@ -32,7 +32,7 @@ In the **views.py** file contains "view functions", or "view", defines what happ
 
 The following view defines what happens when the landing page is visited
 
-```py
+```python
 def landing_page(request):
     posts = Trip.objects.all()
     destinations = Destination.objects.values_list("country", flat=True).distinct()
