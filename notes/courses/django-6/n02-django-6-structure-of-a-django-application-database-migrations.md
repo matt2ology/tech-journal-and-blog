@@ -30,7 +30,7 @@ lesson: Database Migrations
 
 Requirements may change and data models will be required to be updated
 
-```py
+```python
 class Destination(models.Model):
     name = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
@@ -38,7 +38,7 @@ class Destination(models.Model):
 
 Is as easy as updating the corresponding data class
 
-```py
+```python
 class Destination(models.Model):
     name = models.CharField(max_length=100)
     state = models.CharField(max_length=100, default="")
