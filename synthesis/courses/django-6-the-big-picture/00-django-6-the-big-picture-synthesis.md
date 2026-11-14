@@ -45,17 +45,17 @@ course: "Django 6: The Big Picture"
 
 ```mermaid
 flowchart LR
-    subgraph Client ["Client"]
-        PC["User PC"]
+    subgraph client[Client]
+        pc[User PC]
     end
 
-    subgraph Backend ["Django Environment"]
-        Django["Dajango Server"]
-        DB[("database")]
+    subgraph backend[Django Environment]
+        django[Dajango Server]
+        db[(Database)]
     end
 
-    PC <--> Django
-    Django <--> DB
+    pc <--> django
+    django <--> db
 ```
 
 ### [[../../../notes/courses/django-6/n07-django-6-structure-of-a-django-application-the-model-template-view-architecture|Model-Template-View Architecture]]
