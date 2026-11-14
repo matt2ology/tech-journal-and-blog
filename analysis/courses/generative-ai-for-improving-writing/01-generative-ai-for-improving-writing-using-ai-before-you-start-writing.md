@@ -15,7 +15,7 @@ course: Generative AI for Improving Writing
 module: Using AI before You Start Writing
 ---
 
-**Synthesis:** [[../../../synthesis/courses/generative-ai-for-improving-writing/00-gen-ai-for-improving-writing-synthesis]]
+**Synthesis:** [[../../../synthesis/courses/generative-ai-for-improving-writing/00-gen-ai-for-improving-writing-synthesis|00-gen-ai-for-improving-writing-synthesis]]
 
 ## Key Takeaways & Core Concepts
 
