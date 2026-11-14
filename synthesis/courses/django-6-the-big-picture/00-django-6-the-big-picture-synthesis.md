@@ -91,22 +91,22 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    Root["my_project/ <br/><i>(Root Directory)</i>"] --> Manage["manage.py <br/><i>Command-line utility</i>"]
-    Root --> ProjConfig["my_project/ <br/><i>Project Configuration</i>"]
-    Root --> AppDir["myapp/ <br/><i>Custom App Module</i>"]
+    Root[my_project/ <br/><i>(Root Directory)</i>] --> Manage[manage.py <br/><i>Command-line utility</i>]
+    Root --> ProjConfig[my_project/ <br/><i>Project Configuration</i>]
+    Root --> AppDir[myapp/ <br/><i>Custom App Module</i>]
 
     %% Project Configuration Files
-    ProjConfig --> Settings["settings.py <br/><i>App configs, database, middleware</i>"]
-    ProjConfig --> ProjUrls["urls.py <br/><i>Global URL router</i>"]
-    ProjConfig --> WSGI["wsgi.py / asgi.py <br/><i>Server deployment entry points</i>"]
+    ProjConfig --> Settings[settings.py <br/><i>App configs, database, middleware</i>]
+    ProjConfig --> ProjUrls[urls.py <br/><i>Global URL router</i>]
+    ProjConfig --> WSGI[wsgi.py / asgi.py <br/><i>Server deployment entry points</i>]
 
     %% App Files & Folders
-    AppDir --> Models["models.py <br/><i>Database models & ORM definitions</i>"]
-    AppDir --> Views["views.py <br/><i>Request handling & business logic</i>"]
-    AppDir --> AppUrls["urls.py <br/><i>App-specific URL routes (optional)</i>"]
-    AppDir --> Admin["admin.py <br/><i>Django admin dashboard registration</i>"]
-    AppDir --> Migrations["migrations/ <br/><i>Database schema history/migrations</i>"]
-    AppDir --> Templates["templates/ <br/><i>HTML layout files</i>"]
+    AppDir --> Models[models.py <br/><i>Database models & ORM definitions</i>]
+    AppDir --> Views[views.py <br/><i>Request handling & business logic</i>]
+    AppDir --> AppUrls[urls.py <br/><i>App-specific URL routes (optional)</i>]
+    AppDir --> Admin[admin.py <br/><i>Django admin dashboard registration</i>]
+    AppDir --> Migrations[migrations/ <br/><i>Database schema history/migrations</i>]
+    AppDir --> Templates[templates/ <br/><i>HTML layout files</i>]
 ```
 
 ## Connections & Cross-References
