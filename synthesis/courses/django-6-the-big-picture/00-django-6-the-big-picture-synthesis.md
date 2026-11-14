@@ -102,7 +102,7 @@ flowchart TD
 
     models[models.py - Database models & ORM definitions]
     views[views.py - Request handling & business logic]
-    appURLs[urls.py - App-specific URL routes (optional)]
+    appURLs[urls.py - App-specific URL routes - optional]
     admin[admin.py - Django admin dashboard registration]
     migrations[migrations/ - Database schema history/migrations]
     templates[templates/ - HTML layout files]
