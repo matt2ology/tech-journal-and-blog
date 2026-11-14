@@ -11,7 +11,7 @@ type: notes
 domain: courses
 instructor:
   - "[[reindert-jan-ekker|Reindert-Jan Ekker]]"
-course: Django 6
+course: "Django 6: The Big Picture"
 module: Structure of a Django Application
 lesson: User Input with Forms
 ---
