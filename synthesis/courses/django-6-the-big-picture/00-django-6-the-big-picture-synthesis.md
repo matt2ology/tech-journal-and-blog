@@ -64,7 +64,7 @@ flowchart LR
 flowchart LR
     subgraph browser[Web Browser]
         direction TB
-        url["127.0.0.1/trips/1"]
+        url[127.0.0.1/trips/1]
         page[Paris is lovely]
     end
 
@@ -76,7 +76,7 @@ flowchart LR
         subgraph resources[Resources]
             direction LR
             html[(HTML)]
-            db[("Database")]
+            db[(Database)]
         end
     end
 
