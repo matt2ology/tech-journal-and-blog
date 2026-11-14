@@ -15,7 +15,7 @@ course: Django 6
 module: Choosing Django
 ---
 
-**Synthesis:** [[../../../synthesis/courses/django-6/00-django-6-the-big-picture-synthesis|Django 6: The Big Picture]]
+**Synthesis:** [[../../../synthesis/courses/django-6-the-big-picture/00-django-6-the-big-picture-synthesis|Django 6: The Big Picture]]
 
 ## Key Takeaways & Core Concepts
 
