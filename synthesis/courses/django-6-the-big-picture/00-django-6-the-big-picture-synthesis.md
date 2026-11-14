@@ -124,10 +124,22 @@ flowchart TD
     appDir --> migrations
     appDir --> templates
 
-    %% Styling for clarity
+    %% Styling for Folders, Migrations, Templates, and Files
     style root fill:#f8f9fa,stroke:#333,stroke-width:2px
-    style ProjConfig fill:#e3f2fd,stroke:#1565c0,stroke-width:1px
-    style appDir fill:#e8f5e9,stroke:#2e7d32,stroke-width:1px
+    style projConfig fill:#e3f2fd,stroke:#1565c0,stroke-width:2px
+    style appDir fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
+    style migrations fill:#fff8e1,stroke:#ffa000,stroke-width:2px
+    style templates fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+
+    %% File styling
+    style manage fill:#ffffff,stroke:#78909c,stroke-width:1px
+    style settings fill:#ffffff,stroke:#78909c,stroke-width:1px
+    style projURLs fill:#ffffff,stroke:#78909c,stroke-width:1px
+    style wsgi fill:#ffffff,stroke:#78909c,stroke-width:1px
+    style models fill:#ffffff,stroke:#78909c,stroke-width:1px
+    style views fill:#ffffff,stroke:#78909c,stroke-width:1px
+    style appURLs fill:#ffffff,stroke:#78909c,stroke-width:1px
+    style admin fill:#ffffff,stroke:#78909c,stroke-width:1px
 ```
 
 ## Connections & Cross-References
