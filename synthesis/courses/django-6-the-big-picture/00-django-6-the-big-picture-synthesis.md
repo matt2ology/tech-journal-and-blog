@@ -110,9 +110,13 @@ flowchart TD
     root --> manage
     root --> projConfig
     root --> appDir
+
+    %% Project Configuration Files
     projConfig --> settings
     projConfig --> projURLs
     projConfig --> wsgi
+
+    %% App Files & Folders
     appDir --> models
     appDir --> views
     appDir --> appURLs
