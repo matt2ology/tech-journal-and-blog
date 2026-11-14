@@ -22,7 +22,10 @@ lesson: Non-Python Alternatives
 
 > [!tldr] Non-Python Alternatives Summary
 >
-> 1.
+> While both lack the robust admin interface of [Django](https://www.djangoproject.com/) here are a couple of popular, non-python, backend web app alternatives:
+>
+> 1. [Laravel](https://laravel.com/): [written in PHP](https://www.php.net/)
+> 2. [.Net Core](https://learn.microsoft.com/en-us/aspnet/core/overview?view=aspnetcore-10.0): [written in C#](https://dotnet.microsoft.com/en-us/languages/csharp)
 
 ## Non-Python Alternatives
 
