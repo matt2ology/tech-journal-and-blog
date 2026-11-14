@@ -91,22 +91,22 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    Root[my_project/ <br/><i>(Root Directory)</i>] --> Manage[manage.py <br/><i>Command-line utility</i>]
-    Root --> ProjConfig[my_project/ <br/><i>Project Configuration</i>]
-    Root --> AppDir[myapp/ <br/><i>Custom App Module</i>]
+    Root[my_project/ <br/>(Root Directory)] --> Manage[manage.py <br/>Command-line utility]
+    Root --> ProjConfig[my_project/ <br/>Project Configuration]
+    Root --> AppDir[myapp/ <br/>Custom App Module]
 
     %% Project Configuration Files
-    ProjConfig --> Settings[settings.py <br/><i>App configs, database, middleware</i>]
-    ProjConfig --> ProjUrls[urls.py <br/><i>Global URL router</i>]
-    ProjConfig --> WSGI[wsgi.py / asgi.py <br/><i>Server deployment entry points</i>]
+    ProjConfig --> Settings[settings.py <br/>App configs, database, middleware]
+    ProjConfig --> ProjUrls[urls.py <br/>Global URL router]
+    ProjConfig --> WSGI[wsgi.py / asgi.py <br/>Server deployment entry points]
 
     %% App Files & Folders
-    AppDir --> Models[models.py <br/><i>Database models & ORM definitions</i>]
-    AppDir --> Views[views.py <br/><i>Request handling & business logic</i>]
-    AppDir --> AppUrls[urls.py <br/><i>App-specific URL routes (optional)</i>]
-    AppDir --> Admin[admin.py <br/><i>Django admin dashboard registration</i>]
-    AppDir --> Migrations[migrations/ <br/><i>Database schema history/migrations</i>]
-    AppDir --> Templates[templates/ <br/><i>HTML layout files</i>]
+    AppDir --> Models[models.py <br/>Database models & ORM definitions]
+    AppDir --> Views[views.py <br/>Request handling & business logic]
+    AppDir --> AppUrls[urls.py <br/>App-specific URL routes (optional)]
+    AppDir --> Admin[admin.py <br/>Django admin dashboard registration]
+    AppDir --> Migrations[migrations/ <br/>Database schema history/migrations]
+    AppDir --> Templates[templates/ <br/>HTML layout files]
 ```
 
 ## Connections & Cross-References
