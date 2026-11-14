@@ -15,7 +15,7 @@ course: Django 6
 module: Structure of a Django Application
 ---
 
-**Synthesis:** [[00-django-6-synthesis|Django 6]]
+**Synthesis:** [[../../../synthesis/courses/django-6/00-django-6-the-big-picture-synthesis|Django 6]]
 
 <!-- Purpose: Transmute source materials (books, articles, podcasts, lecture notes) into active comprehension and extract candidate concepts. -->
 
