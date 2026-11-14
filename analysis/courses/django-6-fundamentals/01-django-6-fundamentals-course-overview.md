@@ -26,6 +26,7 @@ module: Course Overview
 > [!abstract] Executive Summary & Core Thesis
 >
 > Django course overview
+>
 > - Build a web application
 > - Templates and URL mappings
 > - Model classes and the admin site
