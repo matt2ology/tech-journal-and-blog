@@ -1,8 +1,8 @@
 ---
-aliases: "Analysis of Django 6 - Course Overview - Course Overview"
-title: "Analysis of Django 6 - Course Overview - Course Overview"
+aliases: Analysis of Django 6 - Course Overview - Course Overview
+title: Analysis of Django 6 - Course Overview - Course Overview
 date: 2026-11-12T13:57:43-08:00
-draft: true
+draft: false
 slug: django-6-course-overview
 categories:
   - analysis
@@ -12,7 +12,7 @@ domain: courses
 instructor:
   - "[[reindert-jan-ekker|Reindert-Jan Ekker]]"
 course: "Django 6: The Big Picture"
-module: "Course Overview"
+module: Course Overview
 ---
 
 **Synthesis:** [[../../../synthesis/courses/django-6-the-big-picture/00-django-6-the-big-picture-synthesis|Django 6: The Big Picture]]
