@@ -16,7 +16,7 @@ module: Structure of a Django Application
 lesson: The Data Model Layer
 ---
 
-**Analysis:** [[03-django-6-structure-of-a-django-application|Django 6: the Big Picture - Structure of a Django Application]]
+**Analysis:** [[../../../analysis/courses/django-6-the-big-picture/03-django-6-structure-of-a-django-application|Django 6: the Big Picture - Structure of a Django Application]]
 
 ## TL;DR (too long; didn't read)
 

@@ -16,7 +16,7 @@ module: Choosing Django
 lesson: Python Alternatives
 ---
 
-**Analysis:** [[04-django-6-choosing-django|Django 6 - Choosing Django]]
+**Analysis:** [[../../../analysis/courses/django-6-the-big-picture/04-django-6-choosing-django|Django 6 - Choosing Django]]
 
 ## TL;DR (too long; didn't read)
 

@@ -16,7 +16,7 @@ module: Structure of a Django Application
 lesson: User Input with Forms
 ---
 
-**Analysis:** [[03-django-6-structure-of-a-django-application|Django 6 - Structure of a Django Application]]
+**Analysis:** [[../../../analysis/courses/django-6-the-big-picture/03-django-6-structure-of-a-django-application|Django 6 - Structure of a Django Application]]
 
 ## TL;DR (too long; didn't read)
 
