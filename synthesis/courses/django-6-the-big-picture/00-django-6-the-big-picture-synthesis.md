@@ -91,21 +91,21 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    root["my_project/ \n Root Directory"]
-    manage["manage.py \n Command-line utility"]
-    projConfig["my_project/ \n Project Configuration"]
-    appDir["myapp/ \n Custom App Module"]
+    root["my_project/ <br> Root Directory"]
+    manage["manage.py <br> Command-line utility"]
+    projConfig["my_project/ <br> Project Configuration"]
+    appDir["myapp/ <br> Custom App Module"]
 
-    settings["settings.py \n App configs, database, middleware"]
-    projURLs["urls.py \n Global URL router"]
-    wsgi["wsgi.py / asgi.py \n Server deployment entry points"]
+    settings["settings.py <br> App configs, database, middleware"]
+    projURLs["urls.py <br> Global URL router"]
+    wsgi["wsgi.py / asgi.py <br> Server deployment entry points"]
 
-    models["models.py \n Database models & ORM definitions"]
-    views["views.py \n Request handling & business logic"]
-    appURLs["urls.py \n App-specific URL routes - optional"]
-    admin["admin.py \n Django admin dashboard registration"]
-    migrations["migrations/ \n Database schema history/migrations"]
-    templates["templates/ \n HTML layout files"]
+    models["models.py <br> Database models & ORM definitions"]
+    views["views.py <br> Request handling & business logic"]
+    appURLs["urls.py <br> App-specific URL routes - optional"]
+    admin["admin.py <br> Django admin dashboard registration"]
+    migrations["migrations/ <br> Database schema history/migrations"]
+    templates["templates/ <br> HTML layout files"]
 
     root --> manage
     root --> projConfig
