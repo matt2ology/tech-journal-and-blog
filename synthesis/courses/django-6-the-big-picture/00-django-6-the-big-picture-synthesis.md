@@ -144,4 +144,4 @@ flowchart TD
 
 ## Connections & Cross-References
 
-[[00-django-6-fundamentals-synthesis|Django 6 Fundamentals]]
+[[../django-6-fundamentals/00-django-6-fundamentals-synthesis|Django 6 Fundamentals]]
