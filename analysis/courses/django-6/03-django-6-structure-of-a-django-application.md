@@ -39,16 +39,16 @@ module: Structure of a Django Application
 >    ```
 >
 > 4. Django [[../../../notes/courses/django-6/n03-django-6-structure-of-a-django-application-the-admin-interface#The Admin Interface|includes a robust admin interface]]
-> 5. Django have [[n04-django-6-structure-of-a-django-application-view-functions|"view functions" (views for short) to pull data from the database to be shown in the browser]]
-> 6. Django [[n05-django-6-structure-of-a-django-application-templates|uses "templates" to create HTML for the browser]]
+> 5. Django have [[../../../notes/courses/django-6/n04-django-6-structure-of-a-django-application-view-functions|"view functions" (views for short) to pull data from the database to be shown in the browser]]
+> 6. Django [[../../../notes/courses/django-6/n05-django-6-structure-of-a-django-application-templates|uses "templates" to create HTML for the browser]]
 > 7. **[[n06-django-6-structure-of-a-django-application-url-patterns|urls.py]]:** tell Django which URL page needs to be hosted
-> 8. Django uses a [[n07-django-6-structure-of-a-django-application-the-model-template-view-architecture|"Model-Template-View" architecture]] where:
+> 8. Django uses a [[../../../notes/courses/django-6/n07-django-6-structure-of-a-django-application-the-model-template-view-architecture|"Model-Template-View" architecture]] where:
 >    - **The Model (the data):** uses Python classes to represent tables in the database
 >    - **Templates:** to generate HTML - presentation for user
 >    - **View (the behavior):** brings everything together, map view functions fetch data to specific URLS, in `urls.py` for the templates to be displayed in HTML code via browser
-> 9. The structure of a [[n08-django-6-structure-of-a-django-application-folder-structure-of-a-django-project|Django project directory]]
+> 9. The structure of a [[../../../notes/courses/django-6/n08-django-6-structure-of-a-django-application-folder-structure-of-a-django-project|Django project directory]]
 >    - Root folder is the Project folder
 >    - The "main folder" contains settings and URLs
 >    - "Apps" are subfunctions of the app project
-> 10. Django have [[n09-django-6-structure-of-a-django-application-user-input-with-forms|robust intake-form models]]
-> 11. Django have an [[n10-django-6-structure-of-a-django-application-packages|extensive, 3rd party, package ecosystem to expand functionality]]
+> 10. Django have [[../../../notes/courses/django-6/n09-django-6-structure-of-a-django-application-user-input-with-forms|robust intake-form models]]
+> 11. Django have an [[../../../notes/courses/django-6/n10-django-6-structure-of-a-django-application-packages|extensive, 3rd party, package ecosystem to expand functionality]]
