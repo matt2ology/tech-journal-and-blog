@@ -95,12 +95,10 @@ flowchart TD
     root --> projconfig["my_project/ \nProject Configuration"]
     root --> appdir["myapp/ \nCustom App Module"]
 
-    %% Project Configuration Files
     projconfig --> settings["settings.py \nApp configs, database, middleware"]
     projconfig --> projurls["urls.py \nGlobal URL router"]
     projconfig --> wsgi["wsgi.py / asgi.py \nServer deployment entry points"]
 
-    %% App Files & Folders
     appdir --> models["models.py \nDatabase models & ORM definitions"]
     appdir --> views["views.py \nRequest handling & business logic"]
     appdir --> appurls["urls.py \nApp-specific URL routes (optional)"]
