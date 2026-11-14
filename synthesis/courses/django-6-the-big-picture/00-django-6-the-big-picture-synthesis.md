@@ -107,11 +107,6 @@ flowchart TD
     AppDir --> Admin["admin.py<br/><i>Django admin dashboard registration</i>"]
     AppDir --> Migrations["migrations/<br/><i>Database schema history/migrations</i>"]
     AppDir --> Templates["templates/<br/><i>HTML layout files</i>"]
-
-    %% Styling for clarity
-    style Root fill:#f8f9fa,stroke:#333,stroke-width:2px
-    style ProjConfig fill:#e3f2fd,stroke:#1565c0,stroke-width:1px
-    style AppDir fill:#e8f5e9,stroke:#2e7d32,stroke-width:1px
 ```
 
 ## Connections & Cross-References
