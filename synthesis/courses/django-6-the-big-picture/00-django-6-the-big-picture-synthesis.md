@@ -46,12 +46,12 @@ course: "Django 6: The Big Picture"
 ```mermaid
 flowchart LR
     subgraph Client ["Client"]
-        PC["User's PC"]
+        PC["User PC"]
     end
 
     subgraph Backend ["Django Environment"]
-        Django["Django Server"]
-        DB[("Database")]
+        Django["Dajango Server"]
+        DB[("database")]
     end
 
     PC <--> Django
