@@ -23,6 +23,7 @@ lesson: The Model-Template-View Architecture
 > [!tldr] The Model-Template-View Architecture Summary
 >
 > Django uses a variation of the "model-view-controller" architecture that is the "Model-Template-View" where:
+>
 > - **The Model (the data):** uses Python classes to represent tables in the database
 > - **Templates:** to generate HTML - presentation for user
 > - **View (the behavior):** brings everything together, map view functions fetch data to specific URLS, in `urls.py` for the templates to be displayed in HTML code via browser
@@ -47,7 +48,7 @@ flowchart LR
         direction TB
         Router["# Find mapping in urls.py<br/>path('trips/&lt;int:id&gt;', detail)"]
         View["def detail(request, id):<br/>m = get_object_or_404('...')"]
-        
+
         subgraph Resources [" "]
             direction LR
             HTML[("HTML")]
@@ -82,6 +83,7 @@ Templates are used to generate HTML for website - present info to user
 ### View (Behavior)
 
 Brings everything together:
+
 - Python function mapped to URL
 
 The corresponding view function fetches the data for any page a user visits to be given to the template and finally displayed on the browser.
