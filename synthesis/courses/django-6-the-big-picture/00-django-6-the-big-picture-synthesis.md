@@ -62,29 +62,29 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    subgraph Browser ["Web Browser"]
+    subgraph browser[Web Browser]
         direction TB
-        URL["127.0.0.1/trips/1"]
-        Page["Paris is lovely!<br/>By Reindert<br/>We were in Paris and we loved it..."]
+        url["127.0.0.1/trips/1"]
+        page[Paris is lovely]
     end
 
-    subgraph Server ["Server"]
+    subgraph server[Server]
         direction TB
-        Router["Find mapping in urls.py<br/>path('trips/&lt;int:id&gt;', detail)"]
-        View["def detail(request, id):<br/>m = get_object_or_404(...)"]
+        router[Find mapping in urls.py]
+        view[view function - views.py]
 
-        subgraph Resources ["Resources"]
+        subgraph resources[Resources]
             direction LR
-            HTML[("HTML")]
-            DB[("Database")]
+            html[(HTML)]
+            db[("Database")]
         end
     end
 
-    URL -.->|"HTTP GET /trips/1"| Router
-    Router -.-> View
-    View <-.-> HTML
-    View <-.-> DB
-    View -.->|"Rendered HTML"| Page
+    url -.->|"HTTP GET /trips/1"| router
+    router -.-> view
+    view <-.-> html
+    view <-.-> db
+    view -.->|"Rendered HTML"| page
 ```
 
 ## Connections & Cross-References
