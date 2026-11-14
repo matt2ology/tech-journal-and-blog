@@ -1,8 +1,8 @@
 ---
-aliases: "Analysis of Django 6 - Introducing Django - Introducing Django"
-title: "Analysis of Django 6 - Introducing Django - Introducing Django"
+aliases: Analysis of Django 6 - Introducing Django - Introducing Django
+title: Analysis of Django 6 - Introducing Django - Introducing Django
 date: 2026-11-12T14:01:53-08:00
-draft: true
+draft: false
 slug: django-6-introducing-django
 categories:
   - analysis
@@ -11,8 +11,8 @@ type: analysis
 domain: courses
 instructor:
   - "[[reindert-jan-ekker|Reindert-Jan Ekker]]"
-course: "Django 6"
-module: "Introducing Django"
+course: Django 6
+module: Introducing Django
 ---
 
 **Synthesis:** [[../../../synthesis/courses/django-6-the-big-picture/00-django-6-the-big-picture-synthesis|Django 6: The Big Picture]]
