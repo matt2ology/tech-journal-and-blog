@@ -11,7 +11,6 @@ categories:
 tags:
   - django
   - python
-  - pluralsight
 type: synthesis
 domain: courses
 instructor:
