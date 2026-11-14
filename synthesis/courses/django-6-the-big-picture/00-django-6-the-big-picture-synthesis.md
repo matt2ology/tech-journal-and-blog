@@ -27,8 +27,8 @@ course: "Django 6: The Big Picture"
 
 > [!summary] The Core Concept
 >
-> - [Django](https://www.djangoproject.com/) is [[../../../analysis/courses/django-6/02-django-6-introducing-django|a feature complete Python backend framework for web applications]]
-> - [[../../../analysis/courses/django-6/03-django-6-structure-of-a-django-application|How Django works]]:
+> - [Django](https://www.djangoproject.com/) is [[../../../analysis/courses/django-6-the-big-picture/02-django-6-introducing-django|a feature complete Python backend framework for web applications]]
+> - [[../../../analysis/courses/django-6-the-big-picture/03-django-6-structure-of-a-django-application|How Django works]]:
 >   - "Model-Template-View" architecture
 >     - **The Model (the data):** uses Python classes to represent tables in the database
 >     - **Templates:** to generate HTML - presentation for user
@@ -37,7 +37,7 @@ course: "Django 6: The Big Picture"
 >     - Root folder is the Project folder
 >     - The folder that shares the same name as the Project folder (i.e. `project_name/project_name`) contains the project's configuration files
 >     - "Apps" are other files, components, subsets of the project
-> - One should [[../../../analysis/courses/django-6/04-django-6-choosing-django|choose Django]] for an out-of-the-box, batteries included, experience for quick and robust web application development.
+> - One should [[../../../analysis/courses/django-6-the-big-picture/04-django-6-choosing-django|choose Django]] for an out-of-the-box, batteries included, experience for quick and robust web application development.
 
 ## Foundational Concepts
 
@@ -58,7 +58,7 @@ flowchart LR
     django <--> db
 ```
 
-### [[../../../notes/courses/django-6/n07-django-6-structure-of-a-django-application-the-model-template-view-architecture|Model-Template-View Architecture]]
+### [[../../../notes/courses/django-6-the-big-picture/n07-django-6-structure-of-a-django-application-the-model-template-view-architecture|Model-Template-View Architecture]]
 
 ```mermaid
 flowchart LR
@@ -87,7 +87,7 @@ flowchart LR
     view -.->|Rendered HTML| page
 ```
 
-### [[../../../analysis/courses/django-6/03-django-6-structure-of-a-django-application|Structure of a Django Application]]
+### [[../../../analysis/courses/django-6-the-big-picture/03-django-6-structure-of-a-django-application|Structure of a Django Application]]
 
 ```mermaid
 flowchart TD
