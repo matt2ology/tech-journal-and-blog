@@ -91,20 +91,20 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    root["my_project/ \n (Root Directory)"] --> Manage["manage.py \n Command-line utility"]
-    root --> projconfig["my_project/ \n Project Configuration"]
-    root --> appdir["myapp/ \n Custom App Module"]
+    root[my_project/ - Root Directory] --> Manage[manage.py - Command-line utility]
+    root --> projconfig[my_project/ - Project Configuration]
+    root --> appdir[myapp/ - Custom App Module]
 
-    projconfig --> settings["settings.py \n App configs, database, middleware"]
-    projconfig --> projurls["urls.py \n Global URL router"]
-    projconfig --> wsgi["wsgi.py / asgi.py \n Server deployment entry points"]
+    projconfig --> settings[settings.py - App configs, database, middleware]
+    projconfig --> projurls[urls.py - Global URL router]
+    projconfig --> wsgi[wsgi.py / asgi.py - Server deployment entry points]
 
-    appdir --> models["models.py \n Database models & ORM definitions"]
-    appdir --> views["views.py \n Request handling & business logic"]
-    appdir --> appurls["urls.py \n App-specific URL routes (optional)"]
-    appdir --> admin["admin.py \n Django admin dashboard registration"]
-    appdir --> migrations["migrations/ \n Database schema history/migrations"]
-    appdir --> templates["templates/ \n HTML layout files"]
+    appdir --> models[models.py - Database models & ORM definitions]
+    appdir --> views[views.py - Request handling & business logic]
+    appdir --> appurls[urls.py - App-specific URL routes - optional]
+    appdir --> admin[admin.py - Django admin dashboard registration]
+    appdir --> migrations[migrations/ - Database schema history/migrations]
+    appdir --> templates[templates/ - HTML layout files]
 ```
 
 ## Connections & Cross-References
