@@ -1,8 +1,8 @@
 ---
-aliases: "Notes on Django 6 - Structure of a Django Application - URL Patterns"
-title: "Notes on Django 6 - Structure of a Django Application - URL Patterns"
+aliases: Notes on Django 6 - Structure of a Django Application - URL Patterns
+title: Notes on Django 6 - Structure of a Django Application - URL Patterns
 date: 2026-11-12T23:46:32-08:00
-draft: true
+draft: false
 slug: django-6-structure-of-a-django-application-url-patterns
 categories:
   - notes
@@ -11,9 +11,9 @@ type: notes
 domain: courses
 instructor:
   - "[[reindert-jan-ekker|Reindert-Jan Ekker]]"
-course: "Django 6"
-module: "Structure of a Django Application"
-lesson: "URL Patterns"
+course: Django 6
+module: Structure of a Django Application
+lesson: URL Patterns
 ---
 
 **Analysis:** [[03-django-6-structure-of-a-django-application|Django 6 - Structure of a Django Application]]
