@@ -80,11 +80,11 @@ flowchart LR
         end
     end
 
-    url -.->|"HTTP GET /trips/1"| router
+    url -.->|HTTP GET /trips/1| router
     router -.-> view
     view <-.-> html
     view <-.-> db
-    view -.->|"Rendered HTML"| page
+    view -.->|Rendered HTML| page
 ```
 
 ## Connections & Cross-References
