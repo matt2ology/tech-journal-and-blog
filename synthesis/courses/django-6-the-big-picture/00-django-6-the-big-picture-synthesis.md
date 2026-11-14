@@ -91,21 +91,21 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    root["my_project/ - Root Directory"]
-    manage["manage.py - Command-line utility"]
-    projConfig["my_project/ - Project Configuration"]
-    appDir["myapp/ - Custom App Module"]
+    root[my_project/ - Root Directory]
+    manage[manage.py - Command-line utility]
+    projConfig[my_project/ - Project Configuration]
+    appDir[myapp/ - Custom App Module]
 
-    settings["settings.py - App configs, database, middleware"]
-    projURLs["urls.py - Global URL router"]
-    wsgi["wsgi.py / asgi.py - Server deployment entry points"]
+    settings[settings.py - App configs, database, middleware]
+    projURLs[urls.py - Global URL router]
+    wsgi[wsgi.py / asgi.py - Server deployment entry points]
 
-    models["models.py - Database models & ORM definitions"]
-    views["views.py - Request handling & business logic"]
-    appURLs["urls.py - App-specific URL routes (optional)"]
-    admin["admin.py - Django admin dashboard registration"]
-    migrations["migrations/ - Database schema history/migrations"]
-    templates["templates/ - HTML layout files"]
+    models[models.py - Database models & ORM definitions]
+    views[views.py - Request handling & business logic]
+    appURLs[urls.py - App-specific URL routes (optional)]
+    admin[admin.py - Django admin dashboard registration]
+    migrations[migrations/ - Database schema history/migrations]
+    templates[templates/ - HTML layout files]
 
     root --> manage
     root --> projConfig
