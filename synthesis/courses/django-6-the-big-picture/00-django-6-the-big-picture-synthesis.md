@@ -27,8 +27,8 @@ course: "Django 6: The Big Picture"
 
 > [!summary] The Core Concept
 >
-> - [Django](https://www.djangoproject.com/) is [[02-django-6-introducing-django|a feature complete Python backend framework for web applications]]
-> - [[03-django-6-structure-of-a-django-application|How Django works]]:
+> - [Django](https://www.djangoproject.com/) is [[../../../analysis/courses/django-6/02-django-6-introducing-django|a feature complete Python backend framework for web applications]]
+> - [[../../../analysis/courses/django-6/03-django-6-structure-of-a-django-application|How Django works]]:
 >   - "Model-Template-View" architecture
 >     - **The Model (the data):** uses Python classes to represent tables in the database
 >     - **Templates:** to generate HTML - presentation for user
@@ -51,62 +51,62 @@ flowchart LR
 
     subgraph Backend ["Django Environment"]
         Django["Django Server"]
-        DB[(Database)]
+        DB[("Database")]
     end
 
     PC <--> Django
     Django <--> DB
 ```
 
-### [[n07-django-6-structure-of-a-django-application-the-model-template-view-architecture|Model-Template-View Architecture]]
+### [[../../../notes/courses/django-6/n07-django-6-structure-of-a-django-application-the-model-template-view-architecture|Model-Template-View Architecture]]
 
 ```mermaid
 flowchart LR
     subgraph Browser ["Web Browser"]
         direction TB
         URL["127.0.0.1/trips/1"]
-        Page["<b>Paris is lovely!</b><br/>By Reindert<br/>We were in Paris and we loved it..."]
+        Page["Paris is lovely!<br/>By Reindert<br/>We were in Paris and we loved it..."]
     end
 
     subgraph Server ["Server"]
         direction TB
-        Router["# Find mapping in urls.py<br/>path('trips/&lt;int:id&gt;', detail)"]
-        View["def detail(request, id):<br/>m = get_object_or_404('...')"]
+        Router["Find mapping in urls.py<br/>path('trips/&lt;int:id&gt;', detail)"]
+        View["def detail(request, id):<br/>m = get_object_or_404(...)"]
 
-        subgraph Resources [" "]
+        subgraph Resources ["Resources"]
             direction LR
             HTML[("HTML")]
             DB[("Database")]
         end
     end
 
-    URL -. "HTTP GET /trips/1" .-> Router
+    URL -.->|"HTTP GET /trips/1"| Router
     Router -.-> View
     View <-.-> HTML
     View <-.-> DB
-    View -. "Rendered HTML" .-> Page
+    View -.->|"Rendered HTML"| Page
 ```
 
-### [[03-django-6-structure-of-a-django-application|Structure of a Django Application]]
+### [[../../../analysis/courses/django-6/03-django-6-structure-of-a-django-application|Structure of a Django Application]]
 
 ```mermaid
 flowchart TD
-    Root["my_project/ <br/><i>(Root Directory)</i>"] --> Manage["manage.py <br/><i>Command-line utility</i>"]
-    Root --> ProjConfig["my_project/ <br/><i>Project Configuration</i>"]
-    Root --> AppDir["myapp/ <br/><i>Custom App Module</i>"]
+    Root["my_project/<br/><i>(Root Directory)</i>"] --> Manage["manage.py<br/><i>Command-line utility</i>"]
+    Root --> ProjConfig["my_project/<br/><i>Project Configuration</i>"]
+    Root --> AppDir["myapp/<br/><i>Custom App Module</i>"]
 
     %% Project Configuration Files
-    ProjConfig --> Settings["settings.py <br/><i>App configs, database, middleware</i>"]
-    ProjConfig --> ProjUrls["urls.py <br/><i>Global URL router</i>"]
-    ProjConfig --> WSGI["wsgi.py / asgi.py <br/><i>Server deployment entry points</i>"]
+    ProjConfig --> Settings["settings.py<br/><i>App configs, database, middleware</i>"]
+    ProjConfig --> ProjUrls["urls.py<br/><i>Global URL router</i>"]
+    ProjConfig --> WSGI["wsgi.py / asgi.py<br/><i>Server deployment entry points</i>"]
 
     %% App Files & Folders
-    AppDir --> Models["models.py <br/><i>Database models & ORM definitions</i>"]
-    AppDir --> Views["views.py <br/><i>Request handling & business logic</i>"]
-    AppDir --> AppUrls["urls.py <br/><i>App-specific URL routes (optional)</i>"]
-    AppDir --> Admin["admin.py <br/><i>Django admin dashboard registration</i>"]
-    AppDir --> Migrations["migrations/ <br/><i>Database schema history/migrations</i>"]
-    AppDir --> Templates["templates/ <br/><i>HTML layout files</i>"]
+    AppDir --> Models["models.py<br/><i>Database models &amp; ORM definitions</i>"]
+    AppDir --> Views["views.py<br/><i>Request handling &amp; business logic</i>"]
+    AppDir --> AppUrls["urls.py<br/><i>App-specific URL routes (optional)</i>"]
+    AppDir --> Admin["admin.py<br/><i>Django admin dashboard registration</i>"]
+    AppDir --> Migrations["migrations/<br/><i>Database schema history/migrations</i>"]
+    AppDir --> Templates["templates/<br/><i>HTML layout files</i>"]
 
     %% Styling for clarity
     style Root fill:#f8f9fa,stroke:#333,stroke-width:2px
