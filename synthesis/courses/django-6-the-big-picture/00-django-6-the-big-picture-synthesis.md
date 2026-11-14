@@ -37,7 +37,7 @@ course: "Django 6: The Big Picture"
 >     - Root folder is the Project folder
 >     - The folder that shares the same name as the Project folder (i.e. `project_name/project_name`) contains the project's configuration files
 >     - "Apps" are other files, components, subsets of the project
-> - One should [[04-django-6-choosing-django|choose Django]] for an out-of-the-box, batteries included, experience for quick and robust web application development.
+> - One should [[../../../analysis/courses/django-6/04-django-6-choosing-django|choose Django]] for an out-of-the-box, batteries included, experience for quick and robust web application development.
 
 ## Foundational Concepts
 
