@@ -91,20 +91,34 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    root[my_project/ - Root Directory] --> Manage[manage.py - Command-line utility]
-    root --> projconfig[my_project/ - Project Configuration]
-    root --> appdir[myapp/ - Custom App Module]
+    root[my_project/ - Root Directory]
+    manage[manage.py - Command-line utility]
+    projConfig[my_project/ - Project Configuration]
+    appDir[myapp/ - Custom App Module]
 
-    projconfig --> settings[settings.py - App configs, database, middleware]
-    projconfig --> projurls[urls.py - Global URL router]
-    projconfig --> wsgi[wsgi.py / asgi.py - Server deployment entry points]
+    settings[settings.py - App configs, database, middleware]
+    projURLs[urls.py - Global URL router]
+    wsgi[wsgi.py / asgi.py - Server deployment entry points]
 
-    appdir --> models[models.py - Database models & ORM definitions]
-    appdir --> views[views.py - Request handling & business logic]
-    appdir --> appurls[urls.py - App-specific URL routes - optional]
-    appdir --> admin[admin.py - Django admin dashboard registration]
-    appdir --> migrations[migrations/ - Database schema history/migrations]
-    appdir --> templates[templates/ - HTML layout files]
+    models[models.py - Database models & ORM definitions]
+    views[views.py - Request handling & business logic]
+    appURLs[urls.py - App-specific URL routes - optional]
+    admin[admin.py - Django admin dashboard registration]
+    migrations[migrations/ - Database schema history/migrations]
+    templates[templates/ - HTML layout files]
+
+    root --> manage
+    root --> projConfig
+    root --> appDir
+    projConfig --> settings
+    projConfig --> projURLs
+    projConfig --> wsgi
+    appDir --> models
+    appDir --> views
+    appDir --> appURLs
+    appDir --> admin
+    appDir --> migrations
+    appDir --> templates
 ```
 
 ## Connections & Cross-References
