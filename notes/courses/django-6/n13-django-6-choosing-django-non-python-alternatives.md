@@ -11,7 +11,7 @@ type: notes
 domain: courses
 instructor:
   - "[[reindert-jan-ekker|Reindert-Jan Ekker]]"
-course: Django 6
+course: "Django 6: The Big Picture"
 module: Choosing Django
 lesson: Non-Python Alternatives
 ---
