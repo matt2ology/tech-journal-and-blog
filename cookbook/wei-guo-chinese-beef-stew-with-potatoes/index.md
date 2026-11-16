@@ -42,7 +42,7 @@ image: ""
 - [ ] 2x **onions**, sliced
 - [ ] 3x **medium potatoes**, peeled and cut into chunks, (~350g | 12oz)
 - [ ] 2.5 cups **hot water** (600 ml)
-- [ ] 1.5 lb [beef, cut into chunks](https://www.seriouseats.com/best-cut-beef-stew-braise) (700 g)
+- [ ] 1.5 lb **[Beef](https://www.seriouseats.com/best-cut-beef-stew-braise)**, cut into chunks (700 g)
   - Bohemian (Bottom Sirloin Flap)
   - Bone-in short rib
   - Chuck
@@ -69,9 +69,9 @@ image: ""
 
 ## Prep work
 
-1. 2 **onions**, sliced
-2. 1 smash ginger
-3. [Beef, cut into chunks](https://www.seriouseats.com/best-cut-beef-stew-braise) (1.5 lb | 700 g)
+1. 1.5 lb **[Beef](https://www.seriouseats.com/best-cut-beef-stew-braise)**, cut into chunks
+2. 1x **Ginger**, smashed
+3. 2x **Onions**, sliced
 
 ### Blanch the beef
 
@@ -95,17 +95,17 @@ image: ""
 
 1. Add to the pot:
    - **Dark soy sauce** (1 tablespoon)
-   - Drained [beef chunks](https://www.seriouseats.com/best-cut-beef-stew-braise) (1.5 lb | 700 g)
+   - Drained **[beef chunks](https://www.seriouseats.com/best-cut-beef-stew-braise)** (1.5 lb | 700 g)
    - **Light soy sauce** (2 tablespoon)
    - **Shaoxing rice wine** (1 tablespoon)
 2. Pour in about 2½ cups (600ml) of hot water
-3. Over high heat, bring the water to a full boil
+3. Bring the water to a full boil - over high heat
 4. Turn the heat down to the lowest
 5. **~1½ hours** cover the pot with a lid and leave to simmer **until the beef becomes tender**
 
 ### Add the vegetables
 
-1. **Add potato** and **carrot** chunks
+1. **Add potato** and **carrot chunks**
 2. **10 to 15 minutes** simmer uncovered **until the vegetables become tender**
 
 > [!tip]
