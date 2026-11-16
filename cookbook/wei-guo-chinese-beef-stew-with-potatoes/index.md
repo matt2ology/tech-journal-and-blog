@@ -69,7 +69,7 @@ image: ""
 
 ## Prep work
 
-1. 1.5 lb **[Beef](https://www.seriouseats.com/best-cut-beef-stew-braise)**, cut into chunks
+1. 1.5 lb. **[Beef](https://www.seriouseats.com/best-cut-beef-stew-braise)**, cut into chunks
 2. 1x **Ginger**, smashed
 3. 2x **Onions**, sliced
 
@@ -86,16 +86,19 @@ image: ""
 
 1. In a pot add 2 tablespoon **neutral cooking oil**
 2. Slowly **brown sliced onions** over medium-low heat
-3. Stir and fry until fragrant (so to add hint of caramelised sweetness to the dish):
-   - Ginger
+3. Stir and fry until fragrant (so to add hint of caramelized sweetness to the dish):
+   - Bay leaves
    - Cassia cinnamon (Chinese cinnamon)
+   - Cloves
+   - Dried chilies (optional)
+   - Ginger
    - Star anises
 
 ### Braise the Meat
 
-1. Add to the pot:
+1. **Add to the pot:**
    - **Dark soy sauce** (1 tablespoon)
-   - Drained **[beef chunks](https://www.seriouseats.com/best-cut-beef-stew-braise)** (1.5 lb | 700 g)
+   - Drained **[beef chunks](https://www.seriouseats.com/best-cut-beef-stew-braise)** (1.5 lb. | 700 g)
    - **Light soy sauce** (2 tablespoon)
    - **Shaoxing rice wine** (1 tablespoon)
 2. Pour in about 2½ cups (600ml) of hot water
