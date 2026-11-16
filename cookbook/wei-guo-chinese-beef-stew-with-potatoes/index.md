@@ -31,8 +31,8 @@ image: ""
   - Chicken, Mushroom, or Vegetable Stock,
   - Dry Sherry
   - Dry White Wine
-  - Mirin
-  - Sake
+  - **Mirin**
+  - **Sake**
 
 ## Ingredients
 
@@ -63,7 +63,7 @@ image: ""
 - [ ] **Light soy sauce** (2 tablespoon)
 - [ ] **Neutral cooking oil** (2 tablespoon)
 - [ ] **Salt** (¼ teaspoon or to taste)
-- [ ] **Shaoxing rice wine** (1 tablespoon)
+- [ ] **Shaoxing rice wine** (1 tablespoon) A.K.A "Huangjiu" or "Huadiao"
 
 ---
 
