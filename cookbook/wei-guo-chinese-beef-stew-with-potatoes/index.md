@@ -42,7 +42,7 @@ image: ""
 - [ ] 2x **onions**, sliced
 - [ ] 3x **medium potatoes**, peeled and cut into chunks, (~350g | 12oz)
 - [ ] 2.5 cups **hot water** (600 ml)
-- [ ] 1.5 lb **[Beef](https://www.seriouseats.com/best-cut-beef-stew-braise)**, cut into chunks (700 g)
+- [ ] 1.5 lb. **[Beef](https://www.seriouseats.com/best-cut-beef-stew-braise)**, cut into chunks (700 g)
   - Bohemian (Bottom Sirloin Flap)
   - Bone-in short rib
   - Chuck
