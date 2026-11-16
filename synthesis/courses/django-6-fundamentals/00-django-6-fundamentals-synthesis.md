@@ -20,7 +20,7 @@ course: Django 6 Fundamentals
 
 **Course link:** https://www.pluralsight.com/courses/fundamentals-django
 
-## The Big Picture
+## Django 6 Fundamentals
 
 <!-- A 2-3 sentence summary of the main argument or purpose in your own words. -->
 
@@ -31,21 +31,10 @@ course: Django 6 Fundamentals
 
 <!-- Extract the top 3–5 foundational concepts, architectures, or mental models introduced. -->
 
-## Chapter / Section Breakdown
+## Module Breakdown
 
-<!-- Use progressive summarization to distill your raw highlights and reading notes into active comprehension -->
-
-<!--
-### Section 1: [Chapter / Subtitle / Topic]
-
-- Key point or insight...
-- Mechanism / How it works
-
-### Section 2: [Chapter / Subtitle / Topic]
-
-- Key point or insight...
-- Mechanism / How it works
--->
+1. [[../../../analysis/courses/django-6-fundamentals/02-django-6-fundamentals-starting-a-django-project|Start a Django Project]]
+2. [[../../../analysis/courses/django-6-fundamentals/03-django-6-fundamentals-creating-a-simple-web-page|Create a Simple Web Page]]
 
 ## Connections & Cross-References
 
