@@ -21,9 +21,9 @@ lesson: Adding a Page
 ## TL;DR (too long; didn't read)
 
 > [!tldr] Adding a Page Summary
-> After adding a Django app: `python manage.py startapp website`
+> After adding a Django App: `python manage.py startapp website`
 >
-> Inside your Django app's folder (e.g. **`project_name/django_app_folder/views.py`**)
+> Inside your Django App's folder (e.g. **`project_name/django_app_folder/views.py`**)
 >
 > 1. Add a view function by writing a standard Python function (e.g. `def my_function()`)
 > 2. `url.py` in the project settings folder (i.e. `my_project/my_project`) import the the view `from django_app_folder.views import view_function_name`
