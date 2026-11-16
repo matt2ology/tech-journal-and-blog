@@ -27,7 +27,8 @@ lesson: Creating a Django App
 
 ## Creating a Django App
 
-A Django App is just a folder containing Python files.
+- A Django app is a Python package that's specifically intended for use in a Django project.
+  - A Django App is just a folder containing Python files.
 
 In this case, the instructor, Reindert-Jan Ekker, adds an app that will contain general pages for the website like the welcome-page, a contact-page, an about-page, so calls the Django App "website".
 
