@@ -23,13 +23,13 @@ lesson: Creating a Django App
 > [!tldr] Creating a Django App Summary
 >
 > 1. Run the following command from the project folder (i.e. `project_name/`): `python manage.py startapp website`
-> 2. Add the Django app to **`project_name/project_name/settings.py`**'s "application definition", [Python Lists](https://www.w3schools.com/python/python_lists.asp), `INSTALLED_APPS`
+> 2. Add the Django App to **`project_name/project_name/settings.py`**'s "application definition", [Python Lists](https://www.w3schools.com/python/python_lists.asp), `INSTALLED_APPS`
 
 ## Creating a Django App
 
-A Django app is just a folder containing Python files.
+A Django App is just a folder containing Python files.
 
-In this case, the instructor, Reindert-Jan Ekker, adds an app that will contain general pages for the website like the welcome-page, a contact-page, an about-page, so calls the Django app "website".
+In this case, the instructor, Reindert-Jan Ekker, adds an app that will contain general pages for the website like the welcome-page, a contact-page, an about-page, so calls the Django App "website".
 
 ```mermaid
 treeView-beta
@@ -66,7 +66,7 @@ django-fundamentals/
         main.py
 ```
 
-Now add the newly created **`project_name/website`** Django app to the **`project_name/project_name/settings.py`**'s
+Now add the newly created **`project_name/website`** Django App to the **`project_name/project_name/settings.py`**'s
 
 ```python
 # Application definition
@@ -78,7 +78,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'website', # Add Django app folder here
+    'website', # Add Django App folder here
 ]
 ```
 
