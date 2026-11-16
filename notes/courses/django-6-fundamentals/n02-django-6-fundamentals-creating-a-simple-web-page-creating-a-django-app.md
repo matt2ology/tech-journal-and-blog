@@ -29,7 +29,7 @@ lesson: Creating a Django App
 
 A Django app is just a folder containing Python files.
 
-In this case, the instructor, [[reindert-jan-ekker|Reindert-Jan Ekker]], adds an app that will contain general pages for the website like the welcome-page, a contact-page, an about-page, so calls the Django app "website".
+In this case, the instructor, Reindert-Jan Ekker, adds an app that will contain general pages for the website like the welcome-page, a contact-page, an about-page, so calls the Django app "website".
 
 ```mermaid
 treeView-beta
