@@ -33,7 +33,7 @@ course: "Django 6: The Big Picture"
 >     - **Templates:** to generate HTML - presentation for user
 >     - **View (the behavior):** brings everything together, map view functions fetch data to specific URLS, in `urls.py` for the templates to be displayed in HTML code via browser
 >   - Structured directory
->     - Root folder is the Project folder
+>     - Root folder is the Project folder (i.e. `project_name/`)
 >     - The folder that shares the same name as the Project folder (i.e. `project_name/project_name`) contains the project's configuration files
 >     - "Apps" are other files, components, subsets of the project
 > - One should [[../../../analysis/courses/django-6-the-big-picture/04-django-6-choosing-django|choose Django]] for an out-of-the-box, batteries included, experience for quick and robust web application development.
