@@ -1,11 +1,11 @@
 {{VALUE:frontmatter}}
 {{VALUE:source}}
 
-## 💡 Notes & Variations
+## Notes & Variations
 
 -
 
-## 🛒 Ingredients
+## Ingredients
 
 ### Main Components
 
@@ -17,10 +17,10 @@
 
 ---
 
-## 🔪 Prep work
+## Prep work
 
 1.
 
-## 👩‍🍳 Instructions (Steps)
+## Instructions
 
 1.
