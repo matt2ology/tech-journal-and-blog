@@ -80,8 +80,6 @@ cd my-project-name
 
 We can now run the project by
 
- 
-
 ```shell
 python manage.py runserver
 ```
