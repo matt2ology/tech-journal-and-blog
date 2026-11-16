@@ -16,7 +16,7 @@ meal:
 image: ""
 ---
 
-**Source:** [Easy Comfort Food: over 100 delicious recipes for feel-good favourites](https://a.co/d/00qsTaNs)
+**Source:** [Page 40; Easy Comfort Food: over 100 delicious recipes for feel-good favourites](https://a.co/d/00qsTaNs)
 
 ## 💡 Notes & Variations
 
