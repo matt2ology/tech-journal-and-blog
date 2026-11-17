@@ -17,7 +17,7 @@ Most items are listed for their, soon to be, Black Friday deals, so I've finally
 
 It's not as low as it was Nov 07, 2016 listed for $87.66, and is better than the average going for about $126.29....
 
-I ultimately chose the All-Clad over the Made-in as its handle, as the host of [America's Test Kitchen](https://youtu.be/2wlS169Y2EM?si=1psjPFMJy9zht8Iw) would argue, is better as is more grippier: it won't rotate in your hand. I am still low-key sold on the Made-in brand (thanks Adam Ragusea).
+I ultimately chose the All-Clad over the Made-in as its handle, as the host of America's Test Kitchen (in their Made In vs All-Clad video) would argue, is better as is more grippier: it won't rotate in your hand. I am still low-key sold on the Made-in brand (thanks Adam Ragusea).
 
 ---
 
