@@ -13,6 +13,8 @@ type: blog
 
 After years of cooking with hand-me-down cook wear and a T-fal Ceramic Non-Stick Frypan 3-piece Set from Costco; I've finally purchases an investment piece.
 
+[America's Test Kitchen Article: How to Build Your Own Cookware Set](https://www.americastestkitchen.com/articles/1760-how-to-build-your-own-cookware-set)
+
 Most items are listed for their, soon to be, Black Friday deals, so I've finally made the purchase of an ["All-Clad D3 Stainless Steel 12" Fry Pan with Lid"](https://a.co/d/0eeTlyNZ) for $119.99.
 
 It's not as low as it was Nov 07, 2016 listed for $87.66, and is better than the average going for about $126.29....
