@@ -1,19 +1,19 @@
 ---
-aliases: "Chinese Beef Stew with Potatoes (土豆炖牛肉) by Wei Guo"
-title: "Chinese Beef Stew with Potatoes (土豆炖牛肉) by Wei Guo"
-date:
-draft: true
+aliases: Chinese Beef Stew with Potatoes (土豆炖牛肉) by Wei Guo
+title: Chinese Beef Stew with Potatoes (土豆炖牛肉) by Wei Guo
+date: 2026-11-16T19:00:00
+draft: false
 slug: wei-guo-chinese-beef-stew-with-potatoes
 categories:
   - cookbook
 tags: []
-dish: "Chinese Beef Stew with Potatoes (土豆炖牛肉)"
+dish: Chinese Beef Stew with Potatoes (土豆炖牛肉)
 chef:
   - "[[wei-guo|Wei Guo]]"
 meal:
   - lunch
   - dinner
-image: ""
+image: wei-guo-chinese-beef-stew-with-potatoes.jpg
 ---
 
 **Source:** [Red House Spice - Chinese Recipe Central: Chinese Beef Stew with Potatoes (土豆炖牛肉) by Wei Guo](https://redhousespice.com/chinese-spiced-beef-potato-stew/)
