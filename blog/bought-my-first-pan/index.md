@@ -7,7 +7,7 @@ slug: bought-my-first-pan
 categories:
   - blog
 tags:
-  - hobby
+  - open-journal
 type: blog
 ---
 
