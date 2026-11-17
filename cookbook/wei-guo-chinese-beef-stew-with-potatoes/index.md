@@ -18,6 +18,8 @@ image: wei-guo-chinese-beef-stew-with-potatoes.jpg
 
 **Source:** [Red House Spice - Chinese Recipe Central: Chinese Beef Stew with Potatoes (土豆炖牛肉) by Wei Guo](https://redhousespice.com/chinese-spiced-beef-potato-stew/)
 
+I like this dish ✨
+
 ## Notes & Variations
 
 > [!tip]
@@ -114,4 +116,4 @@ image: wei-guo-chinese-beef-stew-with-potatoes.jpg
 > [!tip]
 > If you wish to serve the dish in less broth, cook a little further over high heat to reduce its volume.
 >
-> Otherwise, serve it as it is (I think the flavourful broth goes wonderfully well with plain rice).
+> Otherwise, serve it as it is (Wei Guo thinks the flavourful broth goes wonderfully well with plain rice).
