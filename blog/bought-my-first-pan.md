@@ -15,11 +15,11 @@ After years of cooking with hand-me-down cook wear and a T-fal Ceramic Non-Stick
 
 [America's Test Kitchen Article: How to Build Your Own Cookware Set](https://www.americastestkitchen.com/articles/1760-how-to-build-your-own-cookware-set)
 
-Most items are listed for their, soon to be, Black Friday deals, so I've finally made the purchase of an ["All-Clad D3 Stainless Steel 12" Fry Pan with Lid"](https://a.co/d/0eeTlyNZ) for $119.99.
+Most items are already listed for their, soon to be, Black Friday deals, so I've finally made the purchase of an ["All-Clad D3 Stainless Steel 12" Fry Pan with Lid"](https://a.co/d/0eeTlyNZ) for $119.99.
 
 It's not as low as it was Nov 07, 2016 listed for $87.66, and is better than the average going for about $126.29....
 
-I ultimately chose the All-Clad over the Made-in as its handle, as the host of America's Test Kitchen (in their Made In vs All-Clad video) would argue, is better as is more grippier: it won't rotate in your hand. I am still low-key sold on the Made-in brand (thanks Adam Ragusea).
+I ultimately chose the All-Clad over the Made In. As the hosts of _America’s Test Kitchen_ argue in their [Made In vs. All-Clad video](https://youtu.be/2wlS169Y2EM?si=5BMHLhtYjDIpjlQF&t=1062), the All-Clad D3 frying pan has a more stable, grippier handle, it’s less likely to rotate in your hand. That said, I’m still low-key sold on the Made In brand (thanks, Adam Ragusea).
 
 ---
 
