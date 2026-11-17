@@ -9,7 +9,7 @@ categories:
 tags: []
 type: analysis
 domain: courses
-instructor: 
+instructor:
   - "[[reindert-jan-ekker|Reindert-Jan Ekker]]"
 course: "Django 6 Fundamentals"
 module: "Setting up a Data Model"
