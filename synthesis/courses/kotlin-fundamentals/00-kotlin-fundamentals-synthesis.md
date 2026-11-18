@@ -15,6 +15,8 @@ instructor:
 course: "Kotlin Fundamentals"
 ---
 
+**Course link:** [Pluralsight: Kotlin Fundamentals by Kevin Jones](https://www.pluralsight.com/courses/fundamentals-kotlin)
+
 <!-- Purpose: Transmute source materials (books, articles, podcasts, lecture notes) into active comprehension and extract candidate concepts. -->
 
 <!--
