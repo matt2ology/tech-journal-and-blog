@@ -77,5 +77,5 @@ Optional Additions / Variations:
 1. **Cook the Ribeye Steak**:
    - In a hot pan, flipping every 30 seconds, to your desired level of doneness
    - OR: in an air fryer cook the ribeye steak
-3. **Slice the Ribeye Steak:** Once the ribeye steak is cooked, on a salted and peppered cutting board, slice it into thin strips for easier assembly of the tacos
-4. **Assemble the Tacos:** Warm the tortillas, then fill them with the cooked ribeye steak, guacamole, and any additional toppings of your choice.
+1. **Slice the Ribeye Steak:** Once the ribeye steak is cooked, on a salted and peppered cutting board, slice it into thin strips for easier assembly of the tacos
+1. **Assemble the Tacos:** Warm the tortillas, then fill them with the cooked ribeye steak, guacamole, and any additional toppings of your choice.
