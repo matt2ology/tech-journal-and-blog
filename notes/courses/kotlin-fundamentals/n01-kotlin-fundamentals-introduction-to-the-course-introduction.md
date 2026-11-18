@@ -22,7 +22,7 @@ lesson: Introduction
 
 > [!tldr] Introduction Summary
 >
-> 1. [Kotlin](https://www.jetbrains.com/idea/download/) uses the Java Virtual Machine (JVM) language
+> 1. [Kotlin](https://github.com/JetBrains/intellij-community/releases) uses the Java Virtual Machine (JVM) language
 >    - Works with Java (can use libraries written in Java and Java can use Kotlin libraries)
 > 2. Kotlin is an object-oriented language
 > 3. Kotlin treats functions as first class, so
