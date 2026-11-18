@@ -29,23 +29,23 @@ image: leah-colins-harissa-honey-salmon-rice-bowl.jpg
 
 ### Main Components
 
-- **Avocado** slices for serving (optional)
-- **Fresh lemon juice** (2 tablespoons | 30 ml)
-- **Skinless salmon fillet**, cut into 1 1/2-inch pieces (16 ounces | 454 g)
-- 1/2 **large English cucumber** (10 ounces; 285 g), halved lengthwise and sliced into very thin half-moons
-- 2x medium **carrots** (2 ounces; 656 g each), **peeled**
-- Cooked **rice** (4 cups)
+- [ ] **Avocado** slices for serving (optional)
+- [ ] **Fresh lemon juice** (2 tablespoons | 30 ml)
+- [ ] **Skinless salmon fillet**, cut into 1 1/2-inch pieces (16 ounces | 454 g)
+- [ ] 1/2 **large English cucumber** (10 ounces; 285 g), halved lengthwise and sliced into very thin half-moons
+- [ ] 2x medium **carrots** (2 ounces; 656 g each), **peeled**
+- [ ] Cooked **rice** (4 cups)
 
 ### Seasonings & Pantry
 
-- **Diamond Crystal kosher salt**, divided; for table salt, use half as much by volume (1/2 teaspoons)
-- **Extra-virgin olive oil** (2 tablespoons | 30 ml)
-- **Fresh dill fronds**, chopped, plus more for garnish (1/4 cup | 6 g)
-- **Freshly ground black pepper**, divided (3/4 teaspoon)
-- **Ground cumin** (1/2 teaspoon)
-- **Harissa paste** (6 tablespoons | 90 ml)
-- **Honey** (4 tablespoons | 60 ml)
-- 4x medium **cloves garlic**, finely minced or grated on a Microplane grater 
+- [ ] **Diamond Crystal kosher salt**, divided; for table salt, use half as much by volume (1/2 teaspoons)
+- [ ] **Extra-virgin olive oil** (2 tablespoons | 30 ml)
+- [ ] **Fresh dill fronds**, chopped, plus more for garnish (1/4 cup | 6 g)
+- [ ] **Freshly ground black pepper**, divided (3/4 teaspoon)
+- [ ] **Ground cumin** (1/2 teaspoon)
+- [ ] **Harissa paste** (6 tablespoons | 90 ml)
+- [ ] **Honey** (4 tablespoons | 60 ml)
+- [ ] 4x medium **cloves garlic**, finely minced or grated on a Microplane grater
 
 ---
 
