@@ -73,8 +73,8 @@ Optional Additions / Variations:
 ## 👩‍🍳 Instructions (Steps)
 
 1. **Pan fry the toppings:** Heat a pan over medium heat, add a small amount of oil or butter, and sauté the diced bell peppers, onions, and any other desired toppings until they are tender and slightly caramelized.
-   - Use a little water as an interface when cooking mushrooms, so to collapse their porous, spongy structure first so they don't absorb excessive oil or burn during browning
-2. **Cook the Ribeye Steak**:
+   - [Use a little water as an interface when cooking mushrooms](https://youtu.be/OPJmJdStvwI?si=qNKFzZzBNw84EqGb&t=354), so to collapse their porous, spongy structure first so they don't absorb excessive oil or burn during browning
+1. **Cook the Ribeye Steak**:
    - In a hot pan, flipping every 30 seconds, to your desired level of doneness
    - OR: in an air fryer cook the ribeye steak
 3. **Slice the Ribeye Steak:** Once the ribeye steak is cooked, on a salted and peppered cutting board, slice it into thin strips for easier assembly of the tacos
