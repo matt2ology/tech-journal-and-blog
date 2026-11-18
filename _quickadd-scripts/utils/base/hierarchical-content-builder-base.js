@@ -1,4 +1,5 @@
 const ContentBuilderBase = require("./content-builder-base");
+const VaultQueryService = require("../services/vault-query-service");
 
 class HierarchicalContentBuilderBase extends ContentBuilderBase {
   getSectionFieldId() {
@@ -40,15 +41,26 @@ class HierarchicalContentBuilderBase extends ContentBuilderBase {
   }
 
   getFields() {
+    const unitOptions = VaultQueryService.getFieldValues({
+      app,
+      fieldName: this.getUnitFieldId(),
+      folderPath: `${this.getKnowledgeResourceType()}/${this.getDomainType()}`,
+    });
     const baseFields = super.getFields();
     return [
       baseFields[0],
       {
         id: this.getUnitFieldId(),
         label: this.getUnitFieldLabel(),
-        type: "text",
+        type: "suggester",
         placeholder: "Enter unit (Title/Chapter/Module)",
         defaultValue: "",
+        options: unitOptions,
+        suggsterConfig: {
+          allowCustom: true,
+          caseSensitive: false,
+          multiSelect: false,
+        },
       },
       {
         id: this.getSectionFieldId(),
