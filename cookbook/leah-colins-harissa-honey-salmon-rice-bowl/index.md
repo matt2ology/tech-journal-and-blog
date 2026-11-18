@@ -51,7 +51,7 @@ image: leah-colins-harissa-honey-salmon-rice-bowl.jpg
 
 ## Prep work
 
-1. **Cook rice** (wash rice)
+1. **Cook rice**
 2. **Garlic**, finely minced or grated on a Microplane grater
 3. Shave **carrots** lengthwise into ribbons, rotating carrot as needed
    - Use a Y-peeler; or, simply chop as thinly as can
