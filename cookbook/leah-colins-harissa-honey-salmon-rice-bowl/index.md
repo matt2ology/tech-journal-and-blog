@@ -1,14 +1,14 @@
 ---
 aliases: "Harissa-Honey Salmon Rice Bowl by Leah Colins"
 title: "Harissa-Honey Salmon Rice Bowl by Leah Colins"
-date: 
+date:
 draft: true
 slug: leah-colins-harissa-honey-salmon-rice-bowl
 categories:
   - cookbook
 tags: []
 dish: "Harissa-Honey Salmon Rice Bowl"
-chef: 
+chef:
   - "[[leah-colins|Leah Colins]]"
 meal:
   - lunch
