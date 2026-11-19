@@ -27,6 +27,7 @@ image: liz-cook-kansas-city-steak-soup.jpeg
 - I've added to the soup:
   - Parsnips
   - Spinach
+  - Croissants to dip in soup
 
 ## Ingredients
 
