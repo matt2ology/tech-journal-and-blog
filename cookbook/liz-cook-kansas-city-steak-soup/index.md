@@ -123,5 +123,5 @@ Do not add steak yet...
 2. Reduce heat to medium low and simmer
 3. ~15 minutes, stirring occasionally, until soup is glossy and has thickened
 4. Season with additional salt and pepper to taste
-5. Add steak and stir just until heated through (about 1 minute)
+5. **Add steak** and stir just until heated through (about 1 minute)
 6. Ladle into individual bowls and serve
