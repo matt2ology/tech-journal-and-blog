@@ -66,7 +66,7 @@ image: liz-cook-kansas-city-steak-soup.jpeg
 
 In a microwave-safe container:
 
-1. ~3 minutes on high, heat 4 cups of chicken stock and dried porcini mushrooms until stock is hot and mushrooms are fully hydrated
+1. ~3 minutes on high, heat 4 cups of **chicken stock** and **dried porcini mushrooms** until stock is hot and mushrooms are fully hydrated
 2. Use a slotted spoon to transfer hydrated porcini to a cutting board
 3. Chop porcini and return to stock
 4. Set aside
