@@ -58,7 +58,7 @@ All Django models need to inherit from the base class `models.Model`, so makes t
 ```python
 from django.db import models
 
-class TableInDataBase(models.Model):
+class DataModelName(models.Model):
     title = models.CharField(max_length=200)
     date = models.DateField()
 ```
