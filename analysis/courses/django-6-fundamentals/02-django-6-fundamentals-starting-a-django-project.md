@@ -26,16 +26,16 @@ module: Starting a Django Project
 > [!abstract] Executive Summary & Core Thesis
 >
 > 1. **[Install the latest Django release](https://www.djangoproject.com/download/):** `python -m pip install django`
-> 2. **[Created a Django project](https://docs.djangoproject.com/en/6.1/intro/tutorial01/):** `django-admin startproject my-project-name`
+> 2. **[Created a Django project](https://docs.djangoproject.com/en/6.1/intro/tutorial01/):** `django-admin startproject my_project_name`
 >    - Be sure the virtual environment (`.venv`) is active: the django‑admin script is installed inside the `.venv`
-> 3. Move into the project directory: `cd my-project-name`
+> 3. Move into the project directory: `cd my_project_name`
 > 4. Run the development server: `python manage.py runserver`
 >    - To stop the server hit `CTRL+C` on the keyboard in the terminal
 
 The Django project folder structure are as follows
 
-- At the root we have the Django project folder: my-project-name
-- The 2nd folder of the same name (i.e. my-project-name/my-project-name) contains the Django project settings - think this as **"the core project folder"**.
+- At the root we have the Django project folder: my_project_name
+- The 2nd folder of the same name (i.e. my_project_name/my_project_name) contains the Django project settings - think this as **"the core project folder"**.
 
 The backbone of a Django web application: **`settings.py`** and **`urls.py`**
 
@@ -65,7 +65,7 @@ Using Jetbrains' Pycharm
    - [**`django‑admin`**](https://docs.djangoproject.com/en/6.1/ref/django-admin/) script can do many things, but commonly it's used to start a new project
 
      ```shell
-     django‑admin startproject my-project-name
+     django‑admin startproject my_project_name
      ```
 
 2. A file here called **`manage.py`** is a script used to run Django commands
@@ -75,7 +75,7 @@ Using Jetbrains' Pycharm
 To run the **`manage.py`** script one would need to navigate into the project root directory
 
 ```shell
-cd my-project-name
+cd my_project_name
 ```
 
 We can now run the project by
@@ -96,7 +96,7 @@ The Django production server is not secure or performant enough for a real‑wor
 
 There's a new file here called **`db.sqlite3`**, and that's a database file that Django created automatically when we ran the server.
 
-There's a second my-project-name folder basically think of this folder as the **"core project folder"**.
+There's a second my_project_name folder basically think of this folder as the **"core project folder"**.
 
 Inside the **"core project folder"** it contains:
 
