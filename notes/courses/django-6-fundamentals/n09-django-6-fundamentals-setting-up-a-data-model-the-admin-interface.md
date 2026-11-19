@@ -1,8 +1,8 @@
 ---
-aliases: "Notes on Django 6 Fundamentals - Setting Up a Data Model - the Admin Interface"
-title: "Notes on Django 6 Fundamentals - Setting Up a Data Model - the Admin Interface"
+aliases: Notes on Django 6 Fundamentals - Setting Up a Data Model - the Admin Interface
+title: Notes on Django 6 Fundamentals - Setting Up a Data Model - the Admin Interface
 date: 2026-11-19T13:19:38-08:00
-draft: true
+draft: false
 slug: django-6-fundamentals-setting-up-a-data-model-the-admin-interface
 categories:
   - notes
@@ -11,9 +11,9 @@ type: notes
 domain: courses
 instructor:
   - "[[reindert-jan-ekker|Reindert-Jan Ekker]]"
-course: "Django 6 Fundamentals"
-module: "Setting up a Data Model"
-lesson: "The Admin Interface"
+course: Django 6 Fundamentals
+module: Setting up a Data Model
+lesson: The Admin Interface
 ---
 
 **Analysis:** [[05-django-6-fundamentals-setting-up-a-data-model|Django 6 Fundamentals - Setting Up a Data Model]]
