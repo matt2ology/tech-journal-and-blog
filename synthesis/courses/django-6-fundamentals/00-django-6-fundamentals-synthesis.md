@@ -35,6 +35,12 @@ course: Django 6 Fundamentals
 
 1. [[../../../analysis/courses/django-6-fundamentals/02-django-6-fundamentals-starting-a-django-project|Start a Django Project]]
 2. [[../../../analysis/courses/django-6-fundamentals/03-django-6-fundamentals-creating-a-simple-web-page|Create a Simple Web Page]]
+3. [[../../../analysis/courses/django-6-fundamentals/04-django-6-fundamentals-setting-up-a-data-model|Setting-up a Data Model]]
+4. [[../../../analysis/courses/django-6-fundamentals/05-django-6-fundamentals-combining-model-view-and-template|Combining Model, View, and Template]]
+5. [[../../../analysis/courses/django-6-fundamentals/06-django-6-fundamentals-urls-and-link-building|URLs and Link Building]]
+6. [[../../../analysis/courses/django-6-fundamentals/07-django-6-fundamentals-templates-styling-and-static-content|Templates, Styling, and Static Content]]
+7. [[../../../analysis/courses/django-6-fundamentals/08-django-6-fundamentals-adding-user-interaction-with-modelforms|Adding User Interaction with ModelForms]]
+8. [[../../../analysis/courses/django-6-fundamentals/09-django-6-fundamentals-editing-meetings-and-authentication|Editing Meetings and Authentication]]
 
 ## Connections & Cross-References
 
