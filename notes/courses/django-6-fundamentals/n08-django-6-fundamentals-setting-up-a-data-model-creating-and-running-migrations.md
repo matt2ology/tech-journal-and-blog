@@ -35,7 +35,7 @@ lesson: Creating and Running Migrations
 # django_app_name\models.py
 from django.db import models
 
-class TableInDataBase(models.Model):
+class DataModelName(models.Model):
     title = models.CharField(max_length=200)
     date = models.DateField()
 ```
