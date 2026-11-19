@@ -74,7 +74,7 @@ By default, Django use SQLite, so will make sure to generate SQL commands to cre
 ## Anatomy of a Django App
 
 - **`admin.py`:** configures the admin interface
-- **`apps.py`:** advance app configuration
+- **`apps.py`:** advance app configuration (not covered in this course)
 - **`models.py`:** holds data models
 - **`tests.py`:** contains unit tests
 - **`views.py`:** contains view functions
