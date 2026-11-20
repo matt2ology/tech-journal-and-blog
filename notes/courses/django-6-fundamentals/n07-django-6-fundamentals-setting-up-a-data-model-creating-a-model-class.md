@@ -33,7 +33,7 @@ lesson: Creating a Model Class
 
 We group related components together in apps:
 
-```shell
+```bash
 python manage.py startapp django_app_name
 ```
 
