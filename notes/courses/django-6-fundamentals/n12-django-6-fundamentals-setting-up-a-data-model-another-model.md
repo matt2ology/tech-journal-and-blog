@@ -31,7 +31,7 @@ lesson: Another Model
 > 7. **Resetting migrations:** In development, you can delete the database and migration files and recreate them if necessary. Warning: This deletes existing data.
 > 8. **Production caution:** Never casually delete migrations or databases in production, as this can result in permanent data loss.
 > 9. **Superuser:** If you delete and recreate the database, you will also need to create a new superuser.
-> 10. **Django Admin:** Register models in `admin.py` to manage them through the admin interface:
+> 10. **Django Admin:** Register models in `admin.py` to manage them through the admin interface
 
 ## Another Model
 
