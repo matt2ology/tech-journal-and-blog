@@ -33,7 +33,7 @@ module: Structure of a Django Application
 > 2. [[../../../notes/courses/django-6-the-big-picture/n01-django-6-structure-of-a-django-application-the-data-model-layer#The Data Model Layer|The structure of the database tables reflects the structure of the Python classes]]
 > 3. Support [[../../../notes/courses/django-6-the-big-picture/n02-django-6-structure-of-a-django-application-database-migrations#Database Migrations|database migrations]] when a data table is updated with a new attribute via 2 commands:
 >
->    ```shell
+>    ```bash
 >    python manage.py makemigrations
 >    python manage.py migrate
 >    ```
