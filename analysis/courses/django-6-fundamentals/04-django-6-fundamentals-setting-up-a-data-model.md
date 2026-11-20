@@ -14,7 +14,6 @@ instructor:
 course: "Django 6 Fundamentals"
 module: "Setting up a Data Model"
 ---
-
 **Synthesis:** [[00-django-6-fundamentals-synthesis|Django 6 Fundamentals]]
 
 <!-- Purpose: Transmute source materials (books, articles, podcasts, lecture notes) into active comprehension and extract candidate concepts. -->
@@ -23,7 +22,7 @@ module: "Setting up a Data Model"
 
 <!-- A 2-3 sentence summary of the main argument or purpose in your own words. -->
 
-> [!abstract] Executive Summary & Core Thesis
+> [!abstract] Setting up a Data Model Executive Summary & Core Thesis
 >
 > 1.
 > 2.
@@ -31,53 +30,13 @@ module: "Setting up a Data Model"
 
 ---
 
-<!--
-Personal Reflection & Critical Commentary
-What do you agree/disagree with? How does this connect to what you already know?
--->
+## Lesson Notes
 
-## SQ3R Method (Survey, Question, Read, Recite, Review)
-
-<!--
-Extract potential atomic ideas to turn into standalone Concept Notes
-
-SQ3R Method (Survey, Question, Read, Recite, Review).
-Best for: General study and reading comprehension. It’s a well-established method for extracting key information from texts.
-
-1. **Survey:** Skim the chapter to get an overview by examining headings, visuals, and summaries.
-2. **Question:** Turn headings and key parts into questions to guide your focus while reading.
-3. **Read:** Read the material actively to find answers while noting key ideas.
-4. **Recite:** Summarize or recall the information in your own words.
-5. **Review:** Go back over the material periodically to reinforce the information.
- -->
-
-- [ ] question_who_what_when_where_why_how
-
-## 🔑 Key Takeaways & Section Breakdown
-
-<!--
-### Section 1: [Chapter / Subtitle / Topic]
-
-- Key point or insight...
-- Supporting detail or quote...
-
-### Section 2: [Chapter / Subtitle / Topic]
-
-- Key point or insight...
--->
-
-## Essential Textbook Highlights
-
-<!--
-> [!quote] Key Definition / Axiom
-> "Insert crucial verbatim definition, formula, or theorem from the chapter if exact wording is vital."
-> \- *p. {{page_number}}*
-========
-Highlights of direct quotes, key points, or insights from the source content
-Format:
-
->> Quote
->> \- cited
-
-**Reflection**:
--->
+[[../../../notes/courses/django-6-fundamentals/n05-django-6-fundamentals-setting-up-a-data-model-introducing-models-and-migrations|Introducing Models and Migrations]]
+[[../../../notes/courses/django-6-fundamentals/n06-django-6-fundamentals-setting-up-a-data-model-running-initial-migrations|Running Initial Migrations]]
+[[../../../notes/courses/django-6-fundamentals/n07-django-6-fundamentals-setting-up-a-data-model-creating-a-model-class|Creating a Model Class]]
+[[../../../notes/courses/django-6-fundamentals/n08-django-6-fundamentals-setting-up-a-data-model-creating-and-running-migrations|Creating and Running Migrations]]
+[[../../../notes/courses/django-6-fundamentals/n09-django-6-fundamentals-setting-up-a-data-model-the-admin-interface|the Admin Interface]]
+[[../../../notes/courses/django-6-fundamentals/n10-django-6-fundamentals-setting-up-a-data-model-review|Review]]
+[[../../../notes/courses/django-6-fundamentals/n11-django-6-fundamentals-setting-up-a-data-model-bringing-it-all-together|Bringing It All Together]]
+[[../../../notes/courses/django-6-fundamentals/n12-django-6-fundamentals-setting-up-a-data-model-another-model|Another Model]]
