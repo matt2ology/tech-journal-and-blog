@@ -83,7 +83,7 @@ class Person(models.Model):
 
 Create a superuser with
 
-```shell
+```bash
 python manage.py createsuperuser
 ```
 
