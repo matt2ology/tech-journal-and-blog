@@ -42,7 +42,7 @@ class DataModelName(models.Model):
 
 After making a data model you must then run:
 
-```shell
+```bash
 python manage.py makemigrations
 ```
 
@@ -54,7 +54,7 @@ In that file is some Python code for us that represents the steps needed to get 
 
 To actually run this SQL and create the table run:
 
-```shell
+```bash
 python manage.py migrate
 ```
 
@@ -71,7 +71,7 @@ and to see the SQL produced we run the `sqlmigrate` command with two arguments
 1. The name of our app
 2. The name of the migration
 
-```shell
+```bash
 python manage.py sqlmigrate django_app_name 0001
 ```
 
