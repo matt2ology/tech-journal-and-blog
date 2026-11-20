@@ -14,6 +14,7 @@ instructor:
 course: "Django 6 Fundamentals"
 module: "Setting up a Data Model"
 ---
+
 **Synthesis:** [[00-django-6-fundamentals-synthesis|Django 6 Fundamentals]]
 
 <!-- Purpose: Transmute source materials (books, articles, podcasts, lecture notes) into active comprehension and extract candidate concepts. -->
