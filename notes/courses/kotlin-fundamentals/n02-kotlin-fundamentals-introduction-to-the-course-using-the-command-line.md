@@ -35,7 +35,7 @@ lesson: Using the Command Line
 
 From the command-line run
 
-```shell
+```bash
 kotlinc
 ```
 
@@ -45,7 +45,7 @@ REPLs can be useful for just evaluating small snippets of code
 
 To exit type:
 
-```shell
+```bash
 :quit
 ```
 
@@ -75,7 +75,7 @@ fun main() {
 
 Compile source code
 
-```shell
+```bash
 kotlinc Hello.kt
 ```
 
@@ -87,7 +87,7 @@ Even though we didn't define a class within our code, the JVM itself is class or
 
 To run code we need to reference the Kotlin runtime JAR file
 
-```shell
+```bash
 kotlinc Hello.kt -include-runtime -d hello.jar
 ```
 
@@ -97,6 +97,6 @@ You'll see that the JAR file will be a larger file relative to the class file; f
 
 Because the JAR file contains all the code to execute, makes distribution easier, and can run anywhere that has a Java runtime environment by simply typing
 
-```shell
+```bash
 java -jar hello.jar
 ```
