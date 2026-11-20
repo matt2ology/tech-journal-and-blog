@@ -53,7 +53,7 @@ Using Jetbrains' Pycharm
 2. Opening the terminal (`Alt+F12`) we should see `(.venv)` prepending our command-line prompt (e.g. `(.venv) PS C:\Users\username\Documents\course-demos\django-fundamentals >`)
 3. **Install Django via the terminal:**
 
-   ```shell
+   ```bash
    python -m pip install Django
    ```
 
@@ -64,7 +64,7 @@ Using Jetbrains' Pycharm
 1. Start a Django project by running a script called **`django‑admin`**
    - [**`django‑admin`**](https://docs.djangoproject.com/en/6.1/ref/django-admin/) script can do many things, but commonly it's used to start a new project
 
-     ```shell
+     ```bash
      django‑admin startproject my_project_name
      ```
 
@@ -74,13 +74,13 @@ Using Jetbrains' Pycharm
 
 To run the **`manage.py`** script one would need to navigate into the project root directory
 
-```shell
+```bash
 cd my_project_name
 ```
 
 We can now run the project by
 
-```shell
+```bash
 python manage.py runserver
 ```
 
