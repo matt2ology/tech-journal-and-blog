@@ -68,7 +68,7 @@ Once our data model (i.e., `django_app_name\models.py`) is registered with `djan
 
 Before viewing we'd need to create a superuser account run:
 
-```shell
+```bash
 python manage.py createsuperuser
 ```
 
@@ -76,7 +76,7 @@ where it will ask to set up both a username and password
 
 To test we can start the development server and view at <http://127.0.0.1:8000/admin>
 
-```shell
+```bash
 python manage.py runserver
 ```
 
