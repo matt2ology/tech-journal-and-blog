@@ -16,7 +16,7 @@ module: Setting up a Data Model
 lesson: Creating and Running Migrations
 ---
 
-**Analysis:** [[05-django-6-fundamentals-setting-up-a-data-model|Django 6 Fundamentals - Setting Up a Data Model]]
+**Analysis:** [[../../../analysis/courses/django-6-fundamentals/04-django-6-fundamentals-setting-up-a-data-model|Django 6 Fundamentals - Setting Up a Data Model]]
 
 ## TL;DR (too long; didn't read)
 
