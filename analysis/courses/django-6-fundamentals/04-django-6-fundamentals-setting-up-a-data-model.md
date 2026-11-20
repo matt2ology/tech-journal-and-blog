@@ -20,7 +20,7 @@ module: "Setting up a Data Model"
 ## Key Takeaways & Core Concepts
 
 > [!abstract] Setting up a Data Model Executive Summary & Core Thesis
->
+
 1. **Models:** Python classes that define database tables; model fields become database columns.
 2. **Create an app:** Run `python manage.py startapp app_name` and register it in `INSTALLED_APPS` in `settings.py`.
 3. **Define models:** Create classes in `models.py` that inherit from `models.Model`.
@@ -38,11 +38,11 @@ module: "Setting up a Data Model"
 1. Create a Django app and register it in `INSTALLED_APPS`.
 2. Define model classes in `models.py` that inherit from `models.Model`.
 3. Run `python manage.py makemigrations` and `python manage.py migrate`
-4.  Use `python manage.py showmigrations` to check migration status.
-5.  Use `python manage.py dbshell` to inspect the database and verify that tables and records are created as expected.
-6.  Register models in `admin.py`, create an admin account, and access the admin interface to manage records.
-7.  
-  
+4. Use `python manage.py showmigrations` to check migration status.
+5. Use `python manage.py dbshell` to inspect the database and verify that tables and records are created as expected.
+6. Register models in `admin.py`, create an admin account, and access the admin interface to manage records.
+7.
+
 ---
 
 ## Lesson Notes
