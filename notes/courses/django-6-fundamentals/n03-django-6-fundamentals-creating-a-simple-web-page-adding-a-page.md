@@ -37,7 +37,7 @@ After doing the following listed below...
 
 Do the following
 
-```shell
+```bash
 python manage.py runserver
 ```
 
