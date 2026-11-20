@@ -56,7 +56,7 @@ python manage.py migrate
 
 ## SQLite Shell Interface
 
-```shell
+```bash
 sqlite>
 ```
 
