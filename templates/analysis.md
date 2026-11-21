@@ -8,7 +8,7 @@
 
 <!-- A 2-3 sentence summary of the main argument or purpose in your own words. -->
 
-> [!abstract] Executive Summary & Core Thesis
+> [!abstract] Executive Summary & Core Thesis of {{VALUE:note_header}}
 >
 > 1.
 > 2.
