@@ -27,10 +27,6 @@ course: Django 6 Fundamentals
 > [!summary] The Core Concept
 > Synthesize the main argument in 2–3 sentences. Why was this written, and what is its primary claim?
 
-## Foundational Concepts
-
-<!-- Extract the top 3–5 foundational concepts, architectures, or mental models introduced. -->
-
 ## Module Breakdown
 
 1. [[../../../analysis/courses/django-6-fundamentals/02-django-6-fundamentals-starting-a-django-project|Start a Django Project]]
@@ -41,6 +37,46 @@ course: Django 6 Fundamentals
 6. [[../../../analysis/courses/django-6-fundamentals/07-django-6-fundamentals-templates-styling-and-static-content|Templates, Styling, and Static Content]]
 7. [[../../../analysis/courses/django-6-fundamentals/08-django-6-fundamentals-adding-user-interaction-with-modelforms|Adding User Interaction with ModelForms]]
 8. [[../../../analysis/courses/django-6-fundamentals/09-django-6-fundamentals-editing-meetings-and-authentication|Editing Meetings and Authentication]]
+
+## Foundational Concepts
+
+### Initial Start-up
+
+1. Setup Python Virtual Environment
+
+   ```bash
+   py -m venv .venv
+   ```
+
+   - [Activate Python virtual environment (operating system dependent)](https://docs.python.org/3/library/venv.html)
+
+2. Install Django
+
+   ```bash
+   python.exe -m pip install --upgrade pip
+   pip install django
+   django-admin --version
+   ```
+
+3. Create your project
+
+   ```bash
+   django-admin startproject project_name
+   ```
+
+4. **Run initial database migrations:** run `python manage.py makemigrations` to detect model changes and create migration files.
+
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+
+5. Start the development server
+
+   ```bash
+   python manage.py runserver
+   ```
+
 
 ## Connections & Cross-References
 
