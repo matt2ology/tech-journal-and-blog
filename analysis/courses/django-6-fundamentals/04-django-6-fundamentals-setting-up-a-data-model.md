@@ -33,7 +33,7 @@ module: Setting up a Data Model
 > 10. **[[../../../notes/courses/django-6-fundamentals/n10-django-6-fundamentals-setting-up-a-data-model-review#Review|Automatic database management]]:** Django generates database-specific SQL, assigns unique primary keys, and supports multiple database engines, including SQLite, PostgreSQL, MySQL, MariaDB, and Oracle.
 > 11. **[[../../../notes/courses/django-6-fundamentals/n11-django-6-fundamentals-setting-up-a-data-model-bringing-it-all-together|Important precautions]]:** Adding non-nullable fields may require default values for existing records. Never casually delete databases or migration files in production because this can cause permanent data loss.
 
-## Data Model Setup Workflow
+## [[../../../notes/courses/django-6-fundamentals/n10-django-6-fundamentals-setting-up-a-data-model-review#Migration Workflow|Data Model Setup Workflow]]
 
 1. Create a Django app and register it in `INSTALLED_APPS` in `settings.py`
 2. Define model classes in `models.py` that inherit from `models.Model`.
