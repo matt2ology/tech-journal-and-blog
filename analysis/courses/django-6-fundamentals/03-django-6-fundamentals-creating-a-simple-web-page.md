@@ -39,3 +39,9 @@ If you need more than one sentence to explain what the purpose of your app is, i
   - Each Django App act as little web applications of their own with their own models, views, templates, and URLs
 - Most Django projects contain several apps
   - Apps can be reused between projects (modular code)
+
+## Lesson Notes
+
+1. [[../../../notes/courses/django-6-fundamentals/n02-django-6-fundamentals-creating-a-simple-web-page-creating-a-django-app|Creating a Django App]]
+2. [[../../../notes/courses/django-6-fundamentals/n03-django-6-fundamentals-creating-a-simple-web-page-adding-a-page|Adding a Page]]
+3. [[../../../notes/courses/django-6-fundamentals/n04-django-6-fundamentals-creating-a-simple-web-page-django-and-the-flow-of-control|Django and the Flow of Control]]
