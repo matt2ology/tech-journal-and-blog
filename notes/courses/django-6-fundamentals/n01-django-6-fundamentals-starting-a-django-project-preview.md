@@ -16,7 +16,7 @@ module: "Starting a Django Project"
 lesson: "Project Preview"
 ---
 
-**Analysis:** [[02-django-6-fundamentals-starting-a-django-project|Django 6 Fundamentals - Starting a Django Project]]
+**Analysis:** [[../../../analysis/courses/django-6-fundamentals/02-django-6-fundamentals-starting-a-django-project|Django 6 Fundamentals - Starting a Django Project]]
 
 ## TL;DR (too long; didn't read)
 
