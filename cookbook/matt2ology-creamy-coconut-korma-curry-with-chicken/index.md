@@ -1,7 +1,7 @@
 ---
 aliases: Creamy Coconut Korma Curry with Chicken by Matt2ology
 title: Creamy Coconut Korma Curry with Chicken by Matt2ology
-date: 2026-11-21T18:00:00
+date: 2026-11-21T20:00:00
 draft: false
 slug: matt2ology-creamy-coconut-korma-curry-with-chicken
 categories:
