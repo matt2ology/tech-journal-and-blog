@@ -43,8 +43,8 @@ image: matt2ology-creamy-coconut-korma-curry-with-chicken.jpg
 - Cook rice
 - Chop:
   - Broccoli
-  - Colliflower
   - Carrots
+  - Colliflower
   - Mushrooms
 
 ## Instructions
