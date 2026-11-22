@@ -13,6 +13,7 @@ tags:
   - python
 type: blog
 ---
+
 Initial steps to get started with Django learned from [[../synthesis/courses/django-6-fundamentals/00-django-6-fundamentals-synthesis|PluralSight course Django 6 Fundamentals by Reindert-Jan Ekker]]
 
 1. Setup Python Virtual Environment

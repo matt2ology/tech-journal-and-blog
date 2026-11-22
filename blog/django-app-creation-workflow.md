@@ -13,6 +13,7 @@ tags:
   - python
 type: blog
 ---
+
 Initial steps and workflow to get started with Django Apps learned from [[../synthesis/courses/django-6-fundamentals/00-django-6-fundamentals-synthesis|PluralSight course Django 6 Fundamentals by Reindert-Jan Ekker]]
 
 After [[django-initial-start-up|Django Initial Start-Up]] we can divide our Django projects into apps
@@ -40,18 +41,18 @@ After [[django-initial-start-up|Django Initial Start-Up]] we can divide our Djan
 
 3. **Configure project-level templates `project_name/settings.py`:** Find the `TEMPLATES` configuration and update `DIRS`
 
-    ```python
-    from pathlib import Path
+   ```python
+   from pathlib import Path
 
-    BASE_DIR = Path(__file__).resolve().parent.parent
+   BASE_DIR = Path(__file__).resolve().parent.parent
 
-    TEMPLATES = [
-        {
-            # look for templates in your project-level `templates` directory
-            'DIRS': [BASE_DIR / 'templates'],
-        },
-    ]
-    ```
+   TEMPLATES = [
+       {
+           # look for templates in your project-level `templates` directory
+           'DIRS': [BASE_DIR / 'templates'],
+       },
+   ]
+   ```
 
 4. **Create the templates directory (template namespacing):** Create a separate folder for each app inside the root `templates` directory
 5. **Create models:** Models define the structure of your application's database
@@ -205,4 +206,3 @@ After [[django-initial-start-up|Django Initial Start-Up]] we can divide our Djan
     ```bash
     python manage.py runserver
     ```
-
