@@ -32,11 +32,9 @@ image: matt2ology-creamy-coconut-korma-curry-with-chicken.jpg
 
 ### Seasonings & Pantry
 
-- [ ] **From Costco:** Real Indian Creamy Coconut Korma Curry Sauce, 24 oz, 2-count
+- [ ] **From Costco:** [Real Indian Creamy Coconut Korma Curry Sauce, 24 oz, 2-count](real-indian-creamy-coconut-korma-curry-sauce24-oz.jpg)
   - Creamy Coconut Korma Curry Sauce; Seasoning Mix Included separately; Made in India.
   - Item: 2062087
-
-![[real-indian-creamy-coconut-korma-curry-sauce24-oz.jpg]]
 
 ---
 
