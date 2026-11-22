@@ -298,6 +298,67 @@
       "pickDayCommand": false
     },
     {
+      "id": "f52eba04-e8b4-4db0-8f66-c1bc3aa9c314",
+      "name": "Concepts Note",
+      "type": "Macro",
+      "command": true,
+      "runOnStartup": false,
+      "macro": {
+        "name": "Concepts Note",
+        "id": "cab2706b-efda-47d7-b892-82d6b6e87ac2",
+        "commands": [
+          {
+            "name": "create-blog",
+            "type": "UserScript",
+            "id": "5b857fa6-41b8-4f2f-91f1-7e32685f6690",
+            "path": "_quickadd-scripts/create-blog.js",
+            "settings": {}
+          },
+          {
+            "name": "Concepts Note Template",
+            "type": "NestedChoice",
+            "id": "789578d7-c939-4de8-b2fc-a5ebdf2375f1",
+            "choice": {
+              "id": "982d55a3-60b8-4dad-b3e0-d42af0104eb3",
+              "name": "Concepts Note Template",
+              "type": "Template",
+              "command": false,
+              "templatePath": "templates/concept.md",
+              "fileNameFormat": {
+                "enabled": true,
+                "format": "{{VALUE:filename}}"
+              },
+              "discoverExistingNotesBeforeCreate": false,
+              "folder": {
+                "enabled": true,
+                "folders": [
+                  "{{VALUE:folderPath}}"
+                ],
+                "chooseWhenCreatingNote": false,
+                "createInSameFolderAsActiveFile": false,
+                "chooseFromSubfolders": false
+              },
+              "appendLink": false,
+              "copyLinkToClipboard": false,
+              "openFile": true,
+              "fileOpening": {
+                "location": "tab",
+                "direction": "vertical",
+                "mode": "default",
+                "focus": true
+              },
+              "fileExistsBehavior": {
+                "kind": "prompt"
+              },
+              "icon": "podcast"
+            }
+          }
+        ]
+      },
+      "icon": "cloud",
+      "pickDayCommand": false
+    },
+    {
       "id": "5d2ba420-c171-4015-89e5-2cef0ab300d7",
       "name": "capture-question",
       "type": "Capture",
@@ -540,7 +601,7 @@
     "templates"
   ],
   "announceUpdates": "major",
-  "version": "2.33.1",
+  "version": "2.33.3",
   "globalVariables": {},
   "onePageInputEnabled": true,
   "disableOnlineFeatures": true,
