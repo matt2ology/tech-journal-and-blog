@@ -1,8 +1,8 @@
 ---
-aliases: "Notes on Django 6 Fundamentals - Combining Model, View, and Template - A Template for the Welcome Page"
-title: "Notes on Django 6 Fundamentals - Combining Model, View, and Template - A Template for the Welcome Page"
+aliases: Notes on Django 6 Fundamentals - Combining Model, View, and Template - A Template for the Welcome Page
+title: Notes on Django 6 Fundamentals - Combining Model, View, and Template - A Template for the Welcome Page
 date: 2026-11-20T21:26:45-08:00
-draft: true
+draft: false
 slug: django-6-fundamentals-combining-model-view-and-template-a-template-for-the-welcome-page
 categories:
   - notes
@@ -11,9 +11,9 @@ type: notes
 domain: courses
 instructor:
   - "[[reindert-jan-ekker|Reindert-Jan Ekker]]"
-course: "Django 6 Fundamentals"
-module: "Combining Model, View, and Template"
-lesson: "A Template for the Welcome Page"
+course: Django 6 Fundamentals
+module: Combining Model, View, and Template
+lesson: A Template for the Welcome Page
 ---
 
 **Analysis:** [[05-django-6-fundamentals-combining-model-view-and-template|Django 6 Fundamentals - Combining Model, View, and Template]]
