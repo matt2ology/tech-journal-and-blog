@@ -22,7 +22,17 @@ lesson: "A Template for the Welcome Page"
 
 > [!tldr] A Template for the Welcome Page Summary
 >
-> 1.
+> 1. Templates display content to users: In web applications, displaying data means creating a web page using HTML.
+> 2. Connect views and templates: Django views call templates and pass data to them to display.
+> 3. Separation of concerns:
+>    - Views (`views.py`): Handle Python code and application logic.
+>    - Templates (`.html`): Handle the HTML and presentation of content.
+> 4. Follow Django's template folder structure: Store templates in `django_app/templates/django_app/` rather than directly in the `templates` folder.
+> 5. Prevent naming conflicts: Creating a folder named after your app helps distinguish templates when multiple apps have files with the same name.
+> 6. Render templates from views: Use Django's `render()` function inside a view to display a template.
+> 7. Understand the `render()` arguments:
+>    - Argument 1 – `request`: An object containing information about the browser's request, such as cookies and HTTP headers.
+>    - Argument 2 – Template name: The name/path of the HTML template you want Django to render.
 
 ## A Template for the Welcome Page
 
@@ -34,6 +44,8 @@ lesson: "A Template for the Welcome Page"
   - Python code (view functions)
   - HTML code (templates)
 - Django has a default location where it expects these templates to be: `django_app/templates/django_app`
-  - **Best practice** is not to put your files directly in the templates folder, but to **create another folder with the name of your app**
+  - **Best practice** is not to put your files directly in the templates folder, but to **create another folder with the name of your app** (i.e., `django_app/templates/django_app`)
   - **Prevent name clashes:** several apps might have templates by the same name, but putting them in a folder with the name of your app makes sure we can tell them apart.
-- After creating HTML code for your Django app, we need to use the template from the view (i.e. `django_app/views.py`) function via `render()`
+- After creating HTML code for your Django app, we need to use the template from the view (i.e. `django_app/views.py`) function via `render()` in this function we provide:
+  - **Argument 1:** `request` an object that holds all kinds of information about the requests that the browser sent, like cookies, HTTP headers and more.
+  - **Argument 2:** the name of the template file that we want to render
