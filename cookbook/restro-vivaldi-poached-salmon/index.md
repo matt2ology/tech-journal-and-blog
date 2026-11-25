@@ -19,11 +19,11 @@ image: restro-vivaldi-poached-salmon.jpg
 
 **Source:** [Instagram: Poached Salmon | The Vivaldi Way](https://www.instagram.com/reel/DaBnpsUAQjE/?hl=en)
 
-## 💡 Notes & Variations
+## Notes & Variations
 
 - Add any mushroom - fry in pan with water, then brown off with oil
 
-## 🛒 Ingredients
+## Ingredients
 
 ### Main Components
 
@@ -41,7 +41,7 @@ image: restro-vivaldi-poached-salmon.jpg
 
 ---
 
-## 👩‍🍳 Instructions
+## Instructions
 
 1. Put all ingredients in a frying pan at once (with salmon on top) and cover with a lid
 2. Bring to a boil and simmer salmon to desired doneness
