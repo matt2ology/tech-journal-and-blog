@@ -27,13 +27,13 @@ image: restro-vivaldi-poached-salmon.jpg
 
 ### Main Components
 
-- 8 oz salmon fillet (skin removed)
-- 1 cup heavy cream
-- 1/2 cup chicken, veg, or fish stock
-- 1/4 cup dry white wine
-- 1/4 cup sliced leeks
-- 1/4 cup sliced scallions
-- Handful of baby spinach
+- 8 oz **salmon fillet** (skin removed)
+- 1 cup **heavy cream**
+- 1/2 cup **chicken**, **veg**, or **fish stock**
+- 1/4 cup dry **white wine**
+- 1/4 cup sliced **leeks**
+- 1/4 cup sliced **scallions**
+- Handful of **baby spinach**
 
 ### Seasonings & Pantry
 
