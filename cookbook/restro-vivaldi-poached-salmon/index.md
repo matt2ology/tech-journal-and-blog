@@ -3,8 +3,8 @@ aliases:
   - Poached Salmon by Restro Vivaldi
   - Poached Salmon
 title: Poached Salmon by Restro Vivaldi
-date: ""
-draft: true
+date: 2026-11-23T19:00:00
+draft: false
 slug: restro-vivaldi-poached-salmon
 categories:
   - cookbook
@@ -14,7 +14,7 @@ chef:
   - "[[restro-vivaldi|Restro Vivaldi]]"
 meal:
   - dinner
-image: ""
+image: restro-vivaldi-poached-salmon.jpg
 ---
 
 **Source:** [Instagram: Poached Salmon | The Vivaldi Way](https://www.instagram.com/reel/DaBnpsUAQjE/?hl=en)
@@ -28,12 +28,12 @@ image: ""
 ### Main Components
 
 - 8 oz salmon fillet (skin removed)
-- 1/4 cup sliced scallions
-- 1/4 cup sliced leeks
-- Handful of baby spinach
-- 1//2 cup chicken, veg, or fish stock
-- 1/4 cup dry white wine
 - 1 cup heavy cream
+- 1/2 cup chicken, veg, or fish stock
+- 1/4 cup dry white wine
+- 1/4 cup sliced leeks
+- 1/4 cup sliced scallions
+- Handful of baby spinach
 
 ### Seasonings & Pantry
 
