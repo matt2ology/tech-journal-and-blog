@@ -1,0 +1,24 @@
+filters:
+  and:
+    - file.hasProperty("title")
+formulas:
+  posts: link(file.name,title)
+views:
+  - type: table
+    name: View
+    filters:
+      and:
+        - file.inFolder("synthesis/courses")
+        - and:
+            - file.hasProperty("domain")
+    order:
+      - draft
+      - formula.posts
+    sort:
+      - property: date
+        direction: DESC
+      - property: file.name
+        direction: ASC
+    columnSize:
+      note.draft: 62
+      formula.posts: 745
